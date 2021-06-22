@@ -1,0 +1,46 @@
+<template>
+  <div :class="{ dark: dark || false }">
+    <component :is="layout" />
+  </div>
+</template>
+
+<script lang="ts">
+  import { defineComponent } from 'vue'
+  import { mapGetters } from 'vuex'
+
+  import { supabase } from './supabase'
+  import store from './store'
+
+  import AuthLayout from './layouts/AuthLayout.vue'
+  import DefaultLayout from './layouts/DefaultLayout.vue'
+  import router from './router'
+
+  export default defineComponent({
+    name: 'App',
+    components: {
+      AuthLayout,
+      DefaultLayout,
+    },
+    data() {
+      return {
+        layout: '',
+      }
+    },
+    setup() {
+      store.dispatch('fetchUser', supabase.auth.user())
+      supabase.auth.onAuthStateChange((_, session) => {
+        store.dispatch('fetchUser', session?.user)
+      })
+    },
+    computed: { ...mapGetters({ dark: 'isDarkMode' }) },
+    watch: {
+      $route(to) {
+        if (to.meta.layout !== undefined) {
+          this.layout = to.meta.layout
+        } else {
+          this.layout = 'DefaultLayout'
+        }
+      },
+    },
+  })
+</script>

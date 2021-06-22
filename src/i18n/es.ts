@@ -1,0 +1,40 @@
+const messages = {
+  es: {
+    user: {
+      profile: 'Perfil',
+      settings: 'Configuración',
+      logout: 'Desconectar',
+    },
+    general: {
+      viewMore: 'Ver más',
+      add: 'Añadir',
+      yes: 'Si',
+      no: 'No',
+      qty: 'Cantidad',
+      actions: 'Acciones',
+    },
+    cellar: {
+      myCellar: 'Mi Bodega',
+      name: 'Nombre',
+      cellar: 'Bodega',
+      date: 'Fecha',
+      type: 'Tipo',
+      vintage: 'Añada',
+      apellation: 'Denominación',
+      red: 'Tinto',
+      white: 'Blanco',
+      rose: 'Rosado',
+      country: 'Pais',
+      region: 'Región',
+      totalBottles: 'Total Botellas',
+    },
+  },
+  en: {
+    general: {
+      viewMore: 'View more',
+      add: 'Add',
+    },
+  },
+}
+
+export default messages
