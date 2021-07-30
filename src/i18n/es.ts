@@ -12,6 +12,7 @@ const messages = {
       no: 'No',
       qty: 'Cantidad',
       actions: 'Acciones',
+      404: '404 - Página no encontrada',
     },
     cellar: {
       myCellar: 'Mi Bodega',
