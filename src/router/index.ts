@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Cellar from '../views/Cellar.vue'
+import NotFound from '../views/NotFound.vue'
 import store from '../store'
 
 const routes = [
@@ -49,6 +50,8 @@ const routes = [
       layout: 'DefaultLayout',
     },
   },
+  { path: '/404', component: NotFound },
+  { path: '/:pathMatch(.*)*', redirect: '/404' },
 ]
 
 const router = createRouter({
