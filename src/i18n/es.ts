@@ -27,6 +27,7 @@ const messages = {
       country: 'Pais',
       region: 'Región',
       totalBottles: 'Total Botellas',
+      filterWines: 'Filtrar vinos',
     },
   },
   en: {
