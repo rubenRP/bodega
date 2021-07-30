@@ -71,6 +71,40 @@
     </div>
   </div>
 
+  <div class="relative w-full max-w-xl focus-within:text-pink-900 m-auto mb-4">
+    <div class="absolute inset-y-0 flex items-center pl-2">
+      <SearchIcon class="w-4 h-4" />
+    </div>
+    <input
+      class="
+        w-full
+        pl-8
+        pr-2
+        py-2
+        text-sm text-gray-700
+        placeholder-gray-600
+        bg-gray-100
+        border
+        rounded-md
+        dark:placeholder-gray-500
+        dark:focus:shadow-outline-gray
+        dark:focus:placeholder-gray-600
+        dark:bg-gray-700
+        dark:text-gray-200
+        focus:placeholder-gray-500
+        focus:bg-white
+        focus:border-pink-900
+        focus:outline-none
+        focus:shadow-outline-purple
+        form-input
+      "
+      type="text"
+      :placeholder="$t('cellar.filterWines')"
+      aria-label="Search"
+      v-model="search"
+    />
+  </div>
+
   <div class="w-full overflow-hidden rounded-lg shadow-xs">
     <div class="w-full overflow-x-auto">
       <table class="w-full whitespace-no-wrap" v-if="!loading">
@@ -100,7 +134,7 @@
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
           <TableItem
-            v-for="bottle in getCellar"
+            v-for="bottle in filteredCellar"
             :key="bottle.id"
             :item="bottle"
             @editItem="editBottle(bottle)"
@@ -123,6 +157,7 @@
     HomeIcon,
     CalculatorIcon,
     PencilAltIcon,
+    SearchIcon,
   } from '@heroicons/vue/solid'
   import { supabase } from '../supabase'
 
@@ -130,7 +165,6 @@
   import Modal from '../components/Modal.vue'
   import BottleForm from '../components/Cellar/BottleForm.vue'
   import { mapGetters, mapMutations } from 'vuex'
-  import { RealtimeSubscription } from '@supabase/realtime-js'
 
   export default defineComponent({
     name: 'Cellar',
@@ -138,6 +172,7 @@
       PencilAltIcon,
       CurrencyEuroIcon,
       HomeIcon,
+      SearchIcon,
       CalculatorIcon,
       TableItem,
       Modal,
@@ -151,6 +186,7 @@
         cellarSubscriber: <any>null,
         activeBottle: <any>null,
         totalBottles: 0,
+        search: '',
       }
     },
     created() {
@@ -164,6 +200,16 @@
       ...mapGetters({
         getCellar: 'cellar',
       }),
+      filteredCellar(): any[] {
+        console.log(this.search)
+        return this.getCellar.filter((bottle: any) => {
+          return (
+            bottle.name.toLowerCase().includes(this.search.toLowerCase()) ||
+            bottle.cellar.toLowerCase().includes(this.search.toLowerCase()) ||
+            bottle.apellation.toLowerCase().includes(this.search.toLowerCase())
+          )
+        })
+      },
     },
     methods: {
       ...mapMutations({
