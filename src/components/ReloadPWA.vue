@@ -1,16 +1,24 @@
 <template>
   <div
     v-if="offlineReady || needRefresh"
-    class="flex bg-pink-900 white text-sm px-6 pt-2"
+    class="
+      flex
+      bg-pink-900
+      text-white text-sm
+      px-6
+      py-2
+      justify-between
+      align-middle
+    "
     role="alert"
   >
-    <div class="message">
+    <div class="message mt-2">
       <span v-if="offlineReady"> App ready to work offline </span>
       <span v-else>
         New content available, click on reload button to update.
       </span>
     </div>
-    <div class="buttons">
+    <div class="buttons flex align-middle">
       <button
         v-if="needRefresh"
         @click="updateServiceWorker()"
@@ -31,6 +39,7 @@
           active:bg-pink-600
           hover:bg-pink-700
           focus:outline-none focus:shadow-outline-purple
+          mr-4
         "
       >
         Reload
@@ -38,19 +47,22 @@
       <button
         @click="close"
         class="
-          flex
-          items-center
-          justify-between
+          w-full
           px-4
-          py-2
-          mt-8
+          py-3
           text-sm
-          border-pink-900
-          bg-pink-100
+          font-medium
+          leading-5
+          text-white
+          transition-colors
+          duration-150
+          bg-pink-900
+          border border-transparent
           rounded-lg
-          focus:border-pink-800
-          dark:text-gray-300
-          border
+          sm:w-auto sm:px-4 sm:py-2
+          active:bg-pink-600
+          hover:bg-pink-700
+          focus:outline-none focus:shadow-outline-purple
         "
       >
         Close
