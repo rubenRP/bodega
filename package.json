@@ -1,9 +1,11 @@
 {
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview",
+    "start": "npm run run-build && npm run serve",
+    "dev": "cross-env DEBUG=vite-plugin-pwa:* vite",
+    "build": "cross-env DEBUG=vite-plugin-pwa:* vite build",
+    "run-build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
+    "serve": "serve dist",
     "lint:script": "eslint --ext .ts,vue --ignore-path .gitignore .",
     "lint:style": "stylelint src/**/*.{css,scss,vue}"
   },
@@ -23,9 +25,11 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "autoprefixer": "^10.2.6",
+    "cross-env": "^7.0.3",
     "eslint": "^7.29.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-vue": "^7.11.1",
+    "https-localhost": "^4.6.5",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
     "postcss": "^8.3.5",
@@ -37,7 +41,7 @@
     "typescript": "^4.3.2",
     "vite": "^2.3.7",
     "vite-plugin-pwa": "^0.9.3",
-    "vue-tsc": "^0.0.24"
+    "workbox-precaching": "^6.1.5"
   },
   "husky": {
     "hooks": {
