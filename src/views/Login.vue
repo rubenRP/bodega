@@ -102,7 +102,7 @@
           const { error } = await supabase.auth.signIn(
             { provider: 'google' },
             {
-              redirectTo: '/home',
+              redirectTo: '/',
             }
           )
           if (error) throw error
@@ -127,7 +127,6 @@
             router.push('/')
           }
         },
-        deep: true,
       },
     },
   })
