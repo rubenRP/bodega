@@ -1,5 +1,6 @@
 <template>
   <div :class="{ dark: dark || false }">
+    <ReloadPWA />
     <component :is="layout" />
   </div>
 </template>
@@ -13,6 +14,7 @@
 
   import AuthLayout from './layouts/AuthLayout.vue'
   import DefaultLayout from './layouts/DefaultLayout.vue'
+  import ReloadPWA from './components/ReloadPWA.vue'
   import router from './router'
 
   export default defineComponent({
@@ -20,6 +22,7 @@
     components: {
       AuthLayout,
       DefaultLayout,
+      ReloadPWA,
     },
     data() {
       return {
