@@ -1,15 +1,32 @@
 <template>
+  <div
+    class="
+      fixed
+      inset-0
+      z-10
+      flex
+      items-end
+      bg-black bg-opacity-50
+      sm:items-center sm:justify-center
+    "
+    :class="!showSidebar ? 'hidden' : ''"
+  ></div>
   <aside
     class="
       z-20
       flex-shrink-0
-      hidden
+      fixed
+      md:relative
+      inset-y-0
       w-64
+      mt-14
+      md:mt-0
       overflow-y-auto
       bg-white
       dark:bg-gray-800
       md:block
     "
+    :class="!showSidebar ? 'hidden' : ''"
   >
     <div class="py-4 text-gray-500 dark:text-gray-400">
       <router-link
@@ -20,13 +37,14 @@
           font-bold
           text-gray-800
           dark:text-gray-200
-          block
+          hidden
+          md:block
           w-6/12
         "
       >
         <Logo />
       </router-link>
-      <ul class="mt-6">
+      <ul class="md:mt-6">
         <li class="relative px-6 py-3">
           <router-link
             class="
@@ -136,6 +154,8 @@
         sideBar: null,
       }
     },
-    computed: { ...mapGetters({ showSidebar: 'sidebar' }) },
+    computed: {
+      ...mapGetters({ showSidebar: 'sidebar' }),
+    },
   })
 </script>
