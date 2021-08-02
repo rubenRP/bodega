@@ -14,34 +14,19 @@
       >
         <Logo />
       </div>
-      <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+      <h1
+        class="
+          mb-4
+          text-xl
+          font-semibold
+          text-gray-700
+          dark:text-gray-200
+          hidden
+        "
+      >
         Login
       </h1>
       <form @submit.prevent="handleLogin">
-        <label class="block text-sm">
-          <span class="text-gray-700 dark:text-gray-400">Email</span>
-          <input
-            class="
-              block
-              w-full
-              mt-1
-              text-sm
-              dark:border-gray-600 dark:bg-gray-700
-              focus:border-pink-900
-              focus:outline-none
-              focus:shadow-outline-purple
-              dark:text-gray-300 dark:focus:shadow-outline-gray
-              border-gray-200 border
-              rounded-md
-              px-3
-              py-2
-            "
-            type="email"
-            placeholder="Your email"
-            v-model="email"
-          />
-        </label>
-
         <div>
           <input
             type="submit"
@@ -64,7 +49,7 @@
               hover:bg-pink-700
               focus:outline-none focus:shadow-outline-purple
             "
-            :value="loading ? 'Loading' : 'Send magic link'"
+            :value="loading ? 'Loading' : 'Login with Google'"
             :disabled="loading"
           />
           <div
@@ -109,15 +94,18 @@
 
     setup: () => {
       const loading = ref(false)
-      const email = ref('')
       let message = ref('')
 
       const handleLogin = async () => {
         try {
           loading.value = true
-          const { error } = await supabase.auth.signIn({ email: email.value })
+          const { error } = await supabase.auth.signIn(
+            { provider: 'google' },
+            {
+              redirectTo: '/home',
+            }
+          )
           if (error) throw error
-          message.value = 'Check your email for the login link!'
         } catch (error) {
           message.value = error.error_description || error.message
         } finally {
@@ -127,7 +115,6 @@
 
       return {
         loading,
-        email,
         handleLogin,
         message,
       }
