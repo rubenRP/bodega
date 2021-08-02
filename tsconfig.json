@@ -12,9 +12,10 @@
     "paths": {
       "/@/*": ["src/*"]
     },
-    "lib": ["esnext", "dom", "webworker"]
+    "lib": ["esnext", "dom"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["test.ts", "**/*.spec.ts", "**/*.worker.ts"],
   "plugins": [
     {
       "name": "@vuedx/typescript-plugin-vue"

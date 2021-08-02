@@ -9,7 +9,6 @@ export default defineConfig({
       mode: 'development',
       base: '/',
       srcDir: 'src',
-      filename: 'sw.ts',
       includeAssets: ['/favicon.png'],
       strategies: 'injectManifest',
       manifest: {
