@@ -35,7 +35,7 @@
         store.dispatch('fetchUser', session?.user)
       })
     },
-    computed: { ...mapGetters({ dark: 'isDarkMode' }) },
+    computed: { ...mapGetters({ dark: 'darkMode' }) },
     watch: {
       $route(to) {
         if (to.meta.layout !== undefined) {

@@ -78,7 +78,7 @@
       ProfileMenu,
       Logo,
     },
-    computed: { ...mapGetters({ darkMode: 'isDarkMode' }) },
+    computed: { ...mapGetters({ darkMode: 'darkMode' }) },
     methods: {
       ...mapMutations({
         toggleTheme: 'TOGGLE_DARK_MODE',
