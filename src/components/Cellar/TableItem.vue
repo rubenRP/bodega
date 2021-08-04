@@ -78,8 +78,8 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { PencilAltIcon, TrashIcon } from '@heroicons/vue/solid'
-  import { supabase } from '../../supabase'
   import QtySelector from '../QtySelector.vue'
+  import api from "../../api"
 
   export default defineComponent({
     name: 'TableItem',
@@ -117,38 +117,14 @@
       },
     },
     methods: {
-      async removeItem(id: string) {
-        try {
-          await supabase.from('mycellar').update({ qty: 0 }).eq('id', id)
-        } catch (error) {
-          alert(error.message)
-        }
+      removeItem(id: string) {
+        api.removeBottle(id)
       },
-      async increaseQty(id: string) {
-        try {
-          await supabase
-            .from('mycellar')
-            .update({ qty: this.item.qty + 1, last_added: new Date() })
-            .eq('id', id)
-        } catch (error) {
-          alert(error.message)
-        }
+      increaseQty(id: string) {
+        api.increaseBottleQty(id, this.item.qty)
       },
-      async decreaseQty(id: string) {
-        try {
-          await supabase
-            .from('mycellar')
-            .update({ qty: this.item.qty ? this.item.qty - 1 : 0 })
-            .eq('id', id)
-          await supabase.from('opened_bottles').insert([
-            {
-              bottle_id: id,
-              date_opened: new Date(),
-            },
-          ])
-        } catch (error) {
-          alert(error.message)
-        }
+      decreaseQty(id: string) {
+        api.decreaseBottleQty(id, this.item.qty)
       },
     },
   })

@@ -30,12 +30,12 @@
       }
     },
     setup() {
-      store.dispatch('fetchUser', supabase.auth.user())
+      store.dispatch('user/fetchUser', supabase.auth.user())
       supabase.auth.onAuthStateChange((_, session) => {
-        store.dispatch('fetchUser', session?.user)
+        store.dispatch('user/fetchUser', session?.user)
       })
     },
-    computed: { ...mapGetters({ dark: 'darkMode' }) },
+    computed: { ...mapGetters({ dark: 'general/darkMode' }) },
     watch: {
       $route(to) {
         if (to.meta.layout !== undefined) {

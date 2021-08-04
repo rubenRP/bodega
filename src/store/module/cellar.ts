@@ -1,0 +1,80 @@
+import api from '../../api'
+import { supabase } from '../../supabase'
+
+const state = () => ({
+  cellar: <any>[],
+  cellarSubscriber: <any>{},
+})
+
+const getters = {
+  cellar: (state: { cellar: [] }) => state.cellar,
+}
+
+const actions = {
+  fetchCellar: async ({ state, commit }: any) => {
+    try {
+      let { data, error, status } = await api.getCellarBottles()
+      if (error && status !== 406) throw error
+      if (data) {
+        commit('SET_CELLAR', data)
+        state.cellarSubscriber = supabase
+          .from('mycellar')
+          .on('*', (payload) => {
+            console.log('Change received!', payload)
+            switch (payload.eventType) {
+              case 'INSERT':
+                commit('ADD_BOTTLE', payload.new)
+                break
+              case 'UPDATE':
+                commit('MODIFY_BOTTLE', payload.new)
+                return
+              case 'DELETE':
+                commit('DELETE_BOTTLE', payload.new.id)
+                break
+            }
+          })
+          .subscribe()
+      }
+    } catch (error) {
+      alert(error.message)
+    }
+  },
+  unsuscribeCellar: ({ state }: any) => {
+    supabase.removeSubscription(state.cellarSubscriber)
+  },
+  destroyCellar: async ({ dispatch, commit }: any) => {
+    dispatch('unsuscribeCellar')
+    commit('RESET_CELLAR')
+  },
+}
+
+const mutations = {
+  SET_CELLAR: (state: { cellar: any[] }, cellar: any[]) => {
+    state.cellar = cellar
+  },
+  RESET_CELLAR: (state: { cellar: never[] }) => {
+    state.cellar = []
+  },
+  ADD_BOTTLE: (state: { cellar: any[] }, bottle: {}) => {
+    state.cellar.push(bottle)
+  },
+  MODIFY_BOTTLE: (
+    state: { cellar: any[] },
+    bottle: { id: number; name: string; cellar: string; qty: number }
+  ) => {
+    let bottleFinded = state.cellar.find((item: any) => {
+      return bottle.id === item.id
+    })
+    bottleFinded.name = bottle.name
+    bottleFinded.cellar = bottle.cellar
+    bottleFinded.qty = bottle.qty
+  },
+}
+
+export default {
+  namespaced: true,
+  state,
+  getters,
+  actions,
+  mutations,
+}

@@ -78,11 +78,11 @@
       ProfileMenu,
       Logo,
     },
-    computed: { ...mapGetters({ darkMode: 'darkMode' }) },
+    computed: { ...mapGetters({ darkMode: 'general/darkMode' }) },
     methods: {
       ...mapMutations({
-        toggleTheme: 'TOGGLE_DARK_MODE',
-        toggleSidebar: 'TOGGLE_SIDEBAR',
+        toggleTheme: 'general/TOGGLE_DARK_MODE',
+        toggleSidebar: 'general/TOGGLE_SIDEBAR',
       }),
       closeNotificationsMenu() {},
     },

@@ -259,8 +259,8 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import Modal from '../Modal.vue'
-  import { supabase } from '../../supabase'
   import QtySelector from '../QtySelector.vue'
+  import api from '../../api'
 
   export default defineComponent({
     name: 'BottleForm',
@@ -283,19 +283,16 @@
     methods: {
       async createBottle() {
         try {
-          let { error, status } = await supabase.from('mycellar').insert([
-            {
-              name: this.name,
-              cellar: this.cellar,
-              vintage: this.vintage,
-              country: this.country,
-              region: this.region,
-              apellation: this.apellation,
-              type: this.type,
-              qty: this.qty,
-            },
-          ])
-
+          let { error, status } = await api.addBottle(
+            this.name,
+            this.cellar,
+            this.vintage,
+            this.country,
+            this.region,
+            this.apellation,
+            this.type,
+            this.qty
+          )
           if (error && status !== 201) throw error
         } catch (e) {
           console.log(e)
@@ -306,19 +303,17 @@
       },
       async updateBottle() {
         try {
-          let { error, status } = await supabase
-            .from('mycellar')
-            .update({
-              name: this.name,
-              cellar: this.cellar,
-              vintage: this.vintage,
-              country: this.country,
-              region: this.region,
-              apellation: this.apellation,
-              type: this.type,
-              qty: this.qty,
-            })
-            .eq('id', this.bottle?.id)
+          let { error, status } = await api.updateBottle(
+            this.name,
+            this.cellar,
+            this.vintage,
+            this.country,
+            this.region,
+            this.apellation,
+            this.type,
+            this.qty,
+            this.bottle?.id
+          )
 
           if (error && status !== 201) throw error
         } catch (e) {
