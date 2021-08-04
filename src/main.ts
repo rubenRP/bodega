@@ -4,7 +4,6 @@ import App from './App.vue'
 import './index.css'
 import router from './router'
 import store from './store'
-// import { auth } from './firebase'
 import messages from './i18n/es'
 
 /* auth.onAuthStateChanged((user) => {

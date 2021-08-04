@@ -158,7 +158,7 @@
         isProfileMenuOpen: false,
       }
     },
-    computed: { ...mapGetters({ userInitials: 'userInitials' }) },
+    computed: { ...mapGetters({ userInitials: 'user/initials' }) },
     methods: {
       async logout() {
         try {

@@ -165,6 +165,7 @@
   import Modal from '../components/Modal.vue'
   import BottleForm from '../components/Cellar/BottleForm.vue'
   import { mapGetters, mapMutations } from 'vuex'
+  import api from '../api'
 
   export default defineComponent({
     name: 'Cellar',
@@ -198,10 +199,9 @@
     },
     computed: {
       ...mapGetters({
-        getCellar: 'cellar',
+        getCellar: 'cellar/cellar',
       }),
       filteredCellar(): any[] {
-        console.log(this.search)
         return this.getCellar.filter((bottle: any) => {
           return (
             bottle.name.toLowerCase().includes(this.search.toLowerCase()) ||
@@ -213,22 +213,16 @@
     },
     methods: {
       ...mapMutations({
-        resetCellar: 'RESET_CELLAR',
-        setCellar: 'SET_CELLAR',
-        addBottle: 'ADD_BOTTLE',
-        modifyBottle: 'MODIFY_BOTTLE',
-        deleteBottle: 'DELETE_BOTTLE',
+        resetCellar: 'cellar/RESET_CELLAR',
+        setCellar: 'cellar/SET_CELLAR',
+        addBottle: 'cellar/ADD_BOTTLE',
+        modifyBottle: 'cellar/MODIFY_BOTTLE',
+        deleteBottle: 'cellar/DELETE_BOTTLE',
       }),
       async getCellarData() {
         try {
-          let { data, error, status } = await supabase
-            .from('mycellar')
-            .select()
-            .gt('qty', 0)
-            .order('last_added', { ascending: false })
-
+          let { data, error, status } = await api.getCellarBottles()
           if (error && status !== 406) throw error
-
           if (data) {
             this.totalBottles = data.reduce((acc, curr) => acc + curr.qty, 0)
             this.setCellar(data)

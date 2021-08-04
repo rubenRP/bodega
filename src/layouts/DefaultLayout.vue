@@ -28,6 +28,6 @@
       Sidebar,
       Topbar,
     },
-    computed: { ...mapGetters({ showSidebar: 'sidebar' }) },
+    computed: { ...mapGetters({ showSidebar: 'general/sidebar' }) },
   })
 </script>

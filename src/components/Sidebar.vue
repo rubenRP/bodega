@@ -155,7 +155,7 @@
       }
     },
     computed: {
-      ...mapGetters({ showSidebar: 'sidebar' }),
+      ...mapGetters({ showSidebar: 'general/sidebar' }),
     },
   })
 </script>

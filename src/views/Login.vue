@@ -119,7 +119,7 @@
         message,
       }
     },
-    computed: { ...mapGetters({ isLoggedIn: 'loggedIn' }) },
+    computed: { ...mapGetters({ isLoggedIn: 'user/loggedIn' }) },
     watch: {
       isLoggedIn: {
         handler: (isLoggedIn) => {
