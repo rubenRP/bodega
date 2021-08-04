@@ -159,13 +159,11 @@
     PencilAltIcon,
     SearchIcon,
   } from '@heroicons/vue/solid'
-  import { supabase } from '../supabase'
 
   import TableItem from '../components/Cellar/TableItem.vue'
   import Modal from '../components/Modal.vue'
   import BottleForm from '../components/Cellar/BottleForm.vue'
-  import { mapGetters, mapMutations } from 'vuex'
-  import api from '../api'
+  import { mapActions, mapGetters } from 'vuex'
 
   export default defineComponent({
     name: 'Cellar',
@@ -181,21 +179,16 @@
     },
     data() {
       return {
-        loading: true,
         openedNewBottle: false,
-        cellar: [],
-        cellarSubscriber: <any>null,
         activeBottle: <any>null,
-        totalBottles: 0,
         search: '',
       }
     },
     created() {
-      this.getCellarData()
+      this.fetchCellar()
     },
     destroyed() {
-      supabase.removeSubscription(this.cellarSubscriber)
-      this.resetCellar()
+      this.destroyCellar()
     },
     computed: {
       ...mapGetters({
@@ -210,30 +203,17 @@
           )
         })
       },
+      totalBottles(): number {
+           return this.getCellar.reduce((acc: number, curr: { qty: number }) => acc + curr.qty, 0)
+      }
     },
     methods: {
-      ...mapMutations({
-        resetCellar: 'cellar/RESET_CELLAR',
-        setCellar: 'cellar/SET_CELLAR',
-        addBottle: 'cellar/ADD_BOTTLE',
-        modifyBottle: 'cellar/MODIFY_BOTTLE',
-        deleteBottle: 'cellar/DELETE_BOTTLE',
+      ...mapActions({
+        fetchCellar: 'cellar/fetchCellar',
+        unsuscribeCellar: 'cellar/unsuscribeCellar',
+        destroyCellar: 'cellar/destroyCellar',
       }),
-      async getCellarData() {
-        try {
-          let { data, error, status } = await api.getCellarBottles()
-          if (error && status !== 406) throw error
-          if (data) {
-            this.totalBottles = data.reduce((acc, curr) => acc + curr.qty, 0)
-            this.setCellar(data)
-            this.setCellarSubscriber()
-          }
-        } catch (error) {
-          alert(error.message)
-        } finally {
-          this.loading = false
-        }
-      },
+
       toggleNewBottle() {
         if (this.openedNewBottle) {
           this.activeBottle = null
@@ -243,25 +223,6 @@
       editBottle(bottle: {}) {
         this.activeBottle = bottle
         this.toggleNewBottle()
-      },
-      setCellarSubscriber() {
-        this.cellarSubscriber = supabase
-          .from('mycellar')
-          .on('*', (payload) => {
-            console.log('Change received!', payload)
-            switch (payload.eventType) {
-              case 'INSERT':
-                this.addBottle(payload.new)
-                break
-              case 'UPDATE':
-                this.modifyBottle(payload.new)
-                return
-              case 'DELETE':
-                this.deleteBottle(payload.new.id)
-                break
-            }
-          })
-          .subscribe()
       },
     },
   })

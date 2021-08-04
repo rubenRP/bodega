@@ -49,20 +49,57 @@ export default {
     qty: number,
     id: number
   ) {
-    return await supabase
-      .from('mycellar')
-      .update([
+    try {
+      await supabase
+        .from('mycellar')
+        .update([
+          {
+            name: name,
+            cellar: cellar,
+            vintage: vintage,
+            country: country,
+            region: region,
+            apellation: apellation,
+            type: type,
+            qty: qty,
+          },
+        ])
+        .eq('id', id)
+    } catch (error) {
+      alert(error.message)
+    }
+  },
+  async removeBottle(id: string) {
+    try {
+      await supabase.from('mycellar').update({ qty: 0 }).eq('id', id)
+    } catch (error) {
+      alert(error.message)
+    }
+  },
+  async increaseBottleQty(id: string, qty: number) {
+    try {
+      await supabase
+        .from('mycellar')
+        .update({ qty: qty + 1, last_added: new Date() })
+        .eq('id', id)
+    } catch (error) {
+      alert(error.message)
+    }
+  },
+  async decreaseBottleQty(id: string, qty: number) {
+    try {
+      await supabase
+        .from('mycellar')
+        .update({ qty: qty ? qty - 1 : 0 })
+        .eq('id', id)
+      await supabase.from('opened_bottles').insert([
         {
-          name: name,
-          cellar: cellar,
-          vintage: vintage,
-          country: country,
-          region: region,
-          apellation: apellation,
-          type: type,
-          qty: qty,
+          bottle_id: id,
+          date_opened: new Date(),
         },
       ])
-      .eq('id', id)
+    } catch (error) {
+      alert(error.message)
+    }
   },
 }
