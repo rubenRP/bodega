@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Cellar,
+    component: Home,
     meta: {
       requiresAuth: true,
       layout: 'DefaultLayout',

@@ -24,15 +24,37 @@
       </span>
     </td>
     <td class="px-4 py-3 pb-4 md:pb-3 text-sm w-1/2">
-      <div class="h-8 w-24 md:m-auto">
+      <div class="h-8 w-24 md:m-auto" v-if="quickQty">
         <QtySelector
           :qty="item.qty"
           v-on:incrementQty="increaseQty(item.id)"
           v-on:decrementQty="decreaseQty(item.id)"
         />
       </div>
+      <div class="h-8 md:m-auto" v-else>
+        <button
+          class="
+            inline-block
+            text-sm
+            px-4
+            py-2
+            leading-none
+            border
+            rounded
+            text-white
+            border-pink-900
+            bg-pink-900
+            hover:bg-transparent hover:text-pink-800
+            lg:mt-0
+          "
+          @click="decreaseQty(item.id)"
+        >
+          {{ $t('cellar.drink') }}
+        </button>
+        <span class="ml-4">{{ item.qty }}</span>
+      </div>
     </td>
-    <td class="px-4 py-3 pb-4 md:pb-3 w-1/2">
+    <td class="px-4 py-3 pb-4 md:pb-3 w-1/2" v-if="actions">
       <div class="flex items-end md:items-center space-x-4 text-sm justify-end">
         <button
           class="
@@ -68,6 +90,14 @@
     name: 'TableItem',
     props: {
       item: <any>{},
+      actions: {
+        type: Boolean,
+        default: true,
+      },
+      quickQty: {
+        type: Boolean,
+        default: false,
+      },
     },
     components: {
       PencilAltIcon,

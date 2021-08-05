@@ -18,6 +18,7 @@ const messages = {
       cancel: 'Cancelar',
       update: 'Actualizar',
       save: 'Guardar',
+      stats: 'Estadísticas',
     },
     cellar: {
       myCellar: 'Mi Bodega',
@@ -36,6 +37,10 @@ const messages = {
       filterWines: 'Filtrar vinos',
       dateAdded: 'Fecha añadida',
       removeBottle: 'Eliminar botella',
+      apellations: 'Denominaciones',
+      countries: 'Paises',
+      latestBottles: 'Últimas Botellas',
+      drink: 'Beber',
     },
     reviews: {
       rating: 'Valoración',

@@ -19,7 +19,7 @@
       md:relative
       inset-y-0
       w-64
-      mt-14
+      mt-12
       md:mt-0
       overflow-y-auto
       bg-white
