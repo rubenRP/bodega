@@ -51,7 +51,8 @@
       aria-label="submenu"
     >
       <li class="flex">
-        <a
+        <router-link
+          to="/profile"
           class="
             inline-flex
             items-center
@@ -66,7 +67,6 @@
             hover:bg-gray-100 hover:text-gray-800
             dark:hover:bg-gray-800 dark:hover:text-gray-200
           "
-          href="#"
         >
           <userIcon
             class="w-4 h-4 mr-3"
@@ -79,9 +79,9 @@
             stroke="currentColor"
           />
           <span>{{ $t('user.profile') }}</span>
-        </a>
+        </router-link>
       </li>
-      <li class="flex">
+      <li class="flex hidden">
         <a
           class="
             inline-flex
@@ -144,7 +144,7 @@
   import { mapGetters } from 'vuex'
   import { LogoutIcon, CogIcon } from '@heroicons/vue/solid'
   import { UserIcon } from '@heroicons/vue/outline'
-  import { supabase } from '../../supabase'
+  import api from '../../api'
 
   export default defineComponent({
     name: 'ProfileMenu',
@@ -161,14 +161,8 @@
     computed: { ...mapGetters({ userInitials: 'user/initials' }) },
     methods: {
       async logout() {
-        try {
-          let { error } = await supabase.auth.signOut()
-          if (error) throw error
-        } catch (error) {
-          alert(error.message)
-        } finally {
-          this.$router.push('/login')
-        }
+        await api.logout()
+        this.$router.push('/login')
       },
       toggleProfileMenu() {
         this.isProfileMenuOpen = !this.isProfileMenuOpen

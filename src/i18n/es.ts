@@ -4,6 +4,8 @@ const messages = {
       profile: 'Perfil',
       settings: 'Configuración',
       logout: 'Desconectar',
+      email: 'Email',
+      name: 'Nombre',
     },
     general: {
       viewMore: 'Ver más',

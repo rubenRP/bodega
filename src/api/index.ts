@@ -4,9 +4,17 @@ export default {
   async getProfileInfo(id: any) {
     return await supabase
       .from('profiles')
-      .select('initials, cellar_id')
+      .select('initials, cellar_id, username, avatar_url')
       .eq('id', id)
       .single()
+  },
+  async logout() {
+    try {
+      let { error } = await supabase.auth.signOut()
+      if (error) throw error
+    } catch (error) {
+      alert(error.message)
+    }
   },
   async getCellarBottles() {
     return await supabase
