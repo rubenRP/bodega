@@ -17,7 +17,7 @@
       <linearGradient
         data-v-423bf9ae=""
         gradientTransform="rotate(25)"
-        id="38cf881c-8dd3-43ff-881c-c99d814124a7"
+        id="38cf881c-8dd3-43ff-881c-c99d814124a8"
         x1="0%"
         y1="0%"
         x2="100%"
@@ -40,7 +40,7 @@
       id="809a3d90-6431-4489-b0ea-90757cc39455"
       transform="matrix(1.0444444444444445,0,0,1.0444444444444445,-34.22222222222223,-2.2222222222222285)"
       stroke="none"
-      fill="url(#38cf881c-8dd3-43ff-881c-c99d814124a7)"
+      fill="url(#38cf881c-8dd3-43ff-881c-c99d814124a8)"
     >
       <path
         d="M66.414 33.586L57 24.171V5a2 2 0 0 0-2-2H45a2 2 0 0 0-2 2v19.171l-9.414 9.415A2 2 0 0 0 33 35v60a2 2 0 0 0 2 2h30a2 2 0 0 0 2-2V35a2 2 0 0 0-.586-1.414zM63 93H37V35.829l9.414-9.415A2 2 0 0 0 47 25V7h6v18a2 2 0 0 0 .586 1.414L63 35.829V93z"
@@ -54,7 +54,7 @@
   import { defineComponent } from 'vue'
 
   export default defineComponent({
-    name: 'Logo',
+    name: 'LogoMobile',
   })
 </script>
 

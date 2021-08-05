@@ -10,7 +10,7 @@
         px-6
         mx-auto
         text-pink-900
-        dark:text-red-300
+        dark:text-gray-400
       "
     >
       <!-- Mobile hamburger -->
@@ -41,7 +41,7 @@
       </button>
       <!-- Logo -->
       <div class="flex justify-center w-32">
-        <img src="../assets/logo.svg" class="md:hidden" />
+        <LogoMobile class="md:hidden text-gray-800 dark:text-gray-200" />
       </div>
       <ul class="flex items-center flex-shrink-0 space-x-6">
         <!-- Theme toggler -->
@@ -68,7 +68,7 @@
   import { mapGetters, mapMutations } from 'vuex'
   import { MoonIcon, SunIcon } from '@heroicons/vue/solid'
   import ProfileMenu from './Topbar/ProfileMenu.vue'
-  import Logo from './Logo.vue'
+  import LogoMobile from './LogoMobile.vue'
 
   export default defineComponent({
     name: 'Topbar',
@@ -76,7 +76,7 @@
       MoonIcon,
       SunIcon,
       ProfileMenu,
-      Logo,
+      LogoMobile,
     },
     computed: { ...mapGetters({ darkMode: 'general/darkMode' }) },
     methods: {

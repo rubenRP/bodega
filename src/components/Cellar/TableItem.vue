@@ -11,7 +11,9 @@
       </div>
     </td>
     <td class="px-4 py-3 text-sm w-1/3">{{ item.vintage }}</td>
-    <td class="px-4 py-3 text-sm w-1/3">{{ item.apellation }}</td>
+    <td class="px-4 py-3 text-sm w-1/3 text-center md:text-left">
+      {{ item.apellation }}
+    </td>
 
     <td class="px-4 py-3 text-xs w-1/3 text-right md:text-center">
       <span
@@ -75,13 +77,13 @@
       getTypeColor(): string {
         switch (this.item.type) {
           case 'Red':
-            return 'text-red-700 bg-red-100'
+            return 'text-red-700 bg-red-100 dark:bg-opacity-70'
           case 'White':
-            return 'text-green-700 bg-green-100'
+            return 'text-green-700 bg-green-100 dark:bg-opacity-70 '
           case 'Rose':
-            return 'text-pink-700 bg-pink-100'
+            return 'text-pink-700 bg-pink-100 dark:bg-opacity-70'
           default:
-            return 'text-yellow-700 bg-yellow-100'
+            return 'text-yellow-700 bg-yellow-100 dark:bg-opacity-70'
         }
       },
       getTypeTranslated(): string {
