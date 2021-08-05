@@ -18,7 +18,7 @@ export default {
   },
   async getCellarBottles() {
     return await supabase
-      .from('mycellar')
+      .from('bottles')
       .select()
       .gt('qty', 0)
       .order('last_added', { ascending: false })
@@ -34,7 +34,7 @@ export default {
     qty: number,
     date?: any
   ) {
-    return await supabase.from('mycellar').insert([
+    return await supabase.from('bottles').insert([
       {
         name: name,
         cellar: cellar,
@@ -62,7 +62,7 @@ export default {
   ) {
     try {
       await supabase
-        .from('mycellar')
+        .from('bottles')
         .update([
           {
             name: name,
@@ -83,7 +83,7 @@ export default {
   },
   async removeBottle(id: string) {
     try {
-      await supabase.from('mycellar').update({ qty: 0 }).eq('id', id)
+      await supabase.from('bottles').update({ qty: 0 }).eq('id', id)
     } catch (error) {
       alert(error.message)
     }
@@ -91,7 +91,7 @@ export default {
   async increaseBottleQty(id: string, qty: number) {
     try {
       await supabase
-        .from('mycellar')
+        .from('bottles')
         .update({ qty: qty + 1, last_added: new Date() })
         .eq('id', id)
     } catch (error) {
@@ -101,7 +101,7 @@ export default {
   async decreaseBottleQty(id: string, qty: number) {
     try {
       await supabase
-        .from('mycellar')
+        .from('bottles')
         .update({ qty: qty ? qty - 1 : 0 })
         .eq('id', id)
       await supabase.from('opened_bottles').insert([

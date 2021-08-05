@@ -18,7 +18,7 @@ const actions = {
       if (data) {
         commit('SET_CELLAR', data)
         state.cellarSubscriber = supabase
-          .from('mycellar')
+          .from('bottles')
           .on('*', (payload) => {
             console.log('Change received!', payload)
             switch (payload.eventType) {

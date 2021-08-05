@@ -58,7 +58,7 @@
       async getCellarTotal() {
         try {
           let { data, error, status } = await supabase
-            .from('mycellar')
+            .from('bottles')
             .select(`qty`)
 
           if (error && status !== 406) throw error
