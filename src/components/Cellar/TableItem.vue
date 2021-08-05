@@ -51,25 +51,6 @@
         >
           <PencilAltIcon class="w-5 h-5" />
         </button>
-        <button
-          class="
-            flex
-            items-center
-            justify-between
-            px-2
-            py-2
-            text-sm
-            font-medium
-            leading-5
-            text-pink-900
-            rounded-lg
-            dark:text-gray-400
-            focus:outline-none focus:shadow-outline-gray
-          "
-          @click="removeItem(item.id)"
-        >
-          <TrashIcon class="w-5 h-5" />
-        </button>
       </div>
     </td>
   </tr>
@@ -77,9 +58,9 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { PencilAltIcon, TrashIcon } from '@heroicons/vue/solid'
+  import { PencilAltIcon } from '@heroicons/vue/solid'
   import QtySelector from '../QtySelector.vue'
-  import api from "../../api"
+  import api from '../../api'
 
   export default defineComponent({
     name: 'TableItem',
@@ -88,7 +69,6 @@
     },
     components: {
       PencilAltIcon,
-      TrashIcon,
       QtySelector,
     },
     computed: {
@@ -117,9 +97,6 @@
       },
     },
     methods: {
-      removeItem(id: string) {
-        api.removeBottle(id)
-      },
       increaseQty(id: string) {
         api.increaseBottleQty(id, this.item.qty)
       },

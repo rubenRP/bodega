@@ -13,6 +13,9 @@ const messages = {
       qty: 'Cantidad',
       actions: 'Acciones',
       404: '404 - Página no encontrada',
+      cancel: 'Cancelar',
+      update: 'Actualizar',
+      save: 'Guardar',
     },
     cellar: {
       myCellar: 'Mi Bodega',
@@ -29,6 +32,8 @@ const messages = {
       region: 'Región',
       totalBottles: 'Total Botellas',
       filterWines: 'Filtrar vinos',
+      dateAdded: 'Fecha añadida',
+      removeBottle: 'Eliminar botella',
     },
   },
   en: {

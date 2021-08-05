@@ -107,7 +107,7 @@
 
   <div class="w-full overflow-hidden rounded-lg shadow-xs">
     <div class="w-full overflow-x-auto">
-      <table class="w-full whitespace-no-wrap" v-if="!loading">
+      <table class="w-full whitespace-no-wrap">
         <thead>
           <tr
             class="
@@ -129,7 +129,7 @@
             <th class="px-4 py-3">{{ $t('cellar.apellation') }}</th>
             <th class="px-4 py-3">{{ $t('cellar.type') }}</th>
             <th class="px-4 py-3 text-center">{{ $t('general.qty') }}</th>
-            <th class="px-4 py-3 text-right">{{ $t('general.actions') }}</th>
+            <th class="px-4 py-3 text-right"></th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -204,8 +204,11 @@
         })
       },
       totalBottles(): number {
-           return this.getCellar.reduce((acc: number, curr: { qty: number }) => acc + curr.qty, 0)
-      }
+        return this.getCellar.reduce(
+          (acc: number, curr: { qty: number }) => acc + curr.qty,
+          0
+        )
+      },
     },
     methods: {
       ...mapActions({

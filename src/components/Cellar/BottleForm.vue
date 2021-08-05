@@ -165,16 +165,45 @@
           <option>Other</option>
         </select>
       </label>
+      <label class="block mt-4 text-sm">
+        <span class="text-gray-700 dark:text-gray-400">{{
+          $t('cellar.dateAdded')
+        }}</span>
+        <input
+          type="date"
+          class="
+            block
+            w-full
+            mt-1
+            text-sm
+            dark:border-gray-600 dark:bg-gray-700
+            focus:border-red-800 focus:outline-none focus:shadow-outline-purple
+            dark:text-gray-300 dark:focus:shadow-outline-gray
+            border-gray-200 border
+            rounded-md
+            px-3
+            py-2
+          "
+          v-model="date"
+        />
+      </label>
       <label class="block mt-4 mb-4 text-sm">
         <span class="text-gray-700 dark:text-gray-400">{{
           $t('general.qty')
         }}</span>
-        <div class="w-1/3">
-          <QtySelector
-            :qty="qty"
-            v-on:incrementQty="increaseQty"
-            v-on:decrementQty="decreaseQty"
-          />
+        <div class="flex align-middle justify-between items-center">
+          <div class="w-1/3">
+            <QtySelector
+              :qty="qty"
+              v-on:incrementQty="increaseQty"
+              v-on:decrementQty="decreaseQty"
+            />
+          </div>
+          <div class="w-auto text-pink-900">
+            <button @click="removeBottle()" v-if="bottle">
+              {{ $t('cellar.removeBottle') }}
+            </button>
+          </div>
         </div>
       </label>
     </template>
@@ -188,7 +217,7 @@
           text-sm
           font-medium
           leading-5
-          text-white text-gray-700
+          text-gray-700
           transition-colors
           duration-150
           border border-gray-300
@@ -202,7 +231,7 @@
           focus:outline-none focus:shadow-outline-gray
         "
       >
-        Cancel
+        {{ $t('general.cancel') }}
       </button>
       <button
         class="
@@ -226,7 +255,7 @@
         v-if="bottle"
         @click="updateBottle()"
       >
-        Update
+        {{ $t('general.update') }}
       </button>
       <button
         class="
@@ -250,7 +279,7 @@
         v-else
         @click="createBottle()"
       >
-        Save
+        {{ $t('general.save') }}
       </button></template
     >
   </Modal>
@@ -278,6 +307,7 @@
         apellation: this.bottle?.apellation || '',
         type: this.bottle?.type || '',
         qty: this.bottle?.qty || 1,
+        date: this.bottle?.['last_added'] || '',
       }
     },
     methods: {
@@ -291,7 +321,8 @@
             this.region,
             this.apellation,
             this.type,
-            this.qty
+            this.qty,
+            this.date
           )
           if (error && status !== 201) throw error
         } catch (e) {
@@ -303,7 +334,7 @@
       },
       async updateBottle() {
         try {
-          let { error, status } = await api.updateBottle(
+          await api.updateBottle(
             this.name,
             this.cellar,
             this.vintage,
@@ -312,16 +343,18 @@
             this.apellation,
             this.type,
             this.qty,
-            this.bottle?.id
+            this.bottle?.id,
+            this.date
           )
-
-          if (error && status !== 201) throw error
         } catch (e) {
           console.log(e)
         } finally {
           this.clearForm()
           this.$emit('closeModalForm')
         }
+      },
+      removeBottle() {
+        api.removeBottle(this.bottle?.id)
       },
       clearForm() {
         this.name = ''

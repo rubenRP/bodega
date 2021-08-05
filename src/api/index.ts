@@ -23,7 +23,8 @@ export default {
     region: string,
     apellation: string,
     type: string,
-    qty: number
+    qty: number,
+    date?: any
   ) {
     return await supabase.from('mycellar').insert([
       {
@@ -35,6 +36,7 @@ export default {
         apellation: apellation,
         type: type,
         qty: qty,
+        last_added: date ? date : new Date(),
       },
     ])
   },
@@ -47,7 +49,8 @@ export default {
     apellation: string,
     type: string,
     qty: number,
-    id: number
+    id: number,
+    date?: any
   ) {
     try {
       await supabase
@@ -62,6 +65,7 @@ export default {
             apellation: apellation,
             type: type,
             qty: qty,
+            last_added: date,
           },
         ])
         .eq('id', id)
