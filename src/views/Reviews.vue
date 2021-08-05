@@ -11,7 +11,7 @@
       justify-between
     "
   >
-    <span>{{ $t('cellar.myCellar') }}</span>
+    <span>Reviews</span>
     <button
       class="
         inline-block
@@ -27,85 +27,13 @@
         hover:bg-transparent hover:text-pink-800
         ml-4
         lg:mt-0
+        hidden
       "
       @click="toggleNewBottle()"
     >
       {{ $t('general.add') }}
     </button>
   </h2>
-
-  <!-- Cards -->
-  <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-    <!-- Card -->
-    <div
-      class="
-        flex
-        items-center
-        p-4
-        bg-white
-        rounded-lg
-        shadow-xs
-        dark:bg-gray-800
-      "
-    >
-      <div
-        class="
-          p-3
-          mr-4
-          text-orange-500
-          bg-orange-100
-          rounded-full
-          dark:text-orange-100 dark:bg-orange-500
-        "
-      >
-        🍷
-      </div>
-      <div>
-        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          {{ $t('cellar.totalBottles') }}
-        </p>
-        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ totalBottles }}
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="relative w-full max-w-xl focus-within:text-gray-200 m-auto mb-4">
-    <div class="absolute inset-y-0 flex items-center pl-2">
-      <SearchIcon class="w-4 h-4" />
-    </div>
-    <input
-      class="
-        w-full
-        pl-8
-        pr-2
-        py-2
-        text-sm text-gray-700
-        placeholder-gray-600
-        bg-gray-100
-        border
-        rounded-md
-        dark:placeholder-gray-500
-        dark:focus:shadow-outline-gray
-        dark:focus:placeholder-gray-600
-        dark:focus:border-gray-400
-        dark:bg-gray-700
-        dark:border-gray-700
-        dark:text-gray-200
-        focus:placeholder-gray-500
-        focus:bg-white
-        focus:border-pink-900
-        focus:outline-none
-        focus:shadow-outline-purple
-        form-input
-      "
-      type="text"
-      :placeholder="$t('cellar.filterWines')"
-      aria-label="Search"
-      v-model="search"
-    />
-  </div>
 
   <div class="w-full overflow-hidden rounded-lg shadow-xs">
     <div class="w-full overflow-x-auto">
@@ -130,13 +58,13 @@
             <th class="px-4 py-3">{{ $t('cellar.vintage') }}</th>
             <th class="px-4 py-3">{{ $t('cellar.apellation') }}</th>
             <th class="px-4 py-3">{{ $t('cellar.type') }}</th>
-            <th class="px-4 py-3 text-center">{{ $t('general.qty') }}</th>
+            <th class="px-4 py-3 text-center">{{ $t('reviews.rating') }}</th>
             <th class="px-4 py-3 text-right"></th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
           <TableItem
-            v-for="bottle in filteredCellar"
+            v-for="bottle in getReviews"
             :key="bottle.id"
             :item="bottle"
             @editItem="editBottle(bottle)"
@@ -162,13 +90,13 @@
     SearchIcon,
   } from '@heroicons/vue/solid'
 
-  import TableItem from '../components/Cellar/TableItem.vue'
+  import TableItem from '../components/Reviews/TableItem.vue'
   import Modal from '../components/Modal.vue'
   import BottleForm from '../components/Cellar/BottleForm.vue'
   import { mapActions, mapGetters } from 'vuex'
 
   export default defineComponent({
-    name: 'Cellar',
+    name: 'Reviews',
     components: {
       PencilAltIcon,
       CurrencyEuroIcon,
@@ -187,38 +115,24 @@
       }
     },
     created() {
-      if (this.getCellar.length === 0) {
-        this.fetchCellar()
-      }
+      this.fetchCellar()
+      this.fetchReviews()
     },
     destroyed() {
-      // this.destroyCellar()
+      this.destroyCellar()
     },
     computed: {
       ...mapGetters({
         getCellar: 'cellar/cellar',
+        getReviews: 'reviews/reviews',
       }),
-      filteredCellar(): any[] {
-        return this.getCellar.filter((bottle: any) => {
-          return (
-            bottle.name.toLowerCase().includes(this.search.toLowerCase()) ||
-            bottle.cellar.toLowerCase().includes(this.search.toLowerCase()) ||
-            bottle.apellation.toLowerCase().includes(this.search.toLowerCase())
-          )
-        })
-      },
-      totalBottles(): number {
-        return this.getCellar.reduce(
-          (acc: number, curr: { qty: number }) => acc + curr.qty,
-          0
-        )
-      },
     },
     methods: {
       ...mapActions({
         fetchCellar: 'cellar/fetchCellar',
         unsuscribeCellar: 'cellar/unsuscribeCellar',
         destroyCellar: 'cellar/destroyCellar',
+        fetchReviews: 'reviews/fetchReviews',
       }),
 
       toggleNewBottle() {

@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Cellar from '../views/Cellar.vue'
+import Reviews from '../views/Reviews.vue'
 import Profile from '../views/Profile.vue'
 import NotFound from '../views/NotFound.vue'
 import store from '../store'
@@ -36,7 +37,7 @@ const routes = [
   {
     path: '/reviews',
     name: 'Reviews',
-    component: Home,
+    component: Reviews,
     meta: {
       requiresAuth: true,
       layout: 'DefaultLayout',

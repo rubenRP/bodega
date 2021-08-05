@@ -41,7 +41,9 @@
       </button>
       <!-- Logo -->
       <div class="flex justify-center w-32">
-        <LogoMobile class="md:hidden text-gray-800 dark:text-gray-200" />
+        <LogoMobile
+          class="md:hidden text-gray-800 dark:text-gray-200 w-32 h-8"
+        />
       </div>
       <ul class="flex items-center flex-shrink-0 space-x-6">
         <!-- Theme toggler -->

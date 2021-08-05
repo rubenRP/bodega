@@ -37,6 +37,9 @@ const messages = {
       dateAdded: 'Fecha añadida',
       removeBottle: 'Eliminar botella',
     },
+    reviews: {
+      rating: 'Valoración',
+    },
   },
   en: {
     general: {

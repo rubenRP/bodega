@@ -85,7 +85,7 @@
             <span class="ml-4">{{ $t('cellar.myCellar') }}</span>
           </router-link>
         </li>
-        <li class="relative px-6 py-3 hidden">
+        <li class="relative px-6 py-3">
           <router-link
             class="
               inline-flex

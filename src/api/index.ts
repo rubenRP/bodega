@@ -20,6 +20,7 @@ export default {
     return await supabase
       .from('bottles')
       .select()
+      .is('mycellar', true)
       .gt('qty', 0)
       .order('last_added', { ascending: false })
   },
@@ -113,5 +114,16 @@ export default {
     } catch (error) {
       alert(error.message)
     }
+  },
+  async getReviews() {
+    return await supabase
+      .from('reviews')
+      .select(
+        `
+        *,
+        bottles(name, cellar, vintage, country, region, apellation, type, mycellar)
+      `
+      )
+      .order('date_added', { ascending: false })
   },
 }
