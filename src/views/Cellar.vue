@@ -71,7 +71,7 @@
     </div>
   </div>
 
-  <div class="relative w-full max-w-xl focus-within:text-pink-900 m-auto mb-4">
+  <div class="relative w-full max-w-xl focus-within:text-gray-200 m-auto mb-4">
     <div class="absolute inset-y-0 flex items-center pl-2">
       <SearchIcon class="w-4 h-4" />
     </div>
@@ -89,7 +89,9 @@
         dark:placeholder-gray-500
         dark:focus:shadow-outline-gray
         dark:focus:placeholder-gray-600
+        dark:focus:border-gray-400
         dark:bg-gray-700
+        dark:border-gray-700
         dark:text-gray-200
         focus:placeholder-gray-500
         focus:bg-white
