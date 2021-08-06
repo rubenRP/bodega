@@ -19,9 +19,7 @@
       <WineTag :type="item.type" />
     </td>
     <td class="px-4 py-3 pb-4 md:pb-3 text-sm w-1/2">
-      <div class="px-4 py-3 text-sm w-1/3">
-        {{ item.rating }}
-      </div>
+      <StarRating :value="item.rating" />
     </td>
     <td class="px-4 py-3 pb-4 md:pb-3 w-1/2" v-if="actions">
       <div class="flex items-end md:items-center space-x-4 text-sm justify-end">
@@ -55,6 +53,7 @@
   import QtySelector from '../QtySelector.vue'
   import WineTag from '../WineTag.vue'
   import api from '../../api'
+  import StarRating from './StarRating.vue'
 
   export default defineComponent({
     name: 'TableItem',
@@ -69,8 +68,8 @@
       PencilAltIcon,
       QtySelector,
       WineTag,
+      StarRating,
     },
-    computed: {},
     methods: {
       increaseQty(id: string) {
         api.increaseBottleQty(id, this.item.qty)

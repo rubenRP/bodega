@@ -35,7 +35,7 @@
   </h2>
 
   <!-- Cards -->
-  <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+  <div class="grid gap-6 mb-8 grid-cols-2 xl:grid-cols-3">
     <!-- Card -->
     <div
       class="
@@ -66,6 +66,71 @@
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
           {{ totalBottles }}
+        </p>
+      </div>
+    </div>
+    <div
+      class="
+        flex
+        items-center
+        p-4
+        bg-white
+        rounded-lg
+        shadow-xs
+        dark:bg-gray-800
+      "
+    >
+      <div
+        class="
+          p-3
+          mr-4
+          text-orange-500
+          bg-orange-100
+          rounded-full
+          dark:text-orange-100 dark:bg-orange-500
+        "
+      >
+        🗺️
+      </div>
+      <div>
+        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+          {{ $t('cellar.totalApellations') }}
+        </p>
+        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+          {{ totalApellations }}
+        </p>
+      </div>
+    </div>
+    <div
+      class="
+        hidden
+        md:flex
+        items-center
+        p-4
+        bg-white
+        rounded-lg
+        shadow-xs
+        dark:bg-gray-800
+      "
+    >
+      <div
+        class="
+          p-3
+          mr-4
+          text-orange-500
+          bg-orange-100
+          rounded-full
+          dark:text-orange-100 dark:bg-orange-500
+        "
+      >
+        🌍
+      </div>
+      <div>
+        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+          {{ $t('cellar.totalCountries') }}
+        </p>
+        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+          {{ totalCountries }}
         </p>
       </div>
     </div>
@@ -212,6 +277,36 @@
           (acc: number, curr: { qty: number }) => acc + curr.qty,
           0
         )
+      },
+      totalApellations(): number {
+        return Object.keys(
+          this.getCellar.reduce(
+            (
+              acc: { [x: string]: any },
+              curr: { apellation: string | number; qty: any }
+            ) => {
+              if (curr.apellation)
+                acc[curr.apellation] = (acc[curr.apellation] || 0) + curr.qty
+              return acc
+            },
+            {}
+          )
+        ).length
+      },
+      totalCountries(): number {
+        return Object.keys(
+          this.getCellar.reduce(
+            (
+              acc: { [x: string]: any },
+              curr: { country: string; qty: any }
+            ) => {
+              if (curr.country)
+                acc[curr.country] = (acc[curr.country] || 0) + curr.qty
+              return acc
+            },
+            {}
+          )
+        ).length
       },
     },
     methods: {

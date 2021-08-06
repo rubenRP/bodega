@@ -123,18 +123,7 @@
         getCellar: 'cellar/cellar',
         getReviews: 'reviews/reviews',
       }),
-      totalCountries(): any {
-        return this.getCellar.reduce(
-          (
-            acc: { [x: string]: any },
-            curr: { country: string | number; qty: any }
-          ) => {
-            acc[curr.country] = (acc[curr.country] || 0) + curr.qty
-            return acc
-          },
-          {}
-        )
-      },
+
       totalApellations(): any {
         return this.getCellar.reduce(
           (
