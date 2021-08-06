@@ -16,12 +16,7 @@
     </td>
 
     <td class="px-4 py-3 text-xs w-1/3 text-right md:text-center">
-      <span
-        class="px-2 py-1 font-semibold leading-tight rounded-full"
-        :class="getTypeColor"
-      >
-        {{ $t(getTypeTranslated) }}
-      </span>
+      <WineTag :type="item.type" />
     </td>
     <td class="px-4 py-3 pb-4 md:pb-3 text-sm w-1/2">
       <div class="px-4 py-3 text-sm w-1/3">
@@ -58,6 +53,7 @@
   import { defineComponent } from 'vue'
   import { PencilAltIcon } from '@heroicons/vue/solid'
   import QtySelector from '../QtySelector.vue'
+  import WineTag from '../WineTag.vue'
   import api from '../../api'
 
   export default defineComponent({
@@ -68,32 +64,9 @@
     components: {
       PencilAltIcon,
       QtySelector,
+      WineTag,
     },
-    computed: {
-      getTypeColor(): string {
-        switch (this.item.type) {
-          case 'Red':
-            return 'text-red-700 bg-red-100 dark:bg-opacity-70'
-          case 'White':
-            return 'text-green-700 bg-green-100 dark:bg-opacity-70 '
-          case 'Rose':
-            return 'text-pink-700 bg-pink-100 dark:bg-opacity-70'
-          default:
-            return 'text-yellow-700 bg-yellow-100 dark:bg-opacity-70'
-        }
-      },
-      getTypeTranslated(): string {
-        switch (this.item.type) {
-          case 'Red':
-            return 'cellar.red'
-          case 'White':
-            return 'cellar.white'
-          case 'Rose':
-            return 'cellar.rose'
-        }
-        return this.item.type
-      },
-    },
+    computed: {},
     methods: {
       increaseQty(id: string) {
         api.increaseBottleQty(id, this.item.qty)
