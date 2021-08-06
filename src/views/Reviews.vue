@@ -27,9 +27,8 @@
         hover:bg-transparent hover:text-pink-800
         ml-4
         lg:mt-0
-        hidden
       "
-      @click="toggleNewBottle()"
+      @click="toggleNewReview()"
     >
       {{ $t('general.add') }}
     </button>
@@ -64,19 +63,19 @@
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
           <TableItem
-            v-for="bottle in getReviews"
-            :key="bottle.id"
-            :item="bottle"
-            @editItem="editBottle(bottle)"
+            v-for="review in getReviews"
+            :key="review.id"
+            :item="review"
+            @editItem="editReview(review)"
           />
         </tbody>
       </table>
     </div>
   </div>
-  <BottleForm
-    v-if="openedNewBottle"
-    @closeModalForm="toggleNewBottle()"
-    :bottle="activeBottle"
+  <ReviewForm
+    v-if="openedNewReview"
+    @closeModalForm="toggleNewReview()"
+    :bottle="activeReview"
   />
 </template>
 
@@ -92,7 +91,7 @@
 
   import TableItem from '../components/Reviews/TableItem.vue'
   import Modal from '../components/Modal.vue'
-  import BottleForm from '../components/Cellar/BottleForm.vue'
+  import ReviewForm from '../components/Reviews/ReviewForm.vue'
   import { mapActions, mapGetters } from 'vuex'
 
   export default defineComponent({
@@ -105,21 +104,22 @@
       CalculatorIcon,
       TableItem,
       Modal,
-      BottleForm,
+      ReviewForm,
     },
     data() {
       return {
-        openedNewBottle: false,
-        activeBottle: <any>null,
+        openedNewReview: false,
+        activeReview: <any>null,
         search: '',
       }
     },
     created() {
-      this.fetchCellar()
-      this.fetchReviews()
-    },
-    destroyed() {
-      this.destroyCellar()
+      if (this.getCellar.length === 0) {
+        this.fetchCellar()
+      }
+      if (this.getReviews.length === 0) {
+        this.fetchReviews()
+      }
     },
     computed: {
       ...mapGetters({
@@ -134,16 +134,15 @@
         destroyCellar: 'cellar/destroyCellar',
         fetchReviews: 'reviews/fetchReviews',
       }),
-
-      toggleNewBottle() {
-        if (this.openedNewBottle) {
-          this.activeBottle = null
+      toggleNewReview() {
+        if (this.openedNewReview) {
+          this.activeReview = null
         }
-        this.openedNewBottle = !this.openedNewBottle
+        this.openedNewReview = !this.openedNewReview
       },
-      editBottle(bottle: {}) {
-        this.activeBottle = bottle
-        this.toggleNewBottle()
+      editReview(review: {}) {
+        this.activeReview = review
+        this.toggleNewReview()
       },
     },
   })

@@ -1,6 +1,6 @@
 <template>
   <Modal v-on:closeModal="$emit('closeModalForm')">
-    <template v-slot:header>Add a new bottle</template>
+    <template v-slot:header>{{ $t('cellar.addBottle') }}</template>
     <template v-slot:body>
       <label class="block text-sm">
         <span class="text-gray-700 dark:text-gray-400">{{

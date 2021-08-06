@@ -44,10 +44,14 @@ const messages = {
       vintages: 'Añadas',
       latestBottles: 'Últimas Botellas',
       drink: 'Beber',
+      addBottle: 'Añadir botella',
+      bottle: 'Botella',
     },
     reviews: {
       rating: 'Valoración',
       latestReviews: 'Últimas Valoraciones',
+      addReview: 'Añadir Valoración',
+      comment: 'Comentario',
     },
   },
   en: {

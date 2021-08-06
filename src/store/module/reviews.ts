@@ -63,8 +63,8 @@ const mutations = {
   RESET_REVIEWS: (state: { reviews: never[] }) => {
     state.reviews = []
   },
-  ADD_REVIEW: (state: { review: any[] }, review: {}) => {
-    state.review.push(review)
+  ADD_REVIEW: (state: { reviews: any[] }, review: {}) => {
+    state.reviews.push(review)
   },
   MODIFY_REVIEW: (
     state: { reviews: any[] },

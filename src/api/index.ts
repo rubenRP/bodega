@@ -126,4 +126,31 @@ export default {
       )
       .order('date_added', { ascending: false })
   },
+  async addReview(
+    cellarBottle: number,
+    rating: number,
+    comment: string,
+    user: any
+  ) {
+    try {
+      await supabase.from('reviews').insert([
+        {
+          bottle_id: cellarBottle,
+          rating: rating,
+          comment: comment,
+          profile_id: user,
+        },
+      ])
+      await supabase
+        .from('bottles')
+        .update([
+          {
+            reviewed: true,
+          },
+        ])
+        .eq('id', cellarBottle)
+    } catch (error) {
+      alert(error.message)
+    }
+  },
 }
