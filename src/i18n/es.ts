@@ -34,7 +34,7 @@ const messages = {
       country: 'Pais',
       region: 'Región',
       totalBottles: 'Total Botellas',
-      totalApellations: 'Total Denominaciones',
+      totalApellations: 'Total DO',
       totalCountries: 'Total Países',
       filterWines: 'Filtrar vinos',
       dateAdded: 'Fecha añadida',
