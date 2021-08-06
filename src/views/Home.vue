@@ -103,8 +103,7 @@
   import { mapActions, mapGetters } from 'vuex'
   import TableItemCellar from '../components/Cellar/TableItem.vue'
   import TableItemReviews from '../components/Reviews/TableItem.vue'
-
-  import PieChart from '../components/PieChart.vue'
+  import PieChart from '../components/Stats/PieChart.vue'
 
   export default defineComponent({
     name: 'Home',
@@ -122,33 +121,9 @@
       ...mapGetters({
         getCellar: 'cellar/cellar',
         getReviews: 'reviews/reviews',
+        totalApellations: 'cellar/totalApellations',
+        totalVintages: 'cellar/totalVintages',
       }),
-
-      totalApellations(): any {
-        return this.getCellar.reduce(
-          (
-            acc: { [x: string]: any },
-            curr: { apellation: string | number; qty: any }
-          ) => {
-            if (curr.apellation)
-              acc[curr.apellation] = (acc[curr.apellation] || 0) + curr.qty
-            return acc
-          },
-          {}
-        )
-      },
-      totalVintages(): any {
-        return this.getCellar.reduce(
-          (
-            acc: { [x: string]: any },
-            curr: { vintage: string | number; qty: any }
-          ) => {
-            acc[curr.vintage] = (acc[curr.vintage] || 0) + curr.qty
-            return acc
-          },
-          {}
-        )
-      },
     },
     watch: {},
     methods: {

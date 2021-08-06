@@ -97,7 +97,7 @@
           {{ $t('cellar.totalApellations') }}
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ totalApellations }}
+          {{ Object.keys(totalApellations).length }}
         </p>
       </div>
     </div>
@@ -130,7 +130,7 @@
           {{ $t('cellar.totalCountries') }}
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ totalCountries }}
+          {{ Object.keys(totalCountries).length }}
         </p>
       </div>
     </div>
@@ -262,6 +262,9 @@
     computed: {
       ...mapGetters({
         getCellar: 'cellar/cellar',
+        totalBottles: 'cellar/totalBottles',
+        totalApellations: 'cellar/totalApellations',
+        totalCountries: 'cellar/totalCountries',
       }),
       filteredCellar(): any[] {
         return this.getCellar.filter((bottle: any) => {
@@ -271,42 +274,6 @@
             bottle.apellation.toLowerCase().includes(this.search.toLowerCase())
           )
         })
-      },
-      totalBottles(): number {
-        return this.getCellar.reduce(
-          (acc: number, curr: { qty: number }) => acc + curr.qty,
-          0
-        )
-      },
-      totalApellations(): number {
-        return Object.keys(
-          this.getCellar.reduce(
-            (
-              acc: { [x: string]: any },
-              curr: { apellation: string | number; qty: any }
-            ) => {
-              if (curr.apellation)
-                acc[curr.apellation] = (acc[curr.apellation] || 0) + curr.qty
-              return acc
-            },
-            {}
-          )
-        ).length
-      },
-      totalCountries(): number {
-        return Object.keys(
-          this.getCellar.reduce(
-            (
-              acc: { [x: string]: any },
-              curr: { country: string; qty: any }
-            ) => {
-              if (curr.country)
-                acc[curr.country] = (acc[curr.country] || 0) + curr.qty
-              return acc
-            },
-            {}
-          )
-        ).length
       },
     },
     methods: {

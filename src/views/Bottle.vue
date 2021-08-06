@@ -19,11 +19,9 @@
   import { mapActions, mapGetters } from 'vuex'
   import TableItem from '../components/Cellar/TableItem.vue'
 
-  import PieChart from '../components/PieChart.vue'
-
   export default defineComponent({
     name: 'Bottle',
-    components: { TableItem, PieChart },
+    components: { TableItem },
     data: () => ({
       id: 0,
     }),

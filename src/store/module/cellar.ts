@@ -8,6 +8,47 @@ const state = () => ({
 
 const getters = {
   cellar: (state: { cellar: [] }) => state.cellar,
+  totalApellations: (state: { cellar: [] }) => {
+    return state.cellar.reduce(
+      (
+        acc: { [x: string]: any },
+        curr: { apellation: string | number; qty: any }
+      ) => {
+        if (curr.apellation)
+          acc[curr.apellation] = (acc[curr.apellation] || 0) + curr.qty
+        return acc
+      },
+      {}
+    )
+  },
+  totalVintages: (state: { cellar: [] }) => {
+    return state.cellar.reduce(
+      (
+        acc: { [x: string]: any },
+        curr: { vintage: string | number; qty: any }
+      ) => {
+        acc[curr.vintage] = (acc[curr.vintage] || 0) + curr.qty
+        return acc
+      },
+      {}
+    )
+  },
+  totalCountries: (state: { cellar: [] }) => {
+    return state.cellar.reduce(
+      (acc: { [x: string]: any }, curr: { country: string; qty: any }) => {
+        if (curr.country)
+          acc[curr.country] = (acc[curr.country] || 0) + curr.qty
+        return acc
+      },
+      {}
+    )
+  },
+  totalBottles: (state: { cellar: [] }) => {
+    return state.cellar.reduce(
+      (acc: number, curr: { qty: number }) => acc + curr.qty,
+      0
+    )
+  },
 }
 
 const actions = {
