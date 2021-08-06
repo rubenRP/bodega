@@ -39,11 +39,13 @@ const messages = {
       removeBottle: 'Eliminar botella',
       apellations: 'Denominaciones',
       countries: 'Paises',
+      vintages: 'Añadas',
       latestBottles: 'Últimas Botellas',
       drink: 'Beber',
     },
     reviews: {
       rating: 'Valoración',
+      latestReviews: 'Últimas Valoraciones',
     },
   },
   en: {

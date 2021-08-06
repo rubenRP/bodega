@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Cellar from '../views/Cellar.vue'
+import Bottle from '../views/Bottle.vue'
 import Reviews from '../views/Reviews.vue'
 import Profile from '../views/Profile.vue'
 import NotFound from '../views/NotFound.vue'
@@ -29,6 +30,15 @@ const routes = [
     path: '/cellar',
     name: 'Cellar',
     component: Cellar,
+    meta: {
+      requiresAuth: true,
+      layout: 'DefaultLayout',
+    },
+  },
+  {
+    path: '/bottle/:id',
+    name: 'Bottle',
+    component: Bottle,
     meta: {
       requiresAuth: true,
       layout: 'DefaultLayout',
@@ -71,6 +81,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+  store.commit('general/CLOSE_SIDEBAR')
 })
 
 export default router

@@ -139,8 +139,6 @@
             v-for="bottle in filteredCellar"
             :key="bottle.id"
             :item="bottle"
-            actions="true"
-            quickQty="false"
             @editItem="editBottle(bottle)"
           />
         </tbody>

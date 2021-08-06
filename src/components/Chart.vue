@@ -16,7 +16,7 @@
       chartOptions: Object,
       selector: String,
     },
-    data: () => ({}),
+    data: () => ({ chart: <any>null }),
     mounted() {
       this.chartConstructor(this.chartType, this.chartData, this.chartOptions)
     },
@@ -24,11 +24,18 @@
     methods: {
       chartConstructor(chartType: any, chartData: any, chartOptions: any) {
         const chartElement = document.querySelector(`.${this.selector} canvas`)
-        new Chart(<ChartItem>chartElement, {
-          type: chartType,
-          data: chartData,
-          options: chartOptions,
-        })
+        if (this.chartData?.labels.length > 0) {
+          this.chart = new Chart(<ChartItem>chartElement, {
+            type: chartType,
+            data: chartData,
+            options: chartOptions,
+          })
+        }
+      },
+    },
+    watch: {
+      chartData() {
+        this.chartConstructor(this.chartType, this.chartData, this.chartOptions)
       },
     },
   })

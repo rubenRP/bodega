@@ -23,7 +23,7 @@
         {{ item.rating }}
       </div>
     </td>
-    <td class="px-4 py-3 pb-4 md:pb-3 w-1/2">
+    <td class="px-4 py-3 pb-4 md:pb-3 w-1/2" v-if="actions">
       <div class="flex items-end md:items-center space-x-4 text-sm justify-end">
         <button
           class="
@@ -60,6 +60,10 @@
     name: 'TableItem',
     props: {
       item: <any>{},
+      actions: {
+        type: Boolean,
+        default: true,
+      },
     },
     components: {
       PencilAltIcon,

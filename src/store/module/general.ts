@@ -15,6 +15,9 @@ const mutations = {
   TOGGLE_SIDEBAR(state: { sidebar: boolean }) {
     state.sidebar = !state.sidebar
   },
+  CLOSE_SIDEBAR(state: { sidebar: boolean }) {
+    state.sidebar = false
+  },
 }
 
 export default {
