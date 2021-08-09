@@ -9,6 +9,7 @@
       bg-black bg-opacity-50
       sm:items-center sm:justify-center
     "
+    @click="toggleSidebar"
     :class="!showSidebar ? 'hidden' : ''"
   ></div>
   <aside
@@ -105,7 +106,7 @@
             <span class="ml-4">Reviews</span>
           </router-link>
         </li>
-        <li class="relative px-6 py-3 hidden">
+        <li class="relative px-6 py-3">
           <router-link
             class="
               inline-flex
@@ -118,10 +119,10 @@
               hover:text-gray-800
               dark:hover:text-gray-200
             "
-            to="/settings"
+            to="/stats"
           >
             <CogIcon class="w-5 h-5" />
-            <span class="ml-4">Settings</span>
+            <span class="ml-4">{{ $t('stats.stats') }}</span>
           </router-link>
         </li>
       </ul>
@@ -139,7 +140,7 @@
     ArchiveIcon,
     StarIcon,
   } from '@heroicons/vue/solid'
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
 
   export default defineComponent({
     name: 'Sidebar',
@@ -157,6 +158,11 @@
     },
     computed: {
       ...mapGetters({ showSidebar: 'general/sidebar' }),
+    },
+    methods: {
+      ...mapMutations({
+        toggleSidebar: 'general/TOGGLE_SIDEBAR',
+      }),
     },
   })
 </script>

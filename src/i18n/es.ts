@@ -53,6 +53,9 @@ const messages = {
       addReview: 'Añadir Valoración',
       comment: 'Comentario',
     },
+    stats: {
+      stats: 'Estadísticas',
+    },
   },
   en: {
     general: {

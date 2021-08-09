@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 import Cellar from '../views/Cellar.vue'
 import Bottle from '../views/Bottle.vue'
 import Reviews from '../views/Reviews.vue'
+import Stats from '../views/Stats.vue'
 import Profile from '../views/Profile.vue'
 import NotFound from '../views/NotFound.vue'
 import store from '../store'
@@ -48,6 +49,15 @@ const routes = [
     path: '/reviews',
     name: 'Reviews',
     component: Reviews,
+    meta: {
+      requiresAuth: true,
+      layout: 'DefaultLayout',
+    },
+  },
+  {
+    path: '/stats',
+    name: 'Stats',
+    component: Stats,
     meta: {
       requiresAuth: true,
       layout: 'DefaultLayout',

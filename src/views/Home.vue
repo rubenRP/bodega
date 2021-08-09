@@ -1,5 +1,8 @@
 <template>
-  <h4 class="my-6 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+  <div class="mt-6">
+    <QuickStats />
+  </div>
+  <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
     {{ $t('cellar.latestBottles') }}
   </h4>
   <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -87,13 +90,13 @@
       <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
         {{ $t('cellar.apellations') }}
       </h4>
-      <PieChart :data="totalApellations" selector="chart-dop" />
+      <BarChart :data="totalApellations" selector="chart-dop" />
     </div>
     <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
       <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
         {{ $t('cellar.vintages') }}
       </h4>
-      <PieChart :data="totalVintages" selector="chart-vintages" />
+      <BarChart :data="totalVintages" selector="chart-vintages" />
     </div>
   </div>
 </template>
@@ -101,13 +104,14 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { mapActions, mapGetters } from 'vuex'
+  import QuickStats from '../components/Stats/QuickStats.vue'
   import TableItemCellar from '../components/Cellar/TableItem.vue'
   import TableItemReviews from '../components/Reviews/TableItem.vue'
-  import PieChart from '../components/Stats/PieChart.vue'
+  import BarChart from '../components/Stats/BarChart.vue'
 
   export default defineComponent({
     name: 'Home',
-    components: { TableItemCellar, TableItemReviews, PieChart },
+    components: { TableItemCellar, TableItemReviews, BarChart, QuickStats },
     data: () => ({}),
     created() {
       if (this.getCellar.length === 0) {
