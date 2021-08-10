@@ -18,14 +18,15 @@
     },
     props: {
       selector: String,
-      data: <any>Object,
+      data: <any>Array,
+      labels: <any>Array,
     },
     data: () => ({
       chartOptions: {
         responsive: true,
         plugins: {
           legend: {
-            display: false,
+            display: true,
           },
         },
       },
@@ -37,18 +38,32 @@
           datasets: [
             {
               data: <any>[],
-              backgroundColor: <any>[],
+              borderColor: '',
+              label: '',
+            },
+            {
+              data: <any>[],
+              borderColor: '',
+              label: '',
             },
           ],
           labels: <any>[],
         }
-        Object.entries(this.data).forEach(([key, value]) => {
-          res.datasets[0].data.push(value)
-          res.datasets[0].backgroundColor.push(
-            `hsl(${Math.random() * 360}, 50%, 50%)`
-          )
-          res.labels.push(key)
-        })
+        for (let i = 0; i < this.data.length; i++) {
+          Object.entries(this.data[i]).forEach(([key, value]) => {
+            res.datasets[i].data.push({
+              x: key,
+              y: value,
+            })
+            res.datasets[i].borderColor = `hsl(${
+              Math.random() * 360
+            }, 50%, 50%)`
+            res.datasets[i].label = this.labels[i]
+            if (res.labels.indexOf(key) == -1) {
+              res.labels.push(key)
+            }
+          })
+        }
         return res
       },
     },

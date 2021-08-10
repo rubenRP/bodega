@@ -165,7 +165,7 @@
           <option>Other</option>
         </select>
       </label>
-      <label class="block mt-4 text-sm">
+      <label class="block mt-4 text-sm hidden">
         <span class="text-gray-700 dark:text-gray-400">{{
           $t('cellar.dateAdded')
         }}</span>
@@ -313,7 +313,7 @@
     methods: {
       async createBottle() {
         try {
-          let { error, status } = await api.addBottle(
+          await api.addBottle(
             this.name,
             this.cellar,
             this.vintage,
@@ -324,7 +324,6 @@
             this.qty,
             this.date
           )
-          if (error && status !== 201) throw error
         } catch (e) {
           console.log(e)
         } finally {

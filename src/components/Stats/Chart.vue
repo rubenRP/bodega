@@ -24,7 +24,15 @@
     methods: {
       chartConstructor(chartType: any, chartData: any, chartOptions: any) {
         const chartElement = document.querySelector(`.${this.selector} canvas`)
-        if (this.chartData?.labels.length > 0) {
+        let filled = true
+        this.chartData?.datasets.forEach(
+          (dataset: { data: string | any[] }, index: any) => {
+            if (dataset.data.length == 0) {
+              filled = false
+            }
+          }
+        )
+        if (this.chartData?.labels.length > 0 && filled) {
           this.chart = new Chart(<ChartItem>chartElement, {
             type: chartType,
             data: chartData,

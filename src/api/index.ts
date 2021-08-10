@@ -35,7 +35,7 @@ export default {
     qty: number,
     date?: any
   ) {
-    return await supabase.from('bottles').insert([
+    let res = await supabase.from('bottles').insert([
       {
         name: name,
         cellar: cellar,
@@ -48,6 +48,14 @@ export default {
         last_added: date ? date : new Date(),
       },
     ])
+    for (let i = 0; i < qty; i++) {
+      await supabase.from('added_bottles').insert([
+        {
+          bottle_id: res.data![0].id,
+          date_added: new Date(),
+        },
+      ])
+    }
   },
   async updateBottle(
     name: string,
@@ -95,6 +103,12 @@ export default {
         .from('bottles')
         .update({ qty: qty + 1, last_added: new Date() })
         .eq('id', id)
+      await supabase.from('added_bottles').insert([
+        {
+          bottle_id: id,
+          date_added: new Date(),
+        },
+      ])
     } catch (error) {
       alert(error.message)
     }
@@ -152,5 +166,17 @@ export default {
     } catch (error) {
       alert(error.message)
     }
+  },
+  async getOpenedBottles() {
+    return await supabase
+      .from('opened_bottles')
+      .select()
+      .order('date_opened', { ascending: true })
+  },
+  async getAddedBottles() {
+    return await supabase
+      .from('added_bottles')
+      .select()
+      .order('date_added', { ascending: true })
   },
 }
