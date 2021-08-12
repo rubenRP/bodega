@@ -3,6 +3,9 @@ import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  resolve: {
+    alias: [{ find: '@', replacement: '/src' }],
+  },
   plugins: [
     vue(),
     VitePWA({

@@ -1,5 +1,5 @@
-import api from '../../api'
-import { supabase } from '../../supabase'
+import { getReviews } from '@/api/reviews'
+import { supabase } from '@/supabase'
 
 const state = () => ({
   reviews: <any>[],
@@ -13,7 +13,7 @@ const getters = {
 const actions = {
   fetchReviews: async ({ state, commit }: any) => {
     try {
-      let { data, error, status } = await api.getReviews()
+      let { data, error, status } = await getReviews()
       if (error && status !== 406) throw error
       if (data) {
         const reviews = data.map((review) => ({

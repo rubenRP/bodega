@@ -52,7 +52,6 @@
   import { PencilAltIcon } from '@heroicons/vue/solid'
   import QtySelector from '../QtySelector.vue'
   import WineTag from '../WineTag.vue'
-  import api from '../../api'
   import StarRating from './StarRating.vue'
 
   export default defineComponent({
@@ -69,14 +68,6 @@
       QtySelector,
       WineTag,
       StarRating,
-    },
-    methods: {
-      increaseQty(id: string) {
-        api.increaseBottleQty(id, this.item.qty)
-      },
-      decreaseQty(id: string) {
-        api.decreaseBottleQty(id, this.item.qty)
-      },
     },
   })
 </script>

@@ -45,12 +45,12 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { mapActions, mapGetters } from 'vuex'
-  import TableItemCellar from '../components/Cellar/TableItem.vue'
-  import TableItemReviews from '../components/Reviews/TableItem.vue'
-  import BarChart from '../components/Stats/BarChart.vue'
-  import LineChart from '../components/Stats/LineChart.vue'
-  import QuickStats from '../components/Stats/QuickStats.vue'
-  import api from '../api'
+  import TableItemCellar from '@/components/Cellar/TableItem.vue'
+  import TableItemReviews from '@/components/Reviews/TableItem.vue'
+  import BarChart from '@/components/Stats/BarChart.vue'
+  import LineChart from '@/components/Stats/LineChart.vue'
+  import QuickStats from '@/components/Stats/QuickStats.vue'
+  import { getAddedBottles, getOpenedBottles } from '@/api/bottles'
 
   export default defineComponent({
     name: 'Home',
@@ -130,7 +130,7 @@
       }),
       async fetchOpenedBottles() {
         try {
-          let { data } = await api.getOpenedBottles()
+          let { data } = await getOpenedBottles()
           this.openedBottles = data
         } catch (e) {
           console.error(e)
@@ -138,7 +138,7 @@
       },
       async fetchAddedBottles() {
         try {
-          let { data } = await api.getAddedBottles()
+          let { data } = await getAddedBottles()
           this.addedBottles = data
         } catch (e) {
           console.error(e)

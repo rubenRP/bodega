@@ -370,7 +370,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import Modal from '../Modal.vue'
-  import api from '../../api'
+  import { addReview } from '@/api/reviews'
   import { mapGetters } from 'vuex'
   import StarRating from './StarRating.vue'
 
@@ -405,7 +405,7 @@
     methods: {
       async createReview() {
         try {
-          await api.addReview(
+          await addReview(
             this.cellarBottle,
             this.rating,
             this.comment,
@@ -431,15 +431,6 @@
         this.cellarBottle = 0
         this.rating = 0
         this.comment = ''
-      },
-    },
-    watch: {
-      cellarBottle(newValue) {
-        /* if (newValue != 0) {
-          this.newBottle = false
-        } else {
-          this.newBottle = true
-        } */
       },
     },
   })

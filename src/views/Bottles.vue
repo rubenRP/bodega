@@ -123,10 +123,10 @@
     PencilAltIcon,
     SearchIcon,
   } from '@heroicons/vue/solid'
-  import TableItem from '../components/Cellar/TableItem.vue'
-  import Modal from '../components/Modal.vue'
-  import BottleForm from '../components/Cellar/BottleForm.vue'
-  import api from '../api'
+  import TableItem from '@/components/Cellar/TableItem.vue'
+  import Modal from '@/components/Modal.vue'
+  import BottleForm from '@/components/Cellar/BottleForm.vue'
+  import { getBottles } from '@/api/bottles'
 
   export default defineComponent({
     name: 'Cellar',
@@ -165,7 +165,7 @@
     methods: {
       async getBottles() {
         try {
-          let { data, error, status } = await api.getBottles()
+          let { data, error, status } = await getBottles()
 
           if (error && status !== 406) throw error
           if (data) {

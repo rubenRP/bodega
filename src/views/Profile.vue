@@ -130,8 +130,8 @@
   import { defineComponent } from 'vue'
 
   import { mapActions, mapGetters } from 'vuex'
-  import api from '../api'
-  import { supabase } from '../supabase'
+  import { getProfileInfo, logout } from '@/api/user'
+  import { supabase } from '@/supabase'
 
   export default defineComponent({
     name: 'Profile',
@@ -155,9 +155,7 @@
     methods: {
       async getProfile() {
         try {
-          let { data, error, status } = await api.getProfileInfo(
-            this.getUser.id
-          )
+          let { data, error, status } = await getProfileInfo(this.getUser.id)
 
           if (error && status !== 406) throw error
 
@@ -192,7 +190,7 @@
         }
       },
       async logout() {
-        await api.logout()
+        await logout()
         this.$router.push('/login')
       },
     },

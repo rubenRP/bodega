@@ -104,10 +104,10 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { mapActions, mapGetters } from 'vuex'
-  import QuickStats from '../components/Stats/QuickStats.vue'
-  import TableItemCellar from '../components/Cellar/TableItem.vue'
-  import TableItemReviews from '../components/Reviews/TableItem.vue'
-  import BarChart from '../components/Stats/BarChart.vue'
+  import QuickStats from '@/components/Stats/QuickStats.vue'
+  import TableItemCellar from '@/components/Cellar/TableItem.vue'
+  import TableItemReviews from '@/components/Reviews/TableItem.vue'
+  import BarChart from '@/components/Stats/BarChart.vue'
 
   export default defineComponent({
     name: 'Home',

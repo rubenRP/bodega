@@ -289,7 +289,7 @@
   import { defineComponent } from 'vue'
   import Modal from '../Modal.vue'
   import QtySelector from '../QtySelector.vue'
-  import api from '../../api'
+  import { addBottle, updateBottle, removeBottle } from '@/api/bottles'
 
   export default defineComponent({
     name: 'BottleForm',
@@ -313,7 +313,7 @@
     methods: {
       async createBottle() {
         try {
-          await api.addBottle(
+          await addBottle(
             this.name,
             this.cellar,
             this.vintage,
@@ -333,7 +333,7 @@
       },
       async updateBottle() {
         try {
-          await api.updateBottle(
+          await updateBottle(
             this.name,
             this.cellar,
             this.vintage,
@@ -353,7 +353,7 @@
         }
       },
       removeBottle() {
-        api.removeBottle(this.bottle?.id)
+        removeBottle(this.bottle?.id)
       },
       clearForm() {
         this.name = ''

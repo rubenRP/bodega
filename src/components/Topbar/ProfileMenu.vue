@@ -144,7 +144,7 @@
   import { mapGetters } from 'vuex'
   import { LogoutIcon, CogIcon } from '@heroicons/vue/solid'
   import { UserIcon } from '@heroicons/vue/outline'
-  import api from '../../api'
+  import { logout } from '@/api/user'
 
   export default defineComponent({
     name: 'ProfileMenu',
@@ -161,7 +161,7 @@
     computed: { ...mapGetters({ userInitials: 'user/initials' }) },
     methods: {
       async logout() {
-        await api.logout()
+        await logout()
         this.$router.push('/login')
       },
       toggleProfileMenu() {

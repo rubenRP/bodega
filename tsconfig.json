@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "/@/*": ["src/*"]
+      "@/*": ["src/*"]
     },
     "lib": ["ESNext", "DOM", "WebWorker"]
   },

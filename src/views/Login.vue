@@ -80,11 +80,11 @@
 
 <script lang="ts">
   import { defineComponent, ref } from 'vue'
-  import { supabase } from '../supabase'
+  import { supabase } from '@/supabase'
 
-  import Logo from '../components/Logo.vue'
+  import Logo from '@/components/Logo.vue'
   import { mapGetters } from 'vuex'
-  import router from '../router'
+  import router from '@/router'
 
   export default defineComponent({
     name: 'Login',

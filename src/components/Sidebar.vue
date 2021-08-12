@@ -153,7 +153,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
 
-  import Logo from '../components/Logo.vue'
+  import Logo from '@/components/Logo.vue'
   import {
     HomeIcon,
     SupportIcon,

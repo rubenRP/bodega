@@ -17,7 +17,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { mapActions, mapGetters } from 'vuex'
-  import TableItem from '../components/Cellar/TableItem.vue'
+  import TableItem from '@/components/Cellar/TableItem.vue'
 
   export default defineComponent({
     name: 'Bottle',

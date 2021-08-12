@@ -1,5 +1,5 @@
-import api from '../../api'
-import { supabase } from '../../supabase'
+import { supabase } from '@/supabase'
+import { getCellarBottles } from '@/api/bottles'
 
 const state = () => ({
   cellar: <any>[],
@@ -54,7 +54,7 @@ const getters = {
 const actions = {
   fetchCellar: async ({ state, commit }: any) => {
     try {
-      let { data, error, status } = await api.getCellarBottles()
+      let { data, error, status } = await getCellarBottles()
       if (error && status !== 406) throw error
       if (data) {
         commit('SET_CELLAR', data)

@@ -1,4 +1,4 @@
-import api from '../../api'
+import { getProfileInfo } from '@/api/user'
 
 const state = () => ({
   loggedIn: false,
@@ -20,7 +20,7 @@ const actions = {
     if (user) {
       commit('SET_USER', user)
       try {
-        let { data, error, status } = await api.getProfileInfo(user.id)
+        let { data, error, status } = await getProfileInfo(user.id)
         if (error && status !== 406) throw error
 
         if (data) {

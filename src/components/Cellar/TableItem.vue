@@ -58,7 +58,7 @@
   import { PencilAltIcon } from '@heroicons/vue/solid'
   import QtySelector from '../QtySelector.vue'
   import WineTag from '../WineTag.vue'
-  import api from '../../api'
+  import { increaseBottleQty, decreaseBottleQty } from '@/api/bottles'
 
   export default defineComponent({
     name: 'TableItem',
@@ -77,10 +77,10 @@
     computed: {},
     methods: {
       increaseQty(id: string) {
-        api.increaseBottleQty(id, this.item.qty)
+        increaseBottleQty(id, this.item.qty)
       },
       decreaseQty(id: string) {
-        api.decreaseBottleQty(id, this.item.qty)
+        decreaseBottleQty(id, this.item.qty)
       },
     },
   })

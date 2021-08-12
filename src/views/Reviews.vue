@@ -89,9 +89,9 @@
     SearchIcon,
   } from '@heroicons/vue/solid'
 
-  import TableItem from '../components/Reviews/TableItem.vue'
-  import Modal from '../components/Modal.vue'
-  import ReviewForm from '../components/Reviews/ReviewForm.vue'
+  import TableItem from '@/components/Reviews/TableItem.vue'
+  import Modal from '@/components/Modal.vue'
+  import ReviewForm from '@/components/Reviews/ReviewForm.vue'
   import { mapActions, mapGetters } from 'vuex'
 
   export default defineComponent({
