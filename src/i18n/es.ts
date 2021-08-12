@@ -57,6 +57,9 @@ const messages = {
       stats: 'Estadísticas',
       cellarStatus: 'Estado de bodega',
     },
+    bottles: {
+      bottles: 'Botellas',
+    },
   },
   en: {
     general: {

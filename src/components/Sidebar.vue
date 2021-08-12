@@ -81,9 +81,29 @@
             "
             to="/cellar"
           >
-            <ArchiveIcon class="w-5 h-5" />
+            <CubeIcon class="w-5 h-5" />
 
             <span class="ml-4">{{ $t('cellar.myCellar') }}</span>
+          </router-link>
+        </li>
+        <li class="relative px-6 py-3">
+          <router-link
+            class="
+              inline-flex
+              items-center
+              w-full
+              text-sm
+              font-semibold
+              transition-colors
+              duration-150
+              hover:text-gray-800
+              dark:hover:text-gray-200
+            "
+            to="/bottles"
+          >
+            <SupportIcon class="w-5 h-5" />
+
+            <span class="ml-4">{{ $t('bottles.bottles') }}</span>
           </router-link>
         </li>
         <li class="relative px-6 py-3">
@@ -121,7 +141,7 @@
             "
             to="/stats"
           >
-            <CogIcon class="w-5 h-5" />
+            <ChartBarIcon class="w-5 h-5" />
             <span class="ml-4">{{ $t('stats.stats') }}</span>
           </router-link>
         </li>
@@ -136,9 +156,10 @@
   import Logo from '../components/Logo.vue'
   import {
     HomeIcon,
-    CogIcon,
-    ArchiveIcon,
+    SupportIcon,
     StarIcon,
+    ChartBarIcon,
+    CubeIcon,
   } from '@heroicons/vue/solid'
   import { mapGetters, mapMutations } from 'vuex'
 
@@ -147,8 +168,9 @@
     components: {
       Logo,
       HomeIcon,
-      CogIcon,
-      ArchiveIcon,
+      CubeIcon,
+      ChartBarIcon,
+      SupportIcon,
       StarIcon,
     },
     data() {

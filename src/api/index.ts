@@ -24,6 +24,12 @@ export default {
       .gt('qty', 0)
       .order('last_added', { ascending: false })
   },
+  async getBottles() {
+    return await supabase
+      .from('bottles')
+      .select()
+      .order('last_added', { ascending: false })
+  },
   async addBottle(
     name: string,
     cellar: string,
