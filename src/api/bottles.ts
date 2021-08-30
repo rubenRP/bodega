@@ -23,7 +23,9 @@ const addBottle = async (
   apellation: string,
   type: string,
   qty: number,
-  date?: any
+  date?: any,
+  mycellar?: boolean,
+  reviewed?: boolean
 ) => {
   let res = await supabase.from('bottles').insert([
     {
@@ -36,6 +38,8 @@ const addBottle = async (
       type: type,
       qty: qty,
       last_added: date ? date : new Date(),
+      mycellar: mycellar ? mycellar : false,
+      reviewed: reviewed ? reviewed : false,
     },
   ])
   for (let i = 0; i < qty; i++) {
