@@ -323,7 +323,7 @@
             this.type,
             this.qty,
             this.date,
-            false
+            true
           )
         } catch (e) {
           console.log(e)
