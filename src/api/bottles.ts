@@ -84,6 +84,21 @@ const updateBottle = async (
     alert(error.message)
   }
 }
+const updateBottleMetadata = async (id: string, updatedData: {}) => {
+  try {
+    await supabase
+      .from('bottles')
+      .update([
+        {
+          date_scrapped: new Date(),
+          ...updatedData,
+        },
+      ])
+      .eq('id', id)
+  } catch (error: any) {
+    alert(error.message)
+  }
+}
 const removeBottle = async (id: string) => {
   try {
     await supabase.from('bottles').update({ qty: 0 }).eq('id', id)
@@ -141,6 +156,7 @@ export {
   getBottles,
   addBottle,
   updateBottle,
+  updateBottleMetadata,
   removeBottle,
   increaseBottleQty,
   decreaseBottleQty,
