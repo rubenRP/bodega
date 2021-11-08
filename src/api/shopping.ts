@@ -1,4 +1,4 @@
-import axios, { Axios } from 'axios'
+import axios from 'axios'
 
 const searchParams = {
   engine: 'google',
@@ -6,10 +6,10 @@ const searchParams = {
   q: '',
   device: 'desktop',
   tbm: 'shop',
-  location_requested: 'Madrid, Community of Madrid, Spain',
   location: 'Madrid, Community of Madrid, Spain',
   hl: 'es',
   gl: 'es',
+  num: '100',
   api_key: <string>import.meta.env.VITE_SERPAPI_KEY,
 }
 
@@ -18,6 +18,9 @@ const getParams = {
   product_id: '',
   gl: 'es',
   hl: 'es',
+  google_domain: 'google.es',
+  location: 'Madrid, Community of Madrid, Spain',
+  device: 'desktop',
   api_key: <string>import.meta.env.VITE_SERPAPI_KEY,
 }
 

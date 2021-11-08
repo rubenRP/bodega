@@ -80,14 +80,29 @@ const updateBottle = async (
         },
       ])
       .eq('id', id)
-  } catch (error) {
+  } catch (error: any) {
+    alert(error.message)
+  }
+}
+const updateBottleMetadata = async (id: string, updatedData: {}) => {
+  try {
+    await supabase
+      .from('bottles')
+      .update([
+        {
+          date_scrapped: new Date(),
+          ...updatedData,
+        },
+      ])
+      .eq('id', id)
+  } catch (error: any) {
     alert(error.message)
   }
 }
 const removeBottle = async (id: string) => {
   try {
     await supabase.from('bottles').update({ qty: 0 }).eq('id', id)
-  } catch (error) {
+  } catch (error: any) {
     alert(error.message)
   }
 }
@@ -103,7 +118,7 @@ const increaseBottleQty = async (id: string, qty: number) => {
         date_added: new Date(),
       },
     ])
-  } catch (error) {
+  } catch (error: any) {
     alert(error.message)
   }
 }
@@ -119,7 +134,7 @@ const decreaseBottleQty = async (id: string, qty: number) => {
         date_opened: new Date(),
       },
     ])
-  } catch (error) {
+  } catch (error: any) {
     alert(error.message)
   }
 }
@@ -141,6 +156,7 @@ export {
   getBottles,
   addBottle,
   updateBottle,
+  updateBottleMetadata,
   removeBottle,
   increaseBottleQty,
   decreaseBottleQty,

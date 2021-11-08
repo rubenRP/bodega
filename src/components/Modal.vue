@@ -19,8 +19,9 @@
         bg-white
         rounded-t-lg
         dark:bg-gray-800
-        sm:rounded-lg sm:m-4 sm:max-w-xl
+        sm:rounded-lg sm:m-4
       "
+      :class="wide ? 'sm:max-w-7xl' : 'sm:max-w-xl'"
     >
       <div class="modal-container">
         <div class="flex justify-between">
@@ -61,7 +62,10 @@
           </button>
         </div>
 
-        <div class="modal-body">
+        <div
+          class="modal-body"
+          :class="!wide && 'md:max-h-96 md:overflow-y-auto'"
+        >
           <div class="text-sm text-gray-700 dark:text-gray-400">
             <slot name="body"> Body </slot>
           </div>
@@ -95,5 +99,11 @@
   import { defineComponent } from 'vue'
   export default defineComponent({
     name: 'Modal',
+    props: {
+      wide: {
+        type: Boolean,
+        default: false,
+      },
+    },
   })
 </script>
