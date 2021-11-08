@@ -102,6 +102,7 @@
             :key="bottle.id"
             :item="bottle"
             @editItem="editBottle(bottle)"
+            @viewItem="viewBottle(bottle)"
           />
         </tbody>
       </table>
@@ -110,6 +111,11 @@
   <BottleForm
     v-if="openedNewBottle"
     @closeModalForm="toggleNewBottle()"
+    :bottle="activeBottle"
+  />
+  <BottleView
+    v-if="openedViewBottle"
+    @closeModalForm="toggleViewBottle()"
     :bottle="activeBottle"
   />
 </template>
@@ -126,6 +132,7 @@
   import TableItem from '@/components/Cellar/TableItem.vue'
   import Modal from '@/components/Modal.vue'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
+  import BottleView from '@/components/Cellar/BottleView.vue'
   import { mapActions, mapGetters } from 'vuex'
 
   export default defineComponent({
@@ -139,10 +146,12 @@
       TableItem,
       Modal,
       BottleForm,
+      BottleView,
     },
     data() {
       return {
         openedNewBottle: false,
+        openedViewBottle: false,
         activeBottle: <any>null,
         search: '',
       }
@@ -182,9 +191,19 @@
         }
         this.openedNewBottle = !this.openedNewBottle
       },
+      toggleViewBottle() {
+        if (this.openedViewBottle) {
+          this.activeBottle = null
+        }
+        this.openedViewBottle = !this.openedViewBottle
+      },
       editBottle(bottle: {}) {
         this.activeBottle = bottle
         this.toggleNewBottle()
+      },
+      viewBottle(bottle: {}) {
+        this.activeBottle = bottle
+        this.toggleViewBottle()
       },
     },
   })

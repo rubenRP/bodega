@@ -19,6 +19,7 @@ const messages = {
       update: 'Actualizar',
       save: 'Guardar',
       stats: 'Estadísticas',
+      close: 'Cerrar',
     },
     cellar: {
       myCellar: 'Mi Bodega',
@@ -46,6 +47,7 @@ const messages = {
       drink: 'Beber',
       addBottle: 'Añadir botella',
       bottle: 'Botella',
+      scrapeBottle: 'Scrapear Botella',
     },
     reviews: {
       rating: 'Valoración',

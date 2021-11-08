@@ -6,6 +6,20 @@ export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],
   },
+  server: {
+    proxy: {
+      '/serpapi': {
+        target: 'https://serpapi.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/serpapi/, ''),
+      },
+      '/scaleserp': {
+        target: 'https://api.scaleserp.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/scaleserp/, ''),
+      },
+    },
+  },
   plugins: [
     vue(),
     VitePWA({
