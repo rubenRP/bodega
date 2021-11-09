@@ -1,5 +1,47 @@
 <template>
-  <div class="grid gap-6 my-6 md:grid-cols-3">
+  <h2
+    class="
+      mb-4
+      mt-6
+      text-2xl
+      font-semibold
+      text-gray-700
+      dark:text-gray-200
+      items-center
+      justify-between
+      pb-2
+      flex
+      md:hidden
+    "
+  >
+    <span
+      >{{ bottle.name }}
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        {{ bottle.cellar }}
+      </p>
+    </span>
+    <button
+      @click="$router.back()"
+      class="
+        inline-block
+        text-sm
+        px-4
+        py-2
+        leading-none
+        border
+        rounded
+        text-white
+        border-pink-900
+        bg-pink-900
+        hover:bg-transparent hover:text-pink-800
+        ml-4
+        lg:mt-0
+      "
+    >
+      {{ $t('general.back') }}
+    </button>
+  </h2>
+  <div class="grid gap-6 mb-6 md:my-6 md:grid-cols-3">
     <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
       <img
         aria-hidden="true"
@@ -34,11 +76,12 @@
           font-semibold
           text-gray-700
           dark:text-gray-200
-          flex
           items-center
           justify-between
           border-b-2
           pb-2
+          hidden
+          md:flex
         "
       >
         <span
@@ -186,7 +229,7 @@
               {{ $t('cellar.type') }}
             </div>
           </td>
-          <td class="px-4 py-3 text-sm">{{ bottle?.type }}</td>
+          <td class="px-4 py-3 text-xs"><WineTag :type="bottle.type" /></td>
         </tr>
         <tr
           class="text-gray-700 dark:text-gray-400 border-b"
