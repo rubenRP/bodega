@@ -84,7 +84,7 @@ const updateBottle = async (
     alert(error.message)
   }
 }
-const updateBottleMetadata = async (id: string, updatedData: {}) => {
+const updateBottleMetadata = async (id: number, updatedData: {}) => {
   try {
     await supabase
       .from('bottles')
@@ -106,7 +106,7 @@ const removeBottle = async (id: string) => {
     alert(error.message)
   }
 }
-const increaseBottleQty = async (id: string, qty: number) => {
+const increaseBottleQty = async (id: number, qty: number) => {
   try {
     await supabase
       .from('bottles')
@@ -122,7 +122,7 @@ const increaseBottleQty = async (id: string, qty: number) => {
     alert(error.message)
   }
 }
-const decreaseBottleQty = async (id: string, qty: number) => {
+const decreaseBottleQty = async (id: number, qty: number) => {
   try {
     await supabase
       .from('bottles')

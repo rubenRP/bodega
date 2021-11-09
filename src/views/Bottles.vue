@@ -93,7 +93,6 @@
             <th class="px-4 py-3">{{ $t('cellar.apellation') }}</th>
             <th class="px-4 py-3">{{ $t('cellar.type') }}</th>
             <th class="px-4 py-3 text-center">{{ $t('general.qty') }}</th>
-            <th class="px-4 py-3 text-right"></th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">

@@ -1,8 +1,9 @@
 import { supabase } from '@/supabase'
 import { getCellarBottles } from '@/api/bottles'
+import { Bottle } from '@/models/cellar'
 
 const state = () => ({
-  cellar: <any>[],
+  cellar: [] as Bottle[],
   cellarSubscriber: <any>{},
 })
 
@@ -61,7 +62,7 @@ const actions = {
         state.cellarSubscriber = supabase
           .from('bottles')
           .on('*', (payload) => {
-            console.log('Change received!', payload)
+            // console.log('Change received!', payload)
             switch (payload.eventType) {
               case 'INSERT':
                 commit('ADD_BOTTLE', payload.new)
@@ -96,19 +97,14 @@ const mutations = {
   RESET_CELLAR: (state: { cellar: never[] }) => {
     state.cellar = []
   },
-  ADD_BOTTLE: (state: { cellar: any[] }, bottle: {}) => {
+  ADD_BOTTLE: (state: { cellar: any[] }, bottle: Bottle) => {
     state.cellar.push(bottle)
   },
-  MODIFY_BOTTLE: (
-    state: { cellar: any[] },
-    bottle: { id: number; name: string; cellar: string; qty: number }
-  ) => {
+  MODIFY_BOTTLE: (state: { cellar: any[] }, bottle: Bottle) => {
     let bottleFinded = state.cellar.find((item: any) => {
       return bottle.id === item.id
     })
-    bottleFinded.name = bottle.name
-    bottleFinded.cellar = bottle.cellar
-    bottleFinded.qty = bottle.qty
+    Object.assign(bottleFinded, bottle)
   },
 }
 

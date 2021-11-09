@@ -93,7 +93,6 @@
             <th class="px-4 py-3">{{ $t('cellar.apellation') }}</th>
             <th class="px-4 py-3">{{ $t('cellar.type') }}</th>
             <th class="px-4 py-3 text-center">{{ $t('general.qty') }}</th>
-            <th class="px-4 py-3 text-right"></th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -113,11 +112,6 @@
     @closeModalForm="toggleNewBottle()"
     :bottle="activeBottle"
   />
-  <BottleView
-    v-if="openedViewBottle"
-    @closeModalForm="toggleViewBottle()"
-    :bottle="activeBottle"
-  />
 </template>
 
 <script lang="ts">
@@ -132,7 +126,6 @@
   import TableItem from '@/components/Cellar/TableItem.vue'
   import Modal from '@/components/Modal.vue'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
-  import BottleView from '@/components/Cellar/BottleView.vue'
   import { mapActions, mapGetters } from 'vuex'
 
   export default defineComponent({
@@ -146,7 +139,6 @@
       TableItem,
       Modal,
       BottleForm,
-      BottleView,
     },
     data() {
       return {

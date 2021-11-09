@@ -1,5 +1,64 @@
 <template>
-  <div class="flex flex-row h-8 w-full rounded-lg relative bg-transparent mt-1">
+  <div
+    class="flex flex-row h-8 w-full rounded-lg relative bg-transparent mt-1"
+    v-if="quick"
+  >
+    <div
+      class="
+        focus:outline-none
+        text-center
+        w-full
+        bg-gray-300
+        font-semibold
+        text-md
+        hover:text-white
+        focus:text-black
+        md:text-basecursor-default
+        flex
+        items-center
+        text-gray-700
+        outline-none
+        justify-center
+        rounded
+        cursor-pointer
+        hover:bg-gray-500
+      "
+      v-if="!showAction"
+      @click="showAction = true"
+    >
+      {{ qty }}
+    </div>
+    <div
+      v-else
+      class="
+        focus:outline-none
+        text-center
+        w-full
+        bg-pink-900
+        font-semibold
+        text-md
+        hover:text-white
+        text-white
+        focus:text-black
+        md:text-basecursor-default
+        flex
+        items-center
+        outline-none
+        justify-center
+        rounded
+        cursor-pointer
+        hover:bg-pink-800
+      "
+    >
+      <button class="" @click="decreaseQty()">
+        <span class="">{{ $t('cellar.drink') }}</span>
+      </button>
+    </div>
+  </div>
+  <div
+    class="flex flex-row h-8 w-full rounded-lg relative bg-transparent mt-1"
+    v-else
+  >
     <button
       class="
         bg-gray-300
@@ -62,6 +121,15 @@
         type: Number,
         default: 1,
       },
+      quick: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    data() {
+      return {
+        showAction: false,
+      }
     },
     methods: {
       increaseQty() {
@@ -71,6 +139,7 @@
         if (this.qty != 0) {
           this.$emit('decrementQty', this.qty - 1)
         }
+        this.showAction = false
       },
     },
   })

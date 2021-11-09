@@ -4,7 +4,7 @@
       aria-hidden="true"
       class="object-cover w-full h-full"
       src="../assets/img/cellar-bg.jpeg"
-      alt="Office"
+      alt="Bodega"
     />
   </div>
   <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">

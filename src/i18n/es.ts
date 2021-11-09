@@ -20,6 +20,7 @@ const messages = {
       save: 'Guardar',
       stats: 'Estadísticas',
       close: 'Cerrar',
+      back: 'Volver',
     },
     cellar: {
       myCellar: 'Mi Bodega',
@@ -44,7 +45,7 @@ const messages = {
       countries: 'Paises',
       vintages: 'Añadas',
       latestBottles: 'Últimas Botellas',
-      drink: 'Beber',
+      drink: 'Beber!',
       addBottle: 'Añadir botella',
       bottle: 'Botella',
       scrapeBottle: 'Scrapear Botella',
@@ -59,6 +60,7 @@ const messages = {
       climateSoil: 'Clima/Suelo',
       alcoholContent: 'Contenido Alcoholico',
       noImport: 'No importar',
+      details: 'Detalles',
     },
     reviews: {
       rating: 'Valoración',
