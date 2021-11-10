@@ -43,7 +43,7 @@ const actions = {
           })
           .subscribe()
       }
-    } catch (error) {
+    } catch (error: any) {
       alert(error.message)
     }
   },

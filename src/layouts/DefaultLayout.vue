@@ -6,6 +6,7 @@
     <Sidebar />
     <div class="flex flex-col flex-1 w-full">
       <Topbar />
+      <Notifications />
       <main class="h-full pb-16 overflow-y-auto">
         <div class="container grid px-6 mx-auto">
           <router-view />
@@ -19,14 +20,16 @@
   import { defineComponent } from 'vue'
   import { mapGetters } from 'vuex'
 
-  import Sidebar from '../components/Sidebar.vue'
-  import Topbar from '../components/Topbar.vue'
+  import Sidebar from '@/components/General/Sidebar.vue'
+  import Topbar from '@/components/General/Topbar.vue'
+  import Notifications from '@/components/General/Notifications.vue'
 
   export default defineComponent({
     name: 'DefaultLayout',
     components: {
       Sidebar,
       Topbar,
+      Notifications,
     },
     computed: { ...mapGetters({ showSidebar: 'general/sidebar' }) },
   })

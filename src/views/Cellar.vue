@@ -124,7 +124,7 @@
     SearchIcon,
   } from '@heroicons/vue/solid'
   import TableItem from '@/components/Cellar/TableItem.vue'
-  import Modal from '@/components/Modal.vue'
+  import Modal from '@/components/General/Modal.vue'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
   import { mapActions, mapGetters } from 'vuex'
 

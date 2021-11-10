@@ -369,7 +369,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import Modal from '../Modal.vue'
+  import Modal from '../General/Modal.vue'
   import { addReview } from '@/api/reviews'
   import { mapGetters } from 'vuex'
   import StarRating from './StarRating.vue'

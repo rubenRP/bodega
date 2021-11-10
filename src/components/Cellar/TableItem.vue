@@ -35,8 +35,8 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import QtySelector from '../QtySelector.vue'
-  import WineTag from '../WineTag.vue'
+  import QtySelector from '../Bottle/QtySelector.vue'
+  import WineTag from '../Bottle/WineTag.vue'
   import { decreaseBottleQty } from '@/api/bottles'
 
   export default defineComponent({

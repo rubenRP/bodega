@@ -1,6 +1,6 @@
-import { supabase } from '@/supabase'
 import { getCellarBottles } from '@/api/bottles'
 import { Bottle } from '@/models/cellar'
+import { supabase } from '@/supabase'
 
 const state = () => ({
   cellar: [] as Bottle[],
@@ -77,7 +77,7 @@ const actions = {
           })
           .subscribe()
       }
-    } catch (error) {
+    } catch (error: any) {
       alert(error.message)
     }
   },

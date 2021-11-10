@@ -295,15 +295,20 @@
   >
     <Scraper :bottle="bottle" />
   </div>
+  <BottleForm
+    v-if="editBottle"
+    @closeModalForm="toggleEditBottle()"
+    :bottle="bottle"
+  />
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { mapActions, mapGetters } from 'vuex'
   import { Bottle } from '@/models/cellar'
-  import WineTag from '../components/WineTag.vue'
+  import WineTag from '../components/Bottle/WineTag.vue'
   import Scraper from '@/components/Bottle/Scraper.vue'
-  import QtySelector from '@/components/QtySelector.vue'
+  import QtySelector from '@/components/Bottle/QtySelector.vue'
   import { increaseBottleQty, decreaseBottleQty } from '@/api/bottles'
 
   export default defineComponent({
@@ -312,6 +317,7 @@
     data: () => ({
       id: 0,
       bottle: <Bottle>{},
+      editBottle: false,
     }),
     async mounted() {
       if (this.id === 0) {
@@ -341,6 +347,9 @@
       },
       decreaseQty(id: number) {
         decreaseBottleQty(id, this.bottle.qty)
+      },
+      toggleEditBottle() {
+        this.editBottle = !this.editBottle
       },
     },
   })
