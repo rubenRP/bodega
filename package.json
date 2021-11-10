@@ -10,8 +10,14 @@
     "lint:style": "stylelint src/**/*.{css,scss,vue}"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/vue-fontawesome": "^2.0.6",
     "@heroicons/vue": "^1.0.1",
     "@supabase/supabase-js": "^1.21.0",
+    "@tailwindcss/forms": "^0.3.4",
     "@vuedx/typescript-plugin-vue": "^0.7.4",
     "axios": "^0.24.0",
     "chart.js": "^3.5.0",

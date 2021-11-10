@@ -1,4 +1,4 @@
-<div style="margin-bottom: 20px; margin-left: auto; margin-right: auto">
+<div style="margin-bottom: 20px; margin-top: 10px; margin-left: auto; margin-right: auto">
     <img src="src/assets/logo.svg" width="200" alt="Bodega">
 </div>
 <hr/>
