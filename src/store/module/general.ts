@@ -1,7 +1,10 @@
 const state = () => ({
   darkMode: false,
   sidebar: false,
+  messages: [],
 })
+
+let messageId = 0
 
 const getters = {
   darkMode: (state: { darkMode: boolean }) => state.darkMode,
@@ -18,6 +21,26 @@ const mutations = {
   CLOSE_SIDEBAR(state: { sidebar: boolean }) {
     state.sidebar = false
   },
+  PUSH_MESSAGE(state: any, message: any) {
+    state.messages.push(message)
+  },
+  DELETE_MESSAGE(state: any, messageId: any) {
+    state.messages = state.messages.filter(
+      (message: { id: number }) => message.id !== messageId
+    )
+  },
+}
+
+const actions = {
+  addMessage({ commit }: any, message: {}) {
+    commit('PUSH_MESSAGE', {
+      ...message,
+      id: messageId++,
+    })
+  },
+  removeMessage({ commit }: any, messageId: number) {
+    commit('DELETE_MESSAGE', messageId)
+  },
 }
 
 export default {
@@ -25,4 +48,5 @@ export default {
   state,
   getters,
   mutations,
+  actions,
 }

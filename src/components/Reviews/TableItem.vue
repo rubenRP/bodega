@@ -50,8 +50,8 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { PencilAltIcon } from '@heroicons/vue/solid'
-  import QtySelector from '../QtySelector.vue'
-  import WineTag from '../WineTag.vue'
+  import QtySelector from '../Bottle/QtySelector.vue'
+  import WineTag from '../Bottle/WineTag.vue'
   import StarRating from './StarRating.vue'
 
   export default defineComponent({

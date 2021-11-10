@@ -14,7 +14,7 @@
 
   import AuthLayout from './layouts/AuthLayout.vue'
   import DefaultLayout from './layouts/DefaultLayout.vue'
-  import ReloadPWA from './components/ReloadPWA.vue'
+  import ReloadPWA from './components/General/ReloadPWA.vue'
   import router from './router'
 
   export default defineComponent({

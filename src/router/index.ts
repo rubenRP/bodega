@@ -1,14 +1,14 @@
-import { createWebHistory, createRouter } from 'vue-router'
+import store from '@/store'
+import Bottle from '@/views/Bottle.vue'
+import Bottles from '@/views/Bottles.vue'
+import Cellar from '@/views/Cellar.vue'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
-import Cellar from '@/views/Cellar.vue'
-import Bottle from '@/views/Bottle.vue'
-import Reviews from '@/views/Reviews.vue'
-import Bottles from '@/views/Bottles.vue'
-import Stats from '@/views/Stats.vue'
-import Profile from '@/views/Profile.vue'
 import NotFound from '@/views/NotFound.vue'
-import store from '@/store'
+import Profile from '@/views/Profile.vue'
+import Reviews from '@/views/Reviews.vue'
+import Stats from '@/views/Stats.vue'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {

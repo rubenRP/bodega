@@ -90,7 +90,7 @@
   } from '@heroicons/vue/solid'
 
   import TableItem from '@/components/Reviews/TableItem.vue'
-  import Modal from '@/components/Modal.vue'
+  import Modal from '@/components/General/Modal.vue'
   import ReviewForm from '@/components/Reviews/ReviewForm.vue'
   import { mapActions, mapGetters } from 'vuex'
 

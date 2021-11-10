@@ -82,7 +82,7 @@
   import { defineComponent, ref } from 'vue'
   import { supabase } from '@/supabase'
 
-  import Logo from '@/components/Logo.vue'
+  import Logo from '@/components/General/Logo.vue'
   import { mapGetters } from 'vuex'
   import router from '@/router'
 
@@ -106,7 +106,7 @@
             }
           )
           if (error) throw error
-        } catch (error) {
+        } catch (error: any) {
           message.value = error.error_description || error.message
         } finally {
           loading.value = false

@@ -1,6 +1,8 @@
 <template>
   <Modal v-on:closeModal="$emit('closeModalForm')">
-    <template v-slot:header>{{ $t('cellar.addBottle') }}</template>
+    <template v-slot:header>{{
+      bottle ? $t('cellar.editBottle') : $t('cellar.addBottle')
+    }}</template>
     <template v-slot:body>
       <label class="block text-sm">
         <span class="text-gray-700 dark:text-gray-400">{{
@@ -156,13 +158,14 @@
             py-2
           "
           v-model="type"
+          required
         >
-          <option>Red</option>
-          <option>White</option>
-          <option>Rose</option>
-          <option>Orange</option>
-          <option>Frizzante</option>
-          <option>Other</option>
+          <option value="Red">{{ $t('cellar.red') }}</option>
+          <option value="White">{{ $t('cellar.white') }}</option>
+          <option value="Rose">{{ $t('cellar.rose') }}</option>
+          <option value="Orange">{{ $t('cellar.orange') }}</option>
+          <option value="Frizzante">{{ $t('cellar.frizzante') }}</option>
+          <option value="Other">{{ $t('cellar.other') }}</option>
         </select>
       </label>
       <label class="block mt-4 text-sm hidden">
@@ -287,9 +290,14 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import Modal from '../Modal.vue'
-  import QtySelector from '../QtySelector.vue'
-  import { addBottle, updateBottle, removeBottle } from '@/api/bottles'
+  import Modal from '../General/Modal.vue'
+  import QtySelector from '../Bottle/QtySelector.vue'
+  import {
+    addBottle,
+    updateBottle,
+    removeBottle,
+    findBottle,
+  } from '@/api/bottles'
 
   export default defineComponent({
     name: 'BottleForm',
@@ -313,18 +321,43 @@
     methods: {
       async createBottle() {
         try {
-          await addBottle(
+          const bottleFinded = await findBottle(
             this.name,
             this.cellar,
             this.vintage,
-            this.country,
-            this.region,
-            this.apellation,
-            this.type,
-            this.qty,
-            this.date,
-            true
+            this.type
           )
+
+          if (!bottleFinded.data) {
+            await addBottle(
+              this.name,
+              this.cellar,
+              this.vintage,
+              this.country,
+              this.region,
+              this.apellation,
+              this.type,
+              this.qty,
+              this.date,
+              true
+            )
+          } else {
+            console.log('Bottle already exists ' + bottleFinded)
+            //TODO:  Throw confirmation message in modal: bottle already exists
+
+            await updateBottle(
+              bottleFinded.data.id,
+              this.name,
+              this.cellar,
+              this.vintage,
+              this.country,
+              this.region,
+              this.apellation,
+              this.type,
+              this.qty,
+              this.date
+            )
+          }
         } catch (e) {
           console.log(e)
         } finally {

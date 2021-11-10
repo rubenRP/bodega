@@ -14,6 +14,22 @@ const getBottles = async () => {
     .select()
     .order('last_added', { ascending: false })
 }
+
+const findBottle = async (
+  name: string,
+  cellar: string,
+  vintage: number,
+  type: string
+) => {
+  return await supabase
+    .from('bottles')
+    .select()
+    .like('name', name)
+    .like('cellar', cellar)
+    .eq('vintage', vintage)
+    .eq('type', type)
+}
+
 const addBottle = async (
   name: string,
   cellar: string,
@@ -162,4 +178,5 @@ export {
   decreaseBottleQty,
   getOpenedBottles,
   getAddedBottles,
+  findBottle,
 }

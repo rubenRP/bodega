@@ -35,9 +35,28 @@ const addReview = async (
         },
       ])
       .eq('id', cellarBottle)
-  } catch (error) {
+  } catch (error: any) {
     alert(error.message)
   }
 }
 
-export { getReviews, addReview }
+const getBottleReview = async (bottleId: number) => {
+  try {
+    const res = await supabase
+      .from('reviews')
+      .select(
+        `
+        *,
+        profiles(username, avatar_url)
+      `
+      )
+      .eq('bottle_id', bottleId)
+      .order('date_added', { ascending: false })
+
+    return res.data
+  } catch (error: any) {
+    console.log(error.message)
+  }
+}
+
+export { getReviews, addReview, getBottleReview }

@@ -11,7 +11,7 @@ const logout = async () => {
   try {
     let { error } = await supabase.auth.signOut()
     if (error) throw error
-  } catch (error) {
+  } catch (error: any) {
     alert(error.message)
   }
 }
