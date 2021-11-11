@@ -2,9 +2,29 @@
   <div class="mt-6">
     <QuickStats />
   </div>
-  <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-    {{ $t('cellar.latestBottles') }}
-  </h4>
+  <h2 class="my-8 text-xl font-semibold flex items-center justify-between">
+    <div>
+      <div
+        class="
+          p-2
+          text-center
+          inline-flex
+          items-center
+          justify-center
+          w-12
+          h-12
+          mr-6
+          shadow-lg
+          rounded-full
+          bg-pink-900
+          text-white
+        "
+      >
+        <font-awesome-icon :icon="['fas', 'wine-bottle']" class="text-xl" />
+      </div>
+      <span>{{ $t('cellar.latestBottles') }}</span>
+    </div>
+  </h2>
   <div class="w-full overflow-hidden rounded-lg shadow-xs">
     <div class="w-full overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
@@ -42,9 +62,29 @@
       </table>
     </div>
   </div>
-  <h4 class="my-6 mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-    {{ $t('reviews.latestReviews') }}
-  </h4>
+  <h2 class="my-8 text-xl font-semibold flex items-center justify-between">
+    <div>
+      <div
+        class="
+          p-2
+          text-center
+          inline-flex
+          items-center
+          justify-center
+          w-12
+          h-12
+          mr-6
+          shadow-lg
+          rounded-full
+          bg-pink-900
+          text-white
+        "
+      >
+        <font-awesome-icon :icon="['fas', 'star']" class="text-xl" />
+      </div>
+      <span> {{ $t('reviews.latestReviews') }}</span>
+    </div>
+  </h2>
   <div class="w-full overflow-hidden rounded-lg shadow-xs">
     <div class="w-full overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
@@ -82,23 +122,6 @@
       </table>
     </div>
   </div>
-  <h4 class="mt-8 text-lg font-semibold text-gray-600 dark:text-gray-300">
-    {{ $t('general.stats') }}
-  </h4>
-  <div class="grid gap-6 mb-8 md:grid-cols-2 mt-8">
-    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-      <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-        {{ $t('cellar.apellations') }}
-      </h4>
-      <BarChart :data="totalApellations" selector="chart-dop" />
-    </div>
-    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-      <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-        {{ $t('cellar.vintages') }}
-      </h4>
-      <BarChart :data="totalVintages" selector="chart-vintages" />
-    </div>
-  </div>
 </template>
 
 <script lang="ts">
@@ -107,11 +130,10 @@
   import QuickStats from '@/components/Stats/QuickStats.vue'
   import TableItemCellar from '@/components/Cellar/TableItem.vue'
   import TableItemReviews from '@/components/Reviews/TableItem.vue'
-  import BarChart from '@/components/Stats/BarChart.vue'
 
   export default defineComponent({
     name: 'Home',
-    components: { TableItemCellar, TableItemReviews, BarChart, QuickStats },
+    components: { TableItemCellar, TableItemReviews, QuickStats },
     data: () => ({}),
     created() {
       if (this.getCellar.length === 0) {

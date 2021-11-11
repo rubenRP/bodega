@@ -44,14 +44,8 @@ const getBottleReview = async (bottleId: number) => {
   try {
     const res = await supabase
       .from('reviews')
-      .select(
-        `
-        *,
-        profiles(username, avatar_url)
-      `
-      )
+      .select(`*, profiles(username, avatar_url)`)
       .eq('bottle_id', bottleId)
-      .order('date_added', { ascending: false })
 
     return res.data
   } catch (error: any) {

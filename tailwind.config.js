@@ -3,11 +3,13 @@ const colors = require('tailwindcss/colors')
 delete colors['lightBlue']
 
 module.exports = {
+  mode: 'jit',
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     colors: {
       ...colors,
+      transparent: 'transparent',
     },
     extend: {
       minHeight: {
