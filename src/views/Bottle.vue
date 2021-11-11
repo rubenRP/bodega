@@ -21,22 +21,28 @@
       </p>
     </span>
     <button
-      @click="$router.back()"
       class="
-        inline-block
-        text-sm
+        text-pink-900
+        bg-transparent
+        border border-solid border-pink-900
+        hover:bg-pink-700 hover:text-white
+        active:bg-pink-600
+        font-bold
+        uppercase
+        text-xs
         px-4
         py-2
-        leading-none
-        border
         rounded
-        text-white
-        border-pink-900
-        bg-pink-900
-        hover:bg-transparent hover:text-pink-800
-        ml-4
-        lg:mt-0
+        outline-none
+        focus:outline-none
+        mr-1
+        mb-1
+        ease-linear
+        transition-all
+        duration-150
       "
+      type="button"
+      @click="$router.back()"
     >
       {{ $t('general.back') }}
     </button>
@@ -78,8 +84,8 @@
           dark:text-gray-200
           items-center
           justify-between
+          pb-4
           border-b-2
-          pb-2
           hidden
           md:flex
         "
@@ -111,19 +117,56 @@
           {{ $t('general.back') }}
         </button>
       </h2>
-      <div class="text-md text-gray-500 dark:text-gray-400">
-        {{ bottle.vintage }}
-      </div>
-      <div class="text-md text-gray-500 dark:text-gray-400 border-b-2 pb-4">
-        {{ bottle.apellation }}
-      </div>
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        {{ bottle.grapes?.join(', ') }}
-      </p>
-      <div class="flex justify-between items-center mt-4">
-        <div class="text-xs">
-          <WineTag :type="bottle.type" />
+      <div class="my-4">
+        <div class="text-md text-gray-500 dark:text-gray-400">
+          {{ bottle.vintage }}
         </div>
+        <div class="text-md text-gray-500 dark:text-gray-400">
+          {{ bottle.apellation }}
+        </div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          {{ bottle.grapes?.join(', ') }}
+        </p>
+      </div>
+      <div class="text-xs">
+        <WineTag :type="bottle.type" />
+      </div>
+
+      <div class="flex justify-between items-center pt-4 border-t-2">
+        <div>
+          <button
+            class="
+              text-pink-900
+              bg-transparent
+              hover:text-pink-700
+              active:text-pink-600
+              font-bold
+              uppercase
+              text-xl
+              mr-6
+            "
+            type="button"
+            @click="toggleEditBottle()"
+          >
+            <font-awesome-icon icon="edit" />
+          </button>
+          <button
+            class="
+              text-pink-900
+              bg-transparent
+              hover:text-pink-700
+              active:text-pink-600
+              font-bold
+              uppercase
+              text-xl
+            "
+            type="button"
+            @click="toggleScrapeBottle()"
+          >
+            <font-awesome-icon icon="search-plus" />
+          </button>
+        </div>
+
         <div class="h-8 w-24 m-left">
           <QtySelector
             :qty="bottle.qty"
@@ -282,18 +325,11 @@
     </table>
   </div>
   <div
-    class="
-      min-w-0
-      p-4
-      mt-6
-      bg-white
-      rounded-lg
-      shadow-xs
-      dark:bg-gray-800
-      hidden
-    "
+    id="bottleScraper"
+    class="min-w-0 p-4 mt-6 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+    v-if="scrapeBottle"
   >
-    <Scraper :bottle="bottle" />
+    <Scraper :bottle="bottle" :scraping="scrapeBottle" />
   </div>
   <BottleForm
     v-if="editBottle"
@@ -310,16 +346,18 @@
   import Scraper from '@/components/Bottle/Scraper.vue'
   import ReviewList from '@/components/Bottle/ReviewList.vue'
   import QtySelector from '@/components/Bottle/QtySelector.vue'
+  import BottleForm from '@/components/Cellar/BottleForm.vue'
 
   import { increaseBottleQty, decreaseBottleQty } from '@/api/bottles'
 
   export default defineComponent({
     name: 'Bottle',
-    components: { WineTag, Scraper, QtySelector, ReviewList },
+    components: { WineTag, Scraper, QtySelector, ReviewList, BottleForm },
     data: () => ({
       id: 0,
       bottle: <Bottle>{},
       editBottle: false,
+      scrapeBottle: false,
     }),
     async mounted() {
       if (this.id === 0) {
@@ -352,6 +390,9 @@
       },
       toggleEditBottle() {
         this.editBottle = !this.editBottle
+      },
+      toggleScrapeBottle() {
+        this.scrapeBottle = !this.scrapeBottle
       },
     },
   })

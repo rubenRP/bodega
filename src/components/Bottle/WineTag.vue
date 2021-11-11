@@ -37,7 +37,7 @@
           case 'Rose':
             return 'cellar.rose'
         }
-        return ''
+        return 'Other'
       },
     },
   })

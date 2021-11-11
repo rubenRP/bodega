@@ -1,6 +1,6 @@
 <template>
-  <div class="grid gap-6 mb-8 md:grid-cols-2">
-    <div>
+  <div class="grid gap-6 mb-8 md:grid-cols-2" v-if="scraping">
+    <div v-if="!loading">
       <img
         v-if="newBottleImage"
         aria-hidden="true"
@@ -16,7 +16,7 @@
         </p>
       </div>
     </div>
-    <div>
+    <div v-if="!loading">
       <table class="w-full whitespace-no-wrap">
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
           <tr
@@ -109,15 +109,6 @@
       </div>
     </div>
   </div>
-  <label class="block mt-4 mb-4 text-sm px-4">
-    <div class="flex align-middle justify-between items-center">
-      <div class="w-auto text-pink-900">
-        <button @click="scrapeBottle()">
-          {{ $t('cellar.scrapeBottle') }}
-        </button>
-      </div>
-    </div>
-  </label>
 
   <div v-if="bottleFounded">
     <button
@@ -202,7 +193,6 @@
   import { defineComponent } from 'vue'
   import { getBottle, searchForBottle } from '@/api/shopping'
   import { updateBottleMetadata } from '@/api/bottles'
-  import { Bottle } from '@/models/cellar'
 
   export default defineComponent({
     name: 'Scraper',
@@ -210,6 +200,11 @@
       bottle: {
         type: Object,
         required: true,
+      },
+      scraping: {
+        type: Boolean,
+        required: true,
+        default: false,
       },
     },
     data: () => ({
@@ -220,6 +215,8 @@
       newBottleDescription: '',
       updatePhoto: false,
       updateDescription: false,
+      loading: false,
+      finished: false,
     }),
 
     methods: {
@@ -239,14 +236,18 @@
           'Carrefour Bodega',
           'Carrefour Supermercado',
           'Enterwine',
+          'EnCopaDeBalón',
         ]
         const filteredProducts: any[] = []
 
         const response = await searchForBottle(
           `${this.bottle?.cellar} ${this.bottle?.name} ${this.bottle?.vintage}`
         )
-        response.data.shopping_results.filter((product: any) => {
-          if (product.product_id) {
+        response.data.shopping_results.filter((product: any, key: number) => {
+          if (
+            (product.product_id && sellers.includes(product.source)) ||
+            key === 0
+          ) {
             filteredProducts.push(product)
           }
         })
@@ -302,6 +303,13 @@
           }
         } catch (error) {
           console.log(error)
+        }
+      },
+    },
+    watch: {
+      scraping() {
+        if (this.scraping === true) {
+          this.scrapeBottle()
         }
       },
     },

@@ -1,8 +1,10 @@
 <template>
-  <div class="mt-6">
+  <div class="mt-12">
     <QuickStats />
   </div>
-  <h2 class="my-8 text-xl font-semibold flex items-center justify-between">
+  <h2
+    class="my-8 mt-12 text-xl font-semibold flex items-center justify-between"
+  >
     <div>
       <div
         class="
@@ -62,7 +64,9 @@
       </table>
     </div>
   </div>
-  <h2 class="my-8 text-xl font-semibold flex items-center justify-between">
+  <h2
+    class="my-8 mt-12 text-xl font-semibold flex items-center justify-between"
+  >
     <div>
       <div
         class="

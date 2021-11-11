@@ -33,6 +33,7 @@ const messages = {
       red: 'Tinto',
       white: 'Blanco',
       rose: 'Rosado',
+      other: 'Otro',
       country: 'Pais',
       region: 'Región',
       totalBottles: 'Total Botellas',
