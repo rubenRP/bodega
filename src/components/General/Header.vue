@@ -1,7 +1,7 @@
 <template>
   <nav
     class="
-      bg-gradient-to-r
+      bg-gradient-to-b
       from-pink-900
       to-pink-800
       z-50
@@ -13,6 +13,8 @@
       py-3
       navbar-expand-lg
       relative
+      h-20
+      lg:px-4 lg:h-auto
     "
   >
     <div
@@ -63,8 +65,7 @@
             font-bold
             leading-relaxed
             inline-block
-            lg:mr-8
-            pt-2
+            lg:mr-8 lg:pt-2
             whitespace-nowrap
             uppercase
             w-1/2

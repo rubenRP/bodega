@@ -3,99 +3,139 @@
     <!-- Card -->
     <div
       class="
-        flex
-        items-center
-        p-4
+        relative
+        flex flex-col
+        min-w-0
+        break-words
         bg-white
-        rounded-lg
-        shadow-xs
-        dark:bg-gray-800
+        rounded
+        mb-6
+        xl:mb-0
+        shadow-lg
       "
     >
-      <div
-        class="
-          p-3
-          mr-4
-          text-orange-500
-          bg-orange-100
-          rounded-full
-          dark:text-orange-100 dark:bg-orange-500
-        "
-      >
-        🍷
-      </div>
-      <div>
-        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          {{ $t('cellar.totalBottles') }}
-        </p>
-        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ totalBottles }}
-        </p>
+      <div class="flex-auto p-4">
+        <div class="flex flex-wrap">
+          <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+            <h5 class="text-blueGray-400 uppercase font-bold text-xs">
+              {{ $t('cellar.totalBottles') }}
+            </h5>
+            <span class="font-semibold text-xl text-blueGray-700">
+              {{ totalBottles }}
+            </span>
+          </div>
+          <div class="relative w-auto pl-4 flex-initial">
+            <div
+              class="
+                text-white
+                p-3
+                text-center
+                inline-flex
+                items-center
+                justify-center
+                w-12
+                h-12
+                shadow-lg
+                rounded-full
+                bg-red-500
+              "
+            >
+              <font-awesome-icon :icon="['fas', 'wine-bottle']" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div
       class="
-        flex
-        items-center
-        p-4
+        relative
+        flex flex-col
+        min-w-0
+        break-words
         bg-white
-        rounded-lg
-        shadow-xs
-        dark:bg-gray-800
+        rounded
+        mb-6
+        xl:mb-0
+        shadow-lg
       "
     >
-      <div
-        class="
-          p-3
-          mr-4
-          text-orange-500
-          bg-orange-100
-          rounded-full
-          dark:text-orange-100 dark:bg-orange-500
-        "
-      >
-        🗺️
-      </div>
-      <div>
-        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          {{ $t('cellar.totalApellations') }}
-        </p>
-        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ Object.keys(totalApellations).length }}
-        </p>
+      <div class="flex-auto p-4">
+        <div class="flex flex-wrap">
+          <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+            <h5 class="text-blueGray-400 uppercase font-bold text-xs">
+              {{ $t('cellar.totalApellations') }}
+            </h5>
+            <span class="font-semibold text-xl text-blueGray-700">
+              {{ Object.keys(totalApellations).length }}
+            </span>
+          </div>
+          <div class="relative w-auto pl-4 flex-initial">
+            <div
+              class="
+                text-white
+                p-3
+                text-center
+                inline-flex
+                items-center
+                justify-center
+                w-12
+                h-12
+                shadow-lg
+                rounded-full
+                bg-orange-500
+              "
+            >
+              <font-awesome-icon :icon="['fas', 'map-signs']" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div
       class="
-        hidden
-        md:flex
-        items-center
-        p-4
+        relative
+        flex flex-col
+        min-w-0
+        break-words
         bg-white
-        rounded-lg
-        shadow-xs
-        dark:bg-gray-800
+        rounded
+        mb-6
+        xl:mb-0
+        shadow-lg
       "
     >
-      <div
-        class="
-          p-3
-          mr-4
-          text-orange-500
-          bg-orange-100
-          rounded-full
-          dark:text-orange-100 dark:bg-orange-500
-        "
-      >
-        🌍
-      </div>
-      <div>
-        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          {{ $t('cellar.totalCountries') }}
-        </p>
-        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ Object.keys(totalCountries).length }}
-        </p>
+      <div class="flex-auto p-4">
+        <div class="flex flex-wrap">
+          <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+            <h5 class="text-blueGray-400 uppercase font-bold text-xs">
+              {{ $t('cellar.totalCountries') }}
+            </h5>
+            <span class="font-semibold text-xl text-blueGray-700">
+              {{ Object.keys(totalCountries).length }}
+            </span>
+          </div>
+          <div class="relative w-auto pl-4 flex-initial">
+            <div
+              class="
+                text-white
+                p-3
+                text-center
+                inline-flex
+                items-center
+                justify-center
+                w-12
+                h-12
+                shadow-lg
+                rounded-full
+                bg-green-500
+              "
+            >
+              <font-awesome-icon :icon="['fas', 'map-marker-alt']" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
