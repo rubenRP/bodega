@@ -1,5 +1,4 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { far } from '@fortawesome/free-regular-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { createApp } from 'vue'
@@ -15,7 +14,6 @@ import store from './store'
 }) */
 
 library.add(fas)
-library.add(far)
 
 const i18n = createI18n({
   locale: 'es',
@@ -27,5 +25,5 @@ createApp(App)
   .use(store)
   .use(router)
   .use(i18n)
-  .component('FAIcon', FontAwesomeIcon)
+  .component('font-awesome-icon', FontAwesomeIcon)
   .mount('#app')

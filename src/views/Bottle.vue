@@ -308,12 +308,14 @@
   import { Bottle } from '@/models/cellar'
   import WineTag from '../components/Bottle/WineTag.vue'
   import Scraper from '@/components/Bottle/Scraper.vue'
+  import ReviewList from '@/components/Bottle/ReviewList.vue'
   import QtySelector from '@/components/Bottle/QtySelector.vue'
+
   import { increaseBottleQty, decreaseBottleQty } from '@/api/bottles'
 
   export default defineComponent({
     name: 'Bottle',
-    components: { WineTag, Scraper, QtySelector },
+    components: { WineTag, Scraper, QtySelector, ReviewList },
     data: () => ({
       id: 0,
       bottle: <Bottle>{},

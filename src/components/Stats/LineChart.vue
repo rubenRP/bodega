@@ -38,13 +38,17 @@
           datasets: [
             {
               data: <any>[],
-              borderColor: '',
+              backgroundColor: '#ed64a6',
+              borderColor: '#ed64a6',
               label: '',
+              tension: 0.5,
             },
             {
               data: <any>[],
-              borderColor: '',
+              backgroundColor: '#4c51bf',
+              borderColor: '#4c51bf',
               label: '',
+              tension: 0.5,
             },
           ],
           labels: <any>[],
@@ -55,9 +59,6 @@
               x: key,
               y: value,
             })
-            res.datasets[i].borderColor = `hsl(${
-              Math.random() * 360
-            }, 50%, 50%)`
             res.datasets[i].label = this.labels[i]
             if (res.labels.indexOf(key) == -1) {
               res.labels.push(key)

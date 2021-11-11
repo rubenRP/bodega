@@ -1,17 +1,26 @@
 <template>
-  <h2
-    class="
-      my-6
-      text-2xl
-      font-semibold
-      text-gray-700
-      dark:text-gray-200
-      flex
-      items-center
-      justify-between
-    "
-  >
-    <span>{{ $t('cellar.myCellar') }}</span>
+  <h2 class="my-8 text-3xl font-semibold flex items-center justify-between">
+    <div>
+      <div
+        class="
+          p-2
+          text-center
+          inline-flex
+          items-center
+          justify-center
+          w-16
+          h-16
+          mr-6
+          shadow-lg
+          rounded-full
+          bg-pink-900
+          text-white
+        "
+      >
+        <font-awesome-icon :icon="['fas', 'wine-bottle']" class="text-xl" />
+      </div>
+      <span>{{ $t('cellar.myCellar') }}</span>
+    </div>
     <button
       class="
         inline-block

@@ -12,8 +12,7 @@
 <script>
   import { getBottleReview } from '@/api/reviews'
   import StarRating from '../Reviews/StarRating.vue'
-  import Review from '../../models/review'
-  import { onMounted, ref, watch } from 'vue'
+  import { onMounted, ref, toRefs, watch } from 'vue'
   export default {
     name: 'ReviewList',
     components: {
@@ -27,7 +26,7 @@
     },
     setup(props) {
       const bottleId = toRefs(props)
-      const reviews = ref([Review])
+      const reviews = ref([])
       const fetchReviews = async () => {
         reviews.value = await getBottleReview(bottleId.value)
       }

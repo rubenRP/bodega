@@ -1,18 +1,12 @@
 <template>
-  <div
-    class="flex h-screen bg-gray-50 dark:bg-gray-900"
-    :class="{ 'overflow-hidden': showSidebar || false }"
-  >
-    <Sidebar />
-    <div class="flex flex-col flex-1 w-full">
-      <Topbar />
-      <Notifications />
-      <main class="h-full pb-16 overflow-y-auto">
-        <div class="container grid px-6 mx-auto">
-          <router-view />
-        </div>
-      </main>
-    </div>
+  <div :class="{ 'overflow-hidden': showSidebar || false }">
+    <Header />
+    <main class="px-4 md:px-10 mx-auto w-full container">
+      <div>
+        <router-view />
+      </div>
+    </main>
+    <Footer />
   </div>
 </template>
 
@@ -22,14 +16,16 @@
 
   import Sidebar from '@/components/General/Sidebar.vue'
   import Topbar from '@/components/General/Topbar.vue'
-  import Notifications from '@/components/General/Notifications.vue'
+  import Header from '@/components/General/Header.vue'
+  import Footer from '@/components/General/Footer.vue'
 
   export default defineComponent({
     name: 'DefaultLayout',
     components: {
       Sidebar,
       Topbar,
-      Notifications,
+      Header,
+      Footer,
     },
     computed: { ...mapGetters({ showSidebar: 'general/sidebar' }) },
   })
