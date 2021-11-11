@@ -1,5 +1,5 @@
 <template>
-  <div class="grid gap-6 mb-8 grid-cols-2 xl:grid-cols-3">
+  <div class="grid gap-6 mb-8 grid-cols-1 xl:grid-cols-3">
     <!-- Card -->
     <div
       class="
@@ -9,8 +9,6 @@
         break-words
         bg-white
         rounded
-        mb-6
-        xl:mb-0
         shadow-lg
       "
     >
@@ -55,8 +53,6 @@
         break-words
         bg-white
         rounded
-        mb-6
-        xl:mb-0
         shadow-lg
       "
     >
@@ -101,8 +97,6 @@
         break-words
         bg-white
         rounded
-        mb-6
-        xl:mb-0
         shadow-lg
       "
     >

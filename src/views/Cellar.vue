@@ -17,7 +17,7 @@
           text-white
         "
       >
-        <font-awesome-icon :icon="['fas', 'wine-bottle']" class="text-xl" />
+        <font-awesome-icon :icon="['fas', 'border-all']" class="text-xl" />
       </div>
       <span>{{ $t('cellar.myCellar') }}</span>
     </div>

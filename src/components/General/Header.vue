@@ -9,7 +9,6 @@
       flex flex-wrap
       items-center
       justify-between
-      px-2
       py-3
       navbar-expand-lg
       relative
@@ -42,7 +41,7 @@
             cursor-pointer
             text-xl
             leading-none
-            px-3
+            pr-3
             py-1
             border border-solid border-transparent
             rounded
@@ -86,7 +85,7 @@
             flex-shrink-0
             fixed
             inset-y-0
-            w-64
+            w-2/3
             mt-20
             left-0
             overflow-y-auto
@@ -107,17 +106,22 @@
               class="
                 lg:text-white lg:hover:text-blueGray-200
                 text-blueGray-700
-                px-3
+                px-4
+                lg:px-3
                 py-4
                 lg:py-2
                 flex
                 items-center
-                text-xs
                 uppercase
                 font-bold
+                w-full
+                lg:w-auto
+                border-b-2
+                lg:border-b-0 lg:text-xs
               "
               to="/cellar"
             >
+              <font-awesome-icon icon="border-all" class="mr-4 lg:hidden" />
               <span>{{ $t('cellar.myCellar') }}</span>
             </router-link>
           </li>
@@ -126,17 +130,22 @@
               class="
                 lg:text-white lg:hover:text-blueGray-200
                 text-blueGray-700
-                px-3
+                px-4
+                lg:px-3
                 py-4
                 lg:py-2
                 flex
                 items-center
-                text-xs
                 uppercase
                 font-bold
+                w-full
+                lg:w-auto
+                border-b-2
+                lg:border-b-0 lg:text-xs
               "
               to="/bottles"
             >
+              <font-awesome-icon icon="wine-bottle" class="mr-4 lg:hidden" />
               <span>{{ $t('bottles.bottles') }}</span>
             </router-link>
           </li>
@@ -145,17 +154,22 @@
               class="
                 lg:text-white lg:hover:text-blueGray-200
                 text-blueGray-700
-                px-3
+                px-4
+                lg:px-3
                 py-4
                 lg:py-2
                 flex
                 items-center
-                text-xs
                 uppercase
                 font-bold
+                w-full
+                lg:w-auto
+                border-b-2
+                lg:border-b-0 lg:text-xs
               "
               to="/reviews"
             >
+              <font-awesome-icon icon="star" class="mr-4 lg:hidden" />
               <span>Reviews</span>
             </router-link>
           </li>
@@ -164,17 +178,22 @@
               class="
                 lg:text-white lg:hover:text-blueGray-200
                 text-blueGray-700
-                px-3
+                px-4
+                lg:px-3
                 py-4
                 lg:py-2
                 flex
                 items-center
-                text-xs
                 uppercase
                 font-bold
+                w-full
+                lg:w-auto
+                border-b-2
+                lg:border-b-0 lg:text-xs
               "
               to="/stats"
             >
+              <font-awesome-icon icon="chart-line" class="mr-4 lg:hidden" />
               <span>{{ $t('stats.stats') }}</span>
             </router-link>
           </li>
