@@ -150,21 +150,6 @@
           >
             <font-awesome-icon icon="edit" />
           </button>
-          <button
-            class="
-              text-pink-900
-              bg-transparent
-              hover:text-pink-700
-              active:text-pink-600
-              font-bold
-              uppercase
-              text-xl
-            "
-            type="button"
-            @click="toggleScrapeBottle()"
-          >
-            <font-awesome-icon icon="search-plus" />
-          </button>
         </div>
 
         <div class="h-8 w-24 m-left">
@@ -370,13 +355,8 @@
     </div>
   </div>
 
-  <div
-    id="bottleScraper"
-    class="min-w-0 p-4 mt-6 bg-white rounded-lg shadow-xs dark:bg-gray-800"
-    v-if="scrapeBottle"
-  >
-    <Scraper :bottle="bottle" :scraping="scrapeBottle" />
-  </div>
+  <Scraper :bottle="bottle" />
+
   <BottleForm
     v-if="editBottle"
     @closeModalForm="toggleEditBottle()"
@@ -415,7 +395,6 @@
       id: 0,
       bottle: <Bottle>{},
       editBottle: false,
-      scrapeBottle: false,
     }),
     async mounted() {
       if (this.id === 0) {
@@ -451,9 +430,6 @@
       },
       toggleEditBottle() {
         this.editBottle = !this.editBottle
-      },
-      toggleScrapeBottle() {
-        this.scrapeBottle = !this.scrapeBottle
       },
     },
   })
