@@ -1,3 +1,4 @@
+import { Bottle } from '@/models/cellar'
 import { supabase } from '@/supabase'
 
 const getCellarBottles = async () => {
@@ -36,78 +37,54 @@ const findBottle = async (
   vintage: number,
   type: string
 ) => {
-  return await supabase
-    .from('bottles')
-    .select()
-    .like('name', name)
-    .like('cellar', cellar)
-    .eq('vintage', vintage)
-    .eq('type', type)
+  try {
+    const res = await supabase
+      .from('bottles')
+      .select()
+      .like('name', name)
+      .like('cellar', cellar)
+      .eq('vintage', vintage)
+      .eq('type', type)
+
+    return res.data![0]
+  } catch (error: any) {
+    console.log(error)
+  }
 }
 
 const addBottle = async (
-  name: string,
-  cellar: string,
-  vintage: number,
-  country: string,
-  region: string,
-  apellation: string,
-  type: string,
-  qty: number,
-  date?: any,
+  bottle: Bottle,
   mycellar?: boolean,
   reviewed?: boolean
 ) => {
-  let res = await supabase.from('bottles').insert([
-    {
-      name: name,
-      cellar: cellar,
-      vintage: vintage,
-      country: country,
-      region: region,
-      apellation: apellation,
-      type: type,
-      qty: qty,
-      last_added: date ? date : new Date(),
-      mycellar: mycellar ? mycellar : false,
-      reviewed: reviewed ? reviewed : false,
-    },
-  ])
-  for (let i = 0; i < qty; i++) {
-    await supabase.from('added_bottles').insert([
+  try {
+    let res = await supabase.from('bottles').insert([
       {
-        bottle_id: res.data![0].id,
-        date_added: new Date(),
+        ...bottle,
+        mycellar: mycellar || false,
+        reviewed: reviewed || false,
       },
     ])
+    for (let i = 0; i < bottle.qty; i++) {
+      await supabase.from('added_bottles').insert([
+        {
+          bottle_id: res.data![0].id,
+          date_added: new Date(),
+        },
+      ])
+    }
+  } catch (error: any) {
+    console.log(error)
   }
 }
-const updateBottle = async (
-  name: string,
-  cellar: string,
-  vintage: number,
-  country: string,
-  region: string,
-  apellation: string,
-  type: string,
-  qty: number,
-  id: number,
-  date?: any
-) => {
+const updateBottle = async (id: number, bottle: {}) => {
   try {
     await supabase
       .from('bottles')
       .update([
         {
-          name: name,
-          cellar: cellar,
-          vintage: vintage,
-          country: country,
-          region: region,
-          apellation: apellation,
-          type: type,
-          qty: qty,
-          last_added: date,
+          date_scrapped: new Date(),
+          ...bottle,
         },
       ])
       .eq('id', id)
@@ -115,14 +92,14 @@ const updateBottle = async (
     alert(error.message)
   }
 }
-const updateBottleMetadata = async (id: number, updatedData: {}) => {
+const updateBottleMetadata = async (id: number, bottle: {}) => {
   try {
     await supabase
       .from('bottles')
       .update([
         {
           date_scrapped: new Date(),
-          ...updatedData,
+          ...bottle,
         },
       ])
       .eq('id', id)

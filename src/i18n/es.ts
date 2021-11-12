@@ -21,6 +21,7 @@ const messages = {
       stats: 'Estadísticas',
       close: 'Cerrar',
       back: 'Volver',
+      start: 'Iniciar',
     },
     cellar: {
       myCellar: 'Mi Bodega',
@@ -34,6 +35,8 @@ const messages = {
       white: 'Blanco',
       rose: 'Rosado',
       other: 'Otro',
+      orange: 'Naranja',
+      frizzante: 'Frizzante',
       country: 'Pais',
       region: 'Región',
       totalBottles: 'Total Botellas',
@@ -62,6 +65,7 @@ const messages = {
       alcoholContent: 'Contenido Alcoholico',
       noImport: 'No importar',
       details: 'Detalles',
+      editBottle: 'Editar botella',
     },
     reviews: {
       rating: 'Valoración',

@@ -23,7 +23,7 @@
             py-2
           "
           placeholder="Name"
-          v-model="name"
+          v-model="newBottle.name"
           required
         />
       </label>
@@ -46,7 +46,7 @@
             py-2
           "
           placeholder="Cellar"
-          v-model="cellar"
+          v-model="newBottle.cellar"
           required
         />
       </label>
@@ -69,7 +69,7 @@
             py-2
           "
           placeholder="Vintage"
-          v-model="vintage"
+          v-model="newBottle.vintage"
           required
         />
       </label>
@@ -92,7 +92,7 @@
             py-2
           "
           placeholder="Country"
-          v-model="country"
+          v-model="newBottle.country"
         />
       </label>
       <label class="block mt-4 text-sm">
@@ -114,7 +114,7 @@
             py-2
           "
           placeholder="Region"
-          v-model="region"
+          v-model="newBottle.region"
         />
       </label>
       <label class="block mt-4 text-sm">
@@ -136,7 +136,7 @@
             py-2
           "
           placeholder="Apellation"
-          v-model="apellation"
+          v-model="newBottle.apellation"
         />
       </label>
       <label class="block mt-4 text-sm">
@@ -157,7 +157,7 @@
             px-3
             py-2
           "
-          v-model="type"
+          v-model="newBottle.type"
           required
         >
           <option value="Red">{{ $t('cellar.red') }}</option>
@@ -168,28 +168,153 @@
           <option value="Other">{{ $t('cellar.other') }}</option>
         </select>
       </label>
-      <label class="block mt-4 text-sm hidden">
-        <span class="text-gray-700 dark:text-gray-400">{{
-          $t('cellar.dateAdded')
-        }}</span>
-        <input
-          type="date"
-          class="
-            block
-            w-full
-            mt-1
-            text-sm
-            dark:border-gray-600 dark:bg-gray-700
-            focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-            dark:text-gray-300 dark:focus:shadow-outline-gray
-            border-gray-200 border
-            rounded-md
-            px-3
-            py-2
-          "
-          v-model="date"
-        />
-      </label>
+      <div v-if="bottle">
+        <label class="block mt-4 text-sm">
+          <span class="text-gray-700 dark:text-gray-400">{{
+            $t('cellar.alcoholContent')
+          }}</span>
+          <input
+            class="
+              block
+              w-full
+              mt-1
+              text-sm
+              dark:border-gray-600 dark:bg-gray-700
+              focus:border-red-800
+              focus:outline-none
+              focus:shadow-outline-purple
+              dark:text-gray-300 dark:focus:shadow-outline-gray
+              border-gray-200 border
+              rounded-md
+              px-3
+              py-2
+            "
+            placeholder="Alcohol Content"
+            v-model="newBottle.alcohol_content"
+          />
+        </label>
+        <label class="block mt-4 text-sm">
+          <span class="text-gray-700 dark:text-gray-400">{{
+            $t('cellar.climateSoil')
+          }}</span>
+          <input
+            class="
+              block
+              w-full
+              mt-1
+              text-sm
+              dark:border-gray-600 dark:bg-gray-700
+              focus:border-red-800
+              focus:outline-none
+              focus:shadow-outline-purple
+              dark:text-gray-300 dark:focus:shadow-outline-gray
+              border-gray-200 border
+              rounded-md
+              px-3
+              py-2
+            "
+            placeholder="Climate/Soil"
+            v-model="newBottle.climate_soil"
+          />
+        </label>
+        <label class="block mt-4 text-sm">
+          <span class="text-gray-700 dark:text-gray-400">{{
+            $t('cellar.aging')
+          }}</span>
+          <input
+            class="
+              block
+              w-full
+              mt-1
+              text-sm
+              dark:border-gray-600 dark:bg-gray-700
+              focus:border-red-800
+              focus:outline-none
+              focus:shadow-outline-purple
+              dark:text-gray-300 dark:focus:shadow-outline-gray
+              border-gray-200 border
+              rounded-md
+              px-3
+              py-2
+            "
+            placeholder="Aging"
+            v-model="newBottle.aging"
+          />
+        </label>
+        <label class="block mt-4 text-sm">
+          <span class="text-gray-700 dark:text-gray-400">{{
+            $t('cellar.comsumption')
+          }}</span>
+          <input
+            class="
+              block
+              w-full
+              mt-1
+              text-sm
+              dark:border-gray-600 dark:bg-gray-700
+              focus:border-red-800
+              focus:outline-none
+              focus:shadow-outline-purple
+              dark:text-gray-300 dark:focus:shadow-outline-gray
+              border-gray-200 border
+              rounded-md
+              px-3
+              py-2
+            "
+            placeholder="Comsumption"
+            v-model="newBottle.comsumption"
+          />
+        </label>
+        <label class="block mt-4 text-sm">
+          <span class="text-gray-700 dark:text-gray-400">{{
+            $t('cellar.stayBarrel')
+          }}</span>
+          <input
+            class="
+              block
+              w-full
+              mt-1
+              text-sm
+              dark:border-gray-600 dark:bg-gray-700
+              focus:border-red-800
+              focus:outline-none
+              focus:shadow-outline-purple
+              dark:text-gray-300 dark:focus:shadow-outline-gray
+              border-gray-200 border
+              rounded-md
+              px-3
+              py-2
+            "
+            placeholder="Stay Barrel"
+            v-model="newBottle.stay_barrel"
+          />
+        </label>
+        <label class="block mt-4 text-sm">
+          <span class="text-gray-700 dark:text-gray-400">{{
+            $t('cellar.description')
+          }}</span>
+          <input
+            type="text"
+            class="
+              block
+              w-full
+              mt-1
+              text-sm
+              dark:border-gray-600 dark:bg-gray-700
+              focus:border-red-800
+              focus:outline-none
+              focus:shadow-outline-purple
+              dark:text-gray-300 dark:focus:shadow-outline-gray
+              border-gray-200 border
+              rounded-md
+              px-3
+              py-2
+            "
+            placeholder="Description"
+            v-model="newBottle.description"
+          />
+        </label>
+      </div>
       <label class="block mt-4 mb-4 text-sm">
         <span class="text-gray-700 dark:text-gray-400">{{
           $t('general.qty')
@@ -197,7 +322,7 @@
         <div class="flex align-middle justify-between items-center">
           <div class="w-1/3">
             <QtySelector
-              :qty="qty"
+              :qty="newBottle.qty"
               v-on:incrementQty="increaseQty"
               v-on:decrementQty="decreaseQty"
             />
@@ -298,65 +423,46 @@
     removeBottle,
     findBottle,
   } from '@/api/bottles'
+  import { Bottle } from '@/models/cellar'
+  import { mapActions } from 'vuex'
 
   export default defineComponent({
     name: 'BottleForm',
     components: { Modal, QtySelector },
     props: {
-      bottle: Object,
+      bottle: {
+        type: Object,
+        default: () => <Bottle>{},
+      },
     },
     data() {
       return {
-        name: this.bottle?.name || '',
-        cellar: this.bottle?.cellar || '',
-        vintage: this.bottle?.vintage || '',
-        country: this.bottle?.country || '',
-        region: this.bottle?.region || '',
-        apellation: this.bottle?.apellation || '',
-        type: this.bottle?.type || '',
-        qty: this.bottle?.qty || 1,
-        date: this.bottle?.['last_added'] || '',
+        newBottle: <Bottle>this.bottle || <Bottle>{ qty: 1 },
       }
     },
     methods: {
+      ...mapActions({
+        addMessage: 'general/addMessage',
+      }),
       async createBottle() {
         try {
           const bottleFinded = await findBottle(
-            this.name,
-            this.cellar,
-            this.vintage,
-            this.type
+            this.newBottle.name,
+            this.newBottle.cellar,
+            this.newBottle.vintage,
+            this.newBottle.type
           )
 
-          if (!bottleFinded.data) {
-            await addBottle(
-              this.name,
-              this.cellar,
-              this.vintage,
-              this.country,
-              this.region,
-              this.apellation,
-              this.type,
-              this.qty,
-              this.date,
-              true
-            )
+          if (!bottleFinded.length) {
+            await addBottle(this.newBottle, true)
           } else {
             console.log('Bottle already exists ' + bottleFinded)
+            this.addMessage({
+              type: 'warning',
+              text: 'Bottle already exists',
+            })
             //TODO:  Throw confirmation message in modal: bottle already exists
-
-            await updateBottle(
-              bottleFinded.data.id,
-              this.name,
-              this.cellar,
-              this.vintage,
-              this.country,
-              this.region,
-              this.apellation,
-              this.type,
-              this.qty,
-              this.date
-            )
+            //await updateBottle(bottleFinded.data[0].id, this.bottle)
           }
         } catch (e) {
           console.log(e)
@@ -367,18 +473,7 @@
       },
       async updateBottle() {
         try {
-          await updateBottle(
-            this.name,
-            this.cellar,
-            this.vintage,
-            this.country,
-            this.region,
-            this.apellation,
-            this.type,
-            this.qty,
-            this.bottle?.id,
-            this.date
-          )
+          await updateBottle(this.newBottle.id, this.newBottle)
         } catch (e) {
           console.log(e)
         } finally {
@@ -390,20 +485,13 @@
         removeBottle(this.bottle?.id)
       },
       clearForm() {
-        this.name = ''
-        this.cellar = ''
-        this.vintage = ''
-        this.country = ''
-        this.region = ''
-        this.apellation = ''
-        this.type = ''
-        this.qty = 1
+        this.newBottle = <Bottle>{ qty: 1 }
       },
       increaseQty(qty: number) {
-        this.qty = qty
+        this.newBottle.qty = qty
       },
       decreaseQty(qty: number) {
-        this.qty = qty
+        this.newBottle.qty = qty
       },
     },
   })
