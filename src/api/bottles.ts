@@ -9,10 +9,25 @@ const getCellarBottles = async () => {
     .order('last_added', { ascending: false })
 }
 const getBottles = async () => {
-  return await supabase
-    .from('bottles')
-    .select()
-    .order('last_added', { ascending: false })
+  try {
+    const res = await supabase
+      .from('bottles')
+      .select()
+      .order('last_added', { ascending: false })
+
+    return res.data!
+  } catch (error: any) {
+    console.log(error)
+  }
+}
+
+const findBottleById = async (id: number) => {
+  try {
+    const res = await supabase.from('bottles').select().eq('id', id)
+    return res.data![0]
+  } catch (error: any) {
+    console.log(error)
+  }
 }
 
 const findBottle = async (
@@ -179,4 +194,5 @@ export {
   getOpenedBottles,
   getAddedBottles,
   findBottle,
+  findBottleById,
 }

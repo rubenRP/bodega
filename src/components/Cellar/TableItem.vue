@@ -1,8 +1,5 @@
 <template>
-  <tr
-    class="text-gray-700 dark:text-gray-400 flex flex-wrap md:table-row"
-    v-if="item.qty"
-  >
+  <tr class="text-gray-700 dark:text-gray-400 flex flex-wrap md:table-row">
     <td class="px-4 py-3 pb-0 md:pb-3 w-full">
       <div class="flex items-center text-sm">
         <router-link class="cursor-pointer" :to="'/bottle/' + item.id">

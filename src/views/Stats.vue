@@ -1,17 +1,42 @@
 <template>
   <h2
     class="
-      my-6
-      text-2xl
+      my-8
+      text-xl
+      lg:text-3xl
       font-semibold
-      text-gray-700
-      dark:text-gray-200
       flex
       items-center
       justify-between
     "
   >
-    {{ $t('stats.stats') }}
+    <div>
+      <div
+        class="
+          p-2
+          text-center
+          inline-flex
+          items-center
+          justify-center
+          w-8
+          lg:w-16
+          h-8
+          lg:h-16
+          mr-2
+          lg:mr-6
+          shadow-lg
+          rounded-full
+          bg-pink-900
+          text-white
+        "
+      >
+        <font-awesome-icon
+          :icon="['fas', 'chart-line']"
+          class="text-sm lg:text-xl"
+        />
+      </div>
+      <span>{{ $t('stats.stats') }}</span>
+    </div>
   </h2>
   <QuickStats />
   <div class="mb-8">

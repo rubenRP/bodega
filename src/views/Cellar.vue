@@ -1,5 +1,15 @@
 <template>
-  <h2 class="my-8 text-3xl font-semibold flex items-center justify-between">
+  <h2
+    class="
+      my-8
+      text-xl
+      lg:text-3xl
+      font-semibold
+      flex
+      items-center
+      justify-between
+    "
+  >
     <div>
       <div
         class="
@@ -8,16 +18,22 @@
           inline-flex
           items-center
           justify-center
-          w-16
-          h-16
-          mr-6
+          w-8
+          lg:w-16
+          h-8
+          lg:h-16
+          mr-2
+          lg:mr-6
           shadow-lg
           rounded-full
           bg-pink-900
           text-white
         "
       >
-        <font-awesome-icon :icon="['fas', 'border-all']" class="text-xl" />
+        <font-awesome-icon
+          :icon="['fas', 'border-all']"
+          class="text-sm lg:text-xl"
+        />
       </div>
       <span>{{ $t('cellar.myCellar') }}</span>
     </div>
@@ -78,7 +94,9 @@
     />
   </div>
 
-  <div class="w-full overflow-hidden rounded-lg shadow-xs">
+  <Spinner v-if="!this.getCellar.length" />
+
+  <div class="w-full overflow-hidden rounded-lg shadow-xs" v-else>
     <div class="w-full overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <thead>
@@ -136,6 +154,7 @@
   import Modal from '@/components/General/Modal.vue'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
   import { mapActions, mapGetters } from 'vuex'
+  import Spinner from '@/components/General/Spinner.vue'
 
   export default defineComponent({
     name: 'Cellar',
@@ -148,6 +167,7 @@
       TableItem,
       Modal,
       BottleForm,
+      Spinner,
     },
     data() {
       return {

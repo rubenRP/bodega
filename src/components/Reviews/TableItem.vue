@@ -2,7 +2,7 @@
   <tr class="text-gray-700 dark:text-gray-400 flex flex-wrap md:table-row">
     <td class="px-4 py-3 pb-0 md:pb-3 w-full">
       <div class="flex items-center text-sm">
-        <router-link class="cursor-pointer" :to="'/bottle/' + item.id">
+        <router-link class="cursor-pointer" :to="'/bottle/' + item.bottleId">
           <p class="font-semibold">{{ item.name }}</p>
           <p class="text-xs text-gray-600 dark:text-gray-400">
             {{ item.cellar }}

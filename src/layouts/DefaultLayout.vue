@@ -1,6 +1,7 @@
 <template>
   <div :class="showSidebar && 'overflow-hidden'">
     <Header />
+    <Notifications />
     <main class="px-4 md:px-10 mx-auto w-full container">
       <div
         class="
@@ -31,6 +32,7 @@
   import Topbar from '@/components/General/Topbar.vue'
   import Header from '@/components/General/Header.vue'
   import Footer from '@/components/General/Footer.vue'
+  import Notifications from '@/components/General/Notifications.vue'
 
   export default defineComponent({
     name: 'DefaultLayout',
@@ -39,6 +41,7 @@
       Topbar,
       Header,
       Footer,
+      Notifications,
     },
     computed: { ...mapGetters({ showSidebar: 'general/sidebar' }) },
     methods: {

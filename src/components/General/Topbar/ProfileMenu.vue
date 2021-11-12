@@ -20,6 +20,7 @@
             bg-pink-900
             table
             cursor-pointer
+            border border-gray-300
           "
         >
           <span class="table-cell text-white font-light align-middle">{{
@@ -68,16 +69,7 @@
             dark:hover:bg-gray-800 dark:hover:text-gray-200
           "
         >
-          <userIcon
-            class="w-4 h-4 mr-3"
-            aria-hidden="true"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          />
+          <font-awesome-icon :icon="['fas', 'user']" class="w-4 h-4 mr-3" />
           <span>{{ $t('user.profile') }}</span>
         </router-link>
       </li>
@@ -99,15 +91,9 @@
           "
           href="#"
         >
-          <CogIcon
+          <font-awesome-icon
+            :icon="['fas', 'sliders-h']"
             class="w-4 h-4 mr-3"
-            aria-hidden="true"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
           />
           <span>{{ $t('user.settings') }}</span>
         </a>
@@ -131,7 +117,10 @@
           "
           @click.prevent="logout"
         >
-          <LogoutIcon class="w-4 h-4 mr-3" />
+          <font-awesome-icon
+            :icon="['fas', 'door-open']"
+            class="w-4 h-4 mr-3"
+          />
           <span>{{ $t('user.logout') }}</span>
         </a>
       </li>
@@ -141,24 +130,20 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { mapGetters } from 'vuex'
-  import { LogoutIcon, CogIcon } from '@heroicons/vue/solid'
-  import { UserIcon } from '@heroicons/vue/outline'
+  import { mapGetters, mapActions } from 'vuex'
+
   import { logout } from '@/api/user'
 
   export default defineComponent({
     name: 'ProfileMenu',
-    components: {
-      LogoutIcon,
-      CogIcon,
-      UserIcon,
-    },
     data() {
       return {
         isProfileMenuOpen: false,
       }
     },
-    computed: { ...mapGetters({ userInitials: 'user/initials' }) },
+    computed: {
+      ...mapGetters({ userInitials: 'user/initials' }),
+    },
     methods: {
       async logout() {
         await logout()

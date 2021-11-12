@@ -9,6 +9,7 @@ let messageId = 0
 const getters = {
   darkMode: (state: { darkMode: boolean }) => state.darkMode,
   sidebar: (state: { sidebar: boolean }) => state.sidebar,
+  messages: (state: { messages: any[] }) => state.messages,
 }
 
 const mutations = {

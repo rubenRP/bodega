@@ -66,8 +66,9 @@ const messages = {
     reviews: {
       rating: 'Valoración',
       latestReviews: 'Últimas Valoraciones',
-      addReview: 'Añadir Valoración',
+      addReview: 'Añadir Review',
       comment: 'Comentario',
+      noReviews: 'No hay reviews',
     },
     stats: {
       stats: 'Estadísticas',

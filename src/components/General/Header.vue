@@ -55,7 +55,7 @@
           type="button"
           @click="toggleSidebar"
         >
-          <font-awesome-icon icon="bars" />
+          <font-awesome-icon :icon="['fas', 'bars']" />
         </button>
         <router-link
           to="/"

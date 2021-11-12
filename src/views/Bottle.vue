@@ -25,8 +25,8 @@
         text-pink-900
         bg-transparent
         border border-solid border-pink-900
-        hover:bg-pink-700 hover:text-white
-        active:bg-pink-600
+        hover:bg-pink-900 hover:text-white
+        active:bg-pink-700
         font-bold
         uppercase
         text-xs
@@ -324,6 +324,52 @@
       </tbody>
     </table>
   </div>
+
+  <div
+    class="
+      relative
+      flex flex-col
+      min-w-0
+      break-words
+      w-full
+      mb-6
+      shadow-lg
+      rounded
+      bg-white
+      mt-6
+    "
+  >
+    <div class="rounded-t mb-0 px-4 py-3 border-0">
+      <div class="flex flex-wrap items-center">
+        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+          <h3 class="font-semibold text-lg text-blueGray-700">Reviews</h3>
+        </div>
+      </div>
+    </div>
+    <div class="block w-full overflow-x-auto">
+      <div
+        class="
+          w-full
+          bg-transparent
+          border-collapse
+          mb-6
+          px-8
+          py-3
+          flex flex-col
+          lg:flex-row
+          items-start
+        "
+      >
+        <div class="w-full lg:w-2/3 mr-8">
+          <ReviewList :bottleId="bottle.id" v-if="bottle" />
+        </div>
+        <div class="w-full lg:w-1/3">
+          <ReviewForm :bottleId="bottle.id" v-if="bottle" />
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div
     id="bottleScraper"
     class="min-w-0 p-4 mt-6 bg-white rounded-lg shadow-xs dark:bg-gray-800"
@@ -345,14 +391,26 @@
   import WineTag from '../components/Bottle/WineTag.vue'
   import Scraper from '@/components/Bottle/Scraper.vue'
   import ReviewList from '@/components/Bottle/ReviewList.vue'
+  import ReviewForm from '@/components/Bottle/ReviewForm.vue'
   import QtySelector from '@/components/Bottle/QtySelector.vue'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
 
-  import { increaseBottleQty, decreaseBottleQty } from '@/api/bottles'
+  import {
+    increaseBottleQty,
+    decreaseBottleQty,
+    findBottleById,
+  } from '@/api/bottles'
 
   export default defineComponent({
     name: 'Bottle',
-    components: { WineTag, Scraper, QtySelector, ReviewList, BottleForm },
+    components: {
+      WineTag,
+      Scraper,
+      QtySelector,
+      ReviewList,
+      BottleForm,
+      ReviewForm,
+    },
     data: () => ({
       id: 0,
       bottle: <Bottle>{},
@@ -381,6 +439,9 @@
         this.bottle = await this.getCellar.find(
           (bottle: { id: number }) => bottle.id === this.id
         )
+        if (!this.bottle) {
+          this.bottle = await findBottleById(this.id)
+        }
       },
       increaseQty(id: number) {
         increaseBottleQty(id, this.bottle.qty)

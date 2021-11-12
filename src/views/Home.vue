@@ -27,7 +27,10 @@
       <span>{{ $t('cellar.latestBottles') }}</span>
     </div>
   </h2>
-  <div class="w-full overflow-hidden rounded-lg shadow-xs">
+
+  <Spinner v-if="!getCellar.length" />
+
+  <div class="w-full overflow-hidden rounded-lg shadow-xs" v-else>
     <div class="w-full overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <thead>
@@ -89,7 +92,10 @@
       <span> {{ $t('reviews.latestReviews') }}</span>
     </div>
   </h2>
-  <div class="w-full overflow-hidden rounded-lg shadow-xs">
+
+  <Spinner v-if="!getReviews.length" />
+
+  <div class="w-full overflow-hidden rounded-lg shadow-xs" v-else>
     <div class="w-full overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <thead>
@@ -134,10 +140,11 @@
   import QuickStats from '@/components/Stats/QuickStats.vue'
   import TableItemCellar from '@/components/Cellar/TableItem.vue'
   import TableItemReviews from '@/components/Reviews/TableItem.vue'
+  import Spinner from '@/components/General/Spinner.vue'
 
   export default defineComponent({
     name: 'Home',
-    components: { TableItemCellar, TableItemReviews, QuickStats },
+    components: { TableItemCellar, TableItemReviews, QuickStats, Spinner },
     data: () => ({}),
     created() {
       if (this.getCellar.length === 0) {

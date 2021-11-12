@@ -1,133 +1,162 @@
 <template>
-  <label class="block mt-4 text-sm">
-    <span class="text-gray-700 dark:text-gray-400">{{
-      $t('reviews.rating')
-    }}</span>
-    <input
-      class="
-        block
-        w-full
-        mt-1
-        text-sm
-        dark:border-gray-600 dark:bg-gray-700
-        focus:border-purple-400 focus:outline-none focus:shadow-outline-purple
-        dark:text-gray-300 dark:focus:shadow-outline-gray
-        border-gray-200 border
-        rounded-md
-        py-2
-      "
-      type="range"
-      min="1"
-      max="10"
-      v-model="rating"
-      required
-    />
-    <div
-      class="
-        text-gray-700
-        dark:text-gray-400
-        mt-4
-        flex
-        justify-between
-        items-center
-      "
-    >
-      <span
+  <h4 class="font-semibold text-md text-blueGray-700 mt-12 lg:mt-0">
+    {{ $t('reviews.addReview') }}
+  </h4>
+  <div class="">
+    <label class="block mt-4 text-sm">
+      <span class="text-gray-700 dark:text-gray-400">{{
+        $t('reviews.rating')
+      }}</span>
+      <input
         class="
           block
-          w-auto
+          w-full
+          mt-1
           text-sm
           dark:border-gray-600 dark:bg-gray-700
           focus:border-purple-400 focus:outline-none focus:shadow-outline-purple
           dark:text-gray-300 dark:focus:shadow-outline-gray
           border-gray-200 border
           rounded-md
+          py-2
+        "
+        type="range"
+        min="1"
+        max="10"
+        v-model="rating"
+        required
+      />
+      <div
+        class="
+          text-gray-700
+          dark:text-gray-400
+          mt-4
+          flex
+          justify-between
+          items-center
+        "
+      >
+        <span
+          class="
+            block
+            w-auto
+            text-sm
+            dark:border-gray-600 dark:bg-gray-700
+            focus:border-purple-400
+            focus:outline-none
+            focus:shadow-outline-purple
+            dark:text-gray-300 dark:focus:shadow-outline-gray
+            border-gray-200 border
+            rounded-md
+            px-3
+            py-2
+          "
+          >{{ rating }}</span
+        >
+        <StarRating :value="rating" />
+      </div>
+    </label>
+
+    <label class="block mt-4 mb-4 text-sm">
+      <span class="text-gray-700 dark:text-gray-400">{{
+        $t('reviews.comment')
+      }}</span>
+      <textarea
+        class="
+          block
+          w-full
+          mt-1
+          text-sm
+          dark:border-gray-600 dark:bg-gray-700
+          focus:border-red-800 focus:outline-none focus:shadow-outline-purple
+          dark:text-gray-300 dark:focus:shadow-outline-gray
+          border-gray-200 border
+          rounded-md
           px-3
           py-2
         "
-        >{{ rating }}</span
+        placeholder="Comment"
+        v-model="comment"
+      />
+    </label>
+    <div class="flex justify-end">
+      <button
+        class="
+          bg-pink-900
+          text-white
+          active:bg-pink-600
+          font-bold
+          uppercase
+          text-sm
+          px-6
+          py-3
+          rounded
+          shadow
+          hover:shadow-lg
+          outline-none
+          focus:outline-none
+          mr-1
+          mb-1
+          ease-linear
+          transition-all
+          duration-150
+        "
+        type="button"
+        @click="createReview()"
       >
-      <StarRating :value="rating" />
+        {{ $t('general.save') }}
+      </button>
     </div>
-  </label>
-  <label class="block mt-4 mb-4 text-sm">
-    <span class="text-gray-700 dark:text-gray-400">{{
-      $t('reviews.comment')
-    }}</span>
-    <textarea
-      class="
-        block
-        w-full
-        mt-1
-        text-sm
-        dark:border-gray-600 dark:bg-gray-700
-        focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-        dark:text-gray-300 dark:focus:shadow-outline-gray
-        border-gray-200 border
-        rounded-md
-        px-3
-        py-2
-      "
-      placeholder="Comment"
-      v-model="comment"
-    />
-  </label>
-  <button
-    class="
-      w-full
-      px-5
-      py-3
-      text-sm
-      font-medium
-      leading-5
-      text-white
-      transition-colors
-      duration-150
-      bg-pink-900
-      border border-transparent
-      rounded-lg
-      sm:w-auto sm:px-4 sm:py-2
-      active:bg-pink-600
-      hover:bg-pink-700
-      focus:outline-none focus:shadow-outline-purple
-    "
-    @click="createReview()"
-  >
-    {{ $t('general.save') }}
-  </button>
+  </div>
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue'
+  import StarRating from '@/components/Reviews/StarRating.vue'
   import { addReview } from '@/api/reviews'
-  import StarRating from './StarRating.vue'
-  import { ref, toRefs } from 'vue'
-  import { useGetters } from 'vuex-composition-helpers'
-
-  export default {
+  import { mapGetters } from 'vuex'
+  import { getBottleReview } from '@/api/reviews'
+  export default defineComponent({
     name: 'ReviewForm',
-    components: { StarRating },
+    components: {
+      StarRating,
+    },
     props: {
-      bottleId: { type: Number, required: true },
+      bottleId: {
+        type: Number,
+        required: true,
+      },
     },
-    setup(props) {
-      const { user } = useGetters({ getUser: 'user/data' })
-      const bottleId = toRefs(props)
-      const rating = ref(0)
-      const comment = ref('')
-      const createReview = () => {
-        try {
-          addReview(bottleId.value, rating.value, comment.value, user.id)
-        } catch (e) {
-          console.error(e)
-        }
-      }
-
+    data() {
       return {
-        bottleId,
-        rating,
-        comment,
-        createReview,
+        comment: this.review?.comment || '',
+        rating: 0,
       }
     },
-  }
+    computed: {
+      ...mapGetters({
+        getUser: 'user/data',
+      }),
+    },
+    methods: {
+      async createReview() {
+        try {
+          await addReview(
+            this.bottleId,
+            this.rating,
+            this.comment,
+            this.getUser.id
+          )
+        } catch (e) {
+          console.log(e)
+        } finally {
+          this.clearForm()
+        }
+      },
+      clearForm() {
+        this.rating = 0
+        this.comment = ''
+      },
+    },
+  })
 </script>

@@ -31,27 +31,31 @@
           <input
             type="submit"
             class="
-              block
-              w-full
-              px-4
-              py-2
-              mt-8
-              text-sm
-              font-medium
-              leading-5
-              text-center text-white
-              transition-colors
-              duration-150
               bg-pink-900
-              border border-transparent
-              rounded-lg
-              active:bg-red-600
-              hover:bg-pink-700
-              focus:outline-none focus:shadow-outline-purple
+              text-white
+              active:bg-pink-700
+              font-bold
+              uppercase
+              text-sm
+              px-6
+              py-3
+              rounded
+              shadow
+              hover:shadow-lg
+              outline-none
+              focus:outline-none
+              mr-1
+              mb-1
+              ease-linear
+              transition-all
+              duration-150
+              w-full
+              cursor-pointer
             "
             :value="loading ? 'Loading' : 'Login with Google'"
             :disabled="loading"
           />
+
           <div
             class="
               flex

@@ -1,40 +1,44 @@
 <template>
   <h2
     class="
-      my-6
-      text-2xl
+      my-8
+      text-xl
+      lg:text-3xl
       font-semibold
-      text-gray-700
-      dark:text-gray-200
       flex
       items-center
       justify-between
     "
   >
-    <span>Reviews</span>
-    <button
-      class="
-        inline-block
-        text-sm
-        px-4
-        py-2
-        leading-none
-        border
-        rounded
-        text-white
-        border-pink-900
-        bg-pink-900
-        hover:bg-transparent hover:text-pink-800
-        ml-4
-        lg:mt-0
-      "
-      @click="toggleNewReview()"
-    >
-      {{ $t('general.add') }}
-    </button>
+    <div>
+      <div
+        class="
+          p-2
+          text-center
+          inline-flex
+          items-center
+          justify-center
+          w-8
+          lg:w-16
+          h-8
+          lg:h-16
+          mr-2
+          lg:mr-6
+          shadow-lg
+          rounded-full
+          bg-pink-900
+          text-white
+        "
+      >
+        <font-awesome-icon :icon="['fas', 'star']" class="text-sm lg:text-xl" />
+      </div>
+      <span>Reviews</span>
+    </div>
   </h2>
 
-  <div class="w-full overflow-hidden rounded-lg shadow-xs">
+  <Spinner v-if="!getReviews.length" />
+
+  <div class="w-full overflow-hidden rounded-lg shadow-xs" v-else>
     <div class="w-full overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <thead>
@@ -93,6 +97,7 @@
   import Modal from '@/components/General/Modal.vue'
   import ReviewForm from '@/components/Reviews/ReviewForm.vue'
   import { mapActions, mapGetters } from 'vuex'
+  import Spinner from '@/components/General/Spinner.vue'
 
   export default defineComponent({
     name: 'Reviews',
@@ -105,6 +110,7 @@
       TableItem,
       Modal,
       ReviewForm,
+      Spinner,
     },
     data() {
       return {
