@@ -50,17 +50,13 @@
       StarRating,
     },
     props: {
-      bottleId: {
-        type: Number,
-        required: true,
-      },
+      bottleId: Number,
     },
     data() {
       return {
         reviews: [],
       }
     },
-    mounted() {},
     watch: {
       bottleId() {
         this.fetchReviews()

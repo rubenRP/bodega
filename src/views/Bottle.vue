@@ -147,6 +147,7 @@
             "
             type="button"
             @click="toggleEditBottle()"
+            v-if="isAdmin"
           >
             <font-awesome-icon icon="edit" />
           </button>
@@ -355,7 +356,7 @@
     </div>
   </div>
 
-  <Scraper :bottle="bottle" />
+  <Scraper :bottle="bottle" v-if="isAdmin" />
 
   <BottleForm
     v-if="editBottle"
@@ -406,6 +407,7 @@
     computed: {
       ...mapGetters({
         getCellar: 'cellar/cellar',
+        isAdmin: 'user/isAdmin',
       }),
     },
     watch: {},

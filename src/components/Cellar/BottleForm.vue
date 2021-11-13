@@ -453,7 +453,7 @@
             this.newBottle.type
           )
 
-          if (!bottleFinded.length) {
+          if (!bottleFinded?.length) {
             await addBottle(this.newBottle, true)
           } else {
             console.log('Bottle already exists ' + bottleFinded)

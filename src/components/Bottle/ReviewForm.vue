@@ -122,10 +122,7 @@
       StarRating,
     },
     props: {
-      bottleId: {
-        type: Number,
-        required: true,
-      },
+      bottleId: Number,
     },
     data() {
       return {
