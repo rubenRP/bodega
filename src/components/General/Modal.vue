@@ -3,7 +3,7 @@
     class="
       fixed
       inset-0
-      z-30
+      z-50
       flex
       items-end
       bg-black bg-opacity-50
@@ -63,7 +63,7 @@
         </div>
 
         <div
-          class="modal-body"
+          class="modal-body pb-6"
           :class="!wide && 'md:max-h-96 md:overflow-y-auto'"
         >
           <div class="text-sm text-gray-700 dark:text-gray-400">

@@ -4,8 +4,12 @@
       bottle ? $t('cellar.editBottle') : $t('cellar.addBottle')
     }}</template>
     <template v-slot:body>
-      <ProgressBar :value="progress" />
-      <form>
+      <ProgressBar
+        v-if="showProgressBar"
+        :text="$t('reviews.step1')"
+        :value="50"
+      />
+      <form id="bottleForm">
         <label class="block text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
             $t('cellar.name')
@@ -26,12 +30,19 @@
               px-3
               py-2
             "
+            :class="v$.newBottle.name.$error && 'border-red-600'"
             placeholder="Name"
             v-model="newBottle.name"
-            required
+            @blur="v$.newBottle.name.$touch()"
           />
-          <span class="text-xs text-red-600 dark:text-red-400"> Required </span>
+          <span
+            class="text-xs text-red-600 dark:text-red-400"
+            v-if="v$.newBottle.name.$error"
+          >
+            {{ $t('forms.required') }}
+          </span>
         </label>
+
         <label class="block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
             $t('cellar.cellar')
@@ -52,10 +63,17 @@
               px-3
               py-2
             "
+            :class="v$.newBottle.cellar.$error && 'border-red-600'"
             placeholder="Cellar"
             v-model="newBottle.cellar"
-            required
+            @blur="v$.newBottle.cellar.$touch()"
           />
+          <span
+            class="text-xs text-red-600 dark:text-red-400"
+            v-if="v$.newBottle.cellar.$error"
+          >
+            {{ $t('forms.required') }}
+          </span>
         </label>
         <label class="block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
@@ -77,10 +95,17 @@
               px-3
               py-2
             "
+            :class="v$.newBottle.cellar.$error && 'border-red-600'"
             placeholder="Vintage"
             v-model="newBottle.vintage"
-            required
+            @blur="v$.newBottle.vintage.$touch()"
           />
+          <span
+            class="text-xs text-red-600 dark:text-red-400"
+            v-if="v$.newBottle.vintage.$error"
+          >
+            {{ $t('forms.required') }}
+          </span>
         </label>
         <label class="block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
@@ -102,9 +127,17 @@
               px-3
               py-2
             "
+            :class="v$.newBottle.country.$error && 'border-red-600'"
             placeholder="Country"
             v-model="newBottle.country"
+            @blur="v$.newBottle.country.$touch()"
           />
+          <span
+            class="text-xs text-red-600 dark:text-red-400"
+            v-if="v$.newBottle.country.$error"
+          >
+            {{ $t('forms.required') }}
+          </span>
         </label>
         <label class="block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
@@ -174,8 +207,9 @@
               px-3
               py-2
             "
+            :class="v$.newBottle.type.$error && 'border-red-600'"
             v-model="newBottle.type"
-            required
+            @blur="v$.newBottle.type.$touch()"
           >
             <option value="Red">{{ $t('cellar.red') }}</option>
             <option value="White">{{ $t('cellar.white') }}</option>
@@ -184,6 +218,12 @@
             <option value="Frizzante">{{ $t('cellar.frizzante') }}</option>
             <option value="Other">{{ $t('cellar.other') }}</option>
           </select>
+          <span
+            class="text-xs text-red-600 dark:text-red-400"
+            v-if="v$.newBottle.type.$error"
+          >
+            {{ $t('forms.required') }}
+          </span>
         </label>
         <div v-if="bottle">
           <label class="block mt-4 text-sm">
@@ -332,7 +372,7 @@
             />
           </label>
         </div>
-        <label class="block mt-4 mb-4 text-sm">
+        <label class="block mt-4 mb-4 text-sm" v-if="showQty">
           <span class="text-gray-700 dark:text-gray-400">{{
             $t('general.qty')
           }}</span>
@@ -352,6 +392,27 @@
           </div>
         </label>
       </form>
+      <div class="mx-auto w-full container mt-6" v-if="existingBottle">
+        <div
+          class="
+            text-white
+            px-6
+            py-4
+            border-0
+            rounded
+            relative
+            mb-4
+            bg-orange-500
+          "
+        >
+          <span class="text-xl inline-block mr-5 align-middle">
+            <font-awesome-icon :icon="['fas', 'exclamation-triangle']" />
+          </span>
+          <span class="inline-block align-middle mr-8">
+            {{ $t('cellar.existingBottle') }}
+          </span>
+        </div>
+      </div>
     </template>
     <template v-slot:footer
       ><button
@@ -398,7 +459,7 @@
           hover:bg-pink-700
           focus:outline-none focus:shadow-outline-purple
         "
-        v-if="bottle"
+        v-if="bottle || existingBottle"
         @click="updateBottle()"
       >
         {{ $t('general.update') }}
@@ -435,6 +496,8 @@
   import { defineComponent } from 'vue'
   import Modal from '../General/Modal.vue'
   import QtySelector from '../Bottle/QtySelector.vue'
+  import { required } from '@vuelidate/validators'
+
   import {
     addBottle,
     updateBottle,
@@ -444,6 +507,7 @@
   import { Bottle } from '@/models/cellar'
   import { mapActions } from 'vuex'
   import ProgressBar from '../General/ProgressBar.vue'
+  import { useVuelidate } from '@vuelidate/core'
 
   export default defineComponent({
     name: 'BottleForm',
@@ -453,11 +517,33 @@
         type: Object,
         default: () => <Bottle>{},
       },
+      showQty: {
+        type: Boolean,
+        default: true,
+      },
+      showProgressBar: {
+        type: Boolean,
+        default: false,
+      },
     },
     data() {
       return {
-        newBottle: <Bottle>this.bottle || <Bottle>{ qty: 1 },
-        progress: 10,
+        v$: useVuelidate(),
+        newBottle: <Bottle>this.bottle || <Bottle>{ qty: this.showQty ? 1 : 0 },
+        progress: 50,
+        existingBottle: false,
+      }
+    },
+    validations() {
+      return {
+        newBottle: {
+          name: { required },
+          cellar: { required },
+          qty: { required },
+          vintage: { required },
+          country: { required },
+          type: { required },
+        },
       }
     },
     methods: {
@@ -465,6 +551,8 @@
         addMessage: 'general/addMessage',
       }),
       async createBottle() {
+        this.v$.$validate()
+        if (this.v$.$error) return
         try {
           const bottleFinded = await findBottle(
             this.newBottle.name,
@@ -473,27 +561,33 @@
             this.newBottle.type
           )
 
-          if (!bottleFinded?.length) {
-            await addBottle(this.newBottle, true)
-          } else {
-            console.log('Bottle already exists ' + bottleFinded)
+          if (!bottleFinded) {
+            let res
+            if (this.showQty || this.newBottle.qty! > 0) {
+              res = await addBottle(this.newBottle, true)
+            } else {
+              res = await addBottle(this.newBottle, false)
+            }
             this.addMessage({
-              type: 'warning',
-              text: 'Bottle already exists',
+              type: 'success',
+              text: this.$t('cellar.success'),
             })
-            //TODO:  Throw confirmation message in modal: bottle already exists
-            //await updateBottle(bottleFinded.data[0].id, this.bottle)
+            this.clearForm()
+            this.$emit('bottleAdded', res)
+            this.$emit('closeModalForm')
+          } else {
+            this.existingBottle = true
+            this.newBottle = bottleFinded
+            this.$emit('bottleFounded', bottleFinded)
+            console.log('Bottle already exists ' + bottleFinded)
           }
         } catch (e) {
           console.log(e)
-        } finally {
-          this.clearForm()
-          this.$emit('closeModalForm')
         }
       },
       async updateBottle() {
         try {
-          await updateBottle(this.newBottle.id, this.newBottle)
+          await updateBottle(this.newBottle.id!, this.newBottle)
         } catch (e) {
           console.log(e)
         } finally {

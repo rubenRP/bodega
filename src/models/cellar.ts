@@ -1,16 +1,16 @@
 export interface Bottle {
-  id: number
+  id?: number
   name: string
   cellar: string
   vintage: number
   country: string
-  region: string
+  region?: string
   apellation?: string
   type: string
-  qty: number
-  last_added: Date
-  mycellar: boolean
-  reviewed: boolean
+  qty?: number
+  last_added?: Date
+  mycellar?: boolean
+  reviewed?: boolean
   date_scraped?: Date
   alcohol_content?: string
   climate_soil?: string

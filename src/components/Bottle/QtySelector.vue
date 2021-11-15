@@ -82,7 +82,6 @@
         bg-gray-300
         font-semibold
         text-md
-        hover:text-black
         focus:text-black
         md:text-basecursor-default
         flex
@@ -95,7 +94,6 @@
       {{ qty }}
     </div>
     <button
-      data-action="increment"
       class="
         bg-gray-300
         text-gray-600

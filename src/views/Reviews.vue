@@ -34,6 +34,26 @@
       </div>
       <span>Reviews</span>
     </div>
+    <button
+      class="
+        inline-block
+        text-sm
+        px-4
+        py-2
+        leading-none
+        border
+        rounded
+        text-white
+        border-pink-900
+        bg-pink-900
+        hover:bg-transparent hover:text-pink-800
+        ml-4
+        lg:mt-0
+      "
+      @click="toggleNewReview()"
+    >
+      {{ $t('general.add') }}
+    </button>
   </h2>
 
   <Spinner v-if="!getReviews.length" />
@@ -78,7 +98,7 @@
   </div>
   <ReviewForm
     v-if="openedNewReview"
-    @closeModalForm="toggleNewReview()"
+    @closeReviewForm="toggleNewReview()"
     :bottle="activeReview"
   />
 </template>

@@ -26,7 +26,7 @@
     </div>
     <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-pink-200">
       <div
-        style="width: 30%"
+        :style="{ width: value + '%' }"
         class="
           shadow-none
           flex flex-col

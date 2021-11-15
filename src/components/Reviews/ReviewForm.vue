@@ -1,216 +1,19 @@
 <template>
-  <Modal v-on:closeModal="$emit('closeModalForm')">
+  <BottleForm
+    :showQty="false"
+    showProgressBar
+    v-if="step == 1"
+    v-on:bottleFounded="setBottle"
+    v-on:bottleAdded="setBottle"
+    v-on:closeModalForm="closeModalForm"
+  />
+  <Modal v-else v-on:closeModal="$emit('closeReviewForm')">
     <template v-slot:header>{{ $t('reviews.addReview') }}</template>
     <template v-slot:body>
-      <label class="block mt-4 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">{{
-          $t('cellar.bottle')
-        }}</span>
-        <select
-          class="
-            block
-            w-full
-            mt-1
-            text-sm
-            dark:border-gray-600 dark:bg-gray-700
-            focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-            dark:text-gray-300 dark:focus:shadow-outline-gray
-            border-gray-200 border
-            rounded-md
-            px-3
-            py-2
-          "
-          v-model="cellarBottle"
-        >
-          <option selected value="0">Not in Cellar</option>
-          <option
-            v-for="bottle in getCellar"
-            :key="bottle.id"
-            :value="bottle.id"
-          >
-            {{ `${bottle.name} ${bottle.vintage} - ${bottle.cellar}` }}
-          </option>
-        </select>
-      </label>
-
-      <div v-if="newBottle">
-        <label class="block mt-4 text-sm">
-          <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.name')
-          }}</span>
-          <input
-            class="
-              block
-              w-full
-              mt-1
-              text-sm
-              dark:border-gray-600 dark:bg-gray-700
-              focus:border-red-800
-              focus:outline-none
-              focus:shadow-outline-purple
-              dark:text-gray-300 dark:focus:shadow-outline-gray
-              border-gray-200 border
-              rounded-md
-              px-3
-              py-2
-            "
-            placeholder="Name"
-            v-model="name"
-            required
-          />
-        </label>
-        <label class="block mt-4 text-sm">
-          <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.cellar')
-          }}</span>
-          <input
-            class="
-              block
-              w-full
-              mt-1
-              text-sm
-              dark:border-gray-600 dark:bg-gray-700
-              focus:border-red-800
-              focus:outline-none
-              focus:shadow-outline-purple
-              dark:text-gray-300 dark:focus:shadow-outline-gray
-              border-gray-200 border
-              rounded-md
-              px-3
-              py-2
-            "
-            placeholder="Cellar"
-            v-model="cellar"
-            required
-          />
-        </label>
-        <label class="block mt-4 text-sm">
-          <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.vintage')
-          }}</span>
-          <input
-            class="
-              block
-              w-full
-              mt-1
-              text-sm
-              dark:border-gray-600 dark:bg-gray-700
-              focus:border-red-800
-              focus:outline-none
-              focus:shadow-outline-purple
-              dark:text-gray-300 dark:focus:shadow-outline-gray
-              border-gray-200 border
-              rounded-md
-              px-3
-              py-2
-            "
-            placeholder="Vintage"
-            v-model="vintage"
-            required
-          />
-        </label>
-        <label class="block mt-4 text-sm">
-          <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.country')
-          }}</span>
-          <input
-            class="
-              block
-              w-full
-              mt-1
-              text-sm
-              dark:border-gray-600 dark:bg-gray-700
-              focus:border-red-800
-              focus:outline-none
-              focus:shadow-outline-purple
-              dark:text-gray-300 dark:focus:shadow-outline-gray
-              border-gray-200 border
-              rounded-md
-              px-3
-              py-2
-            "
-            placeholder="Country"
-            v-model="country"
-          />
-        </label>
-        <label class="block mt-4 text-sm">
-          <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.region')
-          }}</span>
-          <input
-            class="
-              block
-              w-full
-              mt-1
-              text-sm
-              dark:border-gray-600 dark:bg-gray-700
-              focus:border-red-800
-              focus:outline-none
-              focus:shadow-outline-purple
-              dark:text-gray-300 dark:focus:shadow-outline-gray
-              border-gray-200 border
-              rounded-md
-              px-3
-              py-2
-            "
-            placeholder="Region"
-            v-model="region"
-          />
-        </label>
-        <label class="block mt-4 text-sm">
-          <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.apellation')
-          }}</span>
-          <input
-            class="
-              block
-              w-full
-              mt-1
-              text-sm
-              dark:border-gray-600 dark:bg-gray-700
-              focus:border-red-800
-              focus:outline-none
-              focus:shadow-outline-purple
-              dark:text-gray-300 dark:focus:shadow-outline-gray
-              border-gray-200 border
-              rounded-md
-              px-3
-              py-2
-            "
-            placeholder="Apellation"
-            v-model="apellation"
-          />
-        </label>
-        <label class="block mt-4 text-sm">
-          <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.type')
-          }}</span>
-          <select
-            class="
-              block
-              w-full
-              mt-1
-              text-sm
-              dark:border-gray-600 dark:bg-gray-700
-              focus:border-red-800
-              focus:outline-none
-              focus:shadow-outline-purple
-              dark:text-gray-300 dark:focus:shadow-outline-gray
-              border-gray-200 border
-              rounded-md
-              px-3
-              py-2
-            "
-            v-model="type"
-          >
-            <option>Red</option>
-            <option>White</option>
-            <option>Rose</option>
-            <option>Orange</option>
-            <option>Frizzante</option>
-            <option>Other</option>
-          </select>
-        </label>
+      <ProgressBar :text="$t('reviews.step2')" :value="90" />
+      <div class="my-4">
+        <div class="font-semibold">{{ bottle.name }} {{ bottle.vintage }}</div>
+        <div class="text-xs text-gray-600">{{ bottle.cellar }}</div>
       </div>
       <label class="block mt-4 text-sm">
         <span class="text-gray-700 dark:text-gray-400">{{
@@ -234,8 +37,7 @@
           type="range"
           min="1"
           max="10"
-          v-model="rating"
-          required
+          v-model="newReview.rating"
         />
         <div
           class="
@@ -262,9 +64,9 @@
               px-3
               py-2
             "
-            >{{ rating }}</span
+            >{{ newReview.rating }}</span
           >
-          <StarRating :value="rating" />
+          <StarRating :value="newReview.rating" />
         </div>
       </label>
       <label class="block mt-4 mb-4 text-sm">
@@ -286,13 +88,13 @@
             py-2
           "
           placeholder="Comment"
-          v-model="comment"
+          v-model="newReview.comment"
         />
       </label>
     </template>
     <template v-slot:footer
       ><button
-        @click="$emit('closeModalForm')"
+        @click="$emit('closeReviewForm')"
         class="
           w-full
           px-5
@@ -371,67 +173,65 @@
   import { defineComponent } from 'vue'
   import Modal from '../General/Modal.vue'
   import { addReview } from '@/api/reviews'
-  import { mapGetters } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   import StarRating from './StarRating.vue'
+  import BottleForm from '../Cellar/BottleForm.vue'
+  import { Review } from '@/models/review'
+  import { Bottle } from '@/models/cellar'
+  import ProgressBar from '../General/ProgressBar.vue'
 
   export default defineComponent({
     name: 'ReviewForm',
-    components: { Modal, StarRating },
+    components: { Modal, StarRating, BottleForm, ProgressBar },
     props: {
-      review: Object,
+      review: {
+        type: Object,
+        required: false,
+      },
     },
     data() {
       return {
-        name: '',
-        cellar: '',
-        vintage: '',
-        country: '',
-        region: '',
-        apellation: '',
-        type: '',
-        qty: 0,
-        cellarBottle: 0,
-        newBottle: false,
-        comment: this.review?.comment || '',
-        rating: 0,
+        newReview: <Review>this.review || <Review>{ rating: 0 },
+        bottle: <Bottle>{},
+        step: 1,
       }
     },
     computed: {
       ...mapGetters({
-        getCellar: 'cellar/cellar',
         getUser: 'user/data',
       }),
     },
     methods: {
+      ...mapActions({
+        addMessage: 'general/addMessage',
+      }),
       async createReview() {
         try {
           await addReview(
-            this.cellarBottle,
-            this.rating,
-            this.comment,
-            this.getUser.id
+            this.bottle.id!,
+            this.newReview.rating,
+            this.getUser.id,
+            this.newReview.comment
           )
         } catch (e) {
           console.log(e)
         } finally {
           this.clearForm()
-          this.$emit('closeModalForm')
+          this.$emit('closeReviewForm')
+          this.addMessage({
+            type: 'success',
+            text: this.$t('reviews.success'),
+          })
         }
       },
-      removeReview() {},
       clearForm() {
-        this.name = ''
-        this.cellar = ''
-        this.vintage = ''
-        this.country = ''
-        this.region = ''
-        this.apellation = ''
-        this.type = ''
-        this.qty = 0
-        this.cellarBottle = 0
-        this.rating = 0
-        this.comment = ''
+        this.newReview = <Review>{}
       },
+      setBottle(bottle: Bottle) {
+        this.bottle = bottle
+        this.step++
+      },
+      closeModalForm() {},
     },
   })
 </script>
