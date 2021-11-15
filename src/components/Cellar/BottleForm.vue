@@ -515,7 +515,7 @@
     props: {
       bottle: {
         type: Object,
-        default: () => <Bottle>{},
+        required: false,
       },
       showQty: {
         type: Boolean,
