@@ -155,10 +155,7 @@
               </tbody>
             </table>
 
-            <div
-              class="flex mt-6 mb-6 text-sm px-4"
-              v-if="!finished && bottleFounded"
-            >
+            <div class="flex mt-6 mb-6 text-sm px-4" v-if="bottleFounded">
               <label class="flex items-center dark:text-gray-400">
                 <input
                   type="checkbox"
@@ -193,10 +190,7 @@
           </div>
         </div>
 
-        <div
-          class="flex justify-between w-full"
-          v-if="bottleFounded && !finished"
-        >
+        <div class="flex justify-between w-full" v-if="bottleFounded">
           <div>
             <button
               @click="suggestBottle()"
@@ -219,6 +213,7 @@
                 transition-all
                 duration-150
               "
+              v-if="!finished"
             >
               {{ $t('cellar.nextSuggestion') }}
             </button>
@@ -246,6 +241,7 @@
                 duration-150
                 mr-4
               "
+              v-if="!finished"
             >
               {{ $t('cellar.updateAndNextSuggestion') }}
             </button>

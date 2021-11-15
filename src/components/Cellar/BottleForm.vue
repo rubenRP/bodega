@@ -4,174 +4,11 @@
       bottle ? $t('cellar.editBottle') : $t('cellar.addBottle')
     }}</template>
     <template v-slot:body>
-      <label class="block text-sm">
-        <span class="text-gray-700 dark:text-gray-400">{{
-          $t('cellar.name')
-        }}</span>
-        <input
-          class="
-            block
-            w-full
-            mt-1
-            text-sm
-            dark:border-gray-600 dark:bg-gray-700
-            focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-            dark:text-gray-300 dark:focus:shadow-outline-gray
-            border-gray-200 border
-            rounded-md
-            px-3
-            py-2
-          "
-          placeholder="Name"
-          v-model="newBottle.name"
-          required
-        />
-      </label>
-      <label class="block mt-4 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">{{
-          $t('cellar.cellar')
-        }}</span>
-        <input
-          class="
-            block
-            w-full
-            mt-1
-            text-sm
-            dark:border-gray-600 dark:bg-gray-700
-            focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-            dark:text-gray-300 dark:focus:shadow-outline-gray
-            border-gray-200 border
-            rounded-md
-            px-3
-            py-2
-          "
-          placeholder="Cellar"
-          v-model="newBottle.cellar"
-          required
-        />
-      </label>
-      <label class="block mt-4 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">{{
-          $t('cellar.vintage')
-        }}</span>
-        <input
-          class="
-            block
-            w-full
-            mt-1
-            text-sm
-            dark:border-gray-600 dark:bg-gray-700
-            focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-            dark:text-gray-300 dark:focus:shadow-outline-gray
-            border-gray-200 border
-            rounded-md
-            px-3
-            py-2
-          "
-          placeholder="Vintage"
-          v-model="newBottle.vintage"
-          required
-        />
-      </label>
-      <label class="block mt-4 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">{{
-          $t('cellar.country')
-        }}</span>
-        <input
-          class="
-            block
-            w-full
-            mt-1
-            text-sm
-            dark:border-gray-600 dark:bg-gray-700
-            focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-            dark:text-gray-300 dark:focus:shadow-outline-gray
-            border-gray-200 border
-            rounded-md
-            px-3
-            py-2
-          "
-          placeholder="Country"
-          v-model="newBottle.country"
-        />
-      </label>
-      <label class="block mt-4 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">{{
-          $t('cellar.region')
-        }}</span>
-        <input
-          class="
-            block
-            w-full
-            mt-1
-            text-sm
-            dark:border-gray-600 dark:bg-gray-700
-            focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-            dark:text-gray-300 dark:focus:shadow-outline-gray
-            border-gray-200 border
-            rounded-md
-            px-3
-            py-2
-          "
-          placeholder="Region"
-          v-model="newBottle.region"
-        />
-      </label>
-      <label class="block mt-4 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">{{
-          $t('cellar.apellation')
-        }}</span>
-        <input
-          class="
-            block
-            w-full
-            mt-1
-            text-sm
-            dark:border-gray-600 dark:bg-gray-700
-            focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-            dark:text-gray-300 dark:focus:shadow-outline-gray
-            border-gray-200 border
-            rounded-md
-            px-3
-            py-2
-          "
-          placeholder="Apellation"
-          v-model="newBottle.apellation"
-        />
-      </label>
-      <label class="block mt-4 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">{{
-          $t('cellar.type')
-        }}</span>
-        <select
-          class="
-            block
-            w-full
-            mt-1
-            text-sm
-            dark:border-gray-600 dark:bg-gray-700
-            focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-            dark:text-gray-300 dark:focus:shadow-outline-gray
-            border-gray-200 border
-            rounded-md
-            px-3
-            py-2
-          "
-          v-model="newBottle.type"
-          required
-        >
-          <option value="Red">{{ $t('cellar.red') }}</option>
-          <option value="White">{{ $t('cellar.white') }}</option>
-          <option value="Rose">{{ $t('cellar.rose') }}</option>
-          <option value="Orange">{{ $t('cellar.orange') }}</option>
-          <option value="Frizzante">{{ $t('cellar.frizzante') }}</option>
-          <option value="Other">{{ $t('cellar.other') }}</option>
-        </select>
-      </label>
-      <div v-if="bottle">
-        <label class="block mt-4 text-sm">
+      <ProgressBar :value="progress" />
+      <form>
+        <label class="block text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.alcoholContent')
+            $t('cellar.name')
           }}</span>
           <input
             class="
@@ -189,13 +26,15 @@
               px-3
               py-2
             "
-            placeholder="Alcohol Content"
-            v-model="newBottle.alcohol_content"
+            placeholder="Name"
+            v-model="newBottle.name"
+            required
           />
+          <span class="text-xs text-red-600 dark:text-red-400"> Required </span>
         </label>
         <label class="block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.climateSoil')
+            $t('cellar.cellar')
           }}</span>
           <input
             class="
@@ -213,13 +52,14 @@
               px-3
               py-2
             "
-            placeholder="Climate/Soil"
-            v-model="newBottle.climate_soil"
+            placeholder="Cellar"
+            v-model="newBottle.cellar"
+            required
           />
         </label>
         <label class="block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.aging')
+            $t('cellar.vintage')
           }}</span>
           <input
             class="
@@ -237,13 +77,14 @@
               px-3
               py-2
             "
-            placeholder="Aging"
-            v-model="newBottle.aging"
+            placeholder="Vintage"
+            v-model="newBottle.vintage"
+            required
           />
         </label>
         <label class="block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.comsumption')
+            $t('cellar.country')
           }}</span>
           <input
             class="
@@ -261,13 +102,13 @@
               px-3
               py-2
             "
-            placeholder="Comsumption"
-            v-model="newBottle.comsumption"
+            placeholder="Country"
+            v-model="newBottle.country"
           />
         </label>
         <label class="block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.stayBarrel')
+            $t('cellar.region')
           }}</span>
           <input
             class="
@@ -285,16 +126,15 @@
               px-3
               py-2
             "
-            placeholder="Stay Barrel"
-            v-model="newBottle.stay_barrel"
+            placeholder="Region"
+            v-model="newBottle.region"
           />
         </label>
         <label class="block mt-4 text-sm">
           <span class="text-gray-700 dark:text-gray-400">{{
-            $t('cellar.description')
+            $t('cellar.apellation')
           }}</span>
           <input
-            type="text"
             class="
               block
               w-full
@@ -310,30 +150,208 @@
               px-3
               py-2
             "
-            placeholder="Description"
-            v-model="newBottle.description"
+            placeholder="Apellation"
+            v-model="newBottle.apellation"
           />
         </label>
-      </div>
-      <label class="block mt-4 mb-4 text-sm">
-        <span class="text-gray-700 dark:text-gray-400">{{
-          $t('general.qty')
-        }}</span>
-        <div class="flex align-middle justify-between items-center">
-          <div class="w-1/3">
-            <QtySelector
-              :qty="newBottle.qty"
-              v-on:incrementQty="increaseQty"
-              v-on:decrementQty="decreaseQty"
+        <label class="block mt-4 text-sm">
+          <span class="text-gray-700 dark:text-gray-400">{{
+            $t('cellar.type')
+          }}</span>
+          <select
+            class="
+              block
+              w-full
+              mt-1
+              text-sm
+              dark:border-gray-600 dark:bg-gray-700
+              focus:border-red-800
+              focus:outline-none
+              focus:shadow-outline-purple
+              dark:text-gray-300 dark:focus:shadow-outline-gray
+              border-gray-200 border
+              rounded-md
+              px-3
+              py-2
+            "
+            v-model="newBottle.type"
+            required
+          >
+            <option value="Red">{{ $t('cellar.red') }}</option>
+            <option value="White">{{ $t('cellar.white') }}</option>
+            <option value="Rose">{{ $t('cellar.rose') }}</option>
+            <option value="Orange">{{ $t('cellar.orange') }}</option>
+            <option value="Frizzante">{{ $t('cellar.frizzante') }}</option>
+            <option value="Other">{{ $t('cellar.other') }}</option>
+          </select>
+        </label>
+        <div v-if="bottle">
+          <label class="block mt-4 text-sm">
+            <span class="text-gray-700 dark:text-gray-400">{{
+              $t('cellar.alcoholContent')
+            }}</span>
+            <input
+              class="
+                block
+                w-full
+                mt-1
+                text-sm
+                dark:border-gray-600 dark:bg-gray-700
+                focus:border-red-800
+                focus:outline-none
+                focus:shadow-outline-purple
+                dark:text-gray-300 dark:focus:shadow-outline-gray
+                border-gray-200 border
+                rounded-md
+                px-3
+                py-2
+              "
+              placeholder="Alcohol Content"
+              v-model="newBottle.alcohol_content"
             />
-          </div>
-          <div class="w-auto text-pink-900">
-            <button @click="removeBottle()" v-if="bottle">
-              {{ $t('cellar.removeBottle') }}
-            </button>
-          </div>
+          </label>
+          <label class="block mt-4 text-sm">
+            <span class="text-gray-700 dark:text-gray-400">{{
+              $t('cellar.climateSoil')
+            }}</span>
+            <input
+              class="
+                block
+                w-full
+                mt-1
+                text-sm
+                dark:border-gray-600 dark:bg-gray-700
+                focus:border-red-800
+                focus:outline-none
+                focus:shadow-outline-purple
+                dark:text-gray-300 dark:focus:shadow-outline-gray
+                border-gray-200 border
+                rounded-md
+                px-3
+                py-2
+              "
+              placeholder="Climate/Soil"
+              v-model="newBottle.climate_soil"
+            />
+          </label>
+          <label class="block mt-4 text-sm">
+            <span class="text-gray-700 dark:text-gray-400">{{
+              $t('cellar.aging')
+            }}</span>
+            <input
+              class="
+                block
+                w-full
+                mt-1
+                text-sm
+                dark:border-gray-600 dark:bg-gray-700
+                focus:border-red-800
+                focus:outline-none
+                focus:shadow-outline-purple
+                dark:text-gray-300 dark:focus:shadow-outline-gray
+                border-gray-200 border
+                rounded-md
+                px-3
+                py-2
+              "
+              placeholder="Aging"
+              v-model="newBottle.aging"
+            />
+          </label>
+          <label class="block mt-4 text-sm">
+            <span class="text-gray-700 dark:text-gray-400">{{
+              $t('cellar.comsumption')
+            }}</span>
+            <input
+              class="
+                block
+                w-full
+                mt-1
+                text-sm
+                dark:border-gray-600 dark:bg-gray-700
+                focus:border-red-800
+                focus:outline-none
+                focus:shadow-outline-purple
+                dark:text-gray-300 dark:focus:shadow-outline-gray
+                border-gray-200 border
+                rounded-md
+                px-3
+                py-2
+              "
+              placeholder="Comsumption"
+              v-model="newBottle.comsumption"
+            />
+          </label>
+          <label class="block mt-4 text-sm">
+            <span class="text-gray-700 dark:text-gray-400">{{
+              $t('cellar.stayBarrel')
+            }}</span>
+            <input
+              class="
+                block
+                w-full
+                mt-1
+                text-sm
+                dark:border-gray-600 dark:bg-gray-700
+                focus:border-red-800
+                focus:outline-none
+                focus:shadow-outline-purple
+                dark:text-gray-300 dark:focus:shadow-outline-gray
+                border-gray-200 border
+                rounded-md
+                px-3
+                py-2
+              "
+              placeholder="Stay Barrel"
+              v-model="newBottle.stay_barrel"
+            />
+          </label>
+          <label class="block mt-4 text-sm">
+            <span class="text-gray-700 dark:text-gray-400">{{
+              $t('cellar.description')
+            }}</span>
+            <input
+              type="text"
+              class="
+                block
+                w-full
+                mt-1
+                text-sm
+                dark:border-gray-600 dark:bg-gray-700
+                focus:border-red-800
+                focus:outline-none
+                focus:shadow-outline-purple
+                dark:text-gray-300 dark:focus:shadow-outline-gray
+                border-gray-200 border
+                rounded-md
+                px-3
+                py-2
+              "
+              placeholder="Description"
+              v-model="newBottle.description"
+            />
+          </label>
         </div>
-      </label>
+        <label class="block mt-4 mb-4 text-sm">
+          <span class="text-gray-700 dark:text-gray-400">{{
+            $t('general.qty')
+          }}</span>
+          <div class="flex align-middle justify-between items-center">
+            <div class="w-1/3">
+              <QtySelector
+                :qty="newBottle.qty"
+                v-on:incrementQty="increaseQty"
+                v-on:decrementQty="decreaseQty"
+              />
+            </div>
+            <div class="w-auto text-pink-900">
+              <button @click="removeBottle()" v-if="bottle">
+                {{ $t('cellar.removeBottle') }}
+              </button>
+            </div>
+          </div>
+        </label>
+      </form>
     </template>
     <template v-slot:footer
       ><button
@@ -425,10 +443,11 @@
   } from '@/api/bottles'
   import { Bottle } from '@/models/cellar'
   import { mapActions } from 'vuex'
+  import ProgressBar from '../General/ProgressBar.vue'
 
   export default defineComponent({
     name: 'BottleForm',
-    components: { Modal, QtySelector },
+    components: { Modal, QtySelector, ProgressBar },
     props: {
       bottle: {
         type: Object,
@@ -438,6 +457,7 @@
     data() {
       return {
         newBottle: <Bottle>this.bottle || <Bottle>{ qty: 1 },
+        progress: 10,
       }
     },
     methods: {
