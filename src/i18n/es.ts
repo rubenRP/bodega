@@ -66,6 +66,9 @@ const messages = {
       noImport: 'No importar',
       details: 'Detalles',
       editBottle: 'Editar botella',
+      existingBottle:
+        'Esta botella ya existe en la base de datos. Actualiza la cantidad de botellas',
+      success: 'Botella añadida correctamente',
     },
     reviews: {
       rating: 'Valoración',
@@ -73,6 +76,9 @@ const messages = {
       addReview: 'Añadir Review',
       comment: 'Comentario',
       noReviews: 'No hay reviews',
+      step1: 'Paso 1: Añadir botella',
+      step2: 'Paso 2: Añadir review',
+      success: 'Review añadida correctamente',
     },
     stats: {
       stats: 'Estadísticas',
@@ -80,6 +86,9 @@ const messages = {
     },
     bottles: {
       bottles: 'Botellas',
+    },
+    forms: {
+      required: 'Campo obligatorio',
     },
   },
   en: {

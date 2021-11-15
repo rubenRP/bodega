@@ -425,10 +425,10 @@
         }
       },
       increaseQty(id: number) {
-        increaseBottleQty(id, this.bottle.qty)
+        increaseBottleQty(id, this.bottle.qty!)
       },
       decreaseQty(id: number) {
-        decreaseBottleQty(id, this.bottle.qty)
+        decreaseBottleQty(id, this.bottle.qty!)
       },
       toggleEditBottle() {
         this.editBottle = !this.editBottle

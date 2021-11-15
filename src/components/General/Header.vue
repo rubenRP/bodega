@@ -199,6 +199,9 @@
           </li>
         </ul>
         <ul class="flex flex-col lg:flex-row list-none lg:ml-auto items-end">
+          <li class="flex items-center mr-4">
+            <QuickAdd />
+          </li>
           <li class="flex items-center">
             <ProfileMenu />
           </li>
@@ -213,11 +216,13 @@
   import Logo from '@/components/General/Logo.vue'
   import ProfileMenu from '@/components/General/Topbar/ProfileMenu.vue'
   import { mapGetters, mapMutations } from 'vuex'
+  import QuickAdd from '@/components/General/Topbar/QuickAdd.vue'
   export default defineComponent({
     name: 'Header',
     components: {
       Logo,
       ProfileMenu,
+      QuickAdd,
     },
     computed: {
       ...mapGetters({ showSidebar: 'general/sidebar' }),

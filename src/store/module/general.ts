@@ -38,6 +38,9 @@ const actions = {
       ...message,
       id: messageId++,
     })
+    setTimeout(() => {
+      commit('DELETE_MESSAGE', messageId - 1)
+    }, 5000)
   },
   removeMessage({ commit }: any, messageId: number) {
     commit('DELETE_MESSAGE', messageId)

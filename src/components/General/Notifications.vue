@@ -63,7 +63,7 @@
       removeNotification(id: number) {
         this.removeMessage(id)
       },
-      colorClass(type) {
+      colorClass(type: string) {
         switch (type) {
           case 'success':
             return 'bg-emerald-500'

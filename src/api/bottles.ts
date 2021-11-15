@@ -65,7 +65,7 @@ const addBottle = async (
         reviewed: reviewed || false,
       },
     ])
-    for (let i = 0; i < bottle.qty; i++) {
+    for (let i = 0; i < bottle.qty!; i++) {
       await supabase.from('added_bottles').insert([
         {
           bottle_id: res.data![0].id,
@@ -73,6 +73,7 @@ const addBottle = async (
         },
       ])
     }
+    return res.data![0]
   } catch (error: any) {
     console.log(error)
   }

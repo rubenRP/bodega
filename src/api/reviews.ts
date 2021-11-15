@@ -15,8 +15,8 @@ const getReviews = async () => {
 const addReview = async (
   cellarBottle: number,
   rating: number,
-  comment: string,
-  user: any
+  user: any,
+  comment?: string
 ) => {
   try {
     await supabase.from('reviews').insert([
