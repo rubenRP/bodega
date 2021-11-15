@@ -198,7 +198,7 @@
             </router-link>
           </li>
         </ul>
-        <ul class="flex flex-col lg:flex-row list-none lg:ml-auto items-end">
+        <ul class="flex flex-row justify-end list-none lg:ml-auto items-end">
           <li class="flex items-center mr-4">
             <QuickAdd />
           </li>
