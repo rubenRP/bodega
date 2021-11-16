@@ -214,9 +214,9 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import Logo from '@/components/General/Logo.vue'
-  import ProfileMenu from '@/components/General/Topbar/ProfileMenu.vue'
+  import ProfileMenu from '@/components/General/Header/ProfileMenu.vue'
   import { mapGetters, mapMutations } from 'vuex'
-  import QuickAdd from '@/components/General/Topbar/QuickAdd.vue'
+  import QuickAdd from '@/components/General/Header/QuickAdd.vue'
   export default defineComponent({
     name: 'Header',
     components: {

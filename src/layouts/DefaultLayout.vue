@@ -28,8 +28,6 @@
   import { defineComponent } from 'vue'
   import { mapGetters, mapMutations } from 'vuex'
 
-  import Sidebar from '@/components/General/Sidebar.vue'
-  import Topbar from '@/components/General/Topbar.vue'
   import Header from '@/components/General/Header.vue'
   import Footer from '@/components/General/Footer.vue'
   import Notifications from '@/components/General/Notifications.vue'
@@ -37,8 +35,6 @@
   export default defineComponent({
     name: 'DefaultLayout',
     components: {
-      Sidebar,
-      Topbar,
       Header,
       Footer,
       Notifications,
