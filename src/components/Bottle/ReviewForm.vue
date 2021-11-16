@@ -123,7 +123,7 @@
     },
     data() {
       return {
-        comment: this.review?.comment || '',
+        comment: '',
         rating: 0,
       }
     },
@@ -136,7 +136,7 @@
       async createReview() {
         try {
           await addReview(
-            this.bottleId,
+            this.bottleId!,
             this.rating,
             this.getUser.id,
             this.comment

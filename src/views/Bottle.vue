@@ -122,17 +122,15 @@
       </h2>
       <div class="my-4">
         <div class="text-md text-gray-500 dark:text-gray-400">
-          {{ bottle?.vintage }}
+          <span v-if="bottle?.apellation">{{ bottle?.apellation }} - </span
+          ><span class="font-bold">{{ bottle?.vintage }}</span>
         </div>
-        <div class="text-md text-gray-500 dark:text-gray-400">
-          {{ bottle?.apellation }}
-        </div>
-        <p class="text-sm text-gray-500 dark:text-gray-400">
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">
           {{ bottle?.grapes?.join(', ') }}
         </p>
-      </div>
-      <div class="text-xs">
-        <WineTag :type="bottle?.type" />
+        <div class="text-xs mt-6">
+          <WineTag :type="bottle?.type" />
+        </div>
       </div>
 
       <div class="flex justify-between items-center pt-4 border-t-2">
@@ -342,7 +340,8 @@
           bg-transparent
           border-collapse
           mb-6
-          px-8
+          px-4
+          lg:px-8
           py-3
           flex flex-col
           lg:flex-row

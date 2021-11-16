@@ -59,7 +59,7 @@
     class="flex flex-row h-8 w-full rounded-lg relative bg-transparent mt-1"
     v-else
   >
-    <button
+    <div
       class="
         bg-gray-300
         text-gray-600
@@ -69,11 +69,15 @@
         rounded-l
         cursor-pointer
         outline-none
+        flex
       "
       @click="decreaseQty()"
     >
-      <span class="m-auto text-2xl font-thin">−</span>
-    </button>
+      <font-awesome-icon
+        :icon="['fas', 'minus']"
+        class="m-auto"
+      ></font-awesome-icon>
+    </div>
     <div
       class="
         focus:outline-none
@@ -93,7 +97,7 @@
     >
       {{ qty }}
     </div>
-    <button
+    <div
       class="
         bg-gray-300
         text-gray-600
@@ -102,11 +106,15 @@
         w-20
         rounded-r
         cursor-pointer
+        flex
       "
       @click="increaseQty()"
     >
-      <span class="m-auto text-2xl font-thin">+</span>
-    </button>
+      <font-awesome-icon
+        :icon="['fas', 'plus']"
+        class="m-auto"
+      ></font-awesome-icon>
+    </div>
   </div>
 </template>
 

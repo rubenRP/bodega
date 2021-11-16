@@ -197,7 +197,7 @@
           return (
             bottle.name.toLowerCase().includes(this.search.toLowerCase()) ||
             bottle.cellar.toLowerCase().includes(this.search.toLowerCase()) ||
-            bottle.apellation.toLowerCase().includes(this.search.toLowerCase())
+            bottle.apellation?.toLowerCase().includes(this.search.toLowerCase())
           )
         })
       },
