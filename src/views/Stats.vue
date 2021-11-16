@@ -40,7 +40,7 @@
   </h2>
   <QuickStats />
   <div class="mb-8">
-    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800">
       <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
         {{ $t('stats.cellarStatus') }}
       </h4>
@@ -52,13 +52,13 @@
     </div>
   </div>
   <div class="grid gap-6 mb-8 md:grid-cols-2">
-    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800">
       <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
         {{ $t('cellar.apellations') }}
       </h4>
       <BarChart :data="totalApellations" selector="chart-dop" />
     </div>
-    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800">
       <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
         {{ $t('cellar.vintages') }}
       </h4>

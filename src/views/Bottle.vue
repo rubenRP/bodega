@@ -48,7 +48,7 @@
     </button>
   </h2>
   <div class="grid gap-6 mb-6 md:my-6 md:grid-cols-3">
-    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800">
       <img
         aria-hidden="true"
         class="w-auto max-h-80 m-auto"
@@ -67,8 +67,8 @@
         min-w-0
         p-6
         bg-white
-        rounded-lg
-        shadow-xs
+        shadow-lg
+        rounded
         dark:bg-gray-800
         md:col-span-2
         flex flex-col
@@ -112,6 +112,9 @@
             hover:bg-transparent hover:text-pink-800
             ml-4
             lg:mt-0
+            ease-linear
+            transition-all
+            duration-150
           "
         >
           {{ $t('general.back') }}
@@ -166,9 +169,9 @@
 
   <div
     v-if="bottle?.description"
-    class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+    class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800"
   >
-    <h4 class="mb-4 font-semibold dark:text-gray-300">
+    <h4 class="mb-4 font-semibold text-lg text-blueGray-700">
       {{ $t('cellar.description') }}
     </h4>
     <p class="text-gray-600 dark:text-gray-400 text-sm">
@@ -176,8 +179,8 @@
     </p>
   </div>
 
-  <div class="min-w-0 p-4 mt-6 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-    <h4 class="mb-4 font-semibold dark:text-gray-300">
+  <div class="min-w-0 p-4 mt-6 bg-white shadow-lg rounded dark:bg-gray-800">
+    <h4 class="mb-4 font-semibold text-lg text-blueGray-700">
       {{ $t('cellar.details') }}
     </h4>
 
@@ -327,7 +330,7 @@
   >
     <div class="rounded-t mb-0 px-4 py-3 border-0">
       <div class="flex flex-wrap items-center">
-        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+        <div class="relative w-full max-w-full flex-grow flex-1">
           <h3 class="font-semibold text-lg text-blueGray-700">Reviews</h3>
         </div>
       </div>

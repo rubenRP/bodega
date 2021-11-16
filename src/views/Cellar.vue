@@ -52,6 +52,9 @@
         hover:bg-transparent hover:text-pink-800
         ml-4
         lg:mt-0
+        ease-linear
+        transition-all
+        duration-150
       "
       @click="toggleNewBottle()"
     >
@@ -96,7 +99,7 @@
 
   <Spinner v-if="!this.getCellar.length" />
 
-  <div class="w-full overflow-hidden rounded-lg shadow-xs" v-else>
+  <div class="w-full overflow-hidden shadow-lg rounded" v-else>
     <div class="w-full overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <thead>

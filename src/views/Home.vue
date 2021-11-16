@@ -30,7 +30,7 @@
 
   <Spinner v-if="!getCellar.length" />
 
-  <div class="w-full overflow-hidden rounded-lg shadow-xs" v-else>
+  <div class="w-full overflow-hidden shadow-lg rounded" v-else>
     <div class="w-full overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <thead>
@@ -95,7 +95,7 @@
 
   <Spinner v-if="!getReviews.length" />
 
-  <div class="w-full overflow-hidden rounded-lg shadow-xs" v-else>
+  <div class="w-full overflow-hidden shadow-lg rounded" v-else>
     <div class="w-full overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <thead>

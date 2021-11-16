@@ -82,19 +82,17 @@
     <div class="flex justify-end">
       <button
         class="
-          bg-pink-900
-          text-white
-          active:bg-pink-600
-          font-bold
-          uppercase
+          inline-block
           text-sm
-          px-6
-          py-3
+          px-4
+          py-2
+          leading-none
+          border
           rounded
-          shadow
-          hover:shadow-lg
-          outline-none
-          focus:outline-none
+          text-white
+          border-pink-900
+          bg-pink-900
+          hover:bg-transparent hover:text-pink-800
           mr-1
           mb-1
           ease-linear
