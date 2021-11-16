@@ -70,8 +70,29 @@
           items-start
         "
       >
-        <div class="grid gap-6 mb-8 md:grid-cols-10">
-          <Spinner v-if="loading" class="lg:col-span-4" />
+        <div class="mx-auto w-full container mt-6" v-if="message">
+          <div
+            class="
+              text-white
+              px-6
+              py-4
+              border-0
+              rounded
+              relative
+              mb-4
+              bg-orange-500
+            "
+          >
+            <span class="text-xl inline-block mr-5 align-middle">
+              <font-awesome-icon :icon="['fas', 'exclamation-triangle']" />
+            </span>
+            <span class="inline-block align-middle mr-8">
+              {{ message }}
+            </span>
+          </div>
+        </div>
+        <div class="grid gap-6 mb-8 md:grid-cols-10 w-full">
+          <Spinner v-if="loading && !finished" class="lg:col-span-4" />
           <div v-else class="lg:col-span-4">
             <img
               v-if="newBottleImage"
@@ -92,7 +113,7 @@
             </div>
           </div>
 
-          <Spinner v-if="loading" class="lg:col-span-6" />
+          <Spinner v-if="loading && !finished" class="lg:col-span-6" />
           <div class="lg:col-span-6" v-else>
             <table class="w-full whitespace-no-wrap">
               <tbody
@@ -305,6 +326,7 @@
       updateDescription: false,
       loading: false,
       finished: false,
+      message: '',
     }),
 
     methods: {
@@ -334,7 +356,7 @@
         this.loading = true
 
         const response = await searchForBottle(
-          `${this.bottle?.cellar} ${this.bottle?.name} ${this.bottle?.vintage}`
+          `${this.bottle?.cellar} ${this.bottle?.name}`
         )
         response.data.shopping_results.filter((product: any, key: number) => {
           if (
@@ -360,23 +382,30 @@
       },
 
       async suggestBottle() {
-        this.loading = true
-        while (this.filteredBottles.length > 0) {
-          const product = this.filteredBottles.pop()
-          const bottle = await getBottle(product.product_id)
-          //const bottle = this.bottles.pop()
-          if (bottle?.data.specs_results?.detalles) {
-            this.newBottleSpecs = bottle.data.specs_results.detalles
-            this.newBottleImage = bottle.data.product_results.media[0].link
-            this.newBottleDescription = bottle.data.product_results.description
-            this.bottleFounded = true
-            break
+        try {
+          this.loading = true
+          while (this.filteredBottles.length > 0) {
+            const product = this.filteredBottles.pop()
+            const bottle = await getBottle(product.product_id)
+            //const bottle = this.bottles.pop()
+            if (bottle?.data.specs_results?.detalles) {
+              this.newBottleSpecs = bottle.data.specs_results.detalles
+              this.newBottleImage = bottle.data.product_results.media[0].link
+              this.newBottleDescription =
+                bottle.data.product_results.description
+              this.bottleFounded = true
+              break
+            }
           }
-        }
-        if (this.filteredBottles.length === 0) {
+          if (this.filteredBottles.length === 0) {
+            this.finished = true
+          }
+          this.loading = false
+        } catch (error: any) {
+          console.log(error)
+          this.message = error.message
           this.finished = true
         }
-        this.loading = false
       },
       async updateBottle(finishProcess: boolean = true) {
         try {
