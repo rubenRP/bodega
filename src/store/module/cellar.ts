@@ -104,7 +104,9 @@ const mutations = {
     let bottleFinded = state.cellar.find((item: any) => {
       return bottle.id === item.id
     })
-    Object.assign(bottleFinded, bottle)
+    if (bottleFinded) {
+      Object.assign(bottleFinded, bottle)
+    }
   },
 }
 

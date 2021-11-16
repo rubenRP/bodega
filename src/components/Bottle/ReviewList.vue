@@ -35,7 +35,7 @@
       {{ new Date(review.date_added).toLocaleDateString() }}
     </div>
   </div>
-  <div v-if="reviews.length === 0" class="text-center text-gray-600">
+  <div v-if="reviews.length == 0" class="text-center text-gray-600">
     {{ $t('reviews.noReviews') }}
   </div>
 </template>
@@ -44,6 +44,7 @@
   import { defineComponent } from 'vue'
   import StarRating from '@/components/Reviews/StarRating.vue'
   import { getBottleReview } from '@/api/reviews'
+  import { Review } from '@/models/review'
   export default defineComponent({
     name: 'ReviewList',
     components: {
@@ -54,8 +55,11 @@
     },
     data() {
       return {
-        reviews: [],
+        reviews: <any>[],
       }
+    },
+    mounted() {
+      this.fetchReviews()
     },
     watch: {
       bottleId() {
@@ -64,7 +68,9 @@
     },
     methods: {
       async fetchReviews() {
-        this.reviews = await getBottleReview(this.bottleId)
+        if (this.bottleId) {
+          this.reviews = await getBottleReview(this.bottleId)
+        }
       },
     },
   })

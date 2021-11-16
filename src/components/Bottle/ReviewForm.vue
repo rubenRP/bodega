@@ -115,7 +115,6 @@
   import StarRating from '@/components/Reviews/StarRating.vue'
   import { addReview } from '@/api/reviews'
   import { mapGetters } from 'vuex'
-  import { getBottleReview } from '@/api/reviews'
   export default defineComponent({
     name: 'ReviewForm',
     components: {
@@ -141,8 +140,8 @@
           await addReview(
             this.bottleId,
             this.rating,
-            this.comment,
-            this.getUser.id
+            this.getUser.id,
+            this.comment
           )
         } catch (e) {
           console.log(e)

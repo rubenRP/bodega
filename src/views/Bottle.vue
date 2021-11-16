@@ -15,9 +15,9 @@
     "
   >
     <span
-      >{{ bottle.name }}
+      >{{ bottle?.name }}
       <p class="text-sm text-gray-500 dark:text-gray-400">
-        {{ bottle.cellar }}
+        {{ bottle?.cellar }}
       </p>
     </span>
     <button
@@ -53,7 +53,7 @@
         aria-hidden="true"
         class="w-auto max-h-80 m-auto"
         :src="bottle.image"
-        v-if="bottle.image"
+        v-if="bottle?.image"
       />
       <img
         aria-hidden="true"
@@ -91,9 +91,9 @@
         "
       >
         <span
-          >{{ bottle.name }}
+          >{{ bottle?.name }}
           <p class="text-sm text-gray-500 dark:text-gray-400">
-            {{ bottle.cellar }}
+            {{ bottle?.cellar }}
           </p>
         </span>
         <button
@@ -119,17 +119,17 @@
       </h2>
       <div class="my-4">
         <div class="text-md text-gray-500 dark:text-gray-400">
-          {{ bottle.vintage }}
+          {{ bottle?.vintage }}
         </div>
         <div class="text-md text-gray-500 dark:text-gray-400">
-          {{ bottle.apellation }}
+          {{ bottle?.apellation }}
         </div>
         <p class="text-sm text-gray-500 dark:text-gray-400">
-          {{ bottle.grapes?.join(', ') }}
+          {{ bottle?.grapes?.join(', ') }}
         </p>
       </div>
       <div class="text-xs">
-        <WineTag :type="bottle.type" />
+        <WineTag :type="bottle?.type" />
       </div>
 
       <div class="flex justify-between items-center pt-4 border-t-2">
@@ -155,9 +155,9 @@
 
         <div class="h-8 w-24 m-left">
           <QtySelector
-            :qty="bottle.qty"
-            v-on:incrementQty="increaseQty(bottle.id)"
-            v-on:decrementQty="decreaseQty(bottle.id)"
+            :qty="bottle?.qty"
+            v-on:incrementQty="increaseQty(bottle?.id)"
+            v-on:decrementQty="decreaseQty(bottle?.id)"
           />
         </div>
       </div>
@@ -356,7 +356,7 @@
     </div>
   </div>
 
-  <Scraper :bottle="bottle" v-if="isAdmin" />
+  <Scraper :bottle="bottle" v-if="isAdmin && bottle" />
 
   <BottleForm
     v-if="editBottle"
