@@ -64,7 +64,7 @@
 
         <div
           class="modal-body pb-6"
-          :class="!wide && 'max-h-52 md:max-h-96 overflow-y-auto'"
+          :class="!wide && 'max-h-72 md:max-h-96 overflow-y-auto'"
         >
           <div class="text-sm text-gray-700 dark:text-gray-400">
             <slot name="body"> Body </slot>

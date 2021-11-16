@@ -130,9 +130,11 @@
       },
       toggleNewBottle() {
         this.openedNewBottle = !this.openedNewBottle
+        this.closeQuickAdd()
       },
       toggleNewReview() {
         this.openedNewReview = !this.openedNewReview
+        this.closeQuickAdd()
       },
     },
   })

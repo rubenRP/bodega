@@ -1,5 +1,5 @@
 <template>
-  <div :class="showSidebar && 'overflow-hidden'">
+  <div class="h-screen" :class="showSidebar ? 'overflow-hidden' : ''">
     <Header />
     <Notifications />
     <main class="px-4 md:px-10 mx-auto w-full container">

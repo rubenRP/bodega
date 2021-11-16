@@ -1,13 +1,10 @@
 <template>
-  <div :class="{ dark: dark || false }">
-    <ReloadPWA />
-    <component :is="layout" />
-  </div>
+  <ReloadPWA />
+  <component :is="layout" :class="showSidebar ? 'overflow-hidden' : ''" />
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { mapGetters } from 'vuex'
 
   import { supabase } from './supabase'
   import store from './store'
@@ -15,7 +12,7 @@
   import AuthLayout from './layouts/AuthLayout.vue'
   import DefaultLayout from './layouts/DefaultLayout.vue'
   import ReloadPWA from './components/General/ReloadPWA.vue'
-  import router from './router'
+  import { mapGetters } from 'vuex'
 
   export default defineComponent({
     name: 'App',
@@ -35,7 +32,7 @@
         store.dispatch('user/fetchUser', session?.user)
       })
     },
-    computed: { ...mapGetters({ dark: 'general/darkMode' }) },
+    computed: { ...mapGetters({ showSidebar: 'general/sidebar' }) },
     watch: {
       $route(to) {
         if (to.meta.layout !== undefined) {

@@ -71,7 +71,7 @@
             lg:w-32
           "
         >
-          <div class="w-32 lg:w-full ml-auto mr-auto">
+          <div class="w-32 lg:w-full ml-auto mr-auto max-w-full">
             <Logo />
           </div>
         </router-link>
@@ -85,7 +85,7 @@
             flex-shrink-0
             fixed
             inset-y-0
-            w-2/3
+            w-3/4
             mt-20
             left-0
             overflow-y-auto
@@ -106,14 +106,14 @@
               class="
                 lg:text-white lg:hover:text-blueGray-200
                 text-blueGray-700
-                px-4
+                px-5
                 lg:px-3
                 py-4
                 lg:py-2
                 flex
                 items-center
                 uppercase
-                font-bold
+                lg:font-bold
                 w-full
                 lg:w-auto
                 border-b-2
@@ -130,14 +130,14 @@
               class="
                 lg:text-white lg:hover:text-blueGray-200
                 text-blueGray-700
-                px-4
+                px-5
                 lg:px-3
                 py-4
                 lg:py-2
                 flex
                 items-center
                 uppercase
-                font-bold
+                lg:font-bold
                 w-full
                 lg:w-auto
                 border-b-2
@@ -154,14 +154,14 @@
               class="
                 lg:text-white lg:hover:text-blueGray-200
                 text-blueGray-700
-                px-4
+                px-5
                 lg:px-3
                 py-4
                 lg:py-2
                 flex
                 items-center
                 uppercase
-                font-bold
+                lg:font-bold
                 w-full
                 lg:w-auto
                 border-b-2
@@ -178,14 +178,14 @@
               class="
                 lg:text-white lg:hover:text-blueGray-200
                 text-blueGray-700
-                px-4
+                px-5
                 lg:px-3
                 py-4
                 lg:py-2
                 flex
                 items-center
                 uppercase
-                font-bold
+                lg:font-bold
                 w-full
                 lg:w-auto
                 border-b-2

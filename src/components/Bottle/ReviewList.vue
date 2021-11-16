@@ -27,9 +27,11 @@
       </div>
       <div class="mt-1 font-semibold">{{ review.profiles.username }}</div>
     </div>
-    <div class="mt-4 flex">
+    <div class="mt-4 flex flex-col lg:flex-row">
       <StarRating :value="review.rating" class="mr-6 mt-1" />
-      {{ review.comment }}
+      <span class="mt-2 lg:mt-0" v-if="review.comment">
+        {{ review.comment }}
+      </span>
     </div>
     <div class="mt-2 text-xs">
       {{ new Date(review.date_added).toLocaleDateString() }}
