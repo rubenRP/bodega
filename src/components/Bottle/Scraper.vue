@@ -337,8 +337,10 @@
           this.filteredBottles = await this.getFilteredBottles()
           await this.suggestBottle()
           this.loading = false
-        } catch (error) {
+        } catch (error: any) {
           console.log(error)
+          this.message = error.message
+          this.finished = true
         }
       },
       async getFilteredBottles() {
@@ -432,6 +434,7 @@
           }
           if (finishProcess) {
             this.finished = true
+            this.message = '{{ $t("cellar.bottleUpdated") }}'
           }
         } catch (error) {
           console.log(error)

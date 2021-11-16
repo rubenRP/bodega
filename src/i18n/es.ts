@@ -69,6 +69,7 @@ const messages = {
       existingBottle:
         'Esta botella ya existe en la base de datos. Actualiza la cantidad de botellas',
       success: 'Botella añadida correctamente',
+      bottleUpdated: 'Botella actualizada correctamente',
     },
     reviews: {
       rating: 'Valoración',
