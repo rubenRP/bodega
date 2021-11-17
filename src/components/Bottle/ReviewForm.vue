@@ -135,12 +135,14 @@
     methods: {
       async createReview() {
         try {
-          await addReview(
-            this.bottleId!,
-            this.rating,
-            this.getUser.id,
-            this.comment
-          )
+          if (this.rating > 0) {
+            await addReview(
+              this.bottleId!,
+              this.rating,
+              this.getUser.id,
+              this.comment
+            )
+          }
         } catch (e) {
           console.log(e)
         } finally {
