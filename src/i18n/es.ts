@@ -71,7 +71,7 @@ const messages = {
       success: 'Botella añadida correctamente',
       bottleUpdated: 'Botella actualizada correctamente',
       drinkedBottles: 'Botellas bebidas',
-      bottlesInCellar: 'Botellas en bodega',
+      bottlesInCellar: 'Botellas Bodega',
       monthlyBottles: 'Balance Mensual',
     },
     reviews: {
