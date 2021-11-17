@@ -434,7 +434,7 @@
           }
           if (finishProcess) {
             this.finished = true
-            this.message = '{{ $t("cellar.bottleUpdated") }}'
+            this.message = this.$t('cellar.bottleUpdated')
           }
         } catch (error) {
           console.log(error)

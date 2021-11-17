@@ -231,7 +231,11 @@
         this.bottle = bottle
         this.step++
       },
-      closeModalForm() {},
+      closeModalForm() {
+        if (!this.bottle.id) {
+          this.$emit('closeReviewForm')
+        }
+      },
     },
   })
 </script>

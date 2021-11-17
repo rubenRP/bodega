@@ -573,7 +573,7 @@
               text: this.$t('cellar.success'),
             })
             this.clearForm()
-            this.$emit('bottleAdded', res)
+            await this.$emit('bottleAdded', res)
             this.$emit('closeModalForm')
           } else {
             this.existingBottle = true
