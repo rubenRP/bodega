@@ -14,7 +14,7 @@ export interface Bottle {
   date_scraped?: Date
   alcohol_content?: string
   climate_soil?: string
-  comsumption?: string
+  consumption?: string
   aging?: string
   stay_barrel?: string
   grapes?: [string]

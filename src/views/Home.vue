@@ -1,6 +1,11 @@
 <template>
   <div class="mt-12">
-    <QuickStats />
+    <div class="grid gap-6 mb-8 grid-cols-2 xl:grid-cols-4">
+      <CellarBottles />
+      <TotalBottles />
+      <TotalReviews />
+      <MonthlyOffset />
+    </div>
   </div>
   <h2
     class="my-8 mt-12 text-xl font-semibold flex items-center justify-between"
@@ -137,14 +142,27 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { mapActions, mapGetters } from 'vuex'
-  import QuickStats from '@/components/Stats/QuickStats.vue'
   import TableItemCellar from '@/components/Cellar/TableItem.vue'
   import TableItemReviews from '@/components/Reviews/TableItem.vue'
   import Spinner from '@/components/General/Spinner.vue'
+  import TotalBottles from '@/components/Stats/QuickStats/TotalBottles.vue'
+  import TotalApellations from '@/components/Stats/QuickStats/TotalApellations.vue'
+  import TotalReviews from '@/components/Stats/QuickStats/TotalReviews.vue'
+  import MonthlyOffset from '@/components/Stats/QuickStats/MonthlyOffset.vue'
+  import CellarBottles from '@/components/Stats/QuickStats/CellarBottles.vue'
 
   export default defineComponent({
     name: 'Home',
-    components: { TableItemCellar, TableItemReviews, QuickStats, Spinner },
+    components: {
+      TableItemCellar,
+      TableItemReviews,
+      Spinner,
+      TotalBottles,
+      TotalApellations,
+      TotalReviews,
+      MonthlyOffset,
+      CellarBottles,
+    },
     data: () => ({}),
     created() {
       if (this.getCellar.length === 0) {

@@ -299,14 +299,14 @@
         </tr>
         <tr
           class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.comsumption"
+          v-if="bottle?.consumption"
         >
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
-              {{ $t('cellar.comsumption') }}
+              {{ $t('cellar.consumption') }}
             </div>
           </td>
-          <td class="px-4 py-3 text-sm">{{ bottle?.comsumption }}</td>
+          <td class="px-4 py-3 text-sm">{{ bottle?.consumption }}</td>
         </tr>
       </tbody>
     </table>

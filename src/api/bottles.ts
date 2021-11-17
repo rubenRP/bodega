@@ -160,6 +160,10 @@ const getAddedBottles = async () => {
     .order('date_added', { ascending: true })
 }
 
+const getBottlesCount = async () => {
+  return await supabase.from('bottles').select('name')
+}
+
 export {
   getCellarBottles,
   getBottles,
@@ -173,4 +177,5 @@ export {
   getAddedBottles,
   findBottle,
   findBottleById,
+  getBottlesCount,
 }

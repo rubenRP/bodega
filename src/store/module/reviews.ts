@@ -8,6 +8,7 @@ const state = () => ({
 
 const getters = {
   reviews: (state: { reviews: [] }) => state.reviews,
+  totalReviews: (state: { reviews: [] }) => state.reviews.length,
 }
 
 const actions = {

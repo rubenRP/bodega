@@ -38,7 +38,11 @@
       <span>{{ $t('stats.stats') }}</span>
     </div>
   </h2>
-  <QuickStats />
+  <div class="grid gap-6 mb-8 grid-cols-1 xl:grid-cols-3">
+    <TotalBottles />
+    <TotalApellations />
+    <TotalCountries />
+  </div>
   <div class="mb-8">
     <div class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800">
       <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
@@ -74,8 +78,10 @@
   import TableItemReviews from '@/components/Reviews/TableItem.vue'
   import BarChart from '@/components/Stats/BarChart.vue'
   import LineChart from '@/components/Stats/LineChart.vue'
-  import QuickStats from '@/components/Stats/QuickStats.vue'
   import { getAddedBottles, getOpenedBottles } from '@/api/bottles'
+  import TotalBottles from '@/components/Stats/QuickStats/TotalBottles.vue'
+  import TotalApellations from '@/components/Stats/QuickStats/TotalApellations.vue'
+  import TotalCountries from '@/components/Stats/QuickStats/TotalCountries.vue'
 
   export default defineComponent({
     name: 'Home',
@@ -84,7 +90,9 @@
       TableItemReviews,
       BarChart,
       LineChart,
-      QuickStats,
+      TotalBottles,
+      TotalApellations,
+      TotalCountries,
     },
     data: () => ({
       openedBottles: <any>[],

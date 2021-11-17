@@ -300,7 +300,7 @@
           </label>
           <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">{{
-              $t('cellar.comsumption')
+              $t('cellar.consumption')
             }}</span>
             <input
               class="
@@ -318,8 +318,8 @@
                 px-3
                 py-2
               "
-              placeholder="Comsumption"
-              v-model="newBottle.comsumption"
+              placeholder="Consumption"
+              v-model="newBottle.consumption"
             />
           </label>
           <label class="block mt-4 text-sm">

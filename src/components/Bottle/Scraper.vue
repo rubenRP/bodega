@@ -161,8 +161,8 @@
                       <option value="aging">
                         {{ $t('cellar.aging') }}
                       </option>
-                      <option value="comsumption">
-                        {{ $t('cellar.comsumption') }}
+                      <option value="consumption">
+                        {{ $t('cellar.consumption') }}
                       </option>
                       <option value="stay_barrel">
                         {{ $t('cellar.stayBarrel') }}
@@ -358,12 +358,14 @@
         this.loading = true
 
         const response = await searchForBottle(
-          `${this.bottle?.cellar} ${this.bottle?.name}`
+          `${this.removeAccents(this.bottle?.name)} ${this.removeAccents(
+            this.bottle?.cellar
+          )}`
         )
         response.data.shopping_results.filter((product: any, key: number) => {
           if (
             (product.product_id && sellers.includes(product.source)) ||
-            key === 0
+            (product.product_id && key < 3)
           ) {
             filteredProducts.push(product)
           }
@@ -439,6 +441,9 @@
         } catch (error) {
           console.log(error)
         }
+      },
+      removeAccents(str: String) {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       },
     },
   })
