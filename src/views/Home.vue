@@ -141,7 +141,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { mapActions, mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex'
   import TableItemCellar from '@/components/Cellar/TableItem.vue'
   import TableItemReviews from '@/components/Reviews/TableItem.vue'
   import Spinner from '@/components/General/Spinner.vue'
@@ -164,28 +164,13 @@
       CellarBottles,
     },
     data: () => ({}),
-    created() {
-      if (this.getCellar.length === 0) {
-        this.fetchCellar()
-      }
-      if (this.getReviews.length === 0) {
-        this.fetchReviews()
-      }
-    },
+
     computed: {
       ...mapGetters({
         getCellar: 'cellar/cellar',
         getReviews: 'reviews/reviews',
-        totalApellations: 'cellar/totalApellations',
-        totalVintages: 'cellar/totalVintages',
       }),
     },
     watch: {},
-    methods: {
-      ...mapActions({
-        fetchCellar: 'cellar/fetchCellar',
-        fetchReviews: 'reviews/fetchReviews',
-      }),
-    },
   })
 </script>

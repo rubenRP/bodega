@@ -554,12 +554,14 @@
         this.v$.$validate()
         if (this.v$.$error) return
         try {
-          const bottleFinded = await findBottle(
+          const { data } = await findBottle(
             this.newBottle.name,
             this.newBottle.cellar,
             this.newBottle.vintage,
             this.newBottle.type
           )
+
+          const bottleFinded = data![0]
 
           if (!bottleFinded) {
             let res
@@ -581,8 +583,12 @@
             this.$emit('bottleFounded', bottleFinded)
             console.log('Bottle already exists ' + bottleFinded)
           }
-        } catch (e) {
+        } catch (e: any) {
           console.log(e)
+          this.addMessage({
+            type: 'error',
+            text: e.message,
+          })
         }
       },
       async updateBottle() {

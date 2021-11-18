@@ -12,7 +12,7 @@
   import AuthLayout from './layouts/AuthLayout.vue'
   import DefaultLayout from './layouts/DefaultLayout.vue'
   import ReloadPWA from './components/General/ReloadPWA.vue'
-  import { mapGetters } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
 
   export default defineComponent({
     name: 'App',
@@ -26,13 +26,27 @@
         layout: '',
       }
     },
+    created() {
+      if (this.getCellar.length === 0) {
+        this.fetchCellar()
+      }
+      if (this.getReviews.length === 0) {
+        this.fetchReviews()
+      }
+    },
     setup() {
       store.dispatch('user/fetchUser', supabase.auth.user())
       supabase.auth.onAuthStateChange((_, session) => {
         store.dispatch('user/fetchUser', session?.user)
       })
     },
-    computed: { ...mapGetters({ showSidebar: 'general/sidebar' }) },
+    computed: {
+      ...mapGetters({
+        showSidebar: 'general/sidebar',
+        getCellar: 'cellar/cellar',
+        getReviews: 'reviews/reviews',
+      }),
+    },
     watch: {
       $route(to) {
         if (to.meta.layout !== undefined) {
@@ -41,6 +55,12 @@
           this.layout = 'DefaultLayout'
         }
       },
+    },
+    methods: {
+      ...mapActions({
+        fetchCellar: 'cellar/fetchCellar',
+        fetchReviews: 'reviews/fetchReviews',
+      }),
     },
   })
 </script>

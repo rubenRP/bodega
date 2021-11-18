@@ -63,7 +63,7 @@
   </h2>
   <div class="relative w-full max-w-xl focus-within:text-gray-200 m-auto mb-4">
     <div class="absolute inset-y-0 flex items-center pl-2">
-      <SearchIcon class="w-4 h-4" />
+      <font-awesome-icon :icon="['fas', 'search']" class="w-4 h-4" />
     </div>
     <input
       class="
@@ -97,7 +97,7 @@
     />
   </div>
 
-  <Spinner v-if="!this.getCellar.length" />
+  <Spinner v-if="!cellarBottles.length" />
 
   <div class="w-full overflow-hidden shadow-lg rounded" v-else>
     <div class="w-full overflow-x-auto">
@@ -130,105 +130,54 @@
             v-for="bottle in filteredCellar"
             :key="bottle.id"
             :item="bottle"
-            @editItem="editBottle(bottle)"
-            @viewItem="viewBottle(bottle)"
           />
         </tbody>
       </table>
     </div>
   </div>
-  <BottleForm
-    v-if="openedNewBottle"
-    @closeModalForm="toggleNewBottle()"
-    :bottle="activeBottle"
-  />
+  <teleport to="#beforeBodyEnd">
+    <BottleForm v-if="openedNewBottle" @closeModalForm="toggleNewBottle()" />
+  </teleport>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import {
-    CurrencyEuroIcon,
-    HomeIcon,
-    CalculatorIcon,
-    PencilAltIcon,
-    SearchIcon,
-  } from '@heroicons/vue/solid'
+  import BottleForm from '@/components/Cellar/BottleForm.vue'
   import TableItem from '@/components/Cellar/TableItem.vue'
   import Modal from '@/components/General/Modal.vue'
-  import BottleForm from '@/components/Cellar/BottleForm.vue'
-  import { mapActions, mapGetters } from 'vuex'
   import Spinner from '@/components/General/Spinner.vue'
+  import useFilteredBottles from '@/hooks/useFilteredBottles'
+  import { computed, defineComponent, ref } from 'vue'
+  import { useStore } from 'vuex'
 
   export default defineComponent({
-    name: 'Cellar',
     components: {
-      PencilAltIcon,
-      CurrencyEuroIcon,
-      HomeIcon,
-      SearchIcon,
-      CalculatorIcon,
       TableItem,
       Modal,
       BottleForm,
       Spinner,
     },
-    data() {
-      return {
-        openedNewBottle: false,
-        openedViewBottle: false,
-        activeBottle: <any>null,
-        search: '',
-      }
-    },
-    created() {
-      if (this.getCellar.length === 0) {
-        this.fetchCellar()
-      }
-    },
-    destroyed() {
-      // this.destroyCellar()
-    },
-    computed: {
-      ...mapGetters({
-        getCellar: 'cellar/cellar',
-      }),
-      filteredCellar(): any[] {
-        return this.getCellar.filter((bottle: any) => {
-          return (
-            bottle.name.toLowerCase().includes(this.search.toLowerCase()) ||
-            bottle.cellar.toLowerCase().includes(this.search.toLowerCase()) ||
-            bottle.apellation?.toLowerCase().includes(this.search.toLowerCase())
-          )
-        })
-      },
-    },
-    methods: {
-      ...mapActions({
-        fetchCellar: 'cellar/fetchCellar',
-        unsuscribeCellar: 'cellar/unsuscribeCellar',
-        destroyCellar: 'cellar/destroyCellar',
-      }),
+    setup() {
+      const store = useStore()
+      const search = ref('')
+      const openedNewBottle = ref(false)
 
-      toggleNewBottle() {
-        if (this.openedNewBottle) {
-          this.activeBottle = null
-        }
-        this.openedNewBottle = !this.openedNewBottle
-      },
-      toggleViewBottle() {
-        if (this.openedViewBottle) {
-          this.activeBottle = null
-        }
-        this.openedViewBottle = !this.openedViewBottle
-      },
-      editBottle(bottle: {}) {
-        this.activeBottle = bottle
-        this.toggleNewBottle()
-      },
-      viewBottle(bottle: {}) {
-        this.activeBottle = bottle
-        this.toggleViewBottle()
-      },
+      const toggleNewBottle = () => {
+        openedNewBottle.value = !openedNewBottle.value
+      }
+
+      const cellarBottles = computed(() => store.getters['cellar/cellar'])
+
+      const filteredCellar = computed(() => {
+        return useFilteredBottles(cellarBottles.value, search.value)
+      })
+
+      return {
+        search,
+        openedNewBottle,
+        filteredCellar,
+        toggleNewBottle,
+        cellarBottles,
+      }
     },
   })
 </script>

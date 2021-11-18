@@ -10,25 +10,14 @@ const getCellarBottles = async () => {
     .order('last_added', { ascending: false })
 }
 const getBottles = async () => {
-  try {
-    const res = await supabase
-      .from('bottles')
-      .select()
-      .order('last_added', { ascending: false })
-
-    return res.data!
-  } catch (error: any) {
-    console.log(error)
-  }
+  return await supabase
+    .from('bottles')
+    .select()
+    .order('last_added', { ascending: false })
 }
 
 const findBottleById = async (id: number) => {
-  try {
-    const res = await supabase.from('bottles').select().eq('id', id)
-    return res.data![0]
-  } catch (error: any) {
-    console.log(error)
-  }
+  return await supabase.from('bottles').select().eq('id', id)
 }
 
 const findBottle = async (
@@ -37,19 +26,13 @@ const findBottle = async (
   vintage: number,
   type: string
 ) => {
-  try {
-    const res = await supabase
-      .from('bottles')
-      .select()
-      .like('name', name)
-      .like('cellar', cellar)
-      .eq('vintage', vintage)
-      .eq('type', type)
-
-    return res.data![0]
-  } catch (error: any) {
-    console.log(error)
-  }
+  return await supabase
+    .from('bottles')
+    .select()
+    .like('name', name)
+    .like('cellar', cellar)
+    .eq('vintage', vintage)
+    .eq('type', type)
 }
 
 const addBottle = async (

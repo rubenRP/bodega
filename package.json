@@ -15,7 +15,6 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
-    "@heroicons/vue": "^1.0.1",
     "@supabase/supabase-js": "^1.21.0",
     "@tailwindcss/forms": "^0.3.4",
     "@vuedx/typescript-plugin-vue": "^0.7.4",

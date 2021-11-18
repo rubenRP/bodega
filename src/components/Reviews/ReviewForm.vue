@@ -217,7 +217,7 @@
           console.log(e)
         } finally {
           this.clearForm()
-          this.$emit('closeReviewForm')
+          this.$emit('closeModalReview')
           this.addMessage({
             type: 'success',
             text: this.$t('reviews.success'),
@@ -233,7 +233,7 @@
       },
       closeModalForm() {
         if (!this.bottle.id) {
-          this.$emit('closeReviewForm')
+          this.$emit('closeModalReview')
         }
       },
     },

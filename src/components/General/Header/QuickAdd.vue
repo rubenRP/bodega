@@ -99,8 +99,10 @@
       </li>
     </ul>
   </li>
-  <ReviewForm v-if="openedNewReview" @closeModalReview="toggleNewReview()" />
-  <BottleForm v-if="openedNewBottle" @closeModalForm="toggleNewBottle()" />
+  <teleport to="#beforeBodyEnd">
+    <ReviewForm v-if="openedNewReview" @closeModalReview="toggleNewReview()" />
+    <BottleForm v-if="openedNewBottle" @closeModalForm="toggleNewBottle()" />
+  </teleport>
 </template>
 
 <script lang="ts">

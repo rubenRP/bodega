@@ -360,11 +360,13 @@
 
   <Scraper :bottle="bottle" v-if="isAdmin && bottle" />
 
-  <BottleForm
-    v-if="editBottle"
-    @closeModalForm="toggleEditBottle()"
-    :bottle="bottle"
-  />
+  <teleport to="#beforeBodyEnd">
+    <BottleForm
+      v-if="editBottle"
+      @closeModalForm="toggleEditBottle()"
+      :bottle="bottle"
+    />
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -416,14 +418,24 @@
     methods: {
       ...mapActions({
         fetchCellar: 'cellar/fetchCellar',
+        addMessage: 'general/addMessage',
       }),
 
       async getBottle() {
-        this.bottle = await this.getCellar.find(
-          (bottle: { id: number }) => bottle.id === this.id
-        )
-        if (!this.bottle) {
-          this.bottle = await findBottleById(this.id)
+        try {
+          this.bottle = await this.getCellar.find(
+            (bottle: { id: number }) => bottle.id === this.id
+          )
+          if (!this.bottle) {
+            const { data } = await findBottleById(this.id)
+            this.bottle = data![0]
+          }
+        } catch (e: any) {
+          console.error(e)
+          this.addMessage({
+            type: 'error',
+            text: e.message,
+          })
         }
       },
       increaseQty(id: number) {

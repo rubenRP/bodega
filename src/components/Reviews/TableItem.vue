@@ -40,7 +40,7 @@
           "
           @click="$emit('editItem', item)"
         >
-          <PencilAltIcon class="w-5 h-5" />
+          <font-awesome-icon :icon="['fas', 'edit']" class="w-5 h-5" />
         </button>
       </div>
     </td>
@@ -49,7 +49,6 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { PencilAltIcon } from '@heroicons/vue/solid'
   import QtySelector from '../Bottle/QtySelector.vue'
   import WineTag from '../Bottle/WineTag.vue'
   import StarRating from './StarRating.vue'
@@ -64,7 +63,6 @@
       },
     },
     components: {
-      PencilAltIcon,
       QtySelector,
       WineTag,
       StarRating,

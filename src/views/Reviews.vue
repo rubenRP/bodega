@@ -99,80 +99,55 @@
       </table>
     </div>
   </div>
-  <ReviewForm
-    v-if="openedNewReview"
-    @closeReviewForm="toggleNewReview()"
-    :bottle="activeReview"
-  />
+  <teleport to="#beforeBodyEnd">
+    <ReviewForm
+      v-if="openedNewReview"
+      @closeModalReview="toggleNewReview()"
+      :review="activeReview"
+    />
+  </teleport>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import {
-    CurrencyEuroIcon,
-    HomeIcon,
-    CalculatorIcon,
-    PencilAltIcon,
-    SearchIcon,
-  } from '@heroicons/vue/solid'
-
+  import { computed, defineComponent, ref } from 'vue'
   import TableItem from '@/components/Reviews/TableItem.vue'
   import Modal from '@/components/General/Modal.vue'
   import ReviewForm from '@/components/Reviews/ReviewForm.vue'
-  import { mapActions, mapGetters } from 'vuex'
+  import { mapGetters, useStore } from 'vuex'
   import Spinner from '@/components/General/Spinner.vue'
 
   export default defineComponent({
-    name: 'Reviews',
     components: {
-      PencilAltIcon,
-      CurrencyEuroIcon,
-      HomeIcon,
-      SearchIcon,
-      CalculatorIcon,
       TableItem,
       Modal,
       ReviewForm,
       Spinner,
     },
-    data() {
+    setup() {
+      const store = useStore()
+      const openedNewReview = ref(false)
+      const activeReview = ref({})
+
+      const toggleNewReview = () => {
+        openedNewReview.value = !openedNewReview.value
+      }
+
+      const editReview = (review: any) => {
+        activeReview.value = review
+        toggleNewReview()
+      }
+
+      const getReviews = computed(() => {
+        return store.getters['reviews/reviews']
+      })
+
       return {
-        openedNewReview: false,
-        activeReview: <any>null,
-        search: '',
+        openedNewReview,
+        activeReview,
+        toggleNewReview,
+        editReview,
+        getReviews,
       }
-    },
-    created() {
-      if (this.getCellar.length === 0) {
-        this.fetchCellar()
-      }
-      if (this.getReviews.length === 0) {
-        this.fetchReviews()
-      }
-    },
-    computed: {
-      ...mapGetters({
-        getCellar: 'cellar/cellar',
-        getReviews: 'reviews/reviews',
-      }),
-    },
-    methods: {
-      ...mapActions({
-        fetchCellar: 'cellar/fetchCellar',
-        unsuscribeCellar: 'cellar/unsuscribeCellar',
-        destroyCellar: 'cellar/destroyCellar',
-        fetchReviews: 'reviews/fetchReviews',
-      }),
-      toggleNewReview() {
-        if (this.openedNewReview) {
-          this.activeReview = null
-        }
-        this.openedNewReview = !this.openedNewReview
-      },
-      editReview(review: {}) {
-        this.activeReview = review
-        this.toggleNewReview()
-      },
     },
   })
 </script>

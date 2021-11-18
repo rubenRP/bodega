@@ -37,10 +37,33 @@
       </div>
       <span>{{ $t('bottles.bottles') }}</span>
     </div>
+    <button
+      class="
+        inline-block
+        text-sm
+        px-4
+        py-2
+        leading-none
+        border
+        rounded
+        text-white
+        border-pink-900
+        bg-pink-900
+        hover:bg-transparent hover:text-pink-800
+        ml-4
+        lg:mt-0
+        ease-linear
+        transition-all
+        duration-150
+      "
+      @click="toggleNewBottle()"
+    >
+      {{ $t('general.add') }}
+    </button>
   </h2>
   <div class="relative w-full max-w-xl focus-within:text-gray-200 m-auto mb-4">
     <div class="absolute inset-y-0 flex items-center pl-2">
-      <SearchIcon class="w-4 h-4" />
+      <font-awesome-icon :icon="['fas', 'search']" class="w-4 h-4" />
     </div>
     <input
       class="
@@ -113,63 +136,59 @@
       </table>
     </div>
   </div>
+  <teleport to="#beforeBodyEnd">
+    <BottleForm v-if="openedNewBottle" @closeModalForm="toggleNewBottle()" />
+  </teleport>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import {
-    CurrencyEuroIcon,
-    HomeIcon,
-    CalculatorIcon,
-    PencilAltIcon,
-    SearchIcon,
-  } from '@heroicons/vue/solid'
+  import { getBottles } from '@/api/bottles'
+  import BottleForm from '@/components/Cellar/BottleForm.vue'
   import TableItem from '@/components/Cellar/TableItem.vue'
   import Modal from '@/components/General/Modal.vue'
-  import BottleForm from '@/components/Cellar/BottleForm.vue'
-  import { getBottles } from '@/api/bottles'
-  import { Bottle } from '@/models/cellar'
   import Spinner from '@/components/General/Spinner.vue'
+  import useFilteredBottles from '@/hooks/useFilteredBottles'
+  import { Bottle } from '@/models/cellar'
+  import { computed, defineComponent, onMounted, ref } from 'vue'
 
   export default defineComponent({
-    name: 'Cellar',
     components: {
-      PencilAltIcon,
-      CurrencyEuroIcon,
-      HomeIcon,
-      SearchIcon,
-      CalculatorIcon,
       TableItem,
       Modal,
       BottleForm,
       Spinner,
     },
-    data() {
-      return {
-        openedNewBottle: false,
-        activeBottle: <any>null,
-        search: '',
-        bottles: <any>[],
+    setup() {
+      const bottles = ref([] as Bottle[])
+      const search = ref('')
+      const openedNewBottle = ref(false)
+
+      const getAllBottles = async () => {
+        try {
+          const { data } = await getBottles()
+          bottles.value = data as Bottle[]
+        } catch (error) {
+          console.error(error)
+        }
       }
-    },
-    created() {
-      this.getBottles()
-    },
-    computed: {
-      filteredBottles(): any[] {
-        return this.bottles.filter((bottle: any) => {
-          return (
-            bottle.name.toLowerCase().includes(this.search.toLowerCase()) ||
-            bottle.cellar.toLowerCase().includes(this.search.toLowerCase()) ||
-            bottle.apellation?.toLowerCase().includes(this.search.toLowerCase())
-          )
-        })
-      },
-    },
-    methods: {
-      async getBottles() {
-        this.bottles = await getBottles()
-      },
+
+      const toggleNewBottle = () => {
+        openedNewBottle.value = !openedNewBottle.value
+      }
+
+      const filteredBottles = computed(() => {
+        return useFilteredBottles(bottles.value, search.value)
+      })
+
+      onMounted(getAllBottles)
+
+      return {
+        bottles,
+        search,
+        openedNewBottle,
+        filteredBottles,
+        toggleNewBottle,
+      }
     },
   })
 </script>
