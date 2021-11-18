@@ -26,14 +26,14 @@ const getParams = {
 
 const searchForBottle = async (query: string) => {
   searchParams.q = query
-  return axios.get('/serpapi/search', {
+  return axios.get('/serp/search', {
     params: searchParams,
   })
 }
 
 const getBottle = async (id: string) => {
   getParams.product_id = id
-  return axios.get('/serpapi/search', {
+  return axios.get('/serp/search', {
     params: getParams,
   })
 }

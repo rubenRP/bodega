@@ -8,15 +8,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/serpapi': {
+      '/serp': {
         target: 'https://serpapi.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/serpapi/, ''),
-      },
-      '/scaleserp': {
-        target: 'https://api.scaleserp.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/scaleserp/, ''),
+        secure: false,
+        rewrite: (path) => path.replace(/^\/serp/, ''),
       },
     },
   },
