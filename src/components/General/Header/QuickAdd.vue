@@ -1,7 +1,7 @@
 <template>
   <li class="relative">
     <button
-      class="align-middle focus:shadow-outline-red focus:outline-none"
+      class="align-middle focus:outline-none"
       @click="toggleQuickAdd"
       @keydown.escape="closeQuickAdd"
       aria-haspopup="true"
@@ -13,7 +13,6 @@
             w-full
             h-full
             overflow-hidden
-            shadow-inner
             text-center
             flex
             justify-center
