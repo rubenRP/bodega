@@ -165,7 +165,9 @@
         openedNewBottle.value = !openedNewBottle.value
       }
 
-      const cellarBottles = computed(() => store.getters['cellar/cellar'])
+      const cellarBottles = computed(
+        () => store.getters['bottles/cellarBottles']
+      )
 
       const filteredCellar = computed(() => {
         return useFilteredBottles(cellarBottles.value, search.value)

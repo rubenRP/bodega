@@ -379,12 +379,6 @@
   import QtySelector from '@/components/Bottle/QtySelector.vue'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
 
-  import {
-    increaseBottleQty,
-    decreaseBottleQty,
-    findBottleById,
-  } from '@/api/bottles'
-
   export default defineComponent({
     name: 'Bottle',
     components: {
@@ -397,51 +391,32 @@
     },
     data: () => ({
       id: 0,
-      bottle: <Bottle>{},
       editBottle: false,
     }),
     async mounted() {
-      if (this.id === 0) {
-        await this.fetchCellar()
-      }
       this.id = parseInt(<any>this.$route.params.id)
-      await this.getBottle()
     },
     computed: {
       ...mapGetters({
-        getCellar: 'cellar/cellar',
+        getBottles: 'bottles/bottles',
         isAdmin: 'user/isAdmin',
       }),
+      bottle() {
+        return this.getBottles.find((bottle: Bottle) => bottle.id === this.id)
+      },
     },
     watch: {},
     methods: {
       ...mapActions({
-        fetchCellar: 'cellar/fetchCellar',
         addMessage: 'general/addMessage',
+        increaseBottleQty: 'bottles/increaseBottleQty',
+        decreaseBottleQty: 'bottles/decreaseBottleQty',
       }),
-
-      async getBottle() {
-        try {
-          this.bottle = await this.getCellar.find(
-            (bottle: { id: number }) => bottle.id === this.id
-          )
-          if (!this.bottle) {
-            const { data } = await findBottleById(this.id)
-            this.bottle = data![0]
-          }
-        } catch (e: any) {
-          console.error(e)
-          this.addMessage({
-            type: 'error',
-            text: e.message,
-          })
-        }
-      },
       increaseQty(id: number) {
-        increaseBottleQty(id, this.bottle.qty!)
+        this.increaseBottleQty({ bottleId: id, qty: this.bottle.qty! })
       },
       decreaseQty(id: number) {
-        decreaseBottleQty(id, this.bottle.qty!)
+        this.decreaseBottleQty({ bottleId: id, qty: this.bottle.qty! })
       },
       toggleEditBottle() {
         this.editBottle = !this.editBottle

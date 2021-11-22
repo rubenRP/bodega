@@ -39,12 +39,12 @@
     </div>
   </h2>
   <div class="grid gap-6 mb-8 grid-cols-1 xl:grid-cols-3">
-    <TotalBottles />
+    <CellarBottles />
     <TotalApellations />
     <TotalCountries />
   </div>
-  <div class="mb-8">
-    <div class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800">
+  <div class="grid gap-6 mb-8 md:grid-cols-6">
+    <div class="min-w-0 p-4 bg-white shadow-lg rounded md:col-span-4">
       <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
         {{ $t('stats.cellarStatus') }}
       </h4>
@@ -53,6 +53,12 @@
         :labels="bottlesConsumptionLabels"
         selector="chart-bottles"
       />
+    </div>
+    <div class="min-w-0 p-4 bg-white shadow-lg rounded md:col-span-2">
+      <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+        {{ $t('cellar.types') }}
+      </h4>
+      <PieChart :data="totalTypes" selector="chart-types" />
     </div>
   </div>
   <div class="grid gap-6 mb-8 md:grid-cols-2">
@@ -78,8 +84,9 @@
   import TableItemReviews from '@/components/Reviews/TableItem.vue'
   import BarChart from '@/components/Stats/BarChart.vue'
   import LineChart from '@/components/Stats/LineChart.vue'
+  import PieChart from '@/components/Stats/PieChart.vue'
   import { getAddedBottles, getOpenedBottles } from '@/api/bottles'
-  import TotalBottles from '@/components/Stats/QuickStats/TotalBottles.vue'
+  import CellarBottles from '@/components/Stats/QuickStats/CellarBottles.vue'
   import TotalApellations from '@/components/Stats/QuickStats/TotalApellations.vue'
   import TotalCountries from '@/components/Stats/QuickStats/TotalCountries.vue'
 
@@ -90,30 +97,25 @@
       TableItemReviews,
       BarChart,
       LineChart,
-      TotalBottles,
+      CellarBottles,
       TotalApellations,
       TotalCountries,
+      PieChart,
     },
     data: () => ({
       openedBottles: <any>[],
       addedBottles: <any>[],
     }),
     created() {
-      if (this.getCellar.length === 0) {
-        this.fetchCellar()
-      }
-      if (this.getReviews.length === 0) {
-        this.fetchReviews()
-      }
       this.fetchOpenedBottles()
       this.fetchAddedBottles()
     },
     computed: {
       ...mapGetters({
-        getCellar: 'cellar/cellar',
         getReviews: 'reviews/reviews',
-        totalApellations: 'cellar/totalApellations',
-        totalVintages: 'cellar/totalVintages',
+        totalApellations: 'bottles/totalCellarApellations',
+        totalVintages: 'bottles/totalCellarVintages',
+        totalTypes: 'bottles/getCellarTypes',
       }),
       // Group opened bottles by month and year
       openedBottlesByMonth(): any {
@@ -157,10 +159,6 @@
     },
     watch: {},
     methods: {
-      ...mapActions({
-        fetchCellar: 'cellar/fetchCellar',
-        fetchReviews: 'reviews/fetchReviews',
-      }),
       async fetchOpenedBottles() {
         try {
           let { data } = await getOpenedBottles()

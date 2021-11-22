@@ -64,30 +64,44 @@
 </template>
 
 <script lang="ts">
-  import { getAddedBottles, getOpenedBottles } from '@/api/bottles'
-  import { defineComponent, computed, ref, onMounted } from 'vue'
+  import { defineComponent, computed } from 'vue'
+  import { useStore } from 'vuex'
 
   export default defineComponent({
     setup() {
-      const monthlyBalance = ref(0)
-      onMounted(async () => {
-        const openedBottles = (await getOpenedBottles()).data || []
-        const monthlyOpenedBottles = openedBottles.filter(
+      const store = useStore()
+
+      const openedBottles = computed(
+        () => store.getters['bottles/getOpenedBottles']
+      )
+      const addedBottles = computed(
+        () => store.getters['bottles/getAddedBottles']
+      )
+
+      const monthlyOpenedBottles = computed(() => {
+        return openedBottles.value.filter(
           (bottle: any) =>
             new Date(bottle.date_opened).getMonth() === new Date().getMonth() &&
             new Date(bottle.date_opened).getFullYear() ===
               new Date().getFullYear()
         )
-        const addedBottles = (await getAddedBottles()).data || []
-        const monthlyAddedBottles = addedBottles.filter(
+      })
+
+      const monthlyAddedBottles = computed(() => {
+        return addedBottles.value.filter(
           (bottle: any) =>
             new Date(bottle.date_added).getMonth() === new Date().getMonth() &&
             new Date(bottle.date_added).getFullYear() ===
               new Date().getFullYear()
         )
-        monthlyBalance.value =
-          monthlyAddedBottles.length - monthlyOpenedBottles.length
       })
+
+      const monthlyBalance = computed(() => {
+        return (
+          monthlyAddedBottles.value.length - monthlyOpenedBottles.value.length
+        )
+      })
+
       return {
         monthlyBalance,
       }

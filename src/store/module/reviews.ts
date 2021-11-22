@@ -9,6 +9,10 @@ const state = () => ({
 const getters = {
   reviews: (state: { reviews: [] }) => state.reviews,
   totalReviews: (state: { reviews: [] }) => state.reviews.length,
+  latestReviews: (state: { reviews: [] }) => state.reviews.slice(0, 5),
+  getReviewsById: (state: { reviews: [] }) => (id: number) => {
+    return state.reviews.find((review: any) => review.id === id)
+  },
 }
 
 const actions = {

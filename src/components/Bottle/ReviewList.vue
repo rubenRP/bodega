@@ -71,7 +71,12 @@
     methods: {
       async fetchReviews() {
         if (this.bottleId) {
-          this.reviews = await getBottleReview(this.bottleId)
+          try {
+            const { data } = await getBottleReview(this.bottleId)
+            this.reviews = data
+          } catch (e) {
+            console.error(e)
+          }
         }
       },
     },

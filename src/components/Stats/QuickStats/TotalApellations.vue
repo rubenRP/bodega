@@ -53,7 +53,7 @@
       const store = useStore()
       return {
         totalApellations: computed(
-          () => store.getters['cellar/totalApellations']
+          () => store.getters['bottles/totalCellarApellations']
         ),
       }
     },
