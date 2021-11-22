@@ -34,7 +34,7 @@
   import { defineComponent } from 'vue'
   import QtySelector from '../Bottle/QtySelector.vue'
   import WineTag from '../Bottle/WineTag.vue'
-  import { decreaseBottleQty } from '@/api/bottles'
+  import { mapActions } from 'vuex'
 
   export default defineComponent({
     name: 'TableItem',
@@ -51,8 +51,11 @@
     },
     computed: {},
     methods: {
+      ...mapActions({
+        decreaseBottleQty: 'bottles/decreaseBottleQty',
+      }),
       decreaseQty(id: number) {
-        decreaseBottleQty(id, this.item.qty)
+        this.decreaseBottleQty({ bottleId: id, qty: this.item.qty })
       },
     },
   })

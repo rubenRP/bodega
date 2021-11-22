@@ -27,11 +27,17 @@
       }
     },
     created() {
-      if (this.getCellar.length === 0) {
-        this.fetchCellar()
+      if (this.getBottles.length === 0) {
+        this.fetchBottles()
       }
       if (this.getReviews.length === 0) {
         this.fetchReviews()
+      }
+      if (this.openedBottles.length === 0) {
+        this.fetchOpenedBottles()
+      }
+      if (this.addedBottles.length === 0) {
+        this.fetchAddedBottles()
       }
     },
     setup() {
@@ -43,8 +49,10 @@
     computed: {
       ...mapGetters({
         showSidebar: 'general/sidebar',
-        getCellar: 'cellar/cellar',
+        getBottles: 'bottles/bottles',
         getReviews: 'reviews/reviews',
+        openedBottles: 'bottles/getOpenedBottles',
+        addedBottles: 'bottles/getAddedBottles',
       }),
     },
     watch: {
@@ -58,8 +66,10 @@
     },
     methods: {
       ...mapActions({
-        fetchCellar: 'cellar/fetchCellar',
+        fetchBottles: 'bottles/fetchBottles',
         fetchReviews: 'reviews/fetchReviews',
+        fetchOpenedBottles: 'bottles/fetchOpenedBottles',
+        fetchAddedBottles: 'bottles/fetchAddedBottles',
       }),
     },
   })

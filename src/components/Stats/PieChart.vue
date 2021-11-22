@@ -28,6 +28,14 @@
           display: false,
         },
       },
+      backgroundColor: [
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(255, 159, 64, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(255, 99, 132, 0.6)',
+      ],
     }),
 
     computed: {
@@ -43,9 +51,7 @@
         }
         Object.entries(this.data).forEach(([key, value]) => {
           res.datasets[0].data.push(value)
-          res.datasets[0].backgroundColor.push(
-            `hsl(${Math.random() * 360}, 50%, 50%)`
-          )
+          res.datasets[0].backgroundColor.push(this.backgroundColor.pop())
           res.labels.push(key)
         })
         return res

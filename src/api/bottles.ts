@@ -9,7 +9,7 @@ const getCellarBottles = async () => {
     .gt('qty', 0)
     .order('last_added', { ascending: false })
 }
-const getBottles = async () => {
+const getAllBottles = async () => {
   return await supabase
     .from('bottles')
     .select()
@@ -40,95 +40,71 @@ const addBottle = async (
   mycellar?: boolean,
   reviewed?: boolean
 ) => {
-  try {
-    let res = await supabase.from('bottles').insert([
-      {
-        ...bottle,
-        mycellar: mycellar || false,
-        reviewed: reviewed || false,
-      },
-    ])
-    for (let i = 0; i < bottle.qty!; i++) {
-      await supabase.from('added_bottles').insert([
-        {
-          bottle_id: res.data![0].id,
-          date_added: new Date(),
-        },
-      ])
-    }
-    return res.data![0]
-  } catch (error: any) {
-    console.log(error)
-  }
-}
-const updateBottle = async (id: number, bottle: {}) => {
-  try {
-    await supabase
-      .from('bottles')
-      .update([
-        {
-          date_scrapped: new Date(),
-          ...bottle,
-        },
-      ])
-      .eq('id', id)
-  } catch (error: any) {
-    alert(error.message)
-  }
-}
-const updateBottleMetadata = async (id: number, bottle: {}) => {
-  try {
-    await supabase
-      .from('bottles')
-      .update([
-        {
-          date_scrapped: new Date(),
-          ...bottle,
-        },
-      ])
-      .eq('id', id)
-  } catch (error: any) {
-    alert(error.message)
-  }
-}
-const removeBottle = async (id: string) => {
-  try {
-    await supabase.from('bottles').update({ qty: 0 }).eq('id', id)
-  } catch (error: any) {
-    alert(error.message)
-  }
-}
-const increaseBottleQty = async (id: number, qty: number) => {
-  try {
-    await supabase
-      .from('bottles')
-      .update({ qty: qty + 1, last_added: new Date() })
-      .eq('id', id)
+  let res = await supabase.from('bottles').insert([
+    {
+      ...bottle,
+      mycellar: mycellar || false,
+      reviewed: reviewed || false,
+    },
+  ])
+  for (let i = 0; i < bottle.qty!; i++) {
     await supabase.from('added_bottles').insert([
       {
-        bottle_id: id,
+        bottle_id: res.data![0].id,
         date_added: new Date(),
       },
     ])
-  } catch (error: any) {
-    alert(error.message)
   }
+  return res.data![0]
 }
-const decreaseBottleQty = async (id: number, qty: number) => {
-  try {
-    await supabase
-      .from('bottles')
-      .update({ qty: qty ? qty - 1 : 0 })
-      .eq('id', id)
-    await supabase.from('opened_bottles').insert([
+const updateBottle = async (id: number, bottle: {}) => {
+  await supabase
+    .from('bottles')
+    .update([
       {
-        bottle_id: id,
-        date_opened: new Date(),
+        date_scrapped: new Date(),
+        ...bottle,
       },
     ])
-  } catch (error: any) {
-    alert(error.message)
-  }
+    .eq('id', id)
+}
+const updateBottleMetadata = async (id: number, bottle: {}) => {
+  await supabase
+    .from('bottles')
+    .update([
+      {
+        date_scrapped: new Date(),
+        ...bottle,
+      },
+    ])
+    .eq('id', id)
+}
+const removeBottle = async (id: string) => {
+  await supabase.from('bottles').update({ qty: 0 }).eq('id', id)
+}
+const increaseBottleQty = async (id: number, qty: number) => {
+  await supabase
+    .from('bottles')
+    .update({ qty: qty + 1, last_added: new Date() })
+    .eq('id', id)
+  await supabase.from('added_bottles').insert([
+    {
+      bottle_id: id,
+      date_added: new Date(),
+    },
+  ])
+}
+const decreaseBottleQty = async (id: number, qty: number) => {
+  await supabase
+    .from('bottles')
+    .update({ qty: qty ? qty - 1 : 0 })
+    .eq('id', id)
+  await supabase.from('opened_bottles').insert([
+    {
+      bottle_id: id,
+      date_opened: new Date(),
+    },
+  ])
 }
 const getOpenedBottles = async () => {
   return await supabase
@@ -147,9 +123,19 @@ const getBottlesCount = async () => {
   return await supabase.from('bottles').select('name')
 }
 
+const getBottlesSubscription = async () => {
+  return await supabase
+    .from('bottles')
+    .on('*', (payload) => {
+      console.log('Change received!', payload)
+      return payload
+    })
+    .subscribe()
+}
+
 export {
   getCellarBottles,
-  getBottles,
+  getAllBottles,
   addBottle,
   updateBottle,
   updateBottleMetadata,
@@ -161,4 +147,5 @@ export {
   findBottle,
   findBottleById,
   getBottlesCount,
+  getBottlesSubscription,
 }

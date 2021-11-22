@@ -142,14 +142,13 @@
 </template>
 
 <script lang="ts">
-  import { getBottles } from '@/api/bottles'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
   import TableItem from '@/components/Cellar/TableItem.vue'
   import Modal from '@/components/General/Modal.vue'
   import Spinner from '@/components/General/Spinner.vue'
   import useFilteredBottles from '@/hooks/useFilteredBottles'
-  import { Bottle } from '@/models/cellar'
   import { computed, defineComponent, onMounted, ref } from 'vue'
+  import { useStore } from 'vuex'
 
   export default defineComponent({
     components: {
@@ -159,28 +158,19 @@
       Spinner,
     },
     setup() {
-      const bottles = ref([] as Bottle[])
+      const store = useStore()
       const search = ref('')
       const openedNewBottle = ref(false)
-
-      const getAllBottles = async () => {
-        try {
-          const { data } = await getBottles()
-          bottles.value = data as Bottle[]
-        } catch (error) {
-          console.error(error)
-        }
-      }
 
       const toggleNewBottle = () => {
         openedNewBottle.value = !openedNewBottle.value
       }
 
+      const bottles = computed(() => store.getters['bottles/bottles'])
+
       const filteredBottles = computed(() => {
         return useFilteredBottles(bottles.value, search.value)
       })
-
-      onMounted(getAllBottles)
 
       return {
         bottles,

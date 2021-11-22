@@ -1,11 +1,11 @@
 import { createStore } from 'vuex'
 import general from './module/general'
 import user from './module/user'
-import cellar from './module/cellar'
+import bottles from './module/bottles'
 import reviews from './module/reviews'
 
 export default createStore({
-  modules: { general, user, cellar, reviews },
+  modules: { general, user, bottles, reviews },
   state: {},
   getters: {},
   mutations: {},

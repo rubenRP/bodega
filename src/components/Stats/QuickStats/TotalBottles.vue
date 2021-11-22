@@ -17,7 +17,7 @@
             {{ $t('cellar.totalBottles') }}
           </h5>
           <span class="font-semibold text-xl text-blueGray-700">
-            {{ bottlesCount }}
+            {{ totalBottles }}
           </span>
         </div>
         <div class="relative w-auto pl-4 flex-initial">
@@ -45,19 +45,14 @@
 </template>
 
 <script lang="ts">
-  import { getBottlesCount } from '@/api/bottles'
-  import { defineComponent, ref, onMounted } from 'vue'
+  import { defineComponent, computed } from 'vue'
+  import { useStore } from 'vuex'
 
   export default defineComponent({
     setup() {
-      const bottlesCount = ref(0)
-      onMounted(async () => {
-        const bottles = (await getBottlesCount()).data || []
-        bottlesCount.value = bottles.length
-      })
-
+      const store = useStore()
       return {
-        bottlesCount,
+        totalBottles: computed(() => store.getters['bottles/totalBottles']),
       }
     },
   })

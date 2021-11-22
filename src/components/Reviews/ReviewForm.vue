@@ -193,7 +193,7 @@
       return {
         newReview: <Review>this.review || <Review>{ rating: 0 },
         bottle: <Bottle>{},
-        step: 1,
+        step: this.review ? 2 : 1,
       }
     },
     computed: {

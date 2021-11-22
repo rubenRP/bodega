@@ -73,6 +73,7 @@ const messages = {
       drinkedBottles: 'Botellas bebidas',
       bottlesInCellar: 'Botellas Bodega',
       monthlyBottles: 'Balance Mensual',
+      types: 'Tipos de vino',
     },
     reviews: {
       rating: 'Valoración',

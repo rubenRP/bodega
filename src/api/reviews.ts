@@ -18,39 +18,39 @@ const addReview = async (
   user: any,
   comment?: string
 ) => {
-  try {
-    await supabase.from('reviews').insert([
+  await supabase.from('reviews').insert([
+    {
+      bottle_id: cellarBottle,
+      rating: rating,
+      comment: comment,
+      profile_id: user,
+    },
+  ])
+  await supabase
+    .from('bottles')
+    .update([
       {
-        bottle_id: cellarBottle,
-        rating: rating,
-        comment: comment,
-        profile_id: user,
+        reviewed: true,
       },
     ])
-    await supabase
-      .from('bottles')
-      .update([
-        {
-          reviewed: true,
-        },
-      ])
-      .eq('id', cellarBottle)
-  } catch (error: any) {
-    alert(error.message)
-  }
+    .eq('id', cellarBottle)
 }
 
 const getBottleReview = async (bottleId: number) => {
-  try {
-    const res = await supabase
-      .from('reviews')
-      .select(`*, profiles(username, initials)`)
-      .eq('bottle_id', bottleId)
-
-    return res.data
-  } catch (error: any) {
-    console.log(error.message)
-  }
+  return await supabase
+    .from('reviews')
+    .select(`*, profiles(username, initials)`)
+    .eq('bottle_id', bottleId)
 }
 
-export { getReviews, addReview, getBottleReview }
+const getReviewsSubscription = async () => {
+  return await supabase
+    .from('reviews')
+    .on('*', (payload) => {
+      console.log('Change received!', payload)
+      return payload
+    })
+    .subscribe()
+}
+
+export { getReviews, addReview, getBottleReview, getReviewsSubscription }

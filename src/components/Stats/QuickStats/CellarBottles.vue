@@ -17,7 +17,7 @@
             {{ $t('cellar.bottlesInCellar') }}
           </h5>
           <span class="font-semibold text-xl text-blueGray-700">
-            {{ totalBottles }}
+            {{ totalCellarBottles }}
           </span>
         </div>
         <div class="relative w-auto pl-4 flex-initial">
@@ -52,7 +52,9 @@
     setup() {
       const store = useStore()
       return {
-        totalBottles: computed(() => store.getters['cellar/totalBottles']),
+        totalCellarBottles: computed(
+          () => store.getters['bottles/totalCellarBottles']
+        ),
       }
     },
   })

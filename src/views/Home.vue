@@ -33,7 +33,7 @@
     </div>
   </h2>
 
-  <Spinner v-if="!getCellar.length" />
+  <Spinner v-if="!getCellarBottles.length" />
 
   <div class="w-full overflow-hidden shadow-lg rounded" v-else>
     <div class="w-full overflow-x-auto">
@@ -63,7 +63,7 @@
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
           <TableItemCellar
-            v-for="bottle in getCellar.slice(0, 5)"
+            v-for="bottle in getCellarBottles"
             :key="bottle.id"
             :item="bottle"
             :actions="false"
@@ -128,7 +128,7 @@
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
           <TableItemReviews
-            v-for="review in getReviews.slice(0, 5)"
+            v-for="review in getReviews"
             :key="review.id"
             :item="review"
             :actions="false"
@@ -167,8 +167,8 @@
 
     computed: {
       ...mapGetters({
-        getCellar: 'cellar/cellar',
-        getReviews: 'reviews/reviews',
+        getCellarBottles: 'bottles/latestCellarBottles',
+        getReviews: 'reviews/latestReviews',
       }),
     },
     watch: {},

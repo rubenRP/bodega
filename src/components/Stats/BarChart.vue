@@ -29,6 +29,26 @@
           },
         },
       },
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.8)',
+        'rgba(54, 162, 235, 0.8)',
+        'rgba(255, 206, 86, 0.8)',
+        'rgba(75, 192, 192, 0.8)',
+        'rgba(153, 102, 255, 0.8)',
+        'rgba(255, 159, 64, 0.8)',
+        'rgba(255, 99, 132, 0.8)',
+        'rgba(54, 162, 235, 0.8)',
+        'rgba(255, 206, 86, 0.8)',
+        'rgba(75, 192, 192, 0.8)',
+        'rgba(153, 102, 255, 0.8)',
+        'rgba(255, 159, 64, 0.8)',
+        'rgba(255, 99, 132, 0.8)',
+        'rgba(54, 162, 235, 0.8)',
+        'rgba(255, 206, 86, 0.8)',
+        'rgba(75, 192, 192, 0.8)',
+        'rgba(153, 102, 255, 0.8)',
+        'rgba(255, 159, 64, 0.8)',
+      ],
     }),
 
     computed: {
@@ -45,7 +65,8 @@
         Object.entries(this.data).forEach(([key, value]) => {
           res.datasets[0].data.push(value)
           res.datasets[0].backgroundColor.push(
-            `hsl(${Math.random() * 360}, 50%, 50%)`
+            this.backgroundColor.pop() ||
+              `hsl(${Math.random() * 360}, 50%, 50%)`
           )
           res.labels.push(key)
         })

@@ -52,7 +52,9 @@
     setup() {
       const store = useStore()
       return {
-        totalCountries: computed(() => store.getters['cellar/totalCountries']),
+        totalCountries: computed(
+          () => store.getters['bottles/totalCellarCountries']
+        ),
       }
     },
   })
