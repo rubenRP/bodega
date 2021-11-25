@@ -340,7 +340,6 @@
           border-collapse
           mb-6
           px-4
-          lg:px-8
           py-3
           flex flex-col
           lg:flex-row

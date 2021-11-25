@@ -11,7 +11,7 @@ const getters = {
   totalReviews: (state: { reviews: [] }) => state.reviews.length,
   latestReviews: (state: { reviews: [] }) => state.reviews.slice(0, 5),
   getReviewsById: (state: { reviews: [] }) => (id: number) => {
-    return state.reviews.find((review: any) => review.id === id)
+    return state.reviews.filter((review: any) => review.bottleId === id)
   },
 }
 
@@ -26,7 +26,9 @@ const actions = {
           bottleId: review.bottle_id,
           rating: review.rating,
           comment: review.comment,
+          date: review.date_added,
           ...review.bottles,
+          ...review.profiles,
         }))
 
         commit('SET_REVIEWS', reviews)

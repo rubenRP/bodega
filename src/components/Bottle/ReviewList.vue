@@ -1,52 +1,56 @@
 <template>
-  <div
-    v-for="(review, index) in reviews"
-    :key="review?.id"
-    :class="index ?? 'border-t-2'"
-  >
-    <div class="flex">
-      <div class="relative w-8 h-8 rounded-full mr-4">
-        <div
-          class="
-            group
-            w-full
-            h-full
-            rounded-full
-            overflow-hidden
-            shadow-inner
-            text-center
-            bg-pink-900
-            table
-            cursor-pointer
-          "
-        >
-          <span class="table-cell text-white align-middle">
-            {{ review.rating }}
-          </span>
+  <div v-if="bottleId">
+    <div
+      v-for="review in getReviewsById(bottleId)"
+      :key="review?.id"
+      class="mb-6"
+    >
+      <div class="flex">
+        <div class="relative w-8 h-8 rounded-full mr-4">
+          <div
+            class="
+              group
+              w-full
+              h-full
+              rounded-full
+              overflow-hidden
+              shadow-inner
+              text-center
+              bg-pink-900
+              table
+              cursor-pointer
+            "
+          >
+            <span class="table-cell text-white align-middle">
+              {{ review.rating }}
+            </span>
+          </div>
         </div>
+        <div class="mt-1 font-semibold">{{ review.username }}</div>
       </div>
-      <div class="mt-1 font-semibold">{{ review.profiles.username }}</div>
+      <div class="mt-4 flex flex-col lg:flex-row">
+        <StarRating :value="review.rating" class="mr-6 mt-1" />
+        <span class="mt-2 lg:mt-0" v-if="review.comment">
+          {{ review.comment }}
+        </span>
+      </div>
+      <div class="mt-2 text-xs">
+        {{ new Date(review.date).toLocaleDateString() }}
+      </div>
     </div>
-    <div class="mt-4 flex flex-col lg:flex-row">
-      <StarRating :value="review.rating" class="mr-6 mt-1" />
-      <span class="mt-2 lg:mt-0" v-if="review.comment">
-        {{ review.comment }}
-      </span>
+    <div
+      v-if="getReviewsById(bottleId).length == 0"
+      class="text-center text-gray-600"
+    >
+      {{ $t('reviews.noReviews') }}
     </div>
-    <div class="mt-2 text-xs">
-      {{ new Date(review.date_added).toLocaleDateString() }}
-    </div>
-  </div>
-  <div v-if="reviews.length == 0" class="text-center text-gray-600">
-    {{ $t('reviews.noReviews') }}
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
   import StarRating from '@/components/Reviews/StarRating.vue'
-  import { getBottleReview } from '@/api/reviews'
-  import { Review } from '@/models/review'
+  import { mapGetters } from 'vuex'
   export default defineComponent({
     name: 'ReviewList',
     components: {
@@ -55,30 +59,10 @@
     props: {
       bottleId: Number,
     },
-    data() {
-      return {
-        reviews: <any>[],
-      }
-    },
-    mounted() {
-      this.fetchReviews()
-    },
-    watch: {
-      bottleId() {
-        this.fetchReviews()
-      },
-    },
-    methods: {
-      async fetchReviews() {
-        if (this.bottleId) {
-          try {
-            const { data } = await getBottleReview(this.bottleId)
-            this.reviews = data
-          } catch (e) {
-            console.error(e)
-          }
-        }
-      },
+    computed: {
+      ...mapGetters({
+        getReviewsById: 'reviews/getReviewsById',
+      }),
     },
   })
 </script>

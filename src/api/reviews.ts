@@ -6,7 +6,8 @@ const getReviews = async () => {
     .select(
       `
         *,
-        bottles(name, cellar, vintage, country, region, apellation, type, mycellar)
+        bottles(name, cellar, vintage, country, region, apellation, type, mycellar),
+        profiles(username, initials)
       `
     )
     .order('date_added', { ascending: false })
