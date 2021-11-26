@@ -91,6 +91,11 @@ const mutations = {
     reviewFinded.rating = review.rating
     reviewFinded.comment = review.comment
   },
+  DELETE_REVIEW: (state: { reviews: any[] }, id: number) => {
+    state.reviews = state.reviews.filter((item: any) => {
+      return item.id !== id
+    })
+  },
 }
 
 export default {
