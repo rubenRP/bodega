@@ -365,7 +365,7 @@
         response.data.shopping_results.filter((product: any, key: number) => {
           if (
             (product.product_id && sellers.includes(product.source)) ||
-            (product.product_id && key < 3)
+            (product.product_id && key < 5)
           ) {
             filteredProducts.push(product)
           }
@@ -389,7 +389,7 @@
         try {
           this.loading = true
           while (this.filteredBottles.length > 0) {
-            const product = this.filteredBottles.pop()
+            const product = this.filteredBottles.shift()
             const bottle = await getBottle(product.product_id)
             //const bottle = this.bottles.pop()
             if (bottle?.data.specs_results?.detalles) {

@@ -1,4 +1,4 @@
-import { getReviews } from '@/api/reviews'
+import { getReviewById, getReviews } from '@/api/reviews'
 import { supabase } from '@/supabase'
 
 const state = () => ({
@@ -34,11 +34,19 @@ const actions = {
         commit('SET_REVIEWS', reviews)
         state.reviewsSubscriber = supabase
           .from('reviews')
-          .on('*', (payload) => {
+          .on('*', async (payload) => {
             console.log('Change received!', payload)
             switch (payload.eventType) {
               case 'INSERT':
-                commit('ADD_REVIEW', payload.new)
+                const bottleData = await getReviewById(payload.new.id)
+                if (bottleData.data) {
+                  const bottleReview = {
+                    ...payload.new,
+                    ...bottleData.data[0].bottles,
+                    ...bottleData.data[0].profiles,
+                  }
+                  commit('ADD_REVIEW', bottleReview)
+                }
                 break
               case 'UPDATE':
                 commit('MODIFY_REVIEW', payload.new)

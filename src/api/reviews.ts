@@ -13,6 +13,19 @@ const getReviews = async () => {
     .order('date_added', { ascending: false })
 }
 
+const getReviewById = async (id: number) => {
+  return await supabase
+    .from('reviews')
+    .select(
+      `
+        *,
+        bottles(name, cellar, vintage, country, region, apellation, type, mycellar),
+        profiles(username, initials)
+      `
+    )
+    .eq('id', id)
+}
+
 const addReview = async (
   cellarBottle: number,
   rating: number,
@@ -54,4 +67,10 @@ const getReviewsSubscription = async () => {
     .subscribe()
 }
 
-export { getReviews, addReview, getBottleReview, getReviewsSubscription }
+export {
+  getReviews,
+  addReview,
+  getBottleReview,
+  getReviewsSubscription,
+  getReviewById,
+}
