@@ -35,7 +35,7 @@
               rounded-full
               bg-emerald-500
             "
-            v-if="monthlyBalance > 0"
+            v-if="monthlyBalance >= 0"
           >
             <font-awesome-icon :icon="['fas', 'thumbs-up']" />
           </div>
