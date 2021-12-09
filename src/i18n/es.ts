@@ -22,6 +22,8 @@ const messages = {
       close: 'Cerrar',
       back: 'Volver',
       start: 'Iniciar',
+      search: 'Buscar',
+      noResults: 'No se encontraron resultados',
     },
     cellar: {
       myCellar: 'Mi Bodega',

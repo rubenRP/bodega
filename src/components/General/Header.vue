@@ -200,6 +200,9 @@
         </ul>
         <ul class="flex flex-row justify-end list-none lg:ml-auto items-end">
           <li class="flex items-center mr-4">
+            <QuickSearch />
+          </li>
+          <li class="flex items-center mr-4">
             <QuickAdd />
           </li>
           <li class="flex items-center">
@@ -217,12 +220,14 @@
   import ProfileMenu from '@/components/General/Header/ProfileMenu.vue'
   import { mapGetters, mapMutations } from 'vuex'
   import QuickAdd from '@/components/General/Header/QuickAdd.vue'
+  import QuickSearch from '@/components/General/Header/QuickSearch.vue'
   export default defineComponent({
     name: 'Header',
     components: {
       Logo,
       ProfileMenu,
       QuickAdd,
+      QuickSearch,
     },
     computed: {
       ...mapGetters({ showSidebar: 'general/sidebar' }),
