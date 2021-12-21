@@ -3,9 +3,8 @@ const colors = require('tailwindcss/colors')
 delete colors['lightBlue']
 
 module.exports = {
-  mode: 'jit',
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: 'class', // or 'media' or 'class'
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     colors: {
       ...colors,
@@ -70,20 +69,6 @@ module.exports = {
       },
     },
   },
-  variants: [
-    'responsive',
-    'group-hover',
-    'focus-within',
-    'first',
-    'last',
-    'odd',
-    'even',
-    'hover',
-    'focus',
-    'active',
-    'visited',
-    'disabled',
-  ],
   plugins: [
     require('@tailwindcss/forms'),
     plugin(function ({ addComponents, theme }) {
