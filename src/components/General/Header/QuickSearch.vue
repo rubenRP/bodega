@@ -55,7 +55,6 @@
   </div>
   <teleport to="#beforeBodyEnd">
     <Modal v-on:closeModal="toggleSearch()" v-show="openedSearch">
-      <template v-slot:header>{{ $t('general.search') }}</template>
       <template v-slot:body>
         <div class="h-72">
           <div class="mb-3 pt-0">

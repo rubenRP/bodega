@@ -28,7 +28,7 @@
           <div
             class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300"
           >
-            <slot name="header"> Header </slot>
+            <slot name="header"></slot>
           </div>
           <button
             class="

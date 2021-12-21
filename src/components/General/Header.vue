@@ -199,7 +199,7 @@
           </li>
         </ul>
         <ul class="flex flex-row justify-end list-none lg:ml-auto items-end">
-          <li class="flex items-center mr-4">
+          <li class="items-center mr-4 hidden lg:flex">
             <QuickSearch />
           </li>
           <li class="flex items-center mr-4">
