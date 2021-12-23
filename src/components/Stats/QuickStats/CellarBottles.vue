@@ -12,14 +12,17 @@
   >
     <div class="flex-auto p-4">
       <div class="flex flex-wrap">
-        <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+        <router-link
+          to="/cellar"
+          class="relative w-full pr-4 max-w-full flex-grow flex-1"
+        >
           <h5 class="text-blueGray-400 uppercase font-bold text-xs">
             {{ $t('cellar.bottlesInCellar') }}
           </h5>
           <span class="font-semibold text-xl text-blueGray-700">
             {{ totalCellarBottles }}
           </span>
-        </div>
+        </router-link>
         <div class="relative w-auto pl-4 flex-initial">
           <div
             class="
@@ -33,7 +36,7 @@
               h-12
               shadow-lg
               rounded-full
-              bg-emerald-500
+              bg-sky-500
             "
           >
             <font-awesome-icon :icon="['fas', 'border-all']" />
