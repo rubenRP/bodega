@@ -26,7 +26,7 @@
       </div>
       <div class="lg:flex flex-grow items-center">
         <ul
-          class="list-none mr-auto z-20 flex-shrink-0 fixed inset-y-0 w-3/4 mt-20 left-0 overflow-y-auto bg-white lg:relative lg:block lg:shadow-none lg:mt-0 lg:flex lg:flex-row lg:w-auto lg:bg-transparent"
+          class="list-none mr-auto z-20 flex-shrink-0 fixed inset-y-0 w-3/4 mt-20 left-0 overflow-y-auto bg-white lg:relative lg:shadow-none lg:mt-0 lg:flex lg:flex-row lg:w-auto lg:bg-transparent"
           :class="showSidebar ? 'shadow-lg' : 'hidden'"
         >
           <li class="flex items-center">

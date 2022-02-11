@@ -1,5 +1,5 @@
 <template>
-  <footer class="px-4 md:px-10 container mx-auto px-4 w-full mt-12">
+  <footer class="px-4 md:px-10 container mx-auto w-full mt-12">
     <div class="block py-4">
       <div class="">
         <hr class="mb-6 border-b-1 border-slate-600" />
