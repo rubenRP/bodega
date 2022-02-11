@@ -1,45 +1,15 @@
 <template>
   <h2
-    class="
-      mt-6
-      text-2xl
-      font-semibold
-      text-gray-700
-      dark:text-gray-200
-      items-center
-      justify-between
-      pb-2
-      flex
-      md:hidden
-    "
+    class="mt-6 text-2xl font-semibold text-gray-700 items-center justify-between pb-2 flex md:hidden"
   >
     <span
       >{{ bottle?.name }}
-      <p class="text-sm text-gray-500 dark:text-gray-400">
+      <p class="text-sm text-gray-500">
         {{ bottle?.cellar }}
       </p>
     </span>
     <button
-      class="
-        text-pink-900
-        bg-transparent
-        border border-solid border-pink-900
-        hover:bg-pink-900 hover:text-white
-        active:bg-pink-700
-        font-bold
-        uppercase
-        text-xs
-        px-4
-        py-2
-        rounded
-        outline-none
-        focus:outline-none
-        mr-1
-        mb-1
-        ease-linear
-        transition-all
-        duration-150
-      "
+      class="text-pink-900 bg-transparent border border-solid border-pink-900 hover:bg-pink-900 hover:text-white active:bg-pink-700 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
       type="button"
       @click="$router.back()"
     >
@@ -47,7 +17,7 @@
     </button>
   </h2>
   <div class="grid gap-6 mb-6 md:my-6 md:grid-cols-3">
-    <div class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800">
+    <div class="min-w-0 p-4 bg-white shadow-lg rounded">
       <img
         aria-hidden="true"
         class="w-auto max-h-80 m-auto"
@@ -62,69 +32,30 @@
       />
     </div>
     <div
-      class="
-        min-w-0
-        p-6
-        bg-white
-        shadow-lg
-        rounded
-        dark:bg-gray-800
-        md:col-span-2
-        flex flex-col
-        justify-between
-      "
+      class="min-w-0 p-6 bg-white shadow-lg rounded md:col-span-2 flex flex-col justify-between"
     >
       <h2
-        class="
-          mb-4
-          text-2xl
-          font-semibold
-          text-gray-700
-          dark:text-gray-200
-          items-center
-          justify-between
-          pb-4
-          border-b-2
-          hidden
-          md:flex
-        "
+        class="mb-4 text-2xl font-semibold text-gray-700 items-center justify-between pb-4 border-b-2 hidden md:flex"
       >
         <span
           >{{ bottle?.name }}
-          <p class="text-sm text-gray-500 dark:text-gray-400">
+          <p class="text-sm text-gray-500">
             {{ bottle?.cellar }}
           </p>
         </span>
         <button
           @click="$router.back()"
-          class="
-            inline-block
-            text-sm
-            px-4
-            py-2
-            leading-none
-            border
-            rounded
-            text-white
-            border-pink-900
-            bg-pink-900
-            hover:bg-transparent hover:text-pink-800
-            ml-4
-            lg:mt-0
-            ease-linear
-            transition-all
-            duration-150
-          "
+          class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-pink-900 bg-pink-900 hover:bg-transparent hover:text-pink-800 ml-4 lg:mt-0 ease-linear transition-all duration-150"
         >
           {{ $t('general.back') }}
         </button>
       </h2>
       <div class="my-4">
-        <div class="text-md text-gray-500 dark:text-gray-400">
+        <div class="text-md text-gray-500">
           <span v-if="bottle?.apellation">{{ bottle?.apellation }} - </span
           ><span class="font-bold">{{ bottle?.vintage }}</span>
         </div>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">
+        <p class="text-sm text-gray-500 mt-4">
           {{ bottle?.grapes?.join(', ') }}
         </p>
         <div class="text-xs mt-6">
@@ -135,16 +66,7 @@
       <div class="flex justify-between items-center pt-4 border-t-2">
         <div>
           <button
-            class="
-              text-pink-900
-              bg-transparent
-              hover:text-pink-700
-              active:text-pink-600
-              font-bold
-              uppercase
-              text-xl
-              mr-6
-            "
+            class="text-pink-900 bg-transparent hover:text-pink-700 active:text-pink-600 font-bold uppercase text-xl mr-6"
             type="button"
             @click="toggleEditBottle()"
             v-if="isAdmin"
@@ -166,27 +88,24 @@
 
   <div
     v-if="bottle?.description"
-    class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800"
+    class="min-w-0 p-4 bg-white shadow-lg rounded"
   >
-    <h4 class="mb-4 font-semibold text-lg text-blueGray-700">
+    <h4 class="mb-4 font-semibold text-lg text-slate-700">
       {{ $t('cellar.description') }}
     </h4>
-    <p class="text-gray-600 dark:text-gray-400 text-sm">
+    <p class="text-gray-600 text-sm">
       {{ bottle?.description }}
     </p>
   </div>
 
-  <div class="min-w-0 p-4 mt-6 bg-white shadow-lg rounded dark:bg-gray-800">
-    <h4 class="mb-4 font-semibold text-lg text-blueGray-700">
+  <div class="min-w-0 p-4 mt-6 bg-white shadow-lg rounded">
+    <h4 class="mb-4 font-semibold text-lg text-slate-700">
       {{ $t('cellar.details') }}
     </h4>
 
     <table class="w-full whitespace-no-wrap">
-      <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.name"
-        >
+      <tbody class="bg-white divide-y">
+        <tr class="text-gray-700 border-b" v-if="bottle?.name">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.name') }}
@@ -194,10 +113,7 @@
           </td>
           <td class="px-4 py-3 text-sm">{{ bottle?.name }}</td>
         </tr>
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.cellar"
-        >
+        <tr class="text-gray-700 border-b" v-if="bottle?.cellar">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.cellar') }}
@@ -205,10 +121,7 @@
           </td>
           <td class="px-4 py-3 text-sm">{{ bottle?.cellar }}</td>
         </tr>
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.vintage"
-        >
+        <tr class="text-gray-700 border-b" v-if="bottle?.vintage">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.vintage') }}
@@ -216,10 +129,7 @@
           </td>
           <td class="px-4 py-3 text-sm">{{ bottle?.vintage }}</td>
         </tr>
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.country"
-        >
+        <tr class="text-gray-700 border-b" v-if="bottle?.country">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.country') }}
@@ -227,10 +137,7 @@
           </td>
           <td class="px-4 py-3 text-sm">{{ bottle?.country }}</td>
         </tr>
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.region"
-        >
+        <tr class="text-gray-700 border-b" v-if="bottle?.region">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.region') }}
@@ -238,10 +145,7 @@
           </td>
           <td class="px-4 py-3 text-sm">{{ bottle?.region }}</td>
         </tr>
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.apellation"
-        >
+        <tr class="text-gray-700 border-b" v-if="bottle?.apellation">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.apellation') }}
@@ -249,10 +153,7 @@
           </td>
           <td class="px-4 py-3 text-sm">{{ bottle?.apellation }}</td>
         </tr>
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.type"
-        >
+        <tr class="text-gray-700 border-b" v-if="bottle?.type">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.type') }}
@@ -260,10 +161,7 @@
           </td>
           <td class="px-4 py-3 text-xs"><WineTag :type="bottle.type" /></td>
         </tr>
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.grapes"
-        >
+        <tr class="text-gray-700 border-b" v-if="bottle?.grapes">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.grapes') }}
@@ -274,10 +172,7 @@
           </td>
         </tr>
 
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.alcohol_content"
-        >
+        <tr class="text-gray-700 border-b" v-if="bottle?.alcohol_content">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.alcoholContent') }}
@@ -285,10 +180,7 @@
           </td>
           <td class="px-4 py-3 text-sm">{{ bottle?.alcohol_content }}</td>
         </tr>
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.climate_soil"
-        >
+        <tr class="text-gray-700 border-b" v-if="bottle?.climate_soil">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.climateSoil') }}
@@ -296,10 +188,7 @@
           </td>
           <td class="px-4 py-3 text-sm">{{ bottle?.climate_soil }}</td>
         </tr>
-        <tr
-          class="text-gray-700 dark:text-gray-400 border-b"
-          v-if="bottle?.consumption"
-        >
+        <tr class="text-gray-700 border-b" v-if="bottle?.consumption">
           <td class="pr-4 py-3">
             <div class="flex items-center text-sm font-semibold">
               {{ $t('cellar.consumption') }}
@@ -312,39 +201,18 @@
   </div>
 
   <div
-    class="
-      relative
-      flex flex-col
-      min-w-0
-      break-words
-      w-full
-      mb-6
-      shadow-lg
-      rounded
-      bg-white
-      mt-6
-    "
+    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white mt-6"
   >
     <div class="rounded-t mb-0 px-4 py-3 border-0">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
-          <h3 class="font-semibold text-lg text-blueGray-700">Reviews</h3>
+          <h3 class="font-semibold text-lg text-slate-700">Reviews</h3>
         </div>
       </div>
     </div>
     <div class="block w-full overflow-x-auto">
       <div
-        class="
-          w-full
-          bg-transparent
-          border-collapse
-          mb-6
-          px-4
-          py-3
-          flex flex-col
-          lg:flex-row
-          items-start
-        "
+        class="w-full bg-transparent border-collapse mb-6 px-4 py-3 flex flex-col lg:flex-row items-start"
       >
         <div class="w-full lg:w-2/3 mr-8">
           <ReviewList :bottleId="bottle.id" v-if="bottle" />

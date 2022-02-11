@@ -1,16 +1,12 @@
 const plugin = require('tailwindcss/plugin')
-const colors = require('tailwindcss/colors')
-delete colors['lightBlue']
 
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: 'class',
   theme: {
-    colors: {
-      ...colors,
-      transparent: 'transparent',
-    },
     extend: {
+      colors: {
+        transparent: 'transparent',
+      },
       minHeight: {
         'screen-75': '75vh',
       },

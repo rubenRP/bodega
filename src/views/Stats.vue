@@ -1,34 +1,10 @@
 <template>
   <h2
-    class="
-      my-8
-      text-xl
-      lg:text-3xl
-      font-semibold
-      flex
-      items-center
-      justify-between
-    "
+    class="my-8 text-xl lg:text-3xl font-semibold flex items-center justify-between"
   >
     <div>
       <div
-        class="
-          p-2
-          text-center
-          inline-flex
-          items-center
-          justify-center
-          w-8
-          lg:w-16
-          h-8
-          lg:h-16
-          mr-2
-          lg:mr-6
-          shadow-lg
-          rounded-full
-          bg-pink-900
-          text-white
-        "
+        class="p-2 text-center inline-flex items-center justify-center w-8 lg:w-16 h-8 lg:h-16 mr-2 lg:mr-6 shadow-lg rounded-full bg-pink-900 text-white"
       >
         <font-awesome-icon
           :icon="['fas', 'chart-line']"
@@ -45,7 +21,7 @@
   </div>
   <div class="grid gap-6 mb-8 md:grid-cols-6">
     <div class="min-w-0 p-4 bg-white shadow-lg rounded md:col-span-4">
-      <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+      <h4 class="mb-4 font-semibold text-gray-800">
         {{ $t('stats.cellarStatus') }}
       </h4>
       <LineChart
@@ -55,21 +31,21 @@
       />
     </div>
     <div class="min-w-0 p-4 bg-white shadow-lg rounded md:col-span-2">
-      <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+      <h4 class="mb-4 font-semibold text-gray-800">
         {{ $t('cellar.types') }}
       </h4>
       <PieChart :data="totalTypes" selector="chart-types" />
     </div>
   </div>
   <div class="grid gap-6 mb-8 md:grid-cols-2">
-    <div class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800">
-      <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+    <div class="min-w-0 p-4 bg-white shadow-lg rounded">
+      <h4 class="mb-4 font-semibold text-gray-800">
         {{ $t('cellar.apellations') }}
       </h4>
       <BarChart :data="totalApellations" selector="chart-dop" />
     </div>
-    <div class="min-w-0 p-4 bg-white shadow-lg rounded dark:bg-gray-800">
-      <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+    <div class="min-w-0 p-4 bg-white shadow-lg rounded">
+      <h4 class="mb-4 font-semibold text-gray-800">
         {{ $t('cellar.vintages') }}
       </h4>
       <BarChart :data="totalVintages" selector="chart-vintages" />

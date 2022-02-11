@@ -19,13 +19,13 @@
       getTypeColor(): string {
         switch (this.type) {
           case 'Red':
-            return 'text-red-700 bg-red-100 dark:bg-opacity-70'
+            return 'text-red-700 bg-red-100 '
           case 'White':
-            return 'text-green-700 bg-green-100 dark:bg-opacity-70 '
+            return 'text-green-700 bg-green-100  '
           case 'Rose':
-            return 'text-pink-700 bg-pink-100 dark:bg-opacity-70'
+            return 'text-pink-700 bg-pink-100'
           default:
-            return 'text-yellow-700 bg-yellow-100 dark:bg-opacity-70'
+            return 'text-yellow-700 bg-yellow-100'
         }
       },
       getTypeTranslated(): string {

@@ -9,19 +9,7 @@
     >
       <div class="relative w-8 h-8 rounded-full">
         <div
-          class="
-            group
-            w-full
-            h-full
-            rounded-full
-            overflow-hidden
-            shadow-inner
-            text-center
-            bg-pink-900
-            table
-            cursor-pointer
-            border border-gray-300
-          "
+          class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-pink-900 table cursor-pointer border border-gray-300"
         >
           <span class="table-cell text-white font-light align-middle">{{
             userInitials
@@ -32,42 +20,13 @@
     <ul
       @keydown.escape="closeProfileMenu"
       v-if="isProfileMenuOpen"
-      class="
-        absolute
-        right-0
-        w-56
-        p-2
-        mt-2
-        space-y-2
-        text-gray-600
-        bg-white
-        border border-gray-100
-        rounded-md
-        shadow-md
-        dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700
-        transition
-        duration-100
-        ease-in
-      "
+      class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md transition duration-100 ease-in"
       aria-label="submenu"
     >
       <li class="flex">
         <router-link
           to="/profile"
-          class="
-            inline-flex
-            items-center
-            w-full
-            px-2
-            py-1
-            text-sm
-            font-semibold
-            transition-colors
-            duration-150
-            rounded-md
-            hover:bg-gray-100 hover:text-gray-800
-            dark:hover:bg-gray-800 dark:hover:text-gray-200
-          "
+          class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800"
         >
           <font-awesome-icon :icon="['fas', 'user']" class="w-4 h-4 mr-3" />
           <span>{{ $t('user.profile') }}</span>
@@ -75,20 +34,7 @@
       </li>
       <li class="flex hidden">
         <a
-          class="
-            inline-flex
-            items-center
-            w-full
-            px-2
-            py-1
-            text-sm
-            font-semibold
-            transition-colors
-            duration-150
-            rounded-md
-            hover:bg-gray-100 hover:text-gray-800
-            dark:hover:bg-gray-800 dark:hover:text-gray-200
-          "
+          class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800"
           href="#"
         >
           <font-awesome-icon
@@ -100,21 +46,7 @@
       </li>
       <li class="flex">
         <a
-          class="
-            inline-flex
-            items-center
-            w-full
-            px-2
-            py-1
-            text-sm
-            font-semibold
-            transition-colors
-            duration-150
-            rounded-md
-            hover:bg-gray-100 hover:text-gray-800
-            dark:hover:bg-gray-800 dark:hover:text-gray-200
-            cursor-pointer
-          "
+          class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 cursor-pointer"
           @click.prevent="logout"
         >
           <font-awesome-icon

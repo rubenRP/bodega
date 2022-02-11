@@ -2,23 +2,17 @@
   <footer class="px-4 md:px-10 container mx-auto px-4 w-full mt-12">
     <div class="block py-4">
       <div class="">
-        <hr class="mb-6 border-b-1 border-blueGray-600" />
+        <hr class="mb-6 border-b-1 border-slate-600" />
         <div
           class="flex flex-wrap items-center md:justify-between justify-center"
         >
           <div class="w-full md:w-4/12">
             <div
-              class="
-                text-sm text-blueGray-500
-                font-semibold
-                py-1
-                text-center
-                md:text-left
-              "
+              class="text-sm text-slate-500 font-semibold py-1 text-center md:text-left"
             >
               Created by
               <a
-                className="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1"
+                className="text-slate-500 hover:text-slate-700 text-sm font-semibold py-1"
                 href="https://rubenr.dev"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -32,7 +26,7 @@
             <ul class="flex flex-wrap list-none md:justify-end justify-center">
               <li>
                 <a
-                  className="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1"
+                  className="text-slate-500 hover:text-slate-700 text-sm font-semibold py-1"
                   href="https://github.com/rubenrp/bodega"
                   target="_blank"
                   rel="noopener noreferrer"

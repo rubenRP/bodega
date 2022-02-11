@@ -11,20 +11,7 @@
   >
     <div>
       <div
-        class="
-          p-2
-          text-center
-          inline-flex
-          items-center
-          justify-center
-          w-12
-          h-12
-          mr-6
-          shadow-lg
-          rounded-full
-          bg-pink-900
-          text-white
-        "
+        class="p-2 text-center inline-flex items-center justify-center w-12 h-12 mr-6 shadow-lg rounded-full bg-pink-900 text-white"
       >
         <font-awesome-icon :icon="['fas', 'wine-bottle']" class="text-xl" />
       </div>
@@ -39,19 +26,7 @@
       <table class="w-full whitespace-no-wrap">
         <thead>
           <tr
-            class="
-              text-xs
-              font-semibold
-              tracking-wide
-              text-left text-gray-500
-              uppercase
-              border-b
-              dark:border-gray-700
-              bg-gray-50
-              dark:text-gray-400 dark:bg-gray-800
-              hidden
-              md:table-row
-            "
+            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50 hidden md:table-row"
           >
             <th class="px-4 py-3">{{ $t('cellar.name') }}</th>
             <th class="px-4 py-3">{{ $t('cellar.vintage') }}</th>
@@ -60,7 +35,7 @@
             <th class="px-4 py-3 text-center">{{ $t('general.qty') }}</th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+        <tbody class="bg-white divide-y">
           <TableItemCellar
             v-for="bottle in getCellarBottles"
             :key="bottle.id"
@@ -76,20 +51,7 @@
   >
     <div>
       <div
-        class="
-          p-2
-          text-center
-          inline-flex
-          items-center
-          justify-center
-          w-12
-          h-12
-          mr-6
-          shadow-lg
-          rounded-full
-          bg-pink-900
-          text-white
-        "
+        class="p-2 text-center inline-flex items-center justify-center w-12 h-12 mr-6 shadow-lg rounded-full bg-pink-900 text-white"
       >
         <font-awesome-icon :icon="['fas', 'star']" class="text-xl" />
       </div>
@@ -104,19 +66,7 @@
       <table class="w-full whitespace-no-wrap">
         <thead>
           <tr
-            class="
-              text-xs
-              font-semibold
-              tracking-wide
-              text-left text-gray-500
-              uppercase
-              border-b
-              dark:border-gray-700
-              bg-gray-50
-              dark:text-gray-400 dark:bg-gray-800
-              hidden
-              md:table-row
-            "
+            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50 hidden md:table-row"
           >
             <th class="px-4 py-3">{{ $t('cellar.name') }}</th>
             <th class="px-4 py-3">{{ $t('cellar.vintage') }}</th>
@@ -125,7 +75,7 @@
             <th class="px-4 py-3 text-center">{{ $t('reviews.rating') }}</th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+        <tbody class="bg-white divide-y">
           <TableItemReviews
             v-for="review in getReviews"
             :key="review.id"
