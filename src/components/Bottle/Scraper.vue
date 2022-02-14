@@ -286,12 +286,12 @@
             updatedData.image = this.newBottleImage
           }
           for (var [key, value] of Object.entries(this.newBottleSpecs)) {
-            if (refs[key].value != 'null') {
-              if (refs[key].value === 'grapes') {
+            if (refs[key][0].value != 'null') {
+              if (refs[key][0].value === 'grapes') {
                 const grapes = value.split(',')
-                updatedData[refs[key].value] = grapes
+                updatedData[refs[key][0].value] = grapes
               } else {
-                updatedData[refs[key].value] = value
+                updatedData[refs[key][0].value] = value
               }
             }
           }
