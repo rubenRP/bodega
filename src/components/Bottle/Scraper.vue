@@ -160,10 +160,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { getBottle, searchForBottle } from '@/api/shopping'
   import { updateBottleMetadata } from '@/api/bottles'
+  import { getBottle, searchForBottle } from '@/api/shopping'
   import Spinner from '@/components/General/Spinner.vue'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     name: 'Scraper',
@@ -222,7 +222,7 @@
             this.bottle?.cellar
           )}`
         )
-        response.data.shopping_results.filter((product: any, key: number) => {
+        response.data.shopping_results?.filter((product: any, key: number) => {
           if (
             (product.product_id && sellers.includes(product.source)) ||
             (product.product_id && key < 5)
@@ -230,6 +230,10 @@
             filteredProducts.push(product)
           }
         })
+
+        if (response.data.error) {
+          this.message = response.data.error
+        }
 
         this.loading = false
 
