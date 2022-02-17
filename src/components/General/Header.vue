@@ -27,7 +27,7 @@
       <div class="lg:flex flex-grow items-center">
         <ul
           class="list-none mr-auto z-20 flex-shrink-0 fixed inset-y-0 w-3/4 mt-20 left-0 overflow-y-auto bg-white lg:relative lg:shadow-none lg:mt-0 lg:flex lg:flex-row lg:w-auto lg:bg-transparent"
-          :class="showSidebar ? 'shadow-lg' : 'hidden'"
+          :class="showSidebar() ? 'shadow-lg' : 'hidden'"
         >
           <li class="flex items-center">
             <router-link
@@ -80,11 +80,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import Logo from '@/components/General/Logo.vue'
   import ProfileMenu from '@/components/General/Header/ProfileMenu.vue'
-  import { mapGetters, mapMutations } from 'vuex'
   import QuickAdd from '@/components/General/Header/QuickAdd.vue'
+  import Logo from '@/components/General/Logo.vue'
+  import { useGeneralStore } from '@/stores/general'
+  import { mapActions, mapState } from 'pinia'
+  import { defineComponent } from 'vue'
   export default defineComponent({
     name: 'Header',
     components: {
@@ -92,13 +93,10 @@
       ProfileMenu,
       QuickAdd,
     },
-    computed: {
-      ...mapGetters({ showSidebar: 'general/sidebar' }),
-    },
+
     methods: {
-      ...mapMutations({
-        toggleSidebar: 'general/TOGGLE_SIDEBAR',
-      }),
+      ...mapState(useGeneralStore, { showSidebar: 'sidebar' }),
+      ...mapActions(useGeneralStore, ['toggleSidebar']),
     },
   })
 </script>

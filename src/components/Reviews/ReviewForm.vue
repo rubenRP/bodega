@@ -66,15 +66,16 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import Modal from '../General/Modal.vue'
   import { addReview } from '@/api/reviews'
-  import { mapActions, mapGetters } from 'vuex'
-  import StarRating from './StarRating.vue'
-  import BottleForm from '../Cellar/BottleForm.vue'
-  import { Review } from '@/models/review'
   import { Bottle } from '@/models/cellar'
+  import { Review } from '@/models/review'
+  import { useGeneralStore } from '@/stores/general'
+  import { mapActions } from 'pinia'
+  import { defineComponent } from 'vue'
+  import BottleForm from '../Cellar/BottleForm.vue'
+  import Modal from '../General/Modal.vue'
   import ProgressBar from '../General/ProgressBar.vue'
+  import StarRating from './StarRating.vue'
 
   export default defineComponent({
     name: 'ReviewForm',
@@ -98,9 +99,7 @@
       }),
     },
     methods: {
-      ...mapActions({
-        addMessage: 'general/addMessage',
-      }),
+      ...mapActions(useGeneralStore, ['addMessage']),
       async createReview() {
         try {
           await addReview(

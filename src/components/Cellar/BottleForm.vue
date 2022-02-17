@@ -206,21 +206,21 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import Modal from '../General/Modal.vue'
-  import QtySelector from '../Bottle/QtySelector.vue'
-  import { required } from '@vuelidate/validators'
-
   import {
     addBottle,
-    updateBottle,
-    removeBottle,
     findBottle,
+    removeBottle,
+    updateBottle,
   } from '@/api/bottles'
   import { Bottle } from '@/models/cellar'
-  import { mapActions } from 'vuex'
-  import ProgressBar from '../General/ProgressBar.vue'
+  import { useGeneralStore } from '@/stores/general'
   import { useVuelidate } from '@vuelidate/core'
+  import { required } from '@vuelidate/validators'
+  import { mapActions } from 'pinia'
+  import { defineComponent } from 'vue'
+  import QtySelector from '../Bottle/QtySelector.vue'
+  import Modal from '../General/Modal.vue'
+  import ProgressBar from '../General/ProgressBar.vue'
 
   export default defineComponent({
     name: 'BottleForm',
@@ -239,6 +239,7 @@
         default: false,
       },
     },
+
     data() {
       return {
         v$: useVuelidate(),
@@ -260,9 +261,7 @@
       }
     },
     methods: {
-      ...mapActions({
-        addMessage: 'general/addMessage',
-      }),
+      ...mapActions(useGeneralStore, ['addMessage']),
       async createBottle() {
         this.v$.$validate()
         if (this.v$.$error) return

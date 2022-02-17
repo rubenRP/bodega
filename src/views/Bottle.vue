@@ -236,15 +236,15 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { mapActions, mapGetters } from 'vuex'
-  import { Bottle } from '@/models/cellar'
-  import WineTag from '../components/Bottle/WineTag.vue'
-  import Scraper from '@/components/Bottle/Scraper.vue'
-  import ReviewList from '@/components/Bottle/ReviewList.vue'
-  import ReviewForm from '@/components/Bottle/ReviewForm.vue'
   import QtySelector from '@/components/Bottle/QtySelector.vue'
+  import ReviewForm from '@/components/Bottle/ReviewForm.vue'
+  import ReviewList from '@/components/Bottle/ReviewList.vue'
+  import Scraper from '@/components/Bottle/Scraper.vue'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
+  import { Bottle } from '@/models/cellar'
+  import { mapActions } from 'pinia'
+  import { defineComponent } from 'vue'
+  import WineTag from '../components/Bottle/WineTag.vue'
 
   export default defineComponent({
     name: 'Bottle',
@@ -275,7 +275,6 @@
     watch: {},
     methods: {
       ...mapActions({
-        addMessage: 'general/addMessage',
         increaseBottleQty: 'bottles/increaseBottleQty',
         decreaseBottleQty: 'bottles/decreaseBottleQty',
       }),
