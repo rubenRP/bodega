@@ -31,10 +31,11 @@
 </template>
 
 <script lang="ts">
+  import { useBottlesStore } from '@/stores/bottles'
+  import { mapActions } from 'pinia'
   import { defineComponent } from 'vue'
   import QtySelector from '../Bottle/QtySelector.vue'
   import WineTag from '../Bottle/WineTag.vue'
-  import { mapActions } from 'vuex'
 
   export default defineComponent({
     name: 'TableItem',
@@ -51,9 +52,7 @@
     },
     computed: {},
     methods: {
-      ...mapActions({
-        decreaseBottleQty: 'bottles/decreaseBottleQty',
-      }),
+      ...mapActions(useBottlesStore, ['decreaseBottleQty']),
       decreaseQty(id: number) {
         this.decreaseBottleQty({ bottleId: id, qty: this.item.qty })
       },

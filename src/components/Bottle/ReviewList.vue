@@ -1,25 +1,10 @@
 <template>
   <div v-if="bottleId">
-    <div
-      v-for="review in getReviewsById(bottleId)"
-      :key="review?.id"
-      class="mb-6"
-    >
+    <div v-for="review in reviewsById(bottleId)" :key="review?.id" class="mb-6">
       <div class="flex">
         <div class="relative w-8 h-8 rounded-full mr-4">
           <div
-            class="
-              group
-              w-full
-              h-full
-              rounded-full
-              overflow-hidden
-              shadow-inner
-              text-center
-              bg-pink-900
-              table
-              cursor-pointer
-            "
+            class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-pink-900 table cursor-pointer"
           >
             <span class="table-cell text-white align-middle">
               {{ review.rating }}
@@ -39,7 +24,7 @@
       </div>
     </div>
     <div
-      v-if="getReviewsById(bottleId).length == 0"
+      v-if="reviewsById(bottleId).length == 0"
       class="text-center text-gray-600"
     >
       {{ $t('reviews.noReviews') }}
@@ -48,9 +33,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
   import StarRating from '@/components/Reviews/StarRating.vue'
-  import { mapGetters } from 'vuex'
+  import { useReviewsStore } from '@/stores/reviews'
+  import { mapState } from 'pinia'
+  import { defineComponent } from 'vue'
   export default defineComponent({
     name: 'ReviewList',
     components: {
@@ -60,9 +46,7 @@
       bottleId: Number,
     },
     computed: {
-      ...mapGetters({
-        getReviewsById: 'reviews/getReviewsById',
-      }),
+      ...mapState(useReviewsStore, ['reviewsById']),
     },
   })
 </script>

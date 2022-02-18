@@ -1,4 +1,12 @@
+import {
+  decreaseBottleQty,
+  getAddedBottles,
+  getAllBottles,
+  getOpenedBottles,
+  increaseBottleQty,
+} from '@/api/bottles'
 import { Bottle } from '@/models/cellar'
+import { supabase } from '@/supabase'
 import { defineStore } from 'pinia'
 
 export const useBottlesStore = defineStore('bottles', {
@@ -19,7 +27,7 @@ export const useBottlesStore = defineStore('bottles', {
         state.bottles.find((bottle: Bottle) => bottle.id === id)
     },
     totalCellarApellations() {
-      return this.cellarBottles().reduce(
+      return this.cellarBottles.reduce(
         (acc: { [x: string]: any }, curr: any) => {
           if (curr.apellation)
             acc[curr.apellation] = (acc[curr.apellation] || 0) + curr.qty
@@ -29,7 +37,7 @@ export const useBottlesStore = defineStore('bottles', {
       )
     },
     totalCellarVintages() {
-      return this.cellarBottles().reduce(
+      return this.cellarBottles.reduce(
         (acc: { [x: string]: any }, curr: any) => {
           acc[curr.vintage] = (acc[curr.vintage] || 0) + curr.qty
           return acc
@@ -38,7 +46,7 @@ export const useBottlesStore = defineStore('bottles', {
       )
     },
     totalCellarCountries() {
-      return this.cellarBottles().reduce(
+      return this.cellarBottles.reduce(
         (acc: { [x: string]: any }, curr: any) => {
           if (curr.country)
             acc[curr.country] = (acc[curr.country] || 0) + curr.qty
@@ -48,7 +56,7 @@ export const useBottlesStore = defineStore('bottles', {
       )
     },
     totalCellarBottles() {
-      return this.cellarBottles().reduce(
+      return this.cellarBottles.reduce(
         (acc: number, curr: any) => acc + curr.qty,
         0
       )
@@ -57,10 +65,10 @@ export const useBottlesStore = defineStore('bottles', {
       return this.bottles.length
     },
     latestCellarBottles() {
-      return this.cellarBottles().slice(0, 5)
+      return this.cellarBottles.slice(0, 5)
     },
     cellarTypes() {
-      return this.cellarBottles().reduce(
+      return this.cellarBottles.reduce(
         (acc: { [x: string]: any }, curr: any) => {
           acc[curr.type] = (acc[curr.type] || 0) + curr.qty
           return acc
@@ -95,6 +103,78 @@ export const useBottlesStore = defineStore('bottles', {
     },
     setAddedBottles(bottles: Bottle[]) {
       this.addedBottles = bottles
+    },
+    async fetchBottles() {
+      try {
+        let { data, error, status } = await getAllBottles()
+        if (error && status !== 406) throw error
+        if (data) {
+          this.setBottles(data)
+          this.subscribeToBottles()
+        }
+      } catch (error: any) {
+        alert(error.message)
+      }
+    },
+    subscribeToBottles() {
+      this.bottlesSubscriber = supabase
+        .from('bottles')
+        .on('*', (payload) => {
+          console.log('Change received!', payload)
+          switch (payload.eventType) {
+            case 'INSERT':
+              this.addBottle(payload.new)
+              break
+            case 'UPDATE':
+              this.modifyBottle(payload.new)
+              return
+            case 'DELETE':
+              this.deleteBottle(payload.new.id)
+              break
+          }
+        })
+        .subscribe()
+    },
+    unsuscribeToBottles() {
+      supabase.removeSubscription(this.bottlesSubscriber)
+    },
+    async destroyBottles() {
+      this.unsuscribeToBottles()
+      this.resetBottles()
+    },
+    async fetchOpenedBottles() {
+      try {
+        let { data } = await getOpenedBottles()
+        if (data) {
+          this.setOpenedBottles(data)
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async fetchAddedBottles() {
+      try {
+        let { data } = await getAddedBottles()
+        if (data) {
+          this.setAddedBottles(data)
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async increaseBottleQty(info: { bottleId: number; qty: number }) {
+      try {
+        increaseBottleQty(info.bottleId, info.qty)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async decreaseBottleQty(info: { bottleId: number; qty: number }) {
+      try {
+        decreaseBottleQty(info.bottleId, info.qty)
+      } catch (e) {
+        console.error(e)
+      }
     },
   },
 })

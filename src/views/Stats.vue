@@ -54,17 +54,19 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { mapActions, mapGetters } from 'vuex'
+  import { getAddedBottles, getOpenedBottles } from '@/api/bottles'
   import TableItemCellar from '@/components/Cellar/TableItem.vue'
   import TableItemReviews from '@/components/Reviews/TableItem.vue'
   import BarChart from '@/components/Stats/BarChart.vue'
   import LineChart from '@/components/Stats/LineChart.vue'
   import PieChart from '@/components/Stats/PieChart.vue'
-  import { getAddedBottles, getOpenedBottles } from '@/api/bottles'
   import CellarBottles from '@/components/Stats/QuickStats/CellarBottles.vue'
   import TotalApellations from '@/components/Stats/QuickStats/TotalApellations.vue'
   import TotalCountries from '@/components/Stats/QuickStats/TotalCountries.vue'
+  import { useBottlesStore } from '@/stores/bottles'
+  import { useReviewsStore } from '@/stores/reviews'
+  import { mapState } from 'pinia'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     name: 'Home',
@@ -87,11 +89,13 @@
       this.fetchAddedBottles()
     },
     computed: {
-      ...mapGetters({
-        getReviews: 'reviews/reviews',
-        totalApellations: 'bottles/totalCellarApellations',
-        totalVintages: 'bottles/totalCellarVintages',
-        totalTypes: 'bottles/getCellarTypes',
+      ...mapState(useBottlesStore, {
+        totalApellations: 'totalCellarApellations',
+        totalVintages: 'totalCellarVintages',
+        totalTypes: 'cellarTypes',
+      }),
+      ...mapState(useReviewsStore, {
+        getReviews: 'reviews',
       }),
       // Group opened bottles by month and year
       openedBottlesByMonth(): any {

@@ -32,19 +32,15 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from 'vue'
-  import { useStore } from 'vuex'
+  import { useBottlesStore } from '@/stores/bottles'
+  import { computed, defineComponent } from 'vue'
 
   export default defineComponent({
     setup() {
-      const store = useStore()
+      const store = useBottlesStore()
 
-      const openedBottles = computed(
-        () => store.getters['bottles/getOpenedBottles']
-      )
-      const addedBottles = computed(
-        () => store.getters['bottles/getAddedBottles']
-      )
+      const openedBottles = computed(() => store.openedBottles)
+      const addedBottles = computed(() => store.addedBottles)
 
       const monthlyOpenedBottles = computed(() => {
         return openedBottles.value.filter(

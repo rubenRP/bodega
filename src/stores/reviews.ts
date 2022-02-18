@@ -14,7 +14,7 @@ export const useReviewsStore = defineStore('reviews', {
     latestReviews(): any[] {
       return this.reviews.slice(0, 5)
     },
-    getReviewById(state) {
+    reviewsById(state) {
       return (id: number) =>
         state.reviews.filter((review: any) => review.bottleId === id)
     },
@@ -42,7 +42,7 @@ export const useReviewsStore = defineStore('reviews', {
               console.log('Change received!', payload)
               switch (payload.eventType) {
                 case 'INSERT':
-                  const bottleData = await this.getReviewById(payload.new.id)
+                  const bottleData = await this.reviewsById(payload.new.id)
                   if (bottleData.data) {
                     const bottleReview = {
                       ...payload.new,

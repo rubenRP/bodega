@@ -39,14 +39,16 @@
 
 <script lang="ts">
   import { useGeneralStore } from '@/stores/general'
-  import { mapActions } from 'pinia'
+  import { mapActions, mapState } from 'pinia'
   import { defineComponent } from 'vue'
 
   export default defineComponent({
     name: 'Notifications',
-
+    computed: {
+      ...mapState(useGeneralStore, ['messages']),
+    },
     methods: {
-      ...mapActions(useGeneralStore, ['removeMessage', 'messages']),
+      ...mapActions(useGeneralStore, ['removeMessage']),
       removeNotification(id: number) {
         this.removeMessage(id)
       },

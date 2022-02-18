@@ -61,10 +61,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { mapGetters, mapActions } from 'vuex'
-
   import { logout } from '@/api/user'
+  import { useUserStore } from '@/stores/user'
+  import { mapState } from 'pinia'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     name: 'ProfileMenu',
@@ -74,7 +74,9 @@
       }
     },
     computed: {
-      ...mapGetters({ userInitials: 'user/initials' }),
+      ...mapState(useUserStore, {
+        userInitials: 'initials',
+      }),
     },
     methods: {
       async logout() {

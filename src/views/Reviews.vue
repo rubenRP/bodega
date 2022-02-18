@@ -56,12 +56,12 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref } from 'vue'
-  import TableItem from '@/components/Reviews/TableItem.vue'
   import Modal from '@/components/General/Modal.vue'
-  import ReviewForm from '@/components/Reviews/ReviewForm.vue'
-  import { mapGetters, useStore } from 'vuex'
   import Spinner from '@/components/General/Spinner.vue'
+  import ReviewForm from '@/components/Reviews/ReviewForm.vue'
+  import TableItem from '@/components/Reviews/TableItem.vue'
+  import { useReviewsStore } from '@/stores/reviews'
+  import { computed, defineComponent, ref } from 'vue'
 
   export default defineComponent({
     components: {
@@ -71,7 +71,7 @@
       Spinner,
     },
     setup() {
-      const store = useStore()
+      const store = useReviewsStore()
       const openedNewReview = ref(false)
       const activeReview = ref({})
 
@@ -85,7 +85,7 @@
       }
 
       const getReviews = computed(() => {
-        return store.getters['reviews/reviews']
+        return store.reviews
       })
 
       return {

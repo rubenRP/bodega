@@ -70,7 +70,8 @@
   import { Bottle } from '@/models/cellar'
   import { Review } from '@/models/review'
   import { useGeneralStore } from '@/stores/general'
-  import { mapActions } from 'pinia'
+  import { useUserStore } from '@/stores/user'
+  import { mapActions, mapState } from 'pinia'
   import { defineComponent } from 'vue'
   import BottleForm from '../Cellar/BottleForm.vue'
   import Modal from '../General/Modal.vue'
@@ -94,8 +95,8 @@
       }
     },
     computed: {
-      ...mapGetters({
-        getUser: 'user/data',
+      ...mapState(useUserStore, {
+        getUser: 'data',
       }),
     },
     methods: {

@@ -242,7 +242,9 @@
   import Scraper from '@/components/Bottle/Scraper.vue'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
   import { Bottle } from '@/models/cellar'
-  import { mapActions } from 'pinia'
+  import { useBottlesStore } from '@/stores/bottles'
+  import { useUserStore } from '@/stores/user'
+  import { mapActions, mapState } from 'pinia'
   import { defineComponent } from 'vue'
   import WineTag from '../components/Bottle/WineTag.vue'
 
@@ -264,20 +266,18 @@
       this.id = parseInt(<any>this.$route.params.id)
     },
     computed: {
-      ...mapGetters({
-        getBottles: 'bottles/bottles',
-        isAdmin: 'user/isAdmin',
-      }),
+      ...mapState(useBottlesStore, ['bottles']),
+      ...mapState(useUserStore, ['isAdmin']),
       bottle() {
-        return this.getBottles.find((bottle: Bottle) => bottle.id === this.id)
+        return this.bottles.find((bottle: Bottle) => bottle.id === this.id)
       },
     },
     watch: {},
     methods: {
-      ...mapActions({
-        increaseBottleQty: 'bottles/increaseBottleQty',
-        decreaseBottleQty: 'bottles/decreaseBottleQty',
-      }),
+      ...mapActions(useBottlesStore, [
+        'increaseBottleQty',
+        'decreaseBottleQty',
+      ]),
       increaseQty(id: number) {
         this.increaseBottleQty({ bottleId: id, qty: this.bottle.qty! })
       },
