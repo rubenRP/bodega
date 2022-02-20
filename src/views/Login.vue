@@ -37,12 +37,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
-  import { supabase } from '@/supabase'
-
   import Logo from '@/components/General/Logo.vue'
-  import { mapGetters } from 'vuex'
   import router from '@/router'
+  import { useUserStore } from '@/stores/user'
+  import { supabase } from '@/supabase'
+  import { mapState } from 'pinia'
+  import { defineComponent, ref } from 'vue'
 
   export default defineComponent({
     name: 'Login',
@@ -77,7 +77,7 @@
         message,
       }
     },
-    computed: { ...mapGetters({ isLoggedIn: 'user/loggedIn' }) },
+    computed: { ...mapState(useUserStore, { isLoggedIn: 'loggedIn' }) },
     watch: {
       isLoggedIn: {
         handler: (isLoggedIn) => {

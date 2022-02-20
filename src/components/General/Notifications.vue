@@ -25,19 +25,7 @@
               {{ message.text }}
             </span>
             <button
-              class="
-                absolute
-                bg-transparent
-                text-2xl
-                font-semibold
-                leading-none
-                right-0
-                top-0
-                mt-4
-                mr-6
-                outline-none
-                focus:outline-none
-              "
+              class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
               @click="removeNotification(message.id)"
             >
               <span>×</span>
@@ -50,16 +38,17 @@
 </template>
 
 <script lang="ts">
+  import { useGeneralStore } from '@/stores/general'
+  import { mapActions, mapState } from 'pinia'
   import { defineComponent } from 'vue'
-  import { mapActions, mapGetters } from 'vuex'
 
   export default defineComponent({
     name: 'Notifications',
     computed: {
-      ...mapGetters({ messages: 'general/messages' }),
+      ...mapState(useGeneralStore, ['messages']),
     },
     methods: {
-      ...mapActions({ removeMessage: 'general/removeMessage' }),
+      ...mapActions(useGeneralStore, ['removeMessage']),
       removeNotification(id: number) {
         this.removeMessage(id)
       },

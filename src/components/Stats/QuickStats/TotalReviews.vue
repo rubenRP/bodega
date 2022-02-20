@@ -25,14 +25,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from 'vue'
-  import { useStore } from 'vuex'
+  import { useReviewsStore } from '@/stores/reviews'
+  import { computed, defineComponent } from 'vue'
 
   export default defineComponent({
     setup() {
-      const store = useStore()
+      const store = useReviewsStore()
       return {
-        totalReviews: computed(() => store.getters['reviews/totalReviews']),
+        totalReviews: computed(() => store.totalReviews),
       }
     },
   })

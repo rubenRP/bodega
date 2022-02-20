@@ -43,10 +43,11 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import StarRating from '@/components/Reviews/StarRating.vue'
   import { addReview } from '@/api/reviews'
-  import { mapGetters } from 'vuex'
+  import StarRating from '@/components/Reviews/StarRating.vue'
+  import { useUserStore } from '@/stores/user'
+  import { mapState } from 'pinia'
+  import { defineComponent } from 'vue'
   export default defineComponent({
     name: 'ReviewForm',
     components: {
@@ -62,8 +63,8 @@
       }
     },
     computed: {
-      ...mapGetters({
-        getUser: 'user/data',
+      ...mapState(useUserStore, {
+        getUser: 'data',
       }),
     },
     methods: {

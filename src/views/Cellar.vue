@@ -70,8 +70,8 @@
   import Modal from '@/components/General/Modal.vue'
   import Spinner from '@/components/General/Spinner.vue'
   import useFilteredBottles from '@/hooks/useFilteredBottles'
+  import { useBottlesStore } from '@/stores/bottles'
   import { computed, defineComponent, ref } from 'vue'
-  import { useStore } from 'vuex'
 
   export default defineComponent({
     components: {
@@ -81,7 +81,7 @@
       Spinner,
     },
     setup() {
-      const store = useStore()
+      const store = useBottlesStore()
       const search = ref('')
       const openedNewBottle = ref(false)
 
@@ -89,9 +89,7 @@
         openedNewBottle.value = !openedNewBottle.value
       }
 
-      const cellarBottles = computed(
-        () => store.getters['bottles/cellarBottles']
-      )
+      const cellarBottles = computed(() => store.cellarBottles)
 
       const filteredCellar = computed(() => {
         return useFilteredBottles(cellarBottles.value, search.value)

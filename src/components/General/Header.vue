@@ -80,11 +80,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import Logo from '@/components/General/Logo.vue'
   import ProfileMenu from '@/components/General/Header/ProfileMenu.vue'
-  import { mapGetters, mapMutations } from 'vuex'
   import QuickAdd from '@/components/General/Header/QuickAdd.vue'
+  import Logo from '@/components/General/Logo.vue'
+  import { useGeneralStore } from '@/stores/general'
+  import { mapActions, mapState } from 'pinia'
+  import { defineComponent } from 'vue'
   export default defineComponent({
     name: 'Header',
     components: {
@@ -93,12 +94,10 @@
       QuickAdd,
     },
     computed: {
-      ...mapGetters({ showSidebar: 'general/sidebar' }),
+      ...mapState(useGeneralStore, { showSidebar: 'sidebar' }),
     },
     methods: {
-      ...mapMutations({
-        toggleSidebar: 'general/TOGGLE_SIDEBAR',
-      }),
+      ...mapActions(useGeneralStore, ['toggleSidebar']),
     },
   })
 </script>

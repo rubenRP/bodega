@@ -236,15 +236,17 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { mapActions, mapGetters } from 'vuex'
-  import { Bottle } from '@/models/cellar'
-  import WineTag from '../components/Bottle/WineTag.vue'
-  import Scraper from '@/components/Bottle/Scraper.vue'
-  import ReviewList from '@/components/Bottle/ReviewList.vue'
-  import ReviewForm from '@/components/Bottle/ReviewForm.vue'
   import QtySelector from '@/components/Bottle/QtySelector.vue'
+  import ReviewForm from '@/components/Bottle/ReviewForm.vue'
+  import ReviewList from '@/components/Bottle/ReviewList.vue'
+  import Scraper from '@/components/Bottle/Scraper.vue'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
+  import { Bottle } from '@/models/cellar'
+  import { useBottlesStore } from '@/stores/bottles'
+  import { useUserStore } from '@/stores/user'
+  import { mapActions, mapState } from 'pinia'
+  import { defineComponent } from 'vue'
+  import WineTag from '../components/Bottle/WineTag.vue'
 
   export default defineComponent({
     name: 'Bottle',
@@ -264,21 +266,18 @@
       this.id = parseInt(<any>this.$route.params.id)
     },
     computed: {
-      ...mapGetters({
-        getBottles: 'bottles/bottles',
-        isAdmin: 'user/isAdmin',
-      }),
+      ...mapState(useBottlesStore, ['bottles']),
+      ...mapState(useUserStore, ['isAdmin']),
       bottle() {
-        return this.getBottles.find((bottle: Bottle) => bottle.id === this.id)
+        return this.bottles.find((bottle: Bottle) => bottle.id === this.id)
       },
     },
     watch: {},
     methods: {
-      ...mapActions({
-        addMessage: 'general/addMessage',
-        increaseBottleQty: 'bottles/increaseBottleQty',
-        decreaseBottleQty: 'bottles/decreaseBottleQty',
-      }),
+      ...mapActions(useBottlesStore, [
+        'increaseBottleQty',
+        'decreaseBottleQty',
+      ]),
       increaseQty(id: number) {
         this.increaseBottleQty({ bottleId: id, qty: this.bottle.qty! })
       },

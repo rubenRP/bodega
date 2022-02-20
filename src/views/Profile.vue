@@ -42,11 +42,11 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-
-  import { mapActions, mapGetters } from 'vuex'
   import { getProfileInfo, logout } from '@/api/user'
+  import { useUserStore } from '@/stores/user'
   import { supabase } from '@/supabase'
+  import { mapState } from 'pinia'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     name: 'Profile',
@@ -63,8 +63,8 @@
     },
     destroyed() {},
     computed: {
-      ...mapGetters({
-        getUser: 'user/data',
+      ...mapState(useUserStore, {
+        getUser: 'data',
       }),
     },
     methods: {

@@ -4,15 +4,16 @@
 </template>
 
 <script lang="ts">
+  import { mapActions, mapState } from 'pinia'
   import { defineComponent } from 'vue'
-
-  import { supabase } from './supabase'
-  import store from './store'
-
+  import ReloadPWA from './components/General/ReloadPWA.vue'
   import AuthLayout from './layouts/AuthLayout.vue'
   import DefaultLayout from './layouts/DefaultLayout.vue'
-  import ReloadPWA from './components/General/ReloadPWA.vue'
-  import { mapActions, mapGetters } from 'vuex'
+  import { useBottlesStore } from './stores/bottles'
+  import { useGeneralStore } from './stores/general'
+  import { useReviewsStore } from './stores/reviews'
+  import { useUserStore } from './stores/user'
+  import { supabase } from './supabase'
 
   export default defineComponent({
     name: 'App',
@@ -27,10 +28,14 @@
       }
     },
     created() {
-      if (this.getBottles.length === 0) {
+      this.fetchUser(supabase.auth.user())
+      supabase.auth.onAuthStateChange((_, session) => {
+        this.fetchUser(session!.user)
+      })
+      if (this.bottles.length === 0) {
         this.fetchBottles()
       }
-      if (this.getReviews.length === 0) {
+      if (this.reviews.length === 0) {
         this.fetchReviews()
       }
       if (this.openedBottles.length === 0) {
@@ -40,20 +45,16 @@
         this.fetchAddedBottles()
       }
     },
-    setup() {
-      store.dispatch('user/fetchUser', supabase.auth.user())
-      supabase.auth.onAuthStateChange((_, session) => {
-        store.dispatch('user/fetchUser', session?.user)
-      })
-    },
     computed: {
-      ...mapGetters({
-        showSidebar: 'general/sidebar',
-        getBottles: 'bottles/bottles',
-        getReviews: 'reviews/reviews',
-        openedBottles: 'bottles/getOpenedBottles',
-        addedBottles: 'bottles/getAddedBottles',
+      ...mapState(useGeneralStore, {
+        showSidebar: 'sidebar',
       }),
+      ...mapState(useBottlesStore, [
+        'bottles',
+        'openedBottles',
+        'addedBottles',
+      ]),
+      ...mapState(useReviewsStore, ['reviews']),
     },
     watch: {
       $route(to) {
@@ -65,12 +66,13 @@
       },
     },
     methods: {
-      ...mapActions({
-        fetchBottles: 'bottles/fetchBottles',
-        fetchReviews: 'reviews/fetchReviews',
-        fetchOpenedBottles: 'bottles/fetchOpenedBottles',
-        fetchAddedBottles: 'bottles/fetchAddedBottles',
-      }),
+      ...mapActions(useBottlesStore, [
+        'fetchBottles',
+        'fetchOpenedBottles',
+        'fetchAddedBottles',
+      ]),
+      ...mapActions(useReviewsStore, ['fetchReviews']),
+      ...mapActions(useUserStore, ['fetchUser']),
     },
   })
 </script>
