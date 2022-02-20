@@ -11,7 +11,8 @@ export const useUserStore = defineStore('user', {
   }),
   getters: {
     isAdmin() {
-      this.role === 1 ? true : false
+      if (this.role === 1) return true
+      else return false
     },
   },
   actions: {
