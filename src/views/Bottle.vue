@@ -62,6 +62,11 @@
           <WineTag :type="bottle?.type" />
         </div>
       </div>
+      <div v-if="bottle?.description" class="mb-6">
+        <p class="text-gray-600 text-sm">
+          {{ bottle?.description }}
+        </p>
+      </div>
 
       <div class="flex justify-between items-center pt-4 border-t-2">
         <div>
@@ -84,18 +89,6 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div
-    v-if="bottle?.description"
-    class="min-w-0 p-4 bg-white shadow-lg rounded"
-  >
-    <h4 class="mb-4 font-semibold text-lg text-slate-700">
-      {{ $t('cellar.description') }}
-    </h4>
-    <p class="text-gray-600 text-sm">
-      {{ bottle?.description }}
-    </p>
   </div>
 
   <div class="min-w-0 p-4 mt-6 bg-white shadow-lg rounded">

@@ -118,7 +118,9 @@
 
     computed: {
       ...mapState(useBottlesStore, ['latestCellarBottles']),
-      ...mapState(useReviewsStore, ['reviews']),
+      ...mapState(useReviewsStore, {
+        reviews: 'latestReviews',
+      }),
     },
     watch: {},
   })
