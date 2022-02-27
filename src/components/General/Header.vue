@@ -41,19 +41,19 @@
           <li class="flex items-center">
             <router-link
               class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-5 lg:px-3 py-4 lg:py-2 flex items-center uppercase lg:font-bold w-full lg:w-auto border-b-2 lg:border-b-0 lg:text-xs"
-              to="/bottles"
+              to="/reviews"
             >
-              <font-awesome-icon icon="wine-bottle" class="mr-4 lg:hidden" />
-              <span>{{ $t('bottles.bottles') }}</span>
+              <font-awesome-icon icon="star" class="mr-4 lg:hidden" />
+              <span>Reviews</span>
             </router-link>
           </li>
           <li class="flex items-center">
             <router-link
               class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-5 lg:px-3 py-4 lg:py-2 flex items-center uppercase lg:font-bold w-full lg:w-auto border-b-2 lg:border-b-0 lg:text-xs"
-              to="/reviews"
+              to="/bottles"
             >
-              <font-awesome-icon icon="star" class="mr-4 lg:hidden" />
-              <span>Reviews</span>
+              <font-awesome-icon icon="wine-bottle" class="mr-4 lg:hidden" />
+              <span>{{ $t('bottles.bottles') }}</span>
             </router-link>
           </li>
           <li class="flex items-center">
