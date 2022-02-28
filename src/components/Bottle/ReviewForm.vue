@@ -45,8 +45,9 @@
 <script lang="ts">
   import { addReview } from '@/api/reviews'
   import StarRating from '@/components/Reviews/StarRating.vue'
+  import { useReviewsStore } from '@/stores/reviews'
   import { useUserStore } from '@/stores/user'
-  import { mapState } from 'pinia'
+  import { mapActions, mapState } from 'pinia'
   import { defineComponent } from 'vue'
   export default defineComponent({
     name: 'ReviewForm',
@@ -68,6 +69,7 @@
       }),
     },
     methods: {
+      ...mapActions(useReviewsStore, ['fetchReviews']),
       async createReview() {
         try {
           if (this.rating > 0) {
@@ -82,6 +84,7 @@
           console.log(e)
         } finally {
           this.clearForm()
+          this.fetchReviews()
         }
       },
       clearForm() {

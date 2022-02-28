@@ -1,8 +1,8 @@
 <template>
-  <div class="mt-12">
+  <div class="mt-6 xl:mt-12">
     <div class="grid gap-6 mb-8 grid-cols-1 xl:grid-cols-3">
-      <CellarBottles />
-      <TotalReviews />
+      <CellarBottles class="hidden md:block" />
+      <TotalReviews class="hidden md:block" />
       <MonthlyOffset />
     </div>
   </div>

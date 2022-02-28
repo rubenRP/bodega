@@ -1,10 +1,10 @@
 <template>
   <h2
-    class="mt-6 text-2xl font-semibold text-gray-700 items-center justify-between pb-2 flex md:hidden"
+    class="mt-6 text-2xl font-semibold text-gray-700 items-center justify-between pb-6 md:pb-2 flex md:hidden"
   >
     <span
       >{{ bottle?.name }}
-      <p class="text-sm text-gray-500">
+      <p class="text-sm text-gray-500 hidden md:block">
         {{ bottle?.cellar }}
       </p>
     </span>
@@ -35,21 +35,26 @@
       class="min-w-0 p-6 bg-white shadow-lg rounded md:col-span-2 flex flex-col justify-between"
     >
       <h2
-        class="mb-4 text-2xl font-semibold text-gray-700 items-center justify-between pb-4 border-b-2 hidden md:flex"
+        class="mb-4 text-2xl font-semibold text-gray-700 items-center justify-between pb-4 border-b-2 flex md:flex"
       >
         <span
           >{{ bottle?.name }}
-          <p class="text-sm text-gray-500">
+          <p class="text-sm text-gray-500 hidden md:block">
             {{ bottle?.cellar }}
           </p>
         </span>
         <button
           @click="$router.back()"
-          class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-pink-900 bg-pink-900 hover:bg-transparent hover:text-pink-800 ml-4 lg:mt-0 ease-linear transition-all duration-150"
+          class="hidden md:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-pink-900 bg-pink-900 hover:bg-transparent hover:text-pink-800 ml-4 lg:mt-0 ease-linear transition-all duration-150"
         >
           {{ $t('general.back') }}
         </button>
       </h2>
+      <div class="md:hidden">
+        <p class="text-gray-500">
+          {{ bottle?.cellar }}
+        </p>
+      </div>
       <div class="my-4">
         <div class="text-md text-gray-500">
           <span v-if="bottle?.apellation">{{ bottle?.apellation }} - </span
@@ -61,11 +66,6 @@
         <div class="text-xs mt-6">
           <WineTag :type="bottle?.type" />
         </div>
-      </div>
-      <div v-if="bottle?.description" class="mb-6">
-        <p class="text-gray-600 text-sm">
-          {{ bottle?.description }}
-        </p>
       </div>
 
       <div class="flex justify-between items-center pt-4 border-t-2">
@@ -83,12 +83,24 @@
         <div class="h-8 w-24 m-left">
           <QtySelector
             :qty="bottle?.qty"
-            v-on:incrementQty="increaseQty(bottle?.id)"
-            v-on:decrementQty="decreaseQty(bottle?.id)"
+            v-on:incrementQty="increaseQty(bottle?.id || -1)"
+            v-on:decrementQty="decreaseQty(bottle?.id || -1)"
           />
         </div>
       </div>
     </div>
+  </div>
+
+  <div
+    v-if="bottle?.description"
+    class="min-w-0 p-4 bg-white shadow-lg rounded"
+  >
+    <h4 class="mb-4 font-semibold text-lg text-slate-700">
+      {{ $t('cellar.description') }}
+    </h4>
+    <p class="text-gray-600 text-sm">
+      {{ bottle?.description }}
+    </p>
   </div>
 
   <div class="min-w-0 p-4 mt-6 bg-white shadow-lg rounded">
@@ -205,7 +217,7 @@
     </div>
     <div class="block w-full overflow-x-auto">
       <div
-        class="w-full bg-transparent border-collapse mb-6 px-4 py-3 flex flex-col lg:flex-row items-start"
+        class="w-full bg-transparent border-collapse lg:mb-6 px-4 py-3 flex flex-col lg:flex-row items-start"
       >
         <div class="w-full lg:w-2/3 mr-8">
           <ReviewList :bottleId="bottle.id" v-if="bottle" />
@@ -272,10 +284,12 @@
         'decreaseBottleQty',
       ]),
       increaseQty(id: number) {
-        this.increaseBottleQty({ bottleId: id, qty: this.bottle.qty! })
+        this.bottle &&
+          this.increaseBottleQty({ bottleId: id, qty: this.bottle.qty! })
       },
       decreaseQty(id: number) {
-        this.decreaseBottleQty({ bottleId: id, qty: this.bottle.qty! })
+        this.bottle &&
+          this.decreaseBottleQty({ bottleId: id, qty: this.bottle.qty! })
       },
       toggleEditBottle() {
         this.editBottle = !this.editBottle
