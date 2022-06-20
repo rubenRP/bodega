@@ -3,7 +3,7 @@
     <div v-for="i in 5" :key="i" :class="{ 'mr-1': i < 5 }">
       <svg
         class="block h-4 w-4"
-        :class="[(value / 10) * 5 >= i ? 'text-pink-900' : 'text-grey']"
+        :class="[9 - value >= i ? 'text-grey' : 'text-pink-900']"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
@@ -16,9 +16,11 @@
   </div>
 </template>
 
-<script>
-  export default {
-    name: 'StarRating',
-    props: ['value'],
-  }
+<script setup lang="ts">
+  defineProps({
+    value: {
+      type: Number,
+      default: 0,
+    },
+  })
 </script>

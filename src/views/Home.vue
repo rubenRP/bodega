@@ -40,7 +40,6 @@
             v-for="bottle in latestCellarBottles"
             :key="bottle.id"
             :item="bottle"
-            :actions="false"
           />
         </tbody>
       </table>

@@ -232,7 +232,6 @@
             <th class="px-4 py-3">{{ $t('cellar.vintage') }}</th>
             <th class="px-4 py-3">{{ $t('cellar.apellation') }}</th>
             <th class="px-4 py-3">{{ $t('cellar.type') }}</th>
-            <th class="px-4 py-3 text-center">{{ $t('general.qty') }}</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y">
@@ -265,7 +264,7 @@
   >
     <div class="block w-full overflow-x-auto">
       <div
-        class="w-full bg-transparent border-collapse lg:mb-6 px-4 py-3 flex flex-col lg:flex-row items-start"
+        class="w-full bg-transparent border-collapse lg:mb-6 px-4 py-6 flex flex-col lg:flex-row items-start"
       >
         <div class="w-full lg:w-2/3 mr-8">
           <ReviewList :bottleId="bottle.id" v-if="bottle" />
