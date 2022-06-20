@@ -64,7 +64,7 @@
   </teleport>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   import BottleForm from '@/components/Cellar/BottleForm.vue'
   import TableItem from '@/components/Cellar/TableItem.vue'
   import Modal from '@/components/General/Modal.vue'
@@ -73,35 +73,17 @@
   import { useBottlesStore } from '@/stores/bottles'
   import { computed, defineComponent, ref } from 'vue'
 
-  export default defineComponent({
-    components: {
-      TableItem,
-      Modal,
-      BottleForm,
-      Spinner,
-    },
-    setup() {
-      const store = useBottlesStore()
-      const search = ref('')
-      const openedNewBottle = ref(false)
+  const store = useBottlesStore()
+  const search = ref('')
+  const openedNewBottle = ref(false)
 
-      const toggleNewBottle = () => {
-        openedNewBottle.value = !openedNewBottle.value
-      }
+  const toggleNewBottle = () => {
+    openedNewBottle.value = !openedNewBottle.value
+  }
 
-      const cellarBottles = computed(() => store.cellarBottles)
+  const cellarBottles = computed(() => store.cellarBottles)
 
-      const filteredCellar = computed(() => {
-        return useFilteredBottles(cellarBottles.value, search.value)
-      })
-
-      return {
-        search,
-        openedNewBottle,
-        filteredCellar,
-        toggleNewBottle,
-        cellarBottles,
-      }
-    },
+  const filteredCellar = computed(() => {
+    return useFilteredBottles(cellarBottles.value, search.value)
   })
 </script>

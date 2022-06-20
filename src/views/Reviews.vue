@@ -55,46 +55,27 @@
   </teleport>
 </template>
 
-<script lang="ts">
-  import Modal from '@/components/General/Modal.vue'
+<script setup lang="ts">
   import Spinner from '@/components/General/Spinner.vue'
   import ReviewForm from '@/components/Reviews/ReviewForm.vue'
   import TableItem from '@/components/Reviews/TableItem.vue'
   import { useReviewsStore } from '@/stores/reviews'
-  import { computed, defineComponent, ref } from 'vue'
+  import { computed, ref } from 'vue'
 
-  export default defineComponent({
-    components: {
-      TableItem,
-      Modal,
-      ReviewForm,
-      Spinner,
-    },
-    setup() {
-      const store = useReviewsStore()
-      const openedNewReview = ref(false)
-      const activeReview = ref({})
+  const store = useReviewsStore()
+  const openedNewReview = ref(false)
+  const activeReview = ref({})
 
-      const toggleNewReview = () => {
-        openedNewReview.value = !openedNewReview.value
-      }
+  const toggleNewReview = () => {
+    openedNewReview.value = !openedNewReview.value
+  }
 
-      const editReview = (review: any) => {
-        activeReview.value = review
-        toggleNewReview()
-      }
+  const editReview = (review: any) => {
+    activeReview.value = review
+    toggleNewReview()
+  }
 
-      const getReviews = computed(() => {
-        return store.reviews
-      })
-
-      return {
-        openedNewReview,
-        activeReview,
-        toggleNewReview,
-        editReview,
-        getReviews,
-      }
-    },
+  const getReviews = computed(() => {
+    return store.reviews
   })
 </script>

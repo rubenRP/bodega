@@ -54,7 +54,6 @@
             v-for="bottle in filteredBottles"
             :key="bottle.id"
             :item="bottle"
-            @editItem="editBottle(bottle)"
           />
         </tbody>
       </table>
@@ -65,44 +64,25 @@
   </teleport>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   import BottleForm from '@/components/Cellar/BottleForm.vue'
   import TableItem from '@/components/Cellar/TableItem.vue'
-  import Modal from '@/components/General/Modal.vue'
   import Spinner from '@/components/General/Spinner.vue'
   import useFilteredBottles from '@/hooks/useFilteredBottles'
   import { useBottlesStore } from '@/stores/bottles'
-  import { computed, defineComponent, ref } from 'vue'
+  import { computed, ref } from 'vue'
 
-  export default defineComponent({
-    components: {
-      TableItem,
-      Modal,
-      BottleForm,
-      Spinner,
-    },
-    setup() {
-      const store = useBottlesStore()
-      const search = ref('')
-      const openedNewBottle = ref(false)
+  const store = useBottlesStore()
+  const search = ref('')
+  const openedNewBottle = ref(false)
 
-      const toggleNewBottle = () => {
-        openedNewBottle.value = !openedNewBottle.value
-      }
+  const toggleNewBottle = () => {
+    openedNewBottle.value = !openedNewBottle.value
+  }
 
-      const bottles = computed(() => store.bottles)
+  const bottles = computed(() => store.bottles)
 
-      const filteredBottles = computed(() => {
-        return useFilteredBottles(bottles.value, search.value)
-      })
-
-      return {
-        bottles,
-        search,
-        openedNewBottle,
-        filteredBottles,
-        toggleNewBottle,
-      }
-    },
+  const filteredBottles = computed(() => {
+    return useFilteredBottles(bottles.value, search.value)
   })
 </script>
