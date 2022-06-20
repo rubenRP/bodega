@@ -205,16 +205,64 @@
     </table>
   </div>
 
+  <h2
+    class="my-8 mt-12 text-xl font-semibold flex items-center justify-between"
+    v-if="cellarBottles.length"
+  >
+    <div>
+      <div
+        class="p-2 text-center inline-flex items-center justify-center w-12 h-12 mr-6 shadow-lg rounded-full bg-pink-900 text-white"
+      >
+        <font-awesome-icon :icon="['fas', 'wine-bottle']" class="text-xl" />
+      </div>
+      <span>{{ $t('cellar.moreFromCellar') }}</span>
+    </div>
+  </h2>
+
+  <Spinner v-if="!cellarBottles.length" />
+
+  <div class="w-full overflow-hidden shadow-lg rounded" v-else>
+    <div class="w-full overflow-x-auto">
+      <table class="w-full whitespace-no-wrap">
+        <thead>
+          <tr
+            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50 hidden md:table-row"
+          >
+            <th class="px-4 py-3">{{ $t('cellar.name') }}</th>
+            <th class="px-4 py-3">{{ $t('cellar.vintage') }}</th>
+            <th class="px-4 py-3">{{ $t('cellar.apellation') }}</th>
+            <th class="px-4 py-3">{{ $t('cellar.type') }}</th>
+            <th class="px-4 py-3 text-center">{{ $t('general.qty') }}</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y">
+          <TableItem
+            v-for="bottle in cellarBottles"
+            :key="bottle.id"
+            :item="bottle"
+            :actions="false"
+          />
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2
+    class="my-8 mt-12 text-xl font-semibold flex items-center justify-between"
+  >
+    <div>
+      <div
+        class="p-2 text-center inline-flex items-center justify-center w-12 h-12 mr-6 shadow-lg rounded-full bg-pink-900 text-white"
+      >
+        <font-awesome-icon :icon="['fas', 'star']" class="text-xl" />
+      </div>
+      <span>Reviews</span>
+    </div>
+  </h2>
+
   <div
     class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white mt-6"
   >
-    <div class="rounded-t mb-0 px-4 py-3 border-0">
-      <div class="flex flex-wrap items-center">
-        <div class="relative w-full max-w-full flex-grow flex-1">
-          <h3 class="font-semibold text-lg text-slate-700">Reviews</h3>
-        </div>
-      </div>
-    </div>
     <div class="block w-full overflow-x-auto">
       <div
         class="w-full bg-transparent border-collapse lg:mb-6 px-4 py-3 flex flex-col lg:flex-row items-start"
@@ -246,6 +294,7 @@
   import ReviewList from '@/components/Bottle/ReviewList.vue'
   import Scraper from '@/components/Bottle/Scraper.vue'
   import BottleForm from '@/components/Cellar/BottleForm.vue'
+  import TableItem from '@/components/Cellar/TableItem.vue'
   import { Bottle } from '@/models/cellar'
   import { useBottlesStore } from '@/stores/bottles'
   import { useUserStore } from '@/stores/user'
@@ -262,6 +311,7 @@
       ReviewList,
       BottleForm,
       ReviewForm,
+      TableItem,
     },
     data: () => ({
       id: 0,
@@ -271,10 +321,17 @@
       this.id = parseInt(<any>this.$route.params.id)
     },
     computed: {
-      ...mapState(useBottlesStore, ['bottles']),
+      ...mapState(useBottlesStore, ['bottles', 'bottlesFromCellar']),
       ...mapState(useUserStore, ['isAdmin']),
       bottle() {
         return this.bottles.find((bottle: Bottle) => bottle.id === this.id)
+      },
+      cellarBottles() {
+        if (this.bottle) {
+          return this.bottlesFromCellar(this.bottle)
+        } else {
+          return []
+        }
       },
     },
     watch: {},

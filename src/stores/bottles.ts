@@ -76,6 +76,15 @@ export const useBottlesStore = defineStore('bottles', {
         {}
       )
     },
+    bottlesFromCellar(state) {
+      return (bottle: Bottle) =>
+        state.bottles.filter(
+          (b: Bottle) =>
+            b.cellar.toLowerCase() === bottle.cellar.toLowerCase() &&
+            b.id !== bottle.id &&
+            b.qty! > 0
+        )
+    },
   },
   actions: {
     setBottles(bottles: Bottle[]) {
