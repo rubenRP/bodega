@@ -20,4 +20,5 @@ export interface Bottle {
   grapes?: [string]
   description?: string
   image?: string
+  location?: string
 }

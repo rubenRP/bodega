@@ -14,64 +14,18 @@
       >
         <Logo />
       </div>
-      <h1
-        class="
-          mb-4
-          text-xl
-          font-semibold
-          text-gray-700
-          dark:text-gray-200
-          hidden
-        "
-      >
-        Login
-      </h1>
+      <h1 class="mb-4 text-xl font-semibold text-gray-700 hidden">Login</h1>
       <form @submit.prevent="handleLogin">
         <div>
           <input
             type="submit"
-            class="
-              bg-pink-900
-              text-white
-              active:bg-pink-700
-              font-bold
-              uppercase
-              text-sm
-              px-6
-              py-3
-              rounded
-              shadow
-              hover:shadow-lg
-              outline-none
-              focus:outline-none
-              mr-1
-              mb-1
-              ease-linear
-              transition-all
-              duration-150
-              w-full
-              cursor-pointer
-            "
+            class="bg-pink-900 text-white active:bg-pink-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full cursor-pointer"
             :value="loading ? 'Loading' : 'Login with Google'"
             :disabled="loading"
           />
 
           <div
-            class="
-              flex
-              items-center
-              justify-between
-              px-4
-              py-2
-              mt-8
-              text-sm
-              border-pink-900
-              bg-pink-100
-              rounded-lg
-              focus:border-pink-800
-              dark:text-gray-300
-              border
-            "
+            class="flex items-center justify-between px-4 py-2 mt-8 text-sm border-pink-900 bg-pink-100 rounded-lg focus:border-pink-800 border"
             v-if="message"
           >
             <div class="flex items-center">{{ message }}</div>
@@ -83,12 +37,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
-  import { supabase } from '@/supabase'
-
   import Logo from '@/components/General/Logo.vue'
-  import { mapGetters } from 'vuex'
   import router from '@/router'
+  import { useUserStore } from '@/stores/user'
+  import { supabase } from '@/supabase'
+  import { mapState } from 'pinia'
+  import { defineComponent, ref } from 'vue'
 
   export default defineComponent({
     name: 'Login',
@@ -123,7 +77,7 @@
         message,
       }
     },
-    computed: { ...mapGetters({ isLoggedIn: 'user/loggedIn' }) },
+    computed: { ...mapState(useUserStore, { isLoggedIn: 'loggedIn' }) },
     watch: {
       isLoggedIn: {
         handler: (isLoggedIn) => {

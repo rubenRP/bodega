@@ -1,53 +1,17 @@
 <template>
   <div
-    class="
-      relative
-      flex flex-col
-      min-w-0
-      break-words
-      w-full
-      mb-6
-      shadow-lg
-      rounded
-      bg-white
-      mt-6
-    "
+    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white mt-6"
   >
     <div class="rounded-t mb-0 px-4 py-3 border-0">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <h3
-            class="
-              font-semibold
-              text-lg text-blueGray-700
-              flex
-              items-center
-              justify-between
-            "
+            class="font-semibold text-lg text-slate-700 flex items-center justify-between"
           >
             <span>Scraper</span>
             <button
               v-if="!loading || finished"
-              class="
-                text-pink-900
-                bg-transparent
-                border border-solid border-pink-900
-                hover:bg-pink-900 hover:text-white
-                active:bg-pink-700
-                font-bold
-                uppercase
-                text-xs
-                px-4
-                py-2
-                rounded
-                outline-none
-                focus:outline-none
-                mr-1
-                mb-1
-                ease-linear
-                transition-all
-                duration-150
-              "
+              class="text-pink-900 bg-transparent border border-solid border-pink-900 hover:bg-pink-900 hover:text-white active:bg-pink-700 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
               @click="scrapeBottle"
             >
@@ -59,29 +23,11 @@
     </div>
     <div class="block w-full overflow-x-auto">
       <div
-        class="
-          w-full
-          bg-transparent
-          border-collapse
-          mb-6
-          px-8
-          py-3
-          flex flex-col
-          items-start
-        "
+        class="w-full bg-transparent border-collapse mb-6 px-8 py-3 flex flex-col items-start"
       >
         <div class="mx-auto w-full container mt-6" v-if="message">
           <div
-            class="
-              text-white
-              px-6
-              py-4
-              border-0
-              rounded
-              relative
-              mb-4
-              bg-orange-500
-            "
+            class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-orange-500"
           >
             <span class="text-xl inline-block mr-5 align-middle">
               <font-awesome-icon :icon="['fas', 'exclamation-triangle']" />
@@ -101,13 +47,13 @@
               :src="newBottleImage"
             />
             <div
-              class="min-w-0 y-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+              class="min-w-0 y-4 bg-white rounded-lg shadow-xs"
               v-if="newBottleDescription"
             >
-              <h4 class="mb-4 font-semibold dark:text-gray-300">
+              <h4 class="mb-4 font-semibold">
                 {{ $t('cellar.description') }}
               </h4>
-              <p class="text-gray-600 dark:text-gray-400 text-xs">
+              <p class="text-gray-600 text-xs">
                 {{ newBottleDescription }}
               </p>
             </div>
@@ -116,11 +62,9 @@
           <Spinner v-if="loading && !finished" class="lg:col-span-6" />
           <div class="lg:col-span-6" v-else>
             <table class="w-full whitespace-no-wrap">
-              <tbody
-                class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
-              >
+              <tbody class="bg-white divide-y">
                 <tr
-                  class="text-gray-700 dark:text-gray-400 border-b"
+                  class="text-gray-700 border-b"
                   v-for="(value, key) in newBottleSpecs"
                   :key="key"
                 >
@@ -132,21 +76,7 @@
                   <td class="px-4 py-3 text-sm">{{ value }}</td>
                   <td class="px-4 py-3 text-sm">
                     <select
-                      class="
-                        block
-                        w-full
-                        mt-1
-                        text-sm
-                        dark:border-gray-600 dark:bg-gray-700
-                        focus:border-red-800
-                        focus:outline-none
-                        focus:shadow-outline-purple
-                        dark:text-gray-300 dark:focus:shadow-outline-gray
-                        border-gray-200 border
-                        rounded-md
-                        px-3
-                        py-2
-                      "
+                      class="block w-full mt-1 text-sm focus:border-red-800 focus:outline-none focus:shadow-outline-purple border-gray-200 border rounded-md px-3 py-2"
                       :ref="key"
                     >
                       <option value="null">
@@ -177,32 +107,18 @@
             </table>
 
             <div class="flex mt-6 mb-6 text-sm px-4" v-if="bottleFounded">
-              <label class="flex items-center dark:text-gray-400">
+              <label class="flex items-center">
                 <input
                   type="checkbox"
-                  class="
-                    text-purple-600
-                    form-checkbox
-                    focus:border-purple-400
-                    focus:outline-none
-                    focus:shadow-outline-purple
-                    dark:focus:shadow-outline-gray
-                  "
+                  class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple"
                   v-model="updatePhoto"
                 />
                 <span class="ml-2"> Update photo </span>
               </label>
-              <label class="flex items-center dark:text-gray-400 ml-4">
+              <label class="flex items-center ml-4">
                 <input
                   type="checkbox"
-                  class="
-                    text-purple-600
-                    form-checkbox
-                    focus:border-purple-400
-                    focus:outline-none
-                    focus:shadow-outline-purple
-                    dark:focus:shadow-outline-gray
-                  "
+                  class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple"
                   v-model="updateDescription"
                 />
                 <span class="ml-2"> Update description </span>
@@ -215,25 +131,7 @@
           <div>
             <button
               @click="suggestBottle()"
-              class="
-                text-pink-900
-                bg-transparent
-                border border-solid border-pink-900
-                hover:bg-pink-700 hover:text-white
-                active:bg-pink-700
-                font-bold
-                uppercase
-                text-xs
-                px-4
-                py-2
-                rounded
-                outline-none
-                focus:outline-none
-                mb-1
-                ease-linear
-                transition-all
-                duration-150
-              "
+              class="text-pink-900 bg-transparent border border-solid border-pink-900 hover:bg-pink-700 hover:text-white active:bg-pink-700 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
               v-if="!finished"
             >
               {{ $t('cellar.nextSuggestion') }}
@@ -242,26 +140,7 @@
           <div class="flex justify-between">
             <button
               @click="updateAndSuggestBottle()"
-              class="
-                text-pink-900
-                bg-transparent
-                border border-solid border-pink-900
-                hover:bg-pink-700 hover:text-white
-                active:bg-pink-700
-                font-bold
-                uppercase
-                text-xs
-                px-4
-                py-2
-                rounded
-                outline-none
-                focus:outline-none
-                mb-1
-                ease-linear
-                transition-all
-                duration-150
-                mr-4
-              "
+              class="text-pink-900 bg-transparent border border-solid border-pink-900 hover:bg-pink-700 hover:text-white active:bg-pink-700 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mb-1 ease-linear transition-all duration-150 mr-4"
               v-if="!finished"
             >
               {{ $t('cellar.updateAndNextSuggestion') }}
@@ -269,26 +148,7 @@
 
             <button
               @click="updateBottle()"
-              class="
-                bg-pink-900
-                text-white
-                active:pink-700
-                font-bold
-                uppercase
-                text-xs
-                px-4
-                py-2
-                rounded
-                shadow
-                hover:shadow-md
-                outline-none
-                focus:outline-none
-                mr-1
-                mb-1
-                ease-linear
-                transition-all
-                duration-150
-              "
+              class="bg-pink-900 text-white active:pink-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             >
               {{ $t('cellar.updateBottle') }}
             </button>
@@ -300,10 +160,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { getBottle, searchForBottle } from '@/api/shopping'
   import { updateBottleMetadata } from '@/api/bottles'
+  import { getBottle, searchForBottle } from '@/api/shopping'
   import Spinner from '@/components/General/Spinner.vue'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     name: 'Scraper',
@@ -362,7 +222,7 @@
             this.bottle?.cellar
           )}`
         )
-        response.data.shopping_results.filter((product: any, key: number) => {
+        response.data.shopping_results?.filter((product: any, key: number) => {
           if (
             (product.product_id && sellers.includes(product.source)) ||
             (product.product_id && key < 5)
@@ -370,6 +230,10 @@
             filteredProducts.push(product)
           }
         })
+
+        if (response.data.error) {
+          this.message = response.data.error
+        }
 
         this.loading = false
 
@@ -422,12 +286,12 @@
             updatedData.image = this.newBottleImage
           }
           for (var [key, value] of Object.entries(this.newBottleSpecs)) {
-            if (refs[key].value != 'null') {
-              if (refs[key].value === 'grapes') {
+            if (refs[key][0].value != 'null') {
+              if (refs[key][0].value === 'grapes') {
                 const grapes = value.split(',')
-                updatedData[refs[key].value] = grapes
+                updatedData[refs[key][0].value] = grapes
               } else {
-                updatedData[refs[key].value] = value
+                updatedData[refs[key][0].value] = value
               }
             }
           }

@@ -1,4 +1,5 @@
-import store from '@/store'
+import { useGeneralStore } from '@/stores/general'
+import { useUserStore } from '@/stores/user'
 import Bottle from '@/views/Bottle.vue'
 import Bottles from '@/views/Bottles.vue'
 import Cellar from '@/views/Cellar.vue'
@@ -92,8 +93,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const userStore = useUserStore()
+  const generalStore = useGeneralStore()
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!store.getters['user/loggedIn']) {
+    if (!userStore.loggedIn) {
       next({ name: 'Login' })
     } else {
       next()
@@ -101,7 +104,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
-  store.commit('general/CLOSE_SIDEBAR')
+  generalStore.closeSidebar()
 })
 
 export default router

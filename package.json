@@ -7,7 +7,9 @@
     "run-build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
     "serve": "serve dist",
     "lint:script": "eslint --ext .ts,vue --ignore-path .gitignore .",
-    "lint:style": "stylelint src/**/*.{css,scss,vue}"
+    "lint:style": "stylelint src/**/*.{css,scss,vue}",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -22,17 +24,18 @@
     "@vuelidate/validators": "^2.0.0-alpha.25",
     "axios": "^0.24.0",
     "chart.js": "^3.5.0",
+    "pinia": "^2.0.11",
     "vue": "^3.0.5",
     "vue-i18n": "^9.1.6",
-    "vue-router": "^4.0.10",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.0.10"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.2.3",
+    "@vitejs/plugin-vue": "^2.2.2",
     "@vue/compiler-sfc": "^3.0.5",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "autoprefixer": "^10.4.0",
+    "c8": "^7.11.0",
     "cross-env": "^7.0.3",
     "eslint": "^7.29.0",
     "eslint-plugin-prettier": "^3.4.0",
@@ -47,8 +50,9 @@
     "stylelint-config-standard": "^22.0.0",
     "tailwindcss": "^3.0.5",
     "typescript": "^4.3.2",
-    "vite": "^2.3.7",
+    "vite": "^2.8.4",
     "vite-plugin-pwa": "^0.9.3",
+    "vitest": "^0.15.1",
     "workbox-precaching": "^6.1.5"
   },
   "husky": {

@@ -76,6 +76,7 @@ const messages = {
       bottlesInCellar: 'Botellas Bodega',
       monthlyBottles: 'Balance Mensual',
       types: 'Tipos de vino',
+      moreFromCellar: 'Más de la bodega',
     },
     reviews: {
       rating: 'Valoración',

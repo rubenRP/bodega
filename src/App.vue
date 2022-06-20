@@ -1,76 +1,60 @@
 <template>
   <ReloadPWA />
-  <component :is="layout" :class="showSidebar ? 'overflow-hidden' : ''" />
+  <component
+    :is="layout == 'AuthLayout' ? AuthLayout : DefaultLayout"
+    :class="showSidebar ? 'overflow-hidden' : ''"
+  />
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
-  import { supabase } from './supabase'
-  import store from './store'
-
+<script setup lang="ts">
+  import { watch, ref } from 'vue'
+  import { useRoute } from 'vue-router'
+  import ReloadPWA from './components/General/ReloadPWA.vue'
   import AuthLayout from './layouts/AuthLayout.vue'
   import DefaultLayout from './layouts/DefaultLayout.vue'
-  import ReloadPWA from './components/General/ReloadPWA.vue'
-  import { mapActions, mapGetters } from 'vuex'
+  import { useBottlesStore } from './stores/bottles'
+  import { useGeneralStore } from './stores/general'
+  import { useReviewsStore } from './stores/reviews'
+  import { useUserStore } from './stores/user'
+  import { supabase } from './supabase'
 
-  export default defineComponent({
-    name: 'App',
-    components: {
-      AuthLayout,
-      DefaultLayout,
-      ReloadPWA,
-    },
-    data() {
-      return {
-        layout: '',
-      }
-    },
-    created() {
-      if (this.getBottles.length === 0) {
-        this.fetchBottles()
-      }
-      if (this.getReviews.length === 0) {
-        this.fetchReviews()
-      }
-      if (this.openedBottles.length === 0) {
-        this.fetchOpenedBottles()
-      }
-      if (this.addedBottles.length === 0) {
-        this.fetchAddedBottles()
-      }
-    },
-    setup() {
-      store.dispatch('user/fetchUser', supabase.auth.user())
-      supabase.auth.onAuthStateChange((_, session) => {
-        store.dispatch('user/fetchUser', session?.user)
-      })
-    },
-    computed: {
-      ...mapGetters({
-        showSidebar: 'general/sidebar',
-        getBottles: 'bottles/bottles',
-        getReviews: 'reviews/reviews',
-        openedBottles: 'bottles/getOpenedBottles',
-        addedBottles: 'bottles/getAddedBottles',
-      }),
-    },
-    watch: {
-      $route(to) {
-        if (to.meta.layout !== undefined) {
-          this.layout = to.meta.layout
-        } else {
-          this.layout = 'DefaultLayout'
-        }
-      },
-    },
-    methods: {
-      ...mapActions({
-        fetchBottles: 'bottles/fetchBottles',
-        fetchReviews: 'reviews/fetchReviews',
-        fetchOpenedBottles: 'bottles/fetchOpenedBottles',
-        fetchAddedBottles: 'bottles/fetchAddedBottles',
-      }),
-    },
+  const layout = ref()
+  const generalStore = useGeneralStore()
+  const showSidebar = generalStore.sidebar
+  const bottleStore = useBottlesStore()
+  const bottles = bottleStore.bottles
+  const openedBottles = bottleStore.openedBottles
+  const addedBottles = bottleStore.addedBottles
+  const reviewsStore = useReviewsStore()
+  const reviews = reviewsStore.reviews
+  const userStore = useUserStore()
+  const route = useRoute()
+
+  userStore.fetchUser(supabase.auth.user())
+  supabase.auth.onAuthStateChange((_, session) => {
+    userStore.fetchUser(session!.user)
   })
+  if (bottles.length === 0) {
+    bottleStore.fetchBottles()
+  }
+  if (reviews.length === 0) {
+    reviewsStore.fetchReviews()
+  }
+  if (openedBottles.length === 0) {
+    bottleStore.fetchOpenedBottles()
+  }
+  if (addedBottles.length === 0) {
+    bottleStore.fetchAddedBottles()
+  }
+
+  watch(
+    () => route.meta.layout,
+    async (newLayout) => {
+      if (newLayout !== undefined) {
+        layout.value = newLayout
+      } else {
+        layout.value = 'DefaultLayout'
+      }
+    }
+  )
 </script>

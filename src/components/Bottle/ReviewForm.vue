@@ -1,56 +1,21 @@
 <template>
-  <h4 class="font-semibold text-md text-blueGray-700 mt-12 lg:mt-0">
+  <h4 class="font-semibold text-md text-slate-700 mt-12 lg:mt-0">
     {{ $t('reviews.addReview') }}
   </h4>
   <div class="">
     <label class="block mt-4 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">{{
-        $t('reviews.rating')
-      }}</span>
+      <span class="text-gray-700">{{ $t('reviews.rating') }}</span>
       <input
-        class="
-          block
-          w-full
-          mt-1
-          text-sm
-          dark:border-gray-600 dark:bg-gray-700
-          focus:border-purple-400 focus:outline-none focus:shadow-outline-purple
-          dark:text-gray-300 dark:focus:shadow-outline-gray
-          border-gray-200 border
-          rounded-md
-          py-2
-        "
+        class="block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple border-gray-200 border rounded-md py-2"
         type="range"
         min="1"
         max="10"
         v-model="rating"
         required
       />
-      <div
-        class="
-          text-gray-700
-          dark:text-gray-400
-          mt-4
-          flex
-          justify-between
-          items-center
-        "
-      >
+      <div class="text-gray-700 mt-4 flex justify-between items-center">
         <span
-          class="
-            block
-            w-auto
-            text-sm
-            dark:border-gray-600 dark:bg-gray-700
-            focus:border-purple-400
-            focus:outline-none
-            focus:shadow-outline-purple
-            dark:text-gray-300 dark:focus:shadow-outline-gray
-            border-gray-200 border
-            rounded-md
-            px-3
-            py-2
-          "
+          class="block w-auto text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple border-gray-200 border rounded-md px-3 py-2"
           >{{ rating }}</span
         >
         <StarRating :value="rating" />
@@ -58,47 +23,16 @@
     </label>
 
     <label class="block mt-4 mb-4 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">{{
-        $t('reviews.comment')
-      }}</span>
+      <span class="text-gray-700">{{ $t('reviews.comment') }}</span>
       <textarea
-        class="
-          block
-          w-full
-          mt-1
-          text-sm
-          dark:border-gray-600 dark:bg-gray-700
-          focus:border-red-800 focus:outline-none focus:shadow-outline-purple
-          dark:text-gray-300 dark:focus:shadow-outline-gray
-          border-gray-200 border
-          rounded-md
-          px-3
-          py-2
-        "
+        class="block w-full mt-1 text-sm focus:border-red-800 focus:outline-none focus:shadow-outline-purple border-gray-200 border rounded-md px-3 py-2"
         placeholder="Comment"
         v-model="comment"
       />
     </label>
     <div class="flex justify-end">
       <button
-        class="
-          inline-block
-          text-sm
-          px-4
-          py-2
-          leading-none
-          border
-          rounded
-          text-white
-          border-pink-900
-          bg-pink-900
-          hover:bg-transparent hover:text-pink-800
-          mr-1
-          mb-1
-          ease-linear
-          transition-all
-          duration-150
-        "
+        class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-pink-900 bg-pink-900 hover:bg-transparent hover:text-pink-800 mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         @click="createReview()"
       >
@@ -109,10 +43,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import StarRating from '@/components/Reviews/StarRating.vue'
   import { addReview } from '@/api/reviews'
-  import { mapGetters } from 'vuex'
+  import StarRating from '@/components/Reviews/StarRating.vue'
+  import { useReviewsStore } from '@/stores/reviews'
+  import { useUserStore } from '@/stores/user'
+  import { mapActions, mapState } from 'pinia'
+  import { defineComponent } from 'vue'
   export default defineComponent({
     name: 'ReviewForm',
     components: {
@@ -128,11 +64,12 @@
       }
     },
     computed: {
-      ...mapGetters({
-        getUser: 'user/data',
+      ...mapState(useUserStore, {
+        getUser: 'data',
       }),
     },
     methods: {
+      ...mapActions(useReviewsStore, ['fetchReviews']),
       async createReview() {
         try {
           if (this.rating > 0) {
@@ -147,6 +84,7 @@
           console.log(e)
         } finally {
           this.clearForm()
+          this.fetchReviews()
         }
       },
       clearForm() {
