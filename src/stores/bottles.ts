@@ -78,12 +78,13 @@ export const useBottlesStore = defineStore('bottles', {
     },
     bottlesFromCellar(state) {
       return (bottle: Bottle) =>
-        state.bottles.filter(
-          (b: Bottle) =>
-            b.cellar.toLowerCase() === bottle.cellar.toLowerCase() &&
-            b.id !== bottle.id &&
-            b.qty! > 0
-        )
+        state.bottles
+          .filter(
+            (b: Bottle) =>
+              b.cellar.toLowerCase() === bottle.cellar.toLowerCase() &&
+              b.id !== bottle.id
+          )
+          .sort((a: Bottle, b: Bottle) => b.vintage - a.vintage)
     },
   },
   actions: {
@@ -130,15 +131,22 @@ export const useBottlesStore = defineStore('bottles', {
         .from('bottles')
         .on('*', (payload) => {
           console.log('Change received!', payload)
+          // TODO Refactor this
           switch (payload.eventType) {
             case 'INSERT':
               this.addBottle(payload.new)
+              this.fetchAddedBottles()
+              this.fetchOpenedBottles()
               break
             case 'UPDATE':
               this.modifyBottle(payload.new)
+              this.fetchAddedBottles()
+              this.fetchOpenedBottles()
               return
             case 'DELETE':
               this.deleteBottle(payload.new.id)
+              this.fetchAddedBottles()
+              this.fetchOpenedBottles()
               break
           }
         })

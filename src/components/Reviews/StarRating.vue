@@ -1,6 +1,6 @@
 <template>
-  <div class="flex">
-    <div v-for="i in 5" :key="i" :class="{ 'mr-1': i < 5 }">
+  <div class="flex flex-row-reverse">
+    <div v-for="i in 5" :key="i" class="mr-1">
       <svg
         class="block h-4 w-4"
         :class="[9 - value >= i ? 'text-grey' : 'text-pink-900']"
