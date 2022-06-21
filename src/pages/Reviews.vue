@@ -32,7 +32,6 @@
             <th class="px-4 py-3">{{ $t('cellar.apellation') }}</th>
             <th class="px-4 py-3">{{ $t('cellar.type') }}</th>
             <th class="px-4 py-3 text-center">{{ $t('reviews.rating') }}</th>
-            <th class="px-4 py-3 text-right"></th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y">

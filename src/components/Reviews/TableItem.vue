@@ -18,7 +18,7 @@
     <td class="px-4 py-3 text-xs w-1/3 text-right md:text-center">
       <WineTag :type="item.type" />
     </td>
-    <td class="px-4 md:pt-3 pb-4 md:pb-3 text-sm w-1/2">
+    <td class="px-4 md:pt-3 pb-4 md:pb-3 text-sm w-1/2 flex md:table-cell">
       <StarRating :value="item.rating" />
     </td>
     <td class="px-4 py-3 pb-4 md:pb-3 w-1/2" v-if="actions">
@@ -46,7 +46,7 @@
       item: <any>{},
       actions: {
         type: Boolean,
-        default: true,
+        default: false,
       },
     },
     components: {
