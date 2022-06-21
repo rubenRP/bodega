@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import useFilteredBottles from './useFilteredBottles'
+import useFilteredBottles from './filteredBottles'
 describe('useFilteredBottles', () => {
   test('should return an array of bottles', () => {
     const bottles = [{ name: 'test', cellar: 'test' }]

@@ -68,7 +68,7 @@
   import BottleForm from '@/components/Cellar/BottleForm.vue'
   import TableItem from '@/components/Cellar/TableItem.vue'
   import Spinner from '@/components/General/Spinner.vue'
-  import useFilteredBottles from '@/hooks/useFilteredBottles'
+  import useFilteredBottles from '@/composables/filteredBottles'
   import { useBottlesStore } from '@/stores/bottles'
   import { computed, ref } from 'vue'
 

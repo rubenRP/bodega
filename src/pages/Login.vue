@@ -38,7 +38,7 @@
 
 <script lang="ts">
   import Logo from '@/components/General/Logo.vue'
-  import router from '@/router'
+  import router from '@/pages/routes'
   import { useUserStore } from '@/stores/user'
   import { supabase } from '@/supabase'
   import { mapState } from 'pinia'

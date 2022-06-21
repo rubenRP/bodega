@@ -7,7 +7,7 @@ import { createI18n } from 'vue-i18n'
 import App from './App.vue'
 import messages from './i18n/es'
 import './index.css'
-import router from './router'
+import router from './pages/routes'
 
 /* auth.onAuthStateChanged((user) => {
   store.dispatch('fetchUser', user)

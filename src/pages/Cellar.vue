@@ -67,11 +67,10 @@
 <script setup lang="ts">
   import BottleForm from '@/components/Cellar/BottleForm.vue'
   import TableItem from '@/components/Cellar/TableItem.vue'
-  import Modal from '@/components/General/Modal.vue'
   import Spinner from '@/components/General/Spinner.vue'
-  import useFilteredBottles from '@/hooks/useFilteredBottles'
+  import useFilteredBottles from '@/composables/filteredBottles'
   import { useBottlesStore } from '@/stores/bottles'
-  import { computed, defineComponent, ref } from 'vue'
+  import { computed, ref } from 'vue'
 
   const store = useBottlesStore()
   const search = ref('')
