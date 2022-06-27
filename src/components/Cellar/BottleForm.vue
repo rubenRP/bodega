@@ -153,10 +153,10 @@
           <span class="text-gray-700">{{ $t('general.qty') }}</span>
           <div class="flex align-middle justify-between items-center">
             <div class="w-1/3">
-              <QtySelector
-                :qty="newBottle.qty"
-                v-on:incrementQty="increaseQty"
-                v-on:decrementQty="decreaseQty"
+              <input
+                type="number"
+                class="block w-full mt-1 text-sm focus:border-red-800 focus:outline-none focus:shadow-outline-purple border-gray-200 border rounded-md px-3 py-2"
+                v-model="newBottle.qty"
               />
             </div>
             <div class="w-auto text-pink-900">
@@ -319,10 +319,10 @@
       clearForm() {
         this.newBottle = <Bottle>{ qty: 1 }
       },
-      increaseQty(qty: number) {
+      increaseFormQty(qty: number) {
         this.newBottle.qty = qty
       },
-      decreaseQty(qty: number) {
+      decreaseFormQty(qty: number) {
         this.newBottle.qty = qty
       },
     },
