@@ -36,7 +36,7 @@ const messages = {
       rose: 'Rosado',
       other: 'Otro',
       orange: 'Naranja',
-      frizzante: 'Frizzante',
+      frizzante: 'Espumoso',
       country: 'Pais',
       region: 'Región',
       totalBottles: 'Botellas Totales',
