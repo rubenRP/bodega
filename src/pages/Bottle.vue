@@ -91,23 +91,29 @@
     </div>
   </div>
 
+  <h2
+    class="my-8 mt-12 text-xl font-semibold flex items-center justify-between"
+  >
+    <div>
+      <div
+        class="p-2 text-center inline-flex items-center justify-center w-12 h-12 mr-6 shadow-lg rounded-full bg-pink-900 text-white"
+      >
+        <font-awesome-icon :icon="['fas', 'info']" class="text-xl" />
+      </div>
+      <span>{{ $t('cellar.details') }}</span>
+    </div>
+  </h2>
+
   <div
     v-if="bottle?.description"
     class="min-w-0 p-4 bg-white shadow-lg rounded"
   >
-    <h4 class="mb-4 font-semibold text-lg text-slate-700">
-      {{ $t('cellar.description') }}
-    </h4>
     <p class="text-gray-600 text-sm">
       {{ bottle?.description }}
     </p>
   </div>
 
   <div class="min-w-0 p-4 mt-6 bg-white shadow-lg rounded">
-    <h4 class="mb-4 font-semibold text-lg text-slate-700">
-      {{ $t('cellar.details') }}
-    </h4>
-
     <table class="w-full whitespace-no-wrap">
       <tbody class="bg-white divide-y">
         <tr class="text-gray-700 border-b" v-if="bottle?.name">
