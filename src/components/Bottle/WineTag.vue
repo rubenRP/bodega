@@ -24,6 +24,8 @@
             return 'text-green-700 bg-green-100  '
           case 'Rose':
             return 'text-pink-700 bg-pink-100'
+          case 'Sparkling':
+            return 'text-yellow-700 bg-yellow-100'
           default:
             return 'text-yellow-700 bg-yellow-100'
         }
@@ -36,6 +38,8 @@
             return 'cellar.white'
           case 'Rose':
             return 'cellar.rose'
+          case 'Sparkling':
+            return 'cellar.sparkling'
         }
         return 'cellar.other'
       },

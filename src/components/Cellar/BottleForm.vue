@@ -91,7 +91,7 @@
             <option value="White">{{ $t('cellar.white') }}</option>
             <option value="Rose">{{ $t('cellar.rose') }}</option>
             <option value="Orange">{{ $t('cellar.orange') }}</option>
-            <option value="Frizzante">{{ $t('cellar.frizzante') }}</option>
+            <option value="Sparkling">{{ $t('cellar.sparkling') }}</option>
             <option value="Other">{{ $t('cellar.other') }}</option>
           </select>
           <span class="text-xs text-red-600" v-if="v$.newBottle.type.$error">
