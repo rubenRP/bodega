@@ -17,7 +17,7 @@ export interface Bottle {
   consumption?: string
   aging?: string
   stay_barrel?: string
-  grapes?: [string]
+  grapes?: string[]
   description?: string
   image?: string
   location?: string
