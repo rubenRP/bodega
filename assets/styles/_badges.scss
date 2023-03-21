@@ -1,0 +1,17 @@
+.badge {
+  &.bg-red {
+    background-color: $red-700;
+  }
+  &.bg-white-wine {
+    background-color: $green-200;
+  }
+  &.bg-rose {
+    background-color: $pink-300;
+  }
+  &.bg-sparkling {
+    background-color: $yellow-300;
+  }
+  &.bg-other {
+    background-color: $orange-300;
+  }
+}

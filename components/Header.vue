@@ -1,90 +1,94 @@
 <template>
-  <nav
-    class="bg-gradient-to-b from-pink-900 to-pink-800 z-50 w-full flex flex-wrap items-center justify-between py-3 navbar-expand-lg relative h-20 lg:px-4 lg:h-auto"
-  >
-    <div
-      class="container px-4 md:px-10 mx-auto flex flex-wrap items-center justify-between"
-    >
+  <header class="p-3 mb-3 border-bottom bg-primary bg-gradient">
+    <div class="container">
       <div
-        class="w-2/3 relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
       >
-        <button
-          class="cursor-pointer text-xl leading-none pr-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none text-white"
-          type="button"
-          @click="toggleSidebar"
-        >
-          <font-awesome-icon :icon="['fas', 'bars']" />
-        </button>
-        <router-link
+        <NuxtLink
           to="/"
-          class="text-white text-sm font-bold leading-relaxed inline-block lg:mr-8 lg:pt-2 whitespace-nowrap uppercase w-1/2 lg:w-32"
+          class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"
         >
-          <div class="w-32 lg:w-full ml-auto mr-auto max-w-full">
-            <Logo />
-          </div>
-        </router-link>
-      </div>
-      <div class="lg:flex flex-grow items-center">
+          <Logo class="bi me-4" height="45" fill="white" />
+        </NuxtLink>
         <ul
-          class="list-none mr-auto z-20 flex-shrink-0 fixed inset-y-0 w-3/4 mt-20 left-0 overflow-y-auto bg-white lg:relative lg:shadow-none lg:mt-0 lg:flex lg:flex-row lg:w-auto lg:bg-transparent"
-          :class="showSidebar ? 'shadow-lg' : 'hidden'"
+          class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
         >
-          <li class="flex items-center">
-            <router-link
-              class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-5 lg:px-3 py-4 lg:py-2 flex items-center uppercase lg:font-bold w-full lg:w-auto border-b-2 lg:border-b-0 lg:text-xs"
+          <li>
+            <NuxtLink
+              class="nav-link px-2 link-light text-uppercase fw-semibold"
               to="/cellar"
             >
-              <font-awesome-icon icon="border-all" class="mr-4 lg:hidden" />
               <span>{{ $t("cellar.myCellar") }}</span>
-            </router-link>
+            </NuxtLink>
           </li>
-          <li class="flex items-center">
-            <router-link
-              class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-5 lg:px-3 py-4 lg:py-2 flex items-center uppercase lg:font-bold w-full lg:w-auto border-b-2 lg:border-b-0 lg:text-xs"
+          <li>
+            <NuxtLink
+              class="nav-link px-2 link-light text-uppercase fw-semibold"
               to="/reviews"
             >
-              <font-awesome-icon icon="star" class="mr-4 lg:hidden" />
               <span>Reviews</span>
-            </router-link>
+            </NuxtLink>
           </li>
-          <li class="flex items-center">
-            <router-link
-              class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-5 lg:px-3 py-4 lg:py-2 flex items-center uppercase lg:font-bold w-full lg:w-auto border-b-2 lg:border-b-0 lg:text-xs"
+          <li>
+            <NuxtLink
+              class="nav-link px-2 link-light text-uppercase fw-semibold"
               to="/bottles"
             >
-              <font-awesome-icon icon="wine-bottle" class="mr-4 lg:hidden" />
               <span>{{ $t("bottles.bottles") }}</span>
-            </router-link>
+            </NuxtLink>
           </li>
-          <li class="flex items-center">
-            <router-link
-              class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-5 lg:px-3 py-4 lg:py-2 flex items-center uppercase lg:font-bold w-full lg:w-auto border-b-2 lg:border-b-0 lg:text-xs"
+          <li>
+            <NuxtLink
+              class="nav-link px-2 link-light text-uppercase fw-semibold"
               to="/stats"
             >
-              <font-awesome-icon icon="chart-line" class="mr-4 lg:hidden" />
               <span>{{ $t("stats.stats") }}</span>
-            </router-link>
+            </NuxtLink>
           </li>
         </ul>
-        <ul class="flex flex-row justify-end list-none lg:ml-auto items-end">
-          <li class="flex items-center mr-4">
-            <QuickAdd />
-          </li>
-          <li class="flex items-center">
-            <ProfileMenu />
-          </li>
-        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Search..."
+            aria-label="Search"
+          />
+        </form>
+
+        <div class="dropdown text-end">
+          <a
+            href="#"
+            class="d-block link-dark text-decoration-none dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://github.com/mdo.png"
+              alt="mdo"
+              width="32"
+              height="32"
+              class="rounded-circle"
+            />
+          </a>
+          <ul class="dropdown-menu text-small">
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-  </nav>
+  </header>
 </template>
 
 <script setup lang="ts">
 import { useGeneralStore } from "~~/stores/general";
-import GeneralStoreState from "~~/types/stores";
-const showSidebar = useGeneralStore(
-  (state: GeneralStoreState) => state.showSidebar
-);
-const toggleSidebar = () =>
-  useGeneralStore((state: GeneralStoreState) => state.toggleSidebar);
+
+const store = useGeneralStore();
+const showSidebar = computed(() => store.sidebar);
+const toggleSidebar = () => store.toggleSidebar();
 </script>
+P

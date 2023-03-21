@@ -1,43 +1,33 @@
 <template>
-  <footer class="px-4 md:px-10 container mx-auto w-full mt-12">
-    <div class="block py-4">
-      <div class="">
-        <hr class="mb-6 border-b-1 border-slate-600" />
-        <div
-          class="flex flex-wrap items-center md:justify-between justify-center"
+  <div class="container">
+    <footer
+      class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+    >
+      <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 mb-md-0 text-muted">
+          Created by
+          <a
+            href="https://rubenr.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Rubén Rodríguez
+          </a></span
         >
-          <div class="w-full md:w-4/12">
-            <div
-              class="text-sm text-slate-500 font-semibold py-1 text-center md:text-left"
-            >
-              Created by
-              <a
-                className="text-slate-500 hover:text-slate-700 text-sm font-semibold py-1"
-                href="https://rubenr.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Rubén Rodríguez
-              </a>
-            </div>
-          </div>
-
-          <div class="w-full md:w-8/12">
-            <ul class="flex flex-wrap list-none md:justify-end justify-center">
-              <li>
-                <a
-                  className="text-slate-500 hover:text-slate-700 text-sm font-semibold py-1"
-                  href="https://github.com/rubenrp/bodega"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
-    </div>
-  </footer>
+
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li>
+          <a
+            class="text-muted"
+            href="https://github.com/rubenrp/bodega"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        </li>
+      </ul>
+    </footer>
+  </div>
 </template>

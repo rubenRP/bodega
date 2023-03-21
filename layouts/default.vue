@@ -1,15 +1,16 @@
 <template>
-  <div class="h-screen">
-    <Header />
-    <!--<Notifications />-->
-    <main class="px-4 md:px-10 mx-auto w-full container">
-      <div
-        class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"
-      ></div>
-      <div>
-        <slot />
-      </div>
-    </main>
-    <Footer />
-  </div>
+  <Header />
+  <!--<Notifications />-->
+  <main class="container">
+    <router-view />
+  </main>
+  <Footer />
 </template>
+
+<script setup lang="ts">
+import { useGeneralStore } from "@/stores/general";
+
+const store = useGeneralStore();
+const showSidebar = store.sidebar;
+const toggleSidebar = () => store.toggleSidebar;
+</script>
