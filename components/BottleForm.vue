@@ -1,0 +1,227 @@
+<template>
+  <ClientOnly>
+    <Modal v-model="bottleFormVisible" :title="$t('cellar.addBottle')">
+      <ProgressBar
+        v-if="showProgressBar"
+        :text="$t('reviews.step1')"
+        :progress="progress"
+      />
+
+      <form id="bottleForm">
+        <!-- Name -->
+        <div class="form-floating mb-2">
+          <input
+            class="form-control"
+            placeholder="{{ $t('cellar.name') }}"
+            id="name"
+            v-model="newBottle.name"
+            required
+          />
+          <label for="name">{{ $t("cellar.name") }}</label>
+        </div>
+        <!-- Cellar -->
+        <div class="form-floating mb-2">
+          <input
+            class="form-control"
+            placeholder="{{ $t('cellar.cellar') }}"
+            id="cellar"
+            v-model="newBottle.cellar"
+          />
+          <label for="cellar">{{ $t("cellar.cellar") }}</label>
+        </div>
+        <!-- Vintage-->
+        <div class="form-floating mb-2">
+          <input
+            class="form-control"
+            placeholder="{{ $t('cellar.vintage') }}"
+            id="vintage"
+            v-model="newBottle.vintage"
+          />
+          <label for="vintage">{{ $t("cellar.vintage") }}</label>
+        </div>
+        <!-- Country-->
+        <div class="form-floating mb-2">
+          <input
+            class="form-control"
+            placeholder="{{ $t('cellar.country') }}"
+            id="country"
+            v-model="newBottle.country"
+          />
+          <label for="country">{{ $t("cellar.country") }}</label>
+        </div>
+        <!-- Region-->
+        <div class="form-floating mb-2">
+          <input
+            class="form-control"
+            placeholder="{{ $t('cellar.region') }}"
+            id="region"
+            v-model="newBottle.region"
+          />
+          <label for="region">{{ $t("cellar.region") }}</label>
+        </div>
+        <!-- Apellation-->
+        <div class="form-floating mb-4">
+          <input
+            class="form-control"
+            placeholder="{{ $t('cellar.apellation') }}"
+            id="apellation"
+            v-model="newBottle.apellation"
+          />
+          <label for="apellation">{{ $t("cellar.apellation") }}</label>
+        </div>
+        <div class="row">
+          <!-- Type -->
+          <div class="col-8">
+            <div class="form-floating mb-2">
+              <select class="form-select" id="type" v-model="newBottle.type">
+                <option value="Red" selected>{{ $t("cellar.red") }}</option>
+                <option value="White">{{ $t("cellar.white") }}</option>
+                <option value="Rose">{{ $t("cellar.rose") }}</option>
+                <option value="Orange">{{ $t("cellar.orange") }}</option>
+                <option value="Sparkling">{{ $t("cellar.sparkling") }}</option>
+                <option value="Other">{{ $t("cellar.other") }}</option>
+              </select>
+              <label for="type">{{ $t("cellar.type") }}</label>
+            </div>
+          </div>
+          <!-- Qty -->
+          <div class="col-4">
+            <div class="form-floating mb-2" v-if="showQty">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="{{ $t('general.qty') }}"
+                id="qty"
+                v-model="newBottle.qty"
+              />
+              <label for="qty">{{ $t("general.qty") }}</label>
+            </div>
+          </div>
+        </div>
+      </form>
+      <template #footer
+        ><button @click="$emit('closeModalForm')" class="btn btn-secondary">
+          {{ $t("general.cancel") }}
+        </button>
+        <button
+          class="btn btn-primary"
+          v-if="bottle || existingBottle"
+          @click="updateBottle()"
+        >
+          {{ $t("general.update") }}
+        </button>
+        <button class="btn btn-primary" v-else @click="createBottle()">
+          {{ $t("general.save") }}
+        </button></template
+      >
+    </Modal>
+  </ClientOnly>
+</template>
+
+<script setup lang="ts">
+import { Bottle } from "~~/types/bottle";
+import { required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import { findBottle, addBottle } from "~~/api/bottles";
+import { useGeneralStore } from "~~/stores/general";
+
+const store = useGeneralStore();
+
+const props = defineProps({
+  opened: Boolean,
+  bottle: Object,
+  showQty: {
+    type: Boolean,
+    default: true,
+  },
+  showProgressBar: {
+    type: Boolean,
+    default: true,
+  },
+});
+const emit = defineEmits(["closeModalForm"]);
+const bottleFormVisible = ref(false);
+const newBottle = ref(
+  <Bottle>props.bottle?.value || <Bottle>{ qty: props.showQty ? 1 : 0 }
+);
+const progress = ref(50);
+const existingBottle = ref(false);
+const rules = {
+  name: { required },
+  cellar: { required },
+  qty: { required },
+  vintage: { required },
+  country: { required },
+  type: { required },
+};
+
+const v$ = useVuelidate();
+
+watch(
+  () => props.opened,
+  (opened) => {
+    if (opened) {
+      bottleFormVisible.value = true;
+    }
+  }
+);
+
+const createBottle = async () => {
+  try {
+    const { data } = await findBottle(
+      newBottle.value.name,
+      newBottle.value.cellar,
+      newBottle.value.vintage,
+      ""
+    );
+    const bottleFinded = data![0];
+
+    if (!bottleFinded) {
+      let res;
+      if (props.showQty && newBottle.value.qty! > 0) {
+        res = await addBottle(newBottle.value, true);
+      } else {
+        res = await addBottle(newBottle.value, false);
+      }
+      store.addMessage({ type: "success", text: res.data.message });
+      clearForm();
+      closeModal();
+    } else {
+      existingBottle.value = true;
+      newBottle.value = bottleFinded as Bottle;
+      console.log("Bottle already exists " + bottleFinded);
+    }
+  } catch (e: any) {
+    console.log(e);
+    store.addMessage({ type: "error", text: e.message });
+  }
+  closeModal();
+};
+
+const clearForm = () => {
+  newBottle.value = <Bottle>{ qty: props.showQty ? 1 : 0 };
+};
+
+const closeModal = () => {
+  bottleFormVisible.value = false;
+  emit("closeModalForm");
+};
+
+const incrementQty = (qty: number) => {
+  newBottle.value.qty = qty;
+};
+
+const decrementQty = (qty: number) => {
+  newBottle.value.qty = qty;
+};
+
+function launchBottleFormModal() {
+  bottleFormVisible.value = true;
+}
+
+function updateBottle() {
+  console.log("updateBottle");
+  console.log(newBottle);
+  closeModal();
+}
+</script>

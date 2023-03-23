@@ -3,3 +3,8 @@
 @import "bootstrap/scss/bootstrap";
 
 @import "./_badges.scss";
+
+.card.card-bottle-img img {
+  max-height: 450px;
+  margin: auto;
+}

@@ -86,6 +86,16 @@ export const useBottlesStore = defineStore("bottles", {
           )
           .sort((a: Bottle, b: Bottle) => b.vintage - a.vintage);
     },
+    bottlesFromApellation(state) {
+      return (bottle: Bottle) =>
+        state.allBottles
+          .filter(
+            (b: Bottle) =>
+              b.apellation?.toLowerCase() ===
+                bottle.apellation?.toLowerCase() && b.id !== bottle.id
+          )
+          .sort((a: Bottle, b: Bottle) => b.vintage - a.vintage);
+    },
   },
   actions: {
     fetchStoreData() {

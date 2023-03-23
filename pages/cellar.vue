@@ -19,123 +19,116 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
-    <div class="col col-lg-10">
-      <div class="row justify-content-between mb-4 mt-3">
-        <div class="col-auto">
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="cellar-search"
-              ><ClientOnly>
-                <font-awesome-icon
-                  :icon="['fas', 'search']"
-                  class="w-4 h-4"
-                /> </ClientOnly
-            ></span>
-            <input
-              type="text"
-              class="form-control"
-              :placeholder="$t('cellar.filterWines')"
-              aria-label="Search"
-              aria-describedby="cellar-search"
-              v-model="search"
-            />
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="btn-group mb-3" role="group">
-            <input
-              type="radio"
-              class="btn-check"
-              autocomplete="off"
-              checked
-              name="btnType"
-              id="btnTypeAll"
-              v-model="type"
-              value="All"
-            />
-            <label class="btn btn-outline-primary" for="btnTypeAll">All</label>
-            <input
-              type="radio"
-              class="btn-check"
-              autocomplete="off"
-              name="btnType"
-              id="btnTypeRed"
-              v-model="type"
-              value="Red"
-            />
-            <label class="btn btn-outline-primary" for="btnTypeRed">
-              {{ $t("cellar.red") }}</label
-            >
-            <input
-              type="radio"
-              class="btn-check"
-              autocomplete="off"
-              name="btnType"
-              id="btnTypeWhite"
-              v-model="type"
-              value="White"
-            />
-            <label class="btn btn-outline-primary" for="btnTypeWhite">
-              {{ $t("cellar.white") }}</label
-            >
-            <input
-              type="radio"
-              class="btn-check"
-              autocomplete="off"
-              name="btnType"
-              id="btnTypeRose"
-              v-model="type"
-              value="Rose"
-            />
-            <label class="btn btn-outline-primary" for="btnTypeRose">
-              {{ $t("cellar.rose") }}</label
-            >
-            <input
-              type="radio"
-              class="btn-check"
-              autocomplete="off"
-              name="btnType"
-              id="btnTypeSparkling"
-              v-model="type"
-              value="Sparkling"
-            />
-            <label class="btn btn-outline-primary" for="btnTypeSparkling">
-              {{ $t("cellar.sparkling") }}</label
-            >
-          </div>
-        </div>
+  <div class="row justify-content-between mb-4 mt-3">
+    <div class="col-auto">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="cellar-search"
+          ><ClientOnly>
+            <font-awesome-icon
+              :icon="['fas', 'search']"
+              class="w-4 h-4"
+            /> </ClientOnly
+        ></span>
+        <input
+          type="text"
+          class="form-control"
+          :placeholder="$t('cellar.filterWines')"
+          aria-label="Search"
+          aria-describedby="cellar-search"
+          v-model="search"
+        />
       </div>
-
-      <Spinner v-if="!cellarBottles.length" />
-
-      <div class="table-responsive" v-else>
-        <table class="table shadow-sm align-middle">
-          <thead class="text-uppercase text-muted border-top">
-            <tr>
-              <th scope="col" class="ps-3">{{ $t("cellar.name") }}</th>
-              <th scope="col">{{ $t("cellar.vintage") }}</th>
-              <th scope="col">{{ $t("cellar.apellation") }}</th>
-              <th scope="col">{{ $t("cellar.type") }}</th>
-              <th scope="col" class="text-center pe-3">
-                {{ $t("general.qty") }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <CellarTableItem
-              v-for="bottle in filteredCellar"
-              :key="bottle.id"
-              :item="bottle"
-            />
-          </tbody>
-        </table>
+    </div>
+    <div class="col-auto">
+      <div class="btn-group mb-3" role="group">
+        <input
+          type="radio"
+          class="btn-check"
+          autocomplete="off"
+          checked
+          name="btnType"
+          id="btnTypeAll"
+          v-model="type"
+          value="All"
+        />
+        <label class="btn btn-outline-primary" for="btnTypeAll">All</label>
+        <input
+          type="radio"
+          class="btn-check"
+          autocomplete="off"
+          name="btnType"
+          id="btnTypeRed"
+          v-model="type"
+          value="Red"
+        />
+        <label class="btn btn-outline-primary" for="btnTypeRed">
+          {{ $t("cellar.red") }}</label
+        >
+        <input
+          type="radio"
+          class="btn-check"
+          autocomplete="off"
+          name="btnType"
+          id="btnTypeWhite"
+          v-model="type"
+          value="White"
+        />
+        <label class="btn btn-outline-primary" for="btnTypeWhite">
+          {{ $t("cellar.white") }}</label
+        >
+        <input
+          type="radio"
+          class="btn-check"
+          autocomplete="off"
+          name="btnType"
+          id="btnTypeRose"
+          v-model="type"
+          value="Rose"
+        />
+        <label class="btn btn-outline-primary" for="btnTypeRose">
+          {{ $t("cellar.rose") }}</label
+        >
+        <input
+          type="radio"
+          class="btn-check"
+          autocomplete="off"
+          name="btnType"
+          id="btnTypeSparkling"
+          v-model="type"
+          value="Sparkling"
+        />
+        <label class="btn btn-outline-primary" for="btnTypeSparkling">
+          {{ $t("cellar.sparkling") }}</label
+        >
       </div>
     </div>
   </div>
 
-  <!-- <teleport to="#beforeBodyEnd">
-      <BottleForm v-if="openedNewBottle" @closeModalForm="toggleNewBottle()" />
-    </teleport> -->
+  <Spinner v-if="!cellarBottles.length" />
+
+  <div class="table-responsive" v-else>
+    <table class="table shadow-sm align-middle">
+      <thead class="text-uppercase text-muted border-top">
+        <tr>
+          <th scope="col" class="ps-3">{{ $t("cellar.name") }}</th>
+          <th scope="col">{{ $t("cellar.vintage") }}</th>
+          <th scope="col">{{ $t("cellar.apellation") }}</th>
+          <th scope="col">{{ $t("cellar.type") }}</th>
+          <th scope="col" class="text-center pe-3">
+            {{ $t("general.qty") }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <CellarTableItem
+          v-for="bottle in filteredCellar"
+          :key="bottle.id"
+          :item="bottle"
+        />
+      </tbody>
+    </table>
+  </div>
+  <BottleForm :opened="openedNewBottle" @closeModalForm="toggleNewBottle()" />
 </template>
 
 <script setup lang="ts">
