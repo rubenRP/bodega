@@ -1,12 +1,6 @@
 <template>
   <ClientOnly>
     <Modal v-model="bottleFormVisible" :title="$t('cellar.addBottle')">
-      <ProgressBar
-        v-if="showProgressBar"
-        :text="$t('reviews.step1')"
-        :progress="progress"
-      />
-
       <form id="bottleForm">
         <!-- Name -->
         <div class="form-floating mb-2">
@@ -15,7 +9,6 @@
             placeholder="{{ $t('cellar.name') }}"
             id="name"
             v-model="newBottle.name"
-            required
           />
           <label for="name">{{ $t("cellar.name") }}</label>
         </div>
@@ -105,7 +98,7 @@
         </button>
         <button
           class="btn btn-primary"
-          v-if="bottle || existingBottle"
+          v-if="existingBottle"
           @click="updateBottle()"
         >
           {{ $t("general.update") }}
@@ -129,22 +122,22 @@ const store = useGeneralStore();
 
 const props = defineProps({
   opened: Boolean,
-  bottle: Object,
   showQty: {
-    type: Boolean,
-    default: true,
-  },
-  showProgressBar: {
     type: Boolean,
     default: true,
   },
 });
 const emit = defineEmits(["closeModalForm"]);
 const bottleFormVisible = ref(false);
-const newBottle = ref(
-  <Bottle>props.bottle?.value || <Bottle>{ qty: props.showQty ? 1 : 0 }
-);
-const progress = ref(50);
+const newBottle = ref({
+  name: "",
+  cellar: "",
+  vintage: 0,
+  country: "",
+  type: "Red",
+  qty: 1,
+});
+
 const existingBottle = ref(false);
 const rules = {
   name: { required },
@@ -155,7 +148,7 @@ const rules = {
   type: { required },
 };
 
-const v$ = useVuelidate();
+const v$ = useVuelidate(rules, newBottle);
 
 watch(
   () => props.opened,
@@ -183,7 +176,10 @@ const createBottle = async () => {
       } else {
         res = await addBottle(newBottle.value, false);
       }
-      store.addMessage({ type: "success", text: res.data.message });
+      store.addMessage({
+        type: "success",
+        text: "Botella añadida correctamente",
+      });
       clearForm();
       closeModal();
     } else {

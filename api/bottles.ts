@@ -40,20 +40,26 @@ const addBottle = async (
   mycellar?: boolean,
   reviewed?: boolean
 ) => {
-  let res: any = await supabase.from("bottles").insert([
-    {
-      ...bottle,
-      mycellar: mycellar || false,
-      reviewed: reviewed || false,
-    },
-  ]);
-  for (let i = 0; i < bottle.qty!; i++) {
-    await supabase.from("added_bottles").insert([
+  let res: any = await supabase
+    .from("bottles")
+    .insert([
       {
-        bottle_id: res.data![0].id,
-        date_added: new Date(),
+        ...bottle,
+        mycellar: mycellar || false,
+        reviewed: reviewed || false,
       },
-    ]);
+    ])
+    .select();
+  for (let i = 0; i < bottle.qty!; i++) {
+    await supabase
+      .from("added_bottles")
+      .insert([
+        {
+          bottle_id: res.data![0].id,
+          date_added: new Date(),
+        },
+      ])
+      .select();
   }
   return res.data![0];
 };

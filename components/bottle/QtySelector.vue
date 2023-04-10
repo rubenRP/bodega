@@ -15,10 +15,12 @@
   </div>
   <div class="btn-group" v-else>
     <div class="btn btn-secondary" @click="decreaseQty()">
-      <font-awesome-icon
-        :icon="['fas', 'minus']"
-        class="m-auto"
-      ></font-awesome-icon>
+      <ClientOnly>
+        <font-awesome-icon
+          :icon="['fas', 'minus']"
+          class="m-auto"
+        ></font-awesome-icon>
+      </ClientOnly>
     </div>
     <div class="btn btn-secondary">
       {{ qty }}

@@ -4,10 +4,10 @@
   >
     <h1 class="h2">{{ $t("cellar.myCellar") }}</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-      <div class="btn-group me-2">
+      <div class="btn-group">
         <button
           type="button"
-          class="btn btn-outline-secondary"
+          class="btn btn-outline-primary"
           @click="toggleNewBottle()"
         >
           <ClientOnly>

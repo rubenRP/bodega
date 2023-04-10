@@ -59,11 +59,15 @@ const getBottleReview = async (bottleId: number) => {
 
 const getReviewsSubscription = async () => {
   return await supabase
-    .from("reviews")
-    .on("*", (payload) => {
-      console.log("Change received!", payload);
-      return payload;
-    })
+    .channel("any")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "reviews" },
+      (payload) => {
+        console.log("Change received!", payload);
+        return payload;
+      }
+    )
     .subscribe();
 };
 

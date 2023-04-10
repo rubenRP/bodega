@@ -1,6 +1,6 @@
 <template>
   <tr class="bg-white">
-    <th scope="row" class="ps-3">
+    <th scope="row" class="ps-3 col-6">
       <div class="">
         <NuxtLink :to="'/bottle/' + item.id">
           <h5 class="mb-1">{{ item.name }}</h5>
