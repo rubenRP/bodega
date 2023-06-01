@@ -6,41 +6,57 @@
         <div class="form-floating mb-2">
           <input
             class="form-control"
+            :class="{ 'is-invalid': v$.name.$error }"
             placeholder="{{ $t('cellar.name') }}"
             id="name"
             v-model="newBottle.name"
           />
           <label for="name">{{ $t("cellar.name") }}</label>
+          <div class="invalid-feedback" v-if="v$.name.$error">
+            {{ $t("forms.required") }}
+          </div>
         </div>
         <!-- Cellar -->
         <div class="form-floating mb-2">
           <input
             class="form-control"
+            :class="{ 'is-invalid': v$.cellar.$error }"
             placeholder="{{ $t('cellar.cellar') }}"
             id="cellar"
             v-model="newBottle.cellar"
           />
           <label for="cellar">{{ $t("cellar.cellar") }}</label>
+          <div class="invalid-feedback" v-if="v$.cellar.$error">
+            {{ $t("forms.required") }}
+          </div>
         </div>
         <!-- Vintage-->
         <div class="form-floating mb-2">
           <input
             class="form-control"
+            :class="{ 'is-invalid': v$.vintage.$error }"
             placeholder="{{ $t('cellar.vintage') }}"
             id="vintage"
             v-model="newBottle.vintage"
           />
           <label for="vintage">{{ $t("cellar.vintage") }}</label>
+          <div class="invalid-feedback" v-if="v$.vintage.$error">
+            {{ $t("forms.required") }}
+          </div>
         </div>
         <!-- Country-->
         <div class="form-floating mb-2">
           <input
             class="form-control"
+            :class="{ 'is-invalid': v$.country.$error }"
             placeholder="{{ $t('cellar.country') }}"
             id="country"
             v-model="newBottle.country"
           />
           <label for="country">{{ $t("cellar.country") }}</label>
+          <div class="invalid-feedback" v-if="v$.country.$error">
+            {{ $t("forms.required") }}
+          </div>
         </div>
         <!-- Region-->
         <div class="form-floating mb-2">
@@ -83,17 +99,21 @@
               <input
                 type="number"
                 class="form-control"
+                :class="{ 'is-invalid': v$.qty.$error }"
                 placeholder="{{ $t('general.qty') }}"
                 id="qty"
                 v-model="newBottle.qty"
               />
               <label for="qty">{{ $t("general.qty") }}</label>
+              <div class="invalid-feedback" v-if="v$.qty.$error">
+                {{ $t("forms.required") }}
+              </div>
             </div>
           </div>
         </div>
       </form>
       <template #footer
-        ><button @click="$emit('closeModalForm')" class="btn btn-secondary">
+        ><button @click="closeModal()" class="btn btn-secondary">
           {{ $t("general.cancel") }}
         </button>
         <button
@@ -136,19 +156,19 @@ const newBottle = ref({
   country: "",
   type: "Red",
   qty: 1,
-});
+}) as Ref<Bottle>;
 
 const existingBottle = ref(false);
 const rules = {
   name: { required },
   cellar: { required },
-  qty: { required },
-  vintage: { required },
+  qty: { required, min: 1 },
+  vintage: { required, min: 1900, max: new Date().getFullYear() },
   country: { required },
   type: { required },
 };
 
-const v$ = useVuelidate(rules, newBottle);
+const v$ = useVuelidate(rules, newBottle as any);
 
 watch(
   () => props.opened,
@@ -161,6 +181,10 @@ watch(
 
 const createBottle = async () => {
   try {
+    v$.value.$touch();
+    if (v$.value.$invalid) {
+      return;
+    }
     const { data } = await findBottle(
       newBottle.value.name,
       newBottle.value.cellar,
@@ -202,18 +226,6 @@ const closeModal = () => {
   bottleFormVisible.value = false;
   emit("closeModalForm");
 };
-
-const incrementQty = (qty: number) => {
-  newBottle.value.qty = qty;
-};
-
-const decrementQty = (qty: number) => {
-  newBottle.value.qty = qty;
-};
-
-function launchBottleFormModal() {
-  bottleFormVisible.value = true;
-}
 
 function updateBottle() {
   console.log("updateBottle");

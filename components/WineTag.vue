@@ -1,5 +1,8 @@
 <template>
-  <span class="badge rounded-pill py-2 px-3" :class="getTypeColor">
+  <span
+    class="px-2 py-1 font-semibold leading-tight rounded-full"
+    :class="getTypeColor"
+  >
     {{ $t(getTypeTranslated) }}
   </span>
 </template>
@@ -12,15 +15,15 @@ const props = defineProps({
 const getTypeColor = computed(() => {
   switch (props.type) {
     case "Red":
-      return "bg-red ";
+      return "text-red-700 bg-red-100 ";
     case "White":
-      return "bg-white-wine";
+      return "text-green-700 bg-green-100  ";
     case "Rose":
-      return "bg-rose";
+      return "text-pink-700 bg-pink-100";
     case "Sparkling":
-      return "bg-sparkling";
+      return "text-yellow-700 bg-yellow-100";
     default:
-      return "bg-other";
+      return "text-yellow-700 bg-yellow-100";
   }
 });
 

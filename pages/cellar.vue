@@ -1,45 +1,19 @@
 <template>
-  <div
-    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom"
-  >
-    <h1 class="h2">{{ $t("cellar.myCellar") }}</h1>
-    <div class="btn-toolbar mb-2 mb-md-0">
-      <div class="btn-group">
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          @click="toggleNewBottle()"
-        >
-          <ClientOnly>
-            <font-awesome-icon :icon="['fas', 'border-all']" />
-          </ClientOnly>
-          {{ $t("general.add") }}
-        </button>
+  <div class="sm:flex sm:justify-between sm:items-center mb-8">
+    <div class="relative w-full max-w-md focus-within:text-gray-200">
+      <div class="absolute inset-y-0 flex items-center pl-2">
+        <font-awesome-icon :icon="['fas', 'search']" class="w-4 h-4" />
       </div>
+      <input
+        class="w-full pl-8 pr-2 py-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border rounded-md focus:placeholder-gray-500 focus:bg-white focus:border-pink-900 focus:outline-none focus:shadow-outline-purple form-input"
+        type="text"
+        :placeholder="$t('cellar.filterWines')"
+        aria-label="Search"
+        v-model="search"
+      />
     </div>
-  </div>
 
-  <div class="row justify-content-between mb-4 mt-3">
-    <div class="col-auto">
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="cellar-search"
-          ><ClientOnly>
-            <font-awesome-icon
-              :icon="['fas', 'search']"
-              class="w-4 h-4"
-            /> </ClientOnly
-        ></span>
-        <input
-          type="text"
-          class="form-control"
-          :placeholder="$t('cellar.filterWines')"
-          aria-label="Search"
-          aria-describedby="cellar-search"
-          v-model="search"
-        />
-      </div>
-    </div>
-    <div class="col-auto">
+    <div class="flex flex-wrap">
       <div class="btn-group mb-3" role="group">
         <input
           type="radio"
@@ -106,29 +80,30 @@
 
   <Spinner v-if="!cellarBottles.length" />
 
-  <div class="table-responsive" v-else>
-    <table class="table shadow-sm align-middle">
-      <thead class="text-uppercase text-muted border-top">
-        <tr>
-          <th scope="col" class="ps-3">{{ $t("cellar.name") }}</th>
-          <th scope="col">{{ $t("cellar.vintage") }}</th>
-          <th scope="col">{{ $t("cellar.apellation") }}</th>
-          <th scope="col">{{ $t("cellar.type") }}</th>
-          <th scope="col" class="text-center pe-3">
-            {{ $t("general.qty") }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <CellarTableItem
-          v-for="bottle in filteredCellar"
-          :key="bottle.id"
-          :item="bottle"
-        />
-      </tbody>
-    </table>
+  <div class="w-full overflow-hidden shadow-lg rounded" v-else>
+    <div class="w-full overflow-x-auto">
+      <table class="w-full whitespace-no-wrap">
+        <thead>
+          <tr
+            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50 hidden md:table-row"
+          >
+            <th class="px-4 py-3">{{ $t("cellar.name") }}</th>
+            <th class="px-4 py-3">{{ $t("cellar.vintage") }}</th>
+            <th class="px-4 py-3">{{ $t("cellar.apellation") }}</th>
+            <th class="px-4 py-3 text-center">{{ $t("cellar.type") }}</th>
+            <th class="px-4 py-3 text-center">{{ $t("general.qty") }}</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y">
+          <CellarTableItem
+            v-for="bottle in filteredCellar"
+            :key="bottle.id"
+            :item="bottle"
+          />
+        </tbody>
+      </table>
+    </div>
   </div>
-  <BottleForm :opened="openedNewBottle" @closeModalForm="toggleNewBottle()" />
 </template>
 
 <script setup lang="ts">

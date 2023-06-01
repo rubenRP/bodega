@@ -1,83 +1,11 @@
 <template>
-  <header class="p-3 mb-3 border-bottom bg-primary bg-gradient">
-    <div class="container">
-      <div
-        class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-      >
-        <NuxtLink
-          to="/"
-          class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"
-        >
-          <Logo class="bi me-4" height="45" fill="white" />
-        </NuxtLink>
-        <ul
-          class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-        >
-          <li>
-            <NuxtLink
-              class="nav-link px-2 link-light text-uppercase fw-semibold"
-              to="/cellar"
-            >
-              <span>{{ $t("cellar.myCellar") }}</span>
-            </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink
-              class="nav-link px-2 link-light text-uppercase fw-semibold"
-              to="/reviews"
-            >
-              <span>Reviews</span>
-            </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink
-              class="nav-link px-2 link-light text-uppercase fw-semibold"
-              to="/bottles"
-            >
-              <span>{{ $t("bottles.bottles") }}</span>
-            </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink
-              class="nav-link px-2 link-light text-uppercase fw-semibold"
-              to="/stats"
-            >
-              <span>{{ $t("stats.stats") }}</span>
-            </NuxtLink>
-          </li>
-        </ul>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input
-            type="search"
-            class="form-control"
-            placeholder="Search..."
-            aria-label="Search"
-          />
-        </form>
-
-        <div class="dropdown text-end">
-          <a
-            href="#"
-            class="d-block link-dark text-decoration-none dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <img
-              src="https://github.com/mdo.png"
-              alt="mdo"
-              width="32"
-              height="32"
-              class="rounded-circle"
-            />
-          </a>
-          <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
+  <header class="sticky top-0 bg-white border-b border-slate-200 z-30">
+    <div class="px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 -mb-px">
+        <div class="flex"></div>
+        <div class="flex items-center space-x-3">
+          <hr class="w-px h-6 bg-slate-200 dark:bg-slate-700 border-none" />
+          <ProfileMenu />
         </div>
       </div>
     </div>

@@ -1,30 +1,32 @@
 <template>
-  <tr class="bg-white" :class="!item.qty && 'table-secondary'">
-    <th scope="row" class="ps-3 col-6">
-      <div class="">
-        <NuxtLink :to="'/bottle/' + item.id">
-          <h5 class="mb-1">{{ item.name }}</h5>
-          <span class="fw-light">
+  <tr
+    class="text-gray-700 flex flex-wrap md:table-row"
+    :class="!item.qty && 'bg-gray-100'"
+  >
+    <td class="px-4 py-3 pb-0 md:pb-3 w-full">
+      <div class="flex items-center text-sm">
+        <router-link class="cursor-pointer" :to="'/bottle/' + item.id">
+          <p class="font-semibold">{{ item.name }}</p>
+          <p class="text-xs text-gray-600">
             {{ item.cellar }}
-          </span>
-        </NuxtLink>
+          </p>
+        </router-link>
       </div>
-    </th>
-    <td>{{ item.vintage }}</td>
-    <td>
+    </td>
+    <td class="px-4 py-3 text-sm w-1/3">{{ item.vintage }}</td>
+    <td class="px-4 py-3 text-sm w-1/3 text-center md:text-left">
       {{ item.apellation }}
     </td>
 
-    <td>
+    <td class="px-4 py-3 text-xs w-1/3 text-right md:text-center">
       <WineTag :type="item.type" />
     </td>
-    <td v-if="actions" class="pe-3">
-      <div>
-        <CellarQtySelector
+    <td class="px-4 md:pt-3 pb-4 md:pb-3 text-sm w-1/2" v-if="actions">
+      <div class="h-8 w-24 md:m-auto">
+        <QtySelector
           :qty="item.qty"
           v-on:decrementQty="decreaseQty(item.id)"
           quick
-          :actions="actions"
         />
       </div>
     </td>
@@ -33,6 +35,7 @@
 
 <script setup lang="ts">
 import { useBottlesStore } from "~~/stores/bottles";
+import QtySelector from "./QtySelector.vue";
 
 const props = defineProps({
   item: <any>{},
