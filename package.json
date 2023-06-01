@@ -14,7 +14,7 @@
     "@nuxtjs/i18n": "^8.0.0-beta.10",
     "@popperjs/core": "^2.11.6",
     "autoprefixer": "^10.4.14",
-    "nuxt": "^3.2.3",
+    "nuxt": "^3.5.2",
     "nuxt-vitest": "^0.6.8",
     "postcss": "^8.4.24",
     "sass": "^1.59.3",
