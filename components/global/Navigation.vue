@@ -38,9 +38,9 @@
             >
           </h3>
           <ul class="mt-3">
-            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 false">
+            <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
-                class="block text-slate-200 truncate transition duration-150 hover:text-white"
+                class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
                 to="/"
                 ><div class="flex items-center text-gray-100">
                   <svg
@@ -61,9 +61,9 @@
                 </div></NuxtLink
               >
             </li>
-            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 false">
+            <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
-                class="block text-slate-200 truncate transition duration-150 hover:text-white"
+                class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
                 to="/cellar"
                 ><div class="flex items-center text-gray-100">
                   <svg
@@ -83,9 +83,9 @@
                 </div></NuxtLink
               >
             </li>
-            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 false">
+            <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
-                class="block text-slate-200 truncate transition duration-150 hover:text-white"
+                class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
                 to="/cellar"
                 ><div class="flex items-center text-gray-100">
                   <svg
@@ -105,9 +105,9 @@
                 </div></NuxtLink
               >
             </li>
-            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 false">
+            <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
-                class="block text-slate-200 truncate transition duration-150 hover:text-white"
+                class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
                 href="/reviews"
                 ><div class="flex items-center text-gray-100">
                   <svg
@@ -127,9 +127,9 @@
                 </div></NuxtLink
               >
             </li>
-            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 false">
+            <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
-                class="block text-slate-200 truncate transition duration-150 hover:text-white"
+                class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
                 href="/reviews"
                 ><div class="flex items-center text-gray-100">
                   <svg
@@ -149,9 +149,9 @@
                 </div></NuxtLink
               >
             </li>
-            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 false">
+            <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
-                class="block text-slate-200 truncate transition duration-150 hover:text-white"
+                class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
                 href="/reviews"
                 ><div class="flex items-center text-gray-100">
                   <svg
@@ -202,4 +202,9 @@ const store = useGeneralStore();
 const showSidebar = computed(() => store.sidebar);
 const toggleSidebar = () => store.toggleSidebar();
 </script>
-P
+
+<style scoped>
+.nav-link.router-link-active {
+  @apply border-l-2 border-gray-200;
+}
+</style>

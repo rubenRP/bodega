@@ -1,22 +1,14 @@
 <template>
   <div class="mt-6 xl:mt-12">
     <div class="grid gap-6 mb-8 grid-cols-1 xl:grid-cols-3">
-      <QuickStatsCellarBottles />
       <CellarBottles class="hidden md:block" />
-      <MonthlyOffset />
+      <QuickStatsMonthlyOffset />
     </div>
   </div>
   <h2
-    class="my-8 mt-12 text-xl font-semibold flex items-center justify-between"
+    class="my-4 mt-12 text-xl font-semibold flex items-center justify-between"
   >
-    <div>
-      <div
-        class="p-2 text-center inline-flex items-center justify-center w-12 h-12 mr-6 shadow-lg rounded-full bg-pink-900 text-white"
-      >
-        <font-awesome-icon :icon="['fas', 'wine-bottle']" class="text-xl" />
-      </div>
-      <span>{{ $t("cellar.latestBottles") }}</span>
-    </div>
+    <span>{{ $t("cellar.latestBottles") }}</span>
   </h2>
 
   <Spinner v-if="!latestCellarBottles.length" />
@@ -48,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+import CellarBottles from "~/components/quickStats/CellarBottles.vue";
 import { useBottlesStore } from "~~/stores/bottles";
 
 const store = useBottlesStore();

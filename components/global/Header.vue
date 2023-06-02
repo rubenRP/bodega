@@ -4,6 +4,7 @@
       <div class="flex items-center justify-between h-16 -mb-px">
         <div class="flex"></div>
         <div class="flex items-center space-x-3">
+          <QuickAdd />
           <hr class="w-px h-6 bg-slate-200 dark:bg-slate-700 border-none" />
           <ProfileMenu />
         </div>

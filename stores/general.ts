@@ -6,6 +6,9 @@ export const useGeneralStore = defineStore("general", {
     sidebar: false,
     messages: [],
     messageId: 0,
+    bottleForm: false,
+    reviewForm: false,
+    journalForm: false,
   }),
   actions: {
     addMessage(message: {}) {
@@ -27,6 +30,24 @@ export const useGeneralStore = defineStore("general", {
     },
     closeSidebar() {
       this.sidebar = false;
+    },
+    openSidebar() {
+      this.sidebar = true;
+    },
+    toggleBottleForm() {
+      this.bottleForm = !this.bottleForm;
+    },
+    toggleReviewForm() {
+      this.reviewForm = !this.reviewForm;
+    },
+    toggleJournalForm() {
+      this.journalForm = !this.journalForm;
+    },
+    openBottleForm() {
+      this.bottleForm = true;
+    },
+    closeBottleForm() {
+      this.bottleForm = false;
     },
   },
 });

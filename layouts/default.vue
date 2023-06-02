@@ -15,10 +15,16 @@
       <Footer />
     </div>
   </div>
+  <!-- <ReviewForm v-if="openedNewReview" @closeModalReview="toggleNewReview()" /> -->
+  <BottleForm
+    v-if="store.bottleForm"
+    @closeModalForm="store.closeBottleForm()"
+  />
 </template>
 
 <script setup lang="ts">
 import { useGeneralStore } from "@/stores/general";
+import BottleForm from "~/components/global/BottleForm.vue";
 
 const store = useGeneralStore();
 const showSidebar = store.sidebar;
