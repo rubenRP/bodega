@@ -14,67 +14,42 @@
     </div>
 
     <div class="flex flex-wrap">
-      <div class="btn-group mb-3" role="group">
-        <input
-          type="radio"
-          class="btn-check"
-          autocomplete="off"
-          checked
-          name="btnType"
-          id="btnTypeAll"
-          v-model="type"
-          value="All"
-        />
-        <label class="btn btn-outline-primary" for="btnTypeAll">All</label>
-        <input
-          type="radio"
-          class="btn-check"
-          autocomplete="off"
-          name="btnType"
-          id="btnTypeRed"
-          v-model="type"
-          value="Red"
-        />
-        <label class="btn btn-outline-primary" for="btnTypeRed">
-          {{ $t("cellar.red") }}</label
-        >
-        <input
-          type="radio"
-          class="btn-check"
-          autocomplete="off"
-          name="btnType"
-          id="btnTypeWhite"
-          v-model="type"
-          value="White"
-        />
-        <label class="btn btn-outline-primary" for="btnTypeWhite">
-          {{ $t("cellar.white") }}</label
-        >
-        <input
-          type="radio"
-          class="btn-check"
-          autocomplete="off"
-          name="btnType"
-          id="btnTypeRose"
-          v-model="type"
-          value="Rose"
-        />
-        <label class="btn btn-outline-primary" for="btnTypeRose">
-          {{ $t("cellar.rose") }}</label
-        >
-        <input
-          type="radio"
-          class="btn-check"
-          autocomplete="off"
-          name="btnType"
-          id="btnTypeSparkling"
-          v-model="type"
-          value="Sparkling"
-        />
-        <label class="btn btn-outline-primary" for="btnTypeSparkling">
-          {{ $t("cellar.sparkling") }}</label
-        >
-      </div>
+      <button
+        class="text-sm px-4 py-2 leading-none border rounded rounded-r-none text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150"
+        :class="{ 'bg-pink-900 text-white': type === 'All' }"
+        @click="type = 'All'"
+      >
+        All
+      </button>
+
+      <button
+        class="text-sm px-4 py-2 leading-none border text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
+        :class="{ 'bg-pink-900 text-white': type === 'Red' }"
+        @click="type = 'Red'"
+      >
+        {{ $t("cellar.red") }}
+      </button>
+      <button
+        class="text-sm px-4 py-2 leading-none border text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
+        :class="{ 'bg-pink-900 text-white': type === 'White' }"
+        @click="type = 'White'"
+      >
+        {{ $t("cellar.white") }}
+      </button>
+      <button
+        class="text-sm px-4 py-2 leading-none border text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
+        :class="{ 'bg-pink-900 text-white': type === 'Rose' }"
+        @click="type = 'Rose'"
+      >
+        {{ $t("cellar.rose") }}
+      </button>
+      <button
+        class="text-sm px-4 py-2 leading-none border rounded rounded-l-none text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
+        :class="{ 'bg-pink-900 text-white': type === 'Sparkling' }"
+        @click="type = 'Sparkling'"
+      >
+        {{ $t("cellar.sparkling") }}
+      </button>
     </div>
   </div>
 

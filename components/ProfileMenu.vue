@@ -45,14 +45,14 @@
           <li>
             <NuxtLink
               to="/profile"
-              class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
+              class="font-medium text-sm flex items-center py-1 px-3 text-pink-900 hover:text-pink-800"
             >
               <span>{{ $t("user.profile") }}</span>
             </NuxtLink>
           </li>
           <li>
             <a
-              class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
+              class="font-medium text-sm flex items-center py-1 px-3 text-pink-900 hover:text-pink-800"
               href="#"
             >
               <span>{{ $t("user.settings") }}</span>
@@ -60,7 +60,7 @@
           </li>
           <li>
             <a
-              class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
+              class="font-medium text-sm flex items-center py-1 px-3 text-pink-900 hover:text-pink-800"
               @click.prevent="logout"
             >
               <span>{{ $t("user.logout") }}</span>

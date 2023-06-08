@@ -8,13 +8,6 @@
         {{ bottle?.cellar }}
       </p>
     </span>
-    <button
-      class="text-pink-900 bg-transparent border border-solid border-pink-900 hover:bg-pink-900 hover:text-white active:bg-pink-700 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-      type="button"
-      @click="$router.back()"
-    >
-      {{ $t("general.back") }}
-    </button>
   </h2>
   <div class="grid gap-6 mb-6 md:my-6 md:grid-cols-3">
     <div class="min-w-0 p-4 bg-white shadow-lg rounded">
@@ -69,27 +62,85 @@
       </div>
 
       <div class="flex justify-between items-center pt-4 border-t-2">
-        <div>
+        <div class="flex">
           <button
-            class="text-pink-900 bg-transparent hover:text-pink-700 active:text-pink-600 font-bold uppercase text-xl mr-6"
+            class=""
             type="button"
             @click="toggleEditBottle()"
             v-if="isAdmin"
           >
-            <font-awesome-icon icon="edit" />
+            <span
+              class="p-2 w-10 h-10 bg-pink-100 hover:bg-pink-900 text-gray-600 hover:text-white transition-all rounded-md flex items-center justify-center m-auto"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                class="fill-current"
+              >
+                <path
+                  d="M16.51 1.16L19.34 4a2 2 0 010 2.83l-10.6 10.6a2 2 0 01-.37.3l.02.01-.16.06c-.14.07-.29.13-.44.16l-3.84 1.42a2 2 0 01-2.62-2.42l1.3-4.59.03.02a2 2 0 01.42-.61l10.6-10.6a2 2 0 012.83 0zM3.67 16.06l-.41 1.43 1.4-.51-1-.92zm8.96-11.02l-8.14 8.14 2.83 2.83 8.14-8.14-2.83-2.83zm2.47-2.46l-1.06 1.05 2.83 2.83 1.05-1.06-2.82-2.82z"
+                ></path>
+              </svg>
+            </span>
+            <span class="mt-3 text-xs">Edit</span>
           </button>
-        </div>
-
-        <div class="h-8 w-24 m-left">
-          <QtySelector
-            :qty="bottle?.qty"
-            v-on:incrementQty="increaseQty(bottle?.id || -1)"
-            v-on:decrementQty="decreaseQty(bottle?.id || -1)"
-          />
+          <button class="ml-4" type="button" @click="decreaseQty(bottle?.id!)">
+            <span
+              class="p-2 w-10 h-10 bg-pink-100 hover:bg-pink-900 text-gray-600 hover:text-white transition-all rounded-md flex items-center justify-center m-auto"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                class="fill-current"
+              >
+                <path
+                  d="M9.56 0c1.22 0 2.22.9 2.22 2v3C13 5 14 5.9 14 7v1c-.8 0-1.54.17-2.22.47V7H9.56V2H8.44v5H6.22v11h4.62c.82.58 1.8.94 2.87 1-.39.6-1.1 1-1.93 1H6.22C5 20 4 19.1 4 18V7c0-1.1 1-2 2.22-2V2c0-1.1 1-2 2.22-2h1.12zm7.06 12.5c.49 0 .88.45.88 1 0 .51-.34.94-.77 1h-5.35c-.49 0-.88-.45-.88-1 0-.51.34-.94.77-1H16.63z"
+                ></path>
+              </svg>
+            </span>
+            <span class="mt-3 text-xs">Decrease</span>
+          </button>
+          <button class="ml-4" type="button" @click="increaseQty(bottle?.id!)">
+            <span
+              class="p-2 w-10 h-10 bg-pink-100 hover:bg-pink-900 text-gray-600 hover:text-white transition-all rounded-md flex items-center justify-center m-auto"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                class="fill-current"
+              >
+                <path
+                  d="M10 1a1 1 0 0 1 1 1v7h7a1 1 0 0 1 1 .88V10a1 1 0 0 1-1 1h-7v7a1 1 0 0 1-.88 1H10a1 1 0 0 1-1-1v-7H2a1 1 0 0 1-1-.88V10a1 1 0 0 1 1-1h7V2a1 1 0 0 1 .88-1Z"
+                ></path>
+              </svg>
+            </span>
+            <span class="mt-3 text-xs">Increase</span>
+          </button>
+          <span class="ml-4">
+            <span
+              class="p-2 w-10 h-10 bg-pink-100 text-gray-600 transition-all rounded-md flex items-center justify-center m-auto"
+            >
+              {{ bottle?.qty }}
+            </span>
+            <span class="mt-3 text-xs">Quantity</span>
+          </span>
         </div>
       </div>
     </div>
   </div>
+
+  <BottleEditor
+    v-if="editBottle && isAdmin"
+    v-on:updateBottle="updateBottle"
+    v-on:cancelEdit="toggleEditBottle"
+    :bottle="bottle || {}"
+  />
 
   <div
     v-if="bottle?.description"
@@ -100,7 +151,6 @@
     </p>
   </div>
 
-  <!-- Two columns with flexbox tailwind -->
   <div class="grid gap-6 mb-6 md:my-6 md:grid-cols-3">
     <div class="">
       <h2
@@ -318,6 +368,7 @@
 <script setup lang="ts">
 import { useBottlesStore } from "@/stores/bottles";
 import { Bottle } from "~~/types/bottle";
+import { updateBottle as apiUpdateBottle } from "~/api/bottles";
 
 const store = useBottlesStore();
 const route = useRoute();
@@ -360,8 +411,8 @@ const decreaseQty = (id: number) => {
 const toggleEditBottle = () => {
   editBottle.value = !editBottle.value;
 };
-const updateBottle = (bottle: Bottle) => {
-  store.modifyBottle(bottle);
+const updateBottle = async (bottle: Bottle) => {
+  await apiUpdateBottle(bottle.id!, bottle);
   editBottle.value = false;
 };
 </script>

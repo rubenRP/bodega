@@ -86,7 +86,7 @@
             <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
                 class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
-                to="/cellar"
+                to="/bottles"
                 ><div class="flex items-center text-gray-100">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

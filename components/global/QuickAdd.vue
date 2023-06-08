@@ -29,7 +29,7 @@
         <ul>
           <li>
             <button
-              class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
+              class="font-medium text-sm flex items-center py-1 px-3 text-pink-900 hover:text-pink-800"
               @click="toggleNewBottle()"
             >
               <span>{{ $t("cellar.addBottle") }}</span>
@@ -37,7 +37,7 @@
           </li>
           <li>
             <button
-              class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
+              class="font-medium text-sm flex items-center py-1 px-3 text-pink-900 hover:text-pink-800"
               @click="toggleNewReview()"
             >
               <span>{{ $t("reviews.addReview") }}</span>
