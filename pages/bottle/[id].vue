@@ -36,19 +36,13 @@
             {{ bottle?.cellar }}
           </p>
         </span>
-        <button
-          @click="$router.back()"
-          class="hidden md:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-pink-900 bg-pink-900 hover:bg-transparent hover:text-pink-800 ml-4 lg:mt-0 ease-linear transition-all duration-150"
-        >
-          {{ $t("general.back") }}
-        </button>
       </h2>
       <div class="md:hidden">
         <p class="text-gray-500">
           {{ bottle?.cellar }}
         </p>
       </div>
-      <div class="my-4">
+      <div class="mb-4">
         <div class="text-md text-gray-500">
           <span v-if="bottle?.apellation">{{ bottle?.apellation }} - </span
           ><span class="font-bold">{{ bottle?.vintage }}</span>
@@ -58,6 +52,14 @@
         </p>
         <div class="text-xs mt-6">
           <WineTag :type="bottle?.type" />
+        </div>
+
+        <div class="mt-6">
+          <span
+            class="p-2 w-10 h-10 border-pink-900 text-gray-800 rounded-md flex items-center justify-center border"
+          >
+            {{ bottle?.qty }}
+          </span>
         </div>
       </div>
 
@@ -85,6 +87,29 @@
               </svg>
             </span>
             <span class="mt-3 text-xs">Edit</span>
+          </button>
+          <button
+            class="ml-4"
+            type="button"
+            @click="toggleEditBottle()"
+            v-if="isAdmin"
+          >
+            <span
+              class="p-2 w-10 h-10 bg-pink-100 hover:bg-pink-900 text-gray-600 hover:text-white transition-all rounded-md flex items-center justify-center m-auto"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                class="fill-current"
+              >
+                <path
+                  d="M16.625,1 C17.9366763,1 19,2.00735931 19,3.25 L19,3.25 L19.0009752,11.500811 C18.485361,10.8140699 17.7970599,10.2644049 17.0005324,9.91627634 L17,6.72 L11.5683958,9.53363561 C11.8787783,9.72974764 12.2010832,9.93461394 12.5356328,10.1483794 C11.9225066,10.4964379 11.390024,10.9703902 10.9735012,11.5351089 C7.36965551,9.25212309 5.12210955,7.9626603 4.88962842,7.9626603 L4.65576095,8.12481111 C4.55165957,8.19941242 4.41729931,8.3014151 4.26167022,8.43419821 C3.79406338,8.83316144 3.21509447,9.43266289 2.53276052,10.2281591 L2,10.859 L2,17 L10.6696616,17.0012971 C11.1692205,17.864288 11.9193504,18.5641124 12.8205484,19.0012675 L2.375,19 C1.06332372,19 0,17.9926407 0,16.75 L0,16.75 L0,3.25 C0,2.00735931 1.06332372,1 2.375,1 L2.375,1 Z M15,11 C15.4487314,11 15.8185688,11.3377852 15.8691132,11.7729565 L15.875,11.875 L15.875,13.625 L17.625,13.625 C18.1082492,13.625 18.5,14.0167508 18.5,14.5 C18.5,14.9487314 18.1622148,15.3185688 17.7270435,15.3691132 L17.625,15.375 L15.875,15.375 L15.875,17.125 C15.875,17.6082492 15.4832492,18 15,18 C14.5512686,18 14.1814312,17.6622148 14.1308868,17.2270435 L14.125,17.125 L14.125,15.375 L12.375,15.375 C11.8917508,15.375 11.5,14.9832492 11.5,14.5 C11.5,14.0512686 11.8377852,13.6814312 12.2729565,13.6308868 L12.375,13.625 L14.125,13.625 L14.125,11.875 C14.125,11.3917508 14.5167508,11 15,11 Z M17,3 L2,3 L2.00088142,7.77594251 C3.16397552,6.58028446 4.06152092,6 4.88962842,6 C5.50631387,6 6.88443503,6.66963101 9.32918035,8.14609891 L17,4.17 L17,3 Z"
+                ></path>
+              </svg>
+            </span>
+            <span class="mt-3 text-xs">Scrape</span>
           </button>
           <button class="ml-4" type="button" @click="decreaseQty(bottle?.id!)">
             <span
@@ -122,14 +147,6 @@
             </span>
             <span class="mt-3 text-xs">Increase</span>
           </button>
-          <span class="ml-4">
-            <span
-              class="p-2 w-10 h-10 bg-pink-100 text-gray-600 transition-all rounded-md flex items-center justify-center m-auto"
-            >
-              {{ bottle?.qty }}
-            </span>
-            <span class="mt-3 text-xs">Quantity</span>
-          </span>
         </div>
       </div>
     </div>

@@ -43,6 +43,10 @@
 import CellarBottles from "~/components/quickStats/CellarBottles.vue";
 import { useBottlesStore } from "~~/stores/bottles";
 
+definePageMeta({
+  middleware: "auth",
+});
+
 const store = useBottlesStore();
 const latestCellarBottles = computed(() => store.latestCellarBottles);
 </script>

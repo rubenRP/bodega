@@ -5,7 +5,7 @@
         <font-awesome-icon :icon="['fas', 'search']" class="w-4 h-4" />
       </div>
       <input
-        class="w-full pl-8 pr-2 py-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border rounded-md focus:placeholder-gray-500 focus:bg-white focus:border-pink-900 focus:outline-none focus:shadow-outline-purple form-input"
+        class="w-full pl-8 pr-2 py-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border rounded-md focus:placeholder-gray-500 focus:bg-white focus:border-pink-900 focus:outline-none focus:shadow-outline-purple form-input h-8"
         type="text"
         :placeholder="$t('cellar.filterWines')"
         aria-label="Search"

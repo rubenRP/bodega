@@ -59,12 +59,12 @@
             </a>
           </li>
           <li>
-            <a
+            <button
               class="font-medium text-sm flex items-center py-1 px-3 text-pink-900 hover:text-pink-800"
-              @click.prevent="logout"
+              @click="logout"
             >
               <span>{{ $t("user.logout") }}</span>
-            </a>
+            </button>
           </li>
         </ul>
       </div>
@@ -74,6 +74,7 @@
 
 <script setup lang="ts">
 import { useUserStore } from "~~/stores/user";
+const client = useSupabaseAuthClient();
 
 const userStore = useUserStore();
 
@@ -89,5 +90,6 @@ const closeProfileMenu = () => {
 
 const logout = () => {
   userStore.setLoggedIn(false);
+  client.auth.signOut();
 };
 </script>
