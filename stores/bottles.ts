@@ -1,4 +1,3 @@
-import { Bottle, AddedBottle, OpenedBottle } from "~~/types/bottle";
 import { defineStore } from "pinia";
 import {
   decreaseBottleQty,
@@ -9,6 +8,7 @@ import {
   getOpenedBottlesSubscription,
   increaseBottleQty,
 } from "~~/api/bottles";
+import { AddedBottle, Bottle, OpenedBottle } from "~~/types/bottle";
 
 export const useBottlesStore = defineStore("bottles", {
   state: () => ({
@@ -82,7 +82,8 @@ export const useBottlesStore = defineStore("bottles", {
           .filter(
             (b: Bottle) =>
               b.cellar.toLowerCase() === bottle.cellar.toLowerCase() &&
-              b.id !== bottle.id
+              b.id !== bottle.id &&
+              b.qty! > 0
           )
           .sort((a: Bottle, b: Bottle) => b.vintage - a.vintage);
     },
@@ -92,7 +93,9 @@ export const useBottlesStore = defineStore("bottles", {
           .filter(
             (b: Bottle) =>
               b.apellation?.toLowerCase() ===
-                bottle.apellation?.toLowerCase() && b.id !== bottle.id
+                bottle.apellation?.toLowerCase() &&
+              b.id !== bottle.id &&
+              b.qty! > 0
           )
           .sort((a: Bottle, b: Bottle) => b.vintage - a.vintage);
     },

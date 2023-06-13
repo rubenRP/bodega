@@ -384,8 +384,8 @@
 
 <script setup lang="ts">
 import { useBottlesStore } from "@/stores/bottles";
-import { Bottle } from "~~/types/bottle";
 import { updateBottle as apiUpdateBottle } from "~/api/bottles";
+import { Bottle } from "~~/types/bottle";
 
 definePageMeta({
   middleware: "auth",

@@ -17,13 +17,17 @@
             class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-emerald-500"
             v-if="monthlyBalance >= 0"
           >
-            <font-awesome-icon :icon="['fas', 'thumbs-up']" />
+            <ClientOnly>
+              <font-awesome-icon :icon="['fas', 'thumbs-up']" />
+            </ClientOnly>
           </div>
           <div
             class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-red-500"
             v-else
           >
-            <font-awesome-icon :icon="['fas', 'thumbs-down']" />
+            <ClientOnly>
+              <font-awesome-icon :icon="['fas', 'thumbs-down']" />
+            </ClientOnly>
           </div>
         </div>
       </div>
