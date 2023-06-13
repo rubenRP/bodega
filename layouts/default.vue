@@ -27,15 +27,23 @@ import { useGeneralStore } from "@/stores/general";
 import BottleForm from "~/components/global/BottleForm.vue";
 
 const store = useGeneralStore();
-const showSidebar = store.sidebar;
-const toggleSidebar = () => store.toggleSidebar;
 
-const bodyClasses =
-  "font-inter antialiased bg-slate-100 text-slate-600 sidebar-expanded";
+const bodyClasses = "font-inter antialiased bg-slate-100 text-slate-600";
 
 useHead({
   bodyAttrs: {
     class: bodyClasses,
   },
 });
+
+watch(
+  () => store.sidebar,
+  (sidebar) => {
+    if (sidebar) {
+      document.body.classList.add("sidebar-expanded");
+    } else {
+      document.body.classList.remove("sidebar-expanded");
+    }
+  }
+);
 </script>

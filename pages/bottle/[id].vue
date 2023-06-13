@@ -387,6 +387,10 @@ import { useBottlesStore } from "@/stores/bottles";
 import { Bottle } from "~~/types/bottle";
 import { updateBottle as apiUpdateBottle } from "~/api/bottles";
 
+definePageMeta({
+  middleware: "auth",
+});
+
 const store = useBottlesStore();
 const route = useRoute();
 

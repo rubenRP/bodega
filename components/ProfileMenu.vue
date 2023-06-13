@@ -89,7 +89,8 @@ const closeProfileMenu = () => {
 };
 
 const logout = () => {
-  userStore.setLoggedIn(false);
+  userStore.logout();
   client.auth.signOut();
+  navigateTo("/login");
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="sm:flex sm:justify-between sm:items-center mb-8">
-    <div class="relative w-full max-w-md focus-within:text-gray-200">
+    <div class="relative w-full lg:max-w-md focus-within:text-gray-200">
       <div class="absolute inset-y-0 flex items-center pl-2">
         <font-awesome-icon :icon="['fas', 'search']" class="w-4 h-4" />
       </div>
@@ -13,7 +13,7 @@
       />
     </div>
 
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap mt-4 lg:mt-0 w-full lg:w-auto">
       <button
         class="text-sm px-4 py-2 leading-none border rounded rounded-r-none text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150"
         :class="{ 'bg-pink-900 text-white': type === 'All' }"
@@ -84,6 +84,10 @@
 <script setup lang="ts">
 import { useBottlesStore } from "@/stores/bottles";
 import useFilteredBottles from "~~/composables/filteredBottles";
+
+definePageMeta({
+  middleware: "auth",
+});
 
 const store = useBottlesStore();
 const search = ref("");

@@ -72,6 +72,10 @@
 import { useBottlesStore } from "@/stores/bottles";
 import useFilteredBottles from "~~/composables/filteredBottles";
 
+definePageMeta({
+  middleware: "auth",
+});
+
 const store = useBottlesStore();
 const search = ref("");
 const openedNewBottle = ref(false);
