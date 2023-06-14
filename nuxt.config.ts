@@ -47,6 +47,12 @@ export default defineNuxtConfig({
     },
   },
   pwa: {
+    strategies: "injectManifest",
+    srcDir: "src",
+    mode: "development",
+    filename: "sw.ts",
+    base: "/",
+    includeAssets: ["/favicon.png"],
     manifest: {
       name: "Bodega",
       short_name: "Bodega",
@@ -67,9 +73,6 @@ export default defineNuxtConfig({
           type: "image/png",
         },
       ],
-    },
-    workbox: {
-      importScripts: ["~/sw.ts"],
     },
   },
 });
