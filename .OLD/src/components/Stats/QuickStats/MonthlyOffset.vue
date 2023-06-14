@@ -31,9 +31,9 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { useBottlesStore } from '@/stores/bottles'
-  import { computed, defineComponent } from 'vue'
+<script setup lang="ts">
+  import { useBottlesStore } from '@/stores/bottles';
+import { computed, defineComponent } from 'vue';
 
   export default defineComponent({
     setup() {

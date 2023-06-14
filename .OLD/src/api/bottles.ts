@@ -126,7 +126,7 @@ const getBottlesCount = async () => {
 const getBottlesSubscription = async () => {
   return await supabase
     .from('bottles')
-    .on('*', (payload) => {
+    .on('*', (payload: any) => {
       console.log('Change received!', payload)
       return payload
     })
