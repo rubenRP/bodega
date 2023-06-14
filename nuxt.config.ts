@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@pinia/nuxt",
     "@nuxtjs/supabase",
-    "@kevinmarrec/nuxt-pwa",
+    "@vite-pwa/nuxt",
   ],
   css: [
     "@fortawesome/fontawesome-svg-core/styles.css",
@@ -15,6 +15,9 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
+  },
+  i18n: {
+    vueI18n: "./i18n.config.ts",
   },
   runtimeConfig: {
     public: {
@@ -52,7 +55,6 @@ export default defineNuxtConfig({
       start_url: "/",
       display: "standalone",
       background_color: "#ffffff",
-      includeAssets: ["/favicon.png"],
       icons: [
         {
           src: "/icon-192.png",
@@ -65,6 +67,9 @@ export default defineNuxtConfig({
           type: "image/png",
         },
       ],
+    },
+    workbox: {
+      importScripts: ["~/sw.ts"],
     },
   },
 });

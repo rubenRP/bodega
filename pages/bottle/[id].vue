@@ -199,7 +199,7 @@
                 </div>
               </td>
               <td class="px-4 py-3 text-sm">
-                {{ $t(bottle?.type) }}
+                {{ $t(`cellar.${bottle?.type.toLowerCase()}`) }}
               </td>
             </tr>
             <tr class="text-gray-700 border-b" v-if="bottle?.grapes">

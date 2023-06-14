@@ -1,4 +1,5 @@
 <template>
+  <ReloadPWA />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
@@ -12,7 +13,6 @@ const store = useBottlesStore();
 const userStore = useUserStore();
 const reviewsStore = useReviewsStore();
 const user = useSupabaseUser();
-const auth = useSupabaseAuthClient();
 const client = useSupabaseClient();
 
 userStore.fetchUser(user.value);
