@@ -1,11 +1,10 @@
 import { serverSupabaseClient } from "#supabase/server";
+
 export default eventHandler(async (event) => {
   const client = serverSupabaseClient(event);
   const { data } = await client
-    .from("bottles")
+    .from("added_bottles")
     .select()
-    .is("mycellar", true)
-    .gt("qty", 0)
-    .order("last_added", { ascending: false });
+    .order("date_added", { ascending: true });
   return { data };
 });

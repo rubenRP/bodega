@@ -1,4 +1,4 @@
-import { getReviews, getReviewsSubscription } from "@/api/reviews";
+/* import { getReviews, getReviewsSubscription } from "@/api/reviews";
 import { defineStore } from "pinia";
 
 export const useReviewsStore = defineStore("reviews", {
@@ -89,3 +89,4 @@ export const useReviewsStore = defineStore("reviews", {
     },
   },
 });
+ */

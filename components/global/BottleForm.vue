@@ -146,7 +146,6 @@
 <script setup lang="ts">
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-import { addBottle, findBottle } from "~~/api/bottles";
 import { useGeneralStore } from "~~/stores/general";
 import { Bottle } from "~~/types/bottle";
 
@@ -197,20 +196,35 @@ const createBottle = async () => {
     if (v$.value.$invalid) {
       return;
     }
-    const { data } = await findBottle(
-      newBottle.value.name,
-      newBottle.value.cellar,
-      newBottle.value.vintage,
-      ""
-    );
+    const { data } = await $fetch("/api/bottle/find", {
+      method: "POST",
+      body: {
+        name: newBottle.value.name,
+        cellar: newBottle.value.cellar,
+        vintage: newBottle.value.vintage,
+        type: "newBottle.value.type",
+      },
+    });
     const bottleFinded = data![0];
 
     if (!bottleFinded) {
       let res;
       if (props.showQty && newBottle.value.qty! > 0) {
-        res = await addBottle(newBottle.value, true);
+        res = await $fetch("/api/bottles/add", {
+          method: "POST",
+          body: {
+            bottle: newBottle.value,
+            mycellar: true,
+          },
+        });
       } else {
-        res = await addBottle(newBottle.value, false);
+        res = await $fetch("/api/bottles/add", {
+          method: "POST",
+          body: {
+            bottle: newBottle.value,
+            mycellar: false,
+          },
+        });
       }
       store.addMessage({
         type: "success",

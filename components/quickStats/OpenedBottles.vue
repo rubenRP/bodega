@@ -6,7 +6,7 @@
       <div class="flex flex-wrap">
         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
           <h5 class="text-slate-400 uppercase font-bold text-xs">
-            {{ $t('cellar.drinkedBottles') }}
+            {{ $t("cellar.drinkedBottles") }}
           </h5>
           <span class="font-semibold text-xl text-slate-700">
             {{ openedBottles }}
@@ -25,26 +25,26 @@
 </template>
 
 <script lang="ts">
-  import { getOpenedBottles } from '@/api/bottles'
-  import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent, onMounted, ref } from "vue";
 
-  export default defineComponent({
-    setup() {
-      const openedBottles = ref(0)
-      onMounted(async () => {
-        const bottles = (await getOpenedBottles()).data || []
-        const monthBottles = bottles.filter(
-          (bottle: any) =>
-            new Date(bottle.date_opened).getMonth() === new Date().getMonth() &&
-            new Date(bottle.date_opened).getFullYear() ===
-              new Date().getFullYear()
-        )
-        openedBottles.value = monthBottles.length
-      })
+export default defineComponent({
+  setup() {
+    const openedBottles = ref(0);
+    onMounted(async () => {
+      {data} = await $fetch("/api/cellar/opened")
+      const bottles = data || [];
+      const monthBottles = bottles.filter(
+        (bottle: any) =>
+          new Date(bottle.date_opened).getMonth() === new Date().getMonth() &&
+          new Date(bottle.date_opened).getFullYear() ===
+            new Date().getFullYear()
+      );
+      openedBottles.value = monthBottles.length;
+    });
 
-      return {
-        openedBottles,
-      }
-    },
-  })
+    return {
+      openedBottles,
+    };
+  },
+});
 </script>

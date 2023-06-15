@@ -1,11 +1,19 @@
 import { serverSupabaseClient } from "#supabase/server";
+
 export default eventHandler(async (event) => {
   const client = serverSupabaseClient(event);
+
+  const body = await readBody(event);
+
+  const { bottle, id } = body;
+
   const { data } = await client
     .from("bottles")
-    .select()
-    .is("mycellar", true)
-    .gt("qty", 0)
-    .order("last_added", { ascending: false });
+    .update({
+      date_scrapped: new Date(),
+      ...bottle,
+    })
+    .eq("id", id);
+
   return { data };
 });

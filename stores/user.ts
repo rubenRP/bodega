@@ -1,4 +1,3 @@
-import { getProfileInfo } from "@/api/user";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {
@@ -21,8 +20,10 @@ export const useUserStore = defineStore("user", {
       if (user) {
         this.setUser(user);
         try {
-          let { data, error, status } = await getProfileInfo(user.id);
-          if (error && status !== 406) throw error;
+          let { data } = await $fetch("/api/user/profile", {
+            method: "post",
+            body: { id: user.id },
+          });
 
           if (data) {
             this.setInitials(data.initials);

@@ -384,7 +384,6 @@
 
 <script setup lang="ts">
 import { useBottlesStore } from "@/stores/bottles";
-import { updateBottle as apiUpdateBottle } from "~/api/bottles";
 import { Bottle } from "~~/types/bottle";
 
 definePageMeta({
@@ -401,6 +400,13 @@ const isAdmin = ref(true);
 onMounted(() => {
   id.value = parseInt(route.params.id as string);
 });
+
+watch(
+  () => route.params.id,
+  () => {
+    id.value = parseInt(route.params.id as string);
+  }
+);
 
 const bottle = computed(() => {
   return store.allBottles.find((bottle) => bottle.id === id.value);
@@ -433,7 +439,13 @@ const toggleEditBottle = () => {
   editBottle.value = !editBottle.value;
 };
 const updateBottle = async (bottle: Bottle) => {
-  await apiUpdateBottle(bottle.id!, bottle);
+  await $fetch("/api/bottles/update", {
+    method: "POST",
+    body: {
+      id: bottle.id,
+      bottle: bottle,
+    },
+  });
   editBottle.value = false;
 };
 </script>

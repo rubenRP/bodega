@@ -2,7 +2,9 @@
   <div class="sm:flex sm:justify-between sm:items-center mb-8">
     <div class="relative w-full lg:max-w-md focus-within:text-gray-200">
       <div class="absolute inset-y-0 flex items-center pl-2">
-        <font-awesome-icon :icon="['fas', 'search']" class="w-4 h-4" />
+        <ClientOnly>
+          <font-awesome-icon :icon="['fas', 'search']" class="w-4 h-4" />
+        </ClientOnly>
       </div>
       <input
         class="w-full pl-8 pr-2 py-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border rounded-md focus:placeholder-gray-500 focus:bg-white focus:border-pink-900 focus:outline-none focus:shadow-outline-purple form-input h-8"

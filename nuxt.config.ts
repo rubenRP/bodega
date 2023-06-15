@@ -1,11 +1,5 @@
 export default defineNuxtConfig({
-  modules: [
-    "nuxt-vitest",
-    "@nuxtjs/i18n",
-    "@pinia/nuxt",
-    "@nuxtjs/supabase",
-    "@vite-pwa/nuxt",
-  ],
+  modules: ["nuxt-vitest", "@nuxtjs/i18n", "@pinia/nuxt", "@nuxtjs/supabase"],
   css: [
     "@fortawesome/fontawesome-svg-core/styles.css",
     "~/assets/css/main.css",
@@ -27,6 +21,21 @@ export default defineNuxtConfig({
       },
     },
   },
+  supabase: {
+    client: {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    },
+  },
+  nitro: {
+    compressPublicAssets: true,
+    prerender: {
+      crawlLinks: true,
+      routes: ["/"],
+    },
+  },
   app: {
     head: {
       title: "Bodega - Your digital wine cellar",
@@ -42,35 +51,6 @@ export default defineNuxtConfig({
           rel: "icon",
           type: "image/png",
           href: "/favicon.png",
-        },
-      ],
-    },
-  },
-  pwa: {
-    strategies: "injectManifest",
-    srcDir: "src",
-    mode: "development",
-    filename: "sw.ts",
-    base: "/",
-    includeAssets: ["/favicon.png"],
-    manifest: {
-      name: "Bodega",
-      short_name: "Bodega",
-      description: "Your digital wine cellar",
-      theme_color: "#ffffff",
-      start_url: "/",
-      display: "standalone",
-      background_color: "#ffffff",
-      icons: [
-        {
-          src: "/icon-192.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
-          src: "/icon-512.png",
-          sizes: "512x512",
-          type: "image/png",
         },
       ],
     },

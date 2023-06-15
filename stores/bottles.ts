@@ -1,13 +1,4 @@
 import { defineStore } from "pinia";
-import {
-  decreaseBottleQty,
-  getAddedBottles,
-  getAllBottles,
-  getBottlesSubscription,
-  getOpenedBottles,
-  getOpenedBottlesSubscription,
-  increaseBottleQty,
-} from "~~/api/bottles";
 import { AddedBottle, Bottle, OpenedBottle } from "~~/types/bottle";
 
 export const useBottlesStore = defineStore("bottles", {
@@ -108,81 +99,33 @@ export const useBottlesStore = defineStore("bottles", {
     },
     async fetchBottles() {
       try {
-        let { data, error, status } = await getAllBottles();
-        if (error && status !== 406) throw error;
+        let { data } = await $fetch("/api/bottles/all");
         if (data) {
           this.allBottles = data as Bottle[];
-          this.subscribeToBottles();
         }
       } catch (e) {
         console.error(e);
-      }
-    },
-    async subscribeToBottles() {
-      console.log("Subscribing to bottles...");
-      const payload: any = await getBottlesSubscription();
-      switch (payload.eventType) {
-        case "INSERT":
-          this.addBottle(payload.new);
-          break;
-        case "UPDATE":
-          this.modifyBottle(payload.new);
-          return;
-        case "DELETE":
-          this.deleteBottle(payload.new.id);
-          break;
       }
     },
     async fetchOpenedBottles() {
       try {
-        let { data } = await getOpenedBottles();
+        let { data } = await $fetch("/api/cellar/opened");
         if (data) {
           this.openedBottles = data as OpenedBottle[];
-          this.subscribeToOpenedBottles();
         }
       } catch (e) {
         console.error(e);
       }
     },
-    async subscribeToOpenedBottles() {
-      console.log("Subscribing to opened bottles...");
-      const payload: any = await getOpenedBottlesSubscription();
-      switch (payload.eventType) {
-        case "INSERT":
-          this.addOpenedBottle(payload.new);
-          break;
-        case "UPDATE":
-          this.modifyOpenedBottle(payload.new);
-          return;
-        case "DELETE":
-          this.deleteOpenedBottle(payload.new.id);
-          break;
-      }
-    },
+
     async fetchAddedBottles() {
       try {
-        let { data } = await getAddedBottles();
+        let { data } = await $fetch("/api/cellar/added");
         if (data) {
           this.addedBottles = data as AddedBottle[];
-          this.subscribeToAddedBottles();
         }
       } catch (e) {
         console.error(e);
-      }
-    },
-    async subscribeToAddedBottles() {
-      console.log("Subscribing to added bottles...");
-      const payload: any = await getOpenedBottlesSubscription();
-      switch (payload.eventType) {
-        case "INSERT":
-          this.addAddedBottle(payload.new);
-          break;
-        case "UPDATE":
-          this.modifyAddedBottle(payload.new);
-          return;
-        case "DELETE":
-          this.deleteAddedBottle(payload.new.id);
-          break;
       }
     },
     addBottle(bottle: Bottle) {
@@ -229,14 +172,26 @@ export const useBottlesStore = defineStore("bottles", {
     },
     async increaseBottleQty(info: { bottleId: number; qty: number }) {
       try {
-        increaseBottleQty(info.bottleId, info.qty);
+        $fetch("api/api/cellar/increase", {
+          method: "POST",
+          body: {
+            id: info.bottleId,
+            qty: info.qty,
+          },
+        });
       } catch (e) {
         console.error(e);
       }
     },
     async decreaseBottleQty(info: { bottleId: number; qty: number }) {
       try {
-        decreaseBottleQty(info.bottleId, info.qty);
+        $fetch("api/api/cellar/decrease", {
+          method: "POST",
+          body: {
+            id: info.bottleId,
+            qty: info.qty,
+          },
+        });
       } catch (e) {
         console.error(e);
       }
