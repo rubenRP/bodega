@@ -3,7 +3,7 @@ import GeneralStoreState from "~~/types/stores";
 
 export const useGeneralStore = defineStore("general", {
   state: (): GeneralStoreState => ({
-    sidebar: true,
+    sidebar: false,
     messages: [],
     messageId: 0,
     bottleForm: false,

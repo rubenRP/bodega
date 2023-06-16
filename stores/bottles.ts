@@ -172,7 +172,7 @@ export const useBottlesStore = defineStore("bottles", {
     },
     async increaseBottleQty(info: { bottleId: number; qty: number }) {
       try {
-        $fetch("api/api/cellar/increase", {
+        $fetch("/api/cellar/increase", {
           method: "POST",
           body: {
             id: info.bottleId,
@@ -185,7 +185,7 @@ export const useBottlesStore = defineStore("bottles", {
     },
     async decreaseBottleQty(info: { bottleId: number; qty: number }) {
       try {
-        $fetch("api/api/cellar/decrease", {
+        $fetch("/api/cellar/decrease", {
           method: "POST",
           body: {
             id: info.bottleId,

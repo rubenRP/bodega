@@ -9,8 +9,10 @@ import { useBottlesStore } from "~~/stores/bottles";
 /* import { useReviewsStore } from "~~/stores/reviews"; */
 import { useUserStore } from "./stores/user";
 import type { RealtimeChannel } from "@supabase/supabase-js";
+import { useGeneralStore } from "./stores/general";
 
-const store = useBottlesStore();
+const generalStore = useGeneralStore();
+const bottlesStore = useBottlesStore();
 const userStore = useUserStore();
 // const reviewsStore = useReviewsStore();
 const user = useSupabaseUser();
@@ -25,10 +27,17 @@ client.auth.onAuthStateChange((_, session) => {
   if (session) userStore.fetchUser(session.user);
 });
 
-store.fetchStoreData();
+bottlesStore.fetchStoreData();
 // reviewsStore.fetchStoreData();
 
 onMounted(() => {
+  // getClientWith
+  const width = window.innerWidth;
+
+  if (width > 1024) {
+    generalStore.sidebar = true;
+  }
+
   realtimeChannelBottles = client
     .channel("any")
     .on(
@@ -36,10 +45,9 @@ onMounted(() => {
       { event: "*", schema: "public", table: "bottles" },
       (payload) => {
         console.log("Change received!", payload);
-        store.fetchBottles();
+        bottlesStore.fetchBottles();
       }
     );
-
   realtimeChannelBottles.subscribe();
 
   realtimeChannelAddedBottles = client
@@ -49,10 +57,9 @@ onMounted(() => {
       { event: "*", schema: "public", table: "added_bottles" },
       (payload) => {
         console.log("Change received!", payload);
-        store.fetchAddedBottles();
+        bottlesStore.fetchAddedBottles();
       }
     );
-
   realtimeChannelAddedBottles.subscribe();
 
   realtimeChannelOpenedBottles = client
@@ -62,10 +69,9 @@ onMounted(() => {
       { event: "*", schema: "public", table: "opened_bottles" },
       (payload) => {
         console.log("Change received!", payload);
-        store.fetchOpenedBottles();
+        bottlesStore.fetchOpenedBottles();
       }
     );
-
   realtimeChannelOpenedBottles.subscribe();
 });
 </script>
