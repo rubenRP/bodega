@@ -21,7 +21,7 @@ export default eventHandler(async (event) => {
       .from("added_bottles")
       .insert({
         bottle_id: data![0].id,
-        date_added: new Date(),
+        date_added: Date.now(),
       })
       .select();
   }

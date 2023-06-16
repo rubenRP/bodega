@@ -196,21 +196,20 @@ const createBottle = async () => {
     if (v$.value.$invalid) {
       return;
     }
-    const { data } = await $fetch("/api/bottle/find", {
+    const { data } = await $fetch("/api/bottles/find", {
       method: "POST",
       body: {
         name: newBottle.value.name,
         cellar: newBottle.value.cellar,
         vintage: newBottle.value.vintage,
-        type: "newBottle.value.type",
+        type: newBottle.value.type,
       },
     });
     const bottleFinded = data![0];
 
     if (!bottleFinded) {
-      let res;
       if (props.showQty && newBottle.value.qty! > 0) {
-        res = await $fetch("/api/bottles/add", {
+        await $fetch("/api/bottles/add", {
           method: "POST",
           body: {
             bottle: newBottle.value,
@@ -218,7 +217,7 @@ const createBottle = async () => {
           },
         });
       } else {
-        res = await $fetch("/api/bottles/add", {
+        await $fetch("/api/bottles/add", {
           method: "POST",
           body: {
             bottle: newBottle.value,
