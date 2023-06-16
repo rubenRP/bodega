@@ -1,12 +1,12 @@
 <template>
-  <div class="mt-6 xl:mt-12">
+  <div class="lg:mt-6 xl:mt-12">
     <div class="grid gap-6 mb-8 grid-cols-1 xl:grid-cols-3">
       <CellarBottles class="hidden md:block" />
       <QuickStatsMonthlyOffset />
     </div>
   </div>
   <h2
-    class="my-4 mt-12 text-xl font-semibold flex items-center justify-between"
+    class="my-4 lg:mt-12 text-xl font-semibold flex items-center justify-between"
   >
     <span>{{ $t("cellar.latestBottles") }}</span>
   </h2>
