@@ -115,6 +115,31 @@
             <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
                 class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
+                to="/bottles"
+                ><div class="flex items-center text-gray-100">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    class="fill-current shrink-0"
+                  >
+                    <path
+                      d="M4.6 3.63L5.42.48A2.12 2.12 0 017.98-1.1l1 .26c1.1.3 1.73 1.47 1.42 2.63l-.85 3.16c1.1.29 1.74 1.47 1.43 2.63l-3.1 11.55a2.12 2.12 0 01-2.55 1.57L.37 19.38a2.12 2.12 0 01-1.42-2.63l3.1-11.56a2.12 2.12 0 012.54-1.56zM7.41 1l-1.4 5.25-2-.53L.94 17.28l4.96 1.33L9 7.06l-1.98-.54 1.4-5.25-.99-.26z"
+                    ></path>
+                    <path
+                      d="M12.22 4.25V1.1c0-1.16 1-2.1 2.22-2.1h1.12c1.22 0 2.22.94 2.22 2.1v3.15c1.23 0 2.22.94 2.22 2.1V17.9c0 1.16-1 2.1-2.22 2.1h-5.56A2.16 2.16 0 0110 17.9V6.35c0-1.16 1-2.1 2.22-2.1zm2.22-3.15v5.25h-2.22V17.9h5.56V6.35h-2.22V1.1h-1.12z"
+                    ></path></svg
+                  ><span
+                    class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                    >All Bottles</span
+                  >
+                </div></NuxtLink
+              >
+            </li>
+            <li class="rounded-sm mb-0.5 last:mb-0 false">
+              <NuxtLink
+                class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
                 href="/reviews"
                 @click.prevent="checkToggleSidebar()"
                 ><div class="flex items-center text-gray-100">

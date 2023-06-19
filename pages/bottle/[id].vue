@@ -243,7 +243,19 @@
               <td class="px-4 py-3 text-sm">{{ bottle?.alcohol_content }}</td>
             </tr>
             <tr class="text-gray-700 border-b" v-if="bottle?.climate_soil">
-              <td class="pr-4 py-3">
+              <td class="pr-4 py-3 flex align middle">
+                <span class="mr-2 text-pink-800"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    class="fill-current w-4"
+                  >
+                    <path
+                      d="M15.84 0a2 2 0 0 1 1.76 1.05C19.2 4.04 20 7.02 20 10c0 2.98-.8 5.96-2.4 8.95A2 2 0 0 1 15.84 20H4.16a2 2 0 0 1-1.76-1.05A18.77 18.77 0 0 1 0 10c0-2.98.8-5.96 2.4-8.95A2 2 0 0 1 4.16 0h11.68Zm.73 16.5H3.43c.15.35.32.7.5 1.05l.23.45h11.68l.23-.45c.18-.35.35-.7.5-1.05ZM4.9 5.5H2.7C2.23 7 2 8.5 2 10s.23 3 .69 4.5h2.2a26.33 26.33 0 0 1 .01-9Zm4.1 0H6.93l-.05.3a24.34 24.34 0 0 0 0 8.41l.05.29H9v-9Zm4.07 0H11v9h2.06l.06-.3a24.34 24.34 0 0 0 0-8.41l-.05-.29Zm4.24 0h-2.2a26.33 26.33 0 0 1-.01 9h2.21c.46-1.5.69-3 .69-4.5s-.23-3-.69-4.5ZM15.84 2H4.16c-.27.5-.51 1-.73 1.5h13.14c-.22-.5-.46-1-.73-1.5Z"
+                    ></path></svg
+                ></span>
                 <div class="flex items-center text-sm font-semibold">
                   {{ $t("cellar.climateSoil") }}
                 </div>
@@ -251,7 +263,20 @@
               <td class="px-4 py-3 text-sm">{{ bottle?.climate_soil }}</td>
             </tr>
             <tr class="text-gray-700 border-b" v-if="bottle?.consumption">
-              <td class="pr-4 py-3">
+              <td class="pr-4 py-3 flex align-middle">
+                <span class="mr-2 text-pink-800">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    class="fill-current w-4"
+                  >
+                    <path
+                      d="M17 0a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-6v2.25l1.37 1.03c.62.47.78 1.33.38 1.98l-.08.12a1.5 1.5 0 0 1-.52.43l-.15.07-1.65.62 1.25.47a1.5 1.5 0 0 1 .92 1.8l-.04.13c-.13.36-.4.66-.75.82l-.13.06-1.25.47 1.65.62a1.5 1.5 0 0 1 .92 1.8l-.05.13c-.08.21-.2.4-.37.56l-.13.11-1.77 1.33a1 1 0 0 1-1.3-1.52l.1-.08 1.04-.78-2.04-.77a1.5 1.5 0 0 1-.82-.74l-.06-.13a1.5 1.5 0 0 1 .74-1.88l.14-.05 1.25-.47-1.25-.48a1.5 1.5 0 0 1-.82-.74l-.06-.13a1.5 1.5 0 0 1 .74-1.88l.14-.05 2.04-.77-1.04-.78a1 1 0 0 1-.4-.68V5H3a2 2 0 0 1-2-2V2c0-1.1.9-2 2-2h14Zm0 2H3v1h14V2Z"
+                    ></path>
+                  </svg>
+                </span>
                 <div class="flex items-center text-sm font-semibold">
                   {{ $t("cellar.consumption") }}
                 </div>
