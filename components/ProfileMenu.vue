@@ -18,7 +18,7 @@
       </div>
       <div class="flex items-center truncate">
         <span
-          class="truncate ml-2 text-sm font-medium group-hover:text-slate-800"
+          class="truncate ml-2 text-sm font-medium group-hover:text-slate-800 hidden lg:block"
         >
           Rubén R.
         </span>

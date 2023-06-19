@@ -108,7 +108,7 @@
             />
           </label>
         </div>
-        <div>
+        <div class="">
           <label class="block text-sm">
             <span class="text-gray-700">{{ $t("cellar.type") }}</span>
             <select
@@ -135,7 +135,7 @@
               </div>
             </div>
           </label>
-          <div class="block box">
+          <div class="flex justify-between">
             <button
               class="w-full px-5 py-3 text-sm font-medium leading-5 text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg sm:px-4 sm:py-2 sm:w-auto active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray"
               @click="emit('cancelEdit')"

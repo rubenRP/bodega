@@ -1,10 +1,10 @@
 <template>
   <h2
-    class="mt-6 text-2xl font-semibold text-gray-700 items-center justify-between pb-6 md:pb-2 flex md:hidden"
+    class="text-2xl font-semibold text-gray-700 items-center justify-between pb-6 md:pb-2 flex md:hidden"
   >
     <span
       >{{ bottle?.name }}
-      <p class="text-sm text-gray-500 hidden md:block">
+      <p class="text-sm text-gray-500">
         {{ bottle?.cellar }}
       </p>
     </span>
@@ -28,20 +28,15 @@
       class="min-w-0 p-6 bg-white shadow-lg rounded md:col-span-2 flex flex-col justify-between"
     >
       <h2
-        class="mb-4 text-2xl font-semibold text-gray-700 items-center justify-between pb-4 border-b-2 flex md:flex"
+        class="mb-4 text-2xl font-semibold text-gray-700 items-center justify-between pb-4 border-b-2 hidden md:flex"
       >
         <span
           >{{ bottle?.name }}
-          <p class="text-sm text-gray-500 hidden md:block">
+          <p class="text-sm text-gray-500 md:block">
             {{ bottle?.cellar }}
           </p>
         </span>
       </h2>
-      <div class="md:hidden">
-        <p class="text-gray-500">
-          {{ bottle?.cellar }}
-        </p>
-      </div>
       <div class="mb-4">
         <div class="text-md text-gray-500">
           <span v-if="bottle?.apellation">{{ bottle?.apellation }} - </span

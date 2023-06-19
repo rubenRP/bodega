@@ -17,7 +17,7 @@
 
     <div class="flex flex-wrap mt-4 lg:mt-0 w-full lg:w-auto">
       <button
-        class="text-sm px-4 py-2 leading-none border rounded rounded-r-none text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150"
+        class="text-sm px-2 lg:px-4 py-2 leading-none border rounded rounded-r-none text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150"
         :class="{ 'bg-pink-900 text-white': type === 'All' }"
         @click="type = 'All'"
       >
@@ -25,28 +25,28 @@
       </button>
 
       <button
-        class="text-sm px-4 py-2 leading-none border text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
+        class="text-sm px-2 lg:px-4 py-2 leading-none border text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
         :class="{ 'bg-pink-900 text-white': type === 'Red' }"
         @click="type = 'Red'"
       >
         {{ $t("cellar.red") }}
       </button>
       <button
-        class="text-sm px-4 py-2 leading-none border text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
+        class="text-sm px-2 lg:px-4 py-2 leading-none border text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
         :class="{ 'bg-pink-900 text-white': type === 'White' }"
         @click="type = 'White'"
       >
         {{ $t("cellar.white") }}
       </button>
       <button
-        class="text-sm px-4 py-2 leading-none border text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
+        class="text-sm px-2 lg:px-4 py-2 leading-none border text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
         :class="{ 'bg-pink-900 text-white': type === 'Rose' }"
         @click="type = 'Rose'"
       >
         {{ $t("cellar.rose") }}
       </button>
       <button
-        class="text-sm px-4 py-2 leading-none border rounded rounded-l-none text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
+        class="text-sm px-2 lg:px-4 py-2 leading-none border rounded rounded-l-none text-pink-800 border-pink-900 hover:bg-pink-900 hover:text-white lg:mt-0 ease-linear transition-all duration-150 -ml-px"
         :class="{ 'bg-pink-900 text-white': type === 'Sparkling' }"
         @click="type = 'Sparkling'"
       >
