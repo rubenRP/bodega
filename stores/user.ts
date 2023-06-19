@@ -16,14 +16,12 @@ export const useUserStore = defineStore("user", {
   },
   actions: {
     async fetchUser(user: { id: any } | null) {
+      const { getProfile } = useUser();
       this.setLoggedIn(user != null);
       if (user) {
         this.setUser(user);
         try {
-          let { data } = await $fetch("/api/user/profile", {
-            method: "post",
-            body: { id: user.id },
-          });
+          let { data } = await getProfile(user.id);
 
           if (data) {
             this.setInitials(data.initials);

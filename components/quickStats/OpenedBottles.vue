@@ -26,12 +26,16 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
+import { useCellar } from "~/composables/cellar";
 
 export default defineComponent({
   setup() {
     const openedBottles = ref(0);
     onMounted(async () => {
-      {data} = await $fetch("/api/cellar/opened")
+      const { openedBottles } = useCellar();
+
+      const { data } = await openedBottles();
+
       const bottles = data || [];
       const monthBottles = bottles.filter(
         (bottle: any) =>

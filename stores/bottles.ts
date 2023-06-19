@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useBottles } from "~/composables/bottles";
 import { AddedBottle, Bottle, OpenedBottle } from "~~/types/bottle";
 
 export const useBottlesStore = defineStore("bottles", {
@@ -98,8 +99,9 @@ export const useBottlesStore = defineStore("bottles", {
       this.fetchAddedBottles();
     },
     async fetchBottles() {
+      const { allBottles } = useBottles();
       try {
-        let { data } = await $fetch("/api/bottles/all");
+        let { data } = await allBottles();
         if (data) {
           this.allBottles = data as Bottle[];
         }
@@ -108,8 +110,9 @@ export const useBottlesStore = defineStore("bottles", {
       }
     },
     async fetchOpenedBottles() {
+      const { openedBottles } = useCellar();
       try {
-        let { data } = await $fetch("/api/cellar/opened");
+        let { data } = await openedBottles();
         if (data) {
           this.openedBottles = data as OpenedBottle[];
         }
@@ -119,8 +122,9 @@ export const useBottlesStore = defineStore("bottles", {
     },
 
     async fetchAddedBottles() {
+      const { addedCellarBottles } = useCellar();
       try {
-        let { data } = await $fetch("/api/cellar/added");
+        let { data } = await addedCellarBottles();
         if (data) {
           this.addedBottles = data as AddedBottle[];
         }
@@ -171,27 +175,17 @@ export const useBottlesStore = defineStore("bottles", {
       this.addedBottles = this.addedBottles.filter((b) => b.id !== bottle.id);
     },
     async increaseBottleQty(info: { bottleId: number; qty: number }) {
+      const { increaseBottleQty } = useCellar();
       try {
-        $fetch("/api/cellar/increase", {
-          method: "POST",
-          body: {
-            id: info.bottleId,
-            qty: info.qty,
-          },
-        });
+        await increaseBottleQty(info.bottleId, info.qty);
       } catch (e) {
         console.error(e);
       }
     },
     async decreaseBottleQty(info: { bottleId: number; qty: number }) {
+      const { decreaseBottleQty } = useCellar();
       try {
-        $fetch("/api/cellar/decrease", {
-          method: "POST",
-          body: {
-            id: info.bottleId,
-            qty: info.qty,
-          },
-        });
+        await decreaseBottleQty(info.bottleId, info.qty);
       } catch (e) {
         console.error(e);
       }

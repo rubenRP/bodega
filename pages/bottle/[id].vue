@@ -459,13 +459,10 @@ const toggleEditBottle = () => {
   editBottle.value = !editBottle.value;
 };
 const updateBottle = async (bottle: Bottle) => {
-  await $fetch("/api/bottles/update", {
-    method: "POST",
-    body: {
-      id: bottle.id,
-      bottle: bottle,
-    },
-  });
+  const { updateBottle } = useBottles();
+
+  await updateBottle(bottle, bottle.id);
+
   editBottle.value = false;
 };
 </script>

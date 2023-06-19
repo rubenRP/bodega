@@ -191,39 +191,22 @@ watch(
 );
 
 const createBottle = async () => {
+  const { findBottle, addBottle } = useBottles();
   try {
     v$.value.$touch();
     if (v$.value.$invalid) {
       return;
     }
-    const { data } = await $fetch("/api/bottles/find", {
-      method: "POST",
-      body: {
-        name: newBottle.value.name,
-        cellar: newBottle.value.cellar,
-        vintage: newBottle.value.vintage,
-        type: newBottle.value.type,
-      },
-    });
+
+    const { data } = await findBottle(newBottle.value);
+
     const bottleFinded = data![0];
 
     if (!bottleFinded) {
       if (props.showQty && newBottle.value.qty! > 0) {
-        await $fetch("/api/bottles/add", {
-          method: "POST",
-          body: {
-            bottle: newBottle.value,
-            mycellar: true,
-          },
-        });
+        await addBottle(newBottle.value, true);
       } else {
-        await $fetch("/api/bottles/add", {
-          method: "POST",
-          body: {
-            bottle: newBottle.value,
-            mycellar: false,
-          },
-        });
+        await addBottle(newBottle.value, false);
       }
       store.addMessage({
         type: "success",
