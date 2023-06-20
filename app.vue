@@ -14,7 +14,8 @@ const userStore = useUserStore();
 const user = useSupabaseUser();
 const client = useSupabaseClient();
 
-userStore.fetchUser(user.value);
+if (user.value) userStore.fetchUser(user.value);
+
 client.auth.onAuthStateChange((_, session) => {
   if (session) userStore.fetchUser(session.user);
 });
