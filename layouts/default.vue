@@ -24,10 +24,20 @@
 <script setup lang="ts">
 import { useGeneralStore } from "@/stores/general";
 import BottleForm from "~/components/global/BottleForm.vue";
+import type { RealtimeChannel } from "@supabase/supabase-js";
+import { useBottlesStore } from "~/stores/bottles";
+import { useUserStore } from "~/stores/user";
 
 const store = useGeneralStore();
+const bottlesStore = useBottlesStore();
+
+const client = useSupabaseClient();
 
 const bodyClasses = "font-inter antialiased bg-slate-100 text-slate-600";
+
+let realtimeChannelBottles: RealtimeChannel;
+let realtimeChannelOpenedBottles: RealtimeChannel;
+let realtimeChannelAddedBottles: RealtimeChannel;
 
 useHead({
   bodyAttrs: {
@@ -37,6 +47,7 @@ useHead({
 
 onMounted(() => {
   if (store.sidebar) document.body.classList.add("sidebar-expanded");
+  bottlesStore.fetchStoreData();
 });
 
 watch(
@@ -49,4 +60,40 @@ watch(
     }
   }
 );
+
+realtimeChannelBottles = client
+  .channel("any")
+  .on(
+    "postgres_changes",
+    { event: "*", schema: "public", table: "bottles" },
+    (payload) => {
+      console.log("Change received!", payload);
+      bottlesStore.fetchBottles();
+    }
+  );
+realtimeChannelBottles.subscribe();
+
+realtimeChannelAddedBottles = client
+  .channel("any")
+  .on(
+    "postgres_changes",
+    { event: "*", schema: "public", table: "added_bottles" },
+    (payload) => {
+      console.log("Change received!", payload);
+      bottlesStore.fetchAddedBottles();
+    }
+  );
+realtimeChannelAddedBottles.subscribe();
+
+realtimeChannelOpenedBottles = client
+  .channel("any")
+  .on(
+    "postgres_changes",
+    { event: "*", schema: "public", table: "opened_bottles" },
+    (payload) => {
+      console.log("Change received!", payload);
+      bottlesStore.fetchOpenedBottles();
+    }
+  );
+realtimeChannelOpenedBottles.subscribe();
 </script>
