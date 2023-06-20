@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useUserStore = defineStore("user", {
   state: () => ({
     loggedIn: false,
-    data: <any>{},
+    data: null as any,
     initials: "",
     cellarId: 0,
     role: -1,
@@ -52,7 +52,7 @@ export const useUserStore = defineStore("user", {
     },
     logout() {
       this.setLoggedIn(false);
-      this.setUser(null as any);
+      this.data = null;
       this.setInitials("");
       this.setCellarId(0);
       this.setRole(-1);
