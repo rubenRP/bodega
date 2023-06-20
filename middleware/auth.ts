@@ -11,4 +11,7 @@ export default defineNuxtRouteMiddleware((to, _from) => {
     console.log("No user");
     return navigateTo("/login");
   }
+  if (!store.loggedIn && !store.data && user.value) {
+    store.fetchUser(user.value);
+  }
 });

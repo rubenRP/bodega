@@ -17,14 +17,11 @@ const client = useSupabaseClient();
 //bottlesStore.fetchStoreData();
 // reviewsStore.fetchStoreData();
 
-console.log("Aoo.vue");
-console.log(user.value);
-if (user.value) userStore.fetchUser(user.value);
-
 await client.auth.onAuthStateChange((_, session) => {
   console.log("onAuthStateChange");
-  console.log(session);
-  if (session) userStore.fetchUser(session.user);
+  console.log(userStore.loggedIn, userStore.data, session);
+  if (session && !userStore.loggedIn && !userStore.data)
+    userStore.fetchUser(session.user);
 });
 
 onMounted(async () => {
