@@ -34,12 +34,10 @@ export default defineNuxtConfig({
       },
     },
   },
-  ssr: false,
   nitro: {
     compressPublicAssets: true,
     prerender: {
       crawlLinks: true,
-      routes: ["/"],
     },
   },
   app: {
