@@ -14,17 +14,16 @@ const userStore = useUserStore();
 const user = useSupabaseUser();
 const client = useSupabaseClient();
 
-if (user.value) userStore.fetchUser(user.value);
-
-client.auth.onAuthStateChange((_, session) => {
-  if (session) userStore.fetchUser(session.user);
-});
-
 //bottlesStore.fetchStoreData();
 // reviewsStore.fetchStoreData();
 
-onMounted(() => {
-  // getClientWith
+onMounted(async () => {
+  if (user.value) userStore.fetchUser(user.value);
+
+  await client.auth.onAuthStateChange((_, session) => {
+    if (session) userStore.fetchUser(session.user);
+  });
+
   const width = window.innerWidth;
 
   if (width > 1024) {
