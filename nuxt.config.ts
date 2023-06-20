@@ -1,5 +1,10 @@
 export default defineNuxtConfig({
-  modules: ["nuxt-vitest", "@nuxtjs/i18n", "@pinia/nuxt", "@nuxtjs/supabase"],
+  modules: [
+    "nuxt-vitest",
+    "@nuxtjs/i18n-edge",
+    "@pinia/nuxt",
+    "@nuxtjs/supabase",
+  ],
   css: [
     "@fortawesome/fontawesome-svg-core/styles.css",
     "~/assets/css/main.css",
@@ -29,6 +34,7 @@ export default defineNuxtConfig({
       },
     },
   },
+  ssr: false,
   nitro: {
     compressPublicAssets: true,
     prerender: {

@@ -46,7 +46,7 @@ definePageMeta({
 });
 
 const client = useSupabaseAuthClient();
-const store = useUserStore();
+const user = useSupabaseUser();
 
 const loading = ref(false);
 let message = ref("");
@@ -63,18 +63,9 @@ const handleLogin = async () => {
   }
 };
 
-onMounted(() => {
-  if (store.loggedIn) {
+watch(user, () => {
+  if (user.value) {
     navigateTo("/");
   }
 });
-
-watch(
-  () => store.loggedIn,
-  (loggedIn) => {
-    if (loggedIn) {
-      navigateTo("/");
-    }
-  }
-);
 </script>
