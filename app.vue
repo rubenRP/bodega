@@ -1,5 +1,7 @@
 <template>
-  <ReloadPWA />
+  <ClientOnly>
+    <ReloadPWA />
+  </ClientOnly>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

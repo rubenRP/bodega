@@ -63,7 +63,6 @@ export default defineNuxtConfig({
   pwa: {
     mode: "development",
     base: "/",
-    srcDir: "src",
     filename: "sw.ts",
     includeAssets: ["/favicon.png"],
     strategies: "injectManifest",
