@@ -18,8 +18,6 @@ const client = useSupabaseClient();
 // reviewsStore.fetchStoreData();
 
 await client.auth.onAuthStateChange((_, session) => {
-  console.log("onAuthStateChange");
-  console.log(userStore.loggedIn, userStore.data, session);
   if (session && !userStore.loggedIn && !userStore.data)
     userStore.fetchUser(session.user);
 });

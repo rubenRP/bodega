@@ -1,5 +1,5 @@
 <template>
-  <!-- <div
+  <div
     v-if="(offlineReady || needRefresh) && visible"
     class="flex flex-wrap md:flex-nowrap bg-pink-900 text-white text-sm px-6 py-2 justify-between align-middle"
     role="alert"
@@ -25,16 +25,16 @@
         Close
       </button>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script setup lang="ts">
-/* import { useRegisterSW } from "virtual:pwa-register/vue";
+import { useRegisterSW } from "virtual:pwa-register/vue";
 
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
 const visible = ref(true);
 
 const close = () => {
   visible.value = false;
-}; */
+};
 </script>

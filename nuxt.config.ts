@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n-edge",
     "@pinia/nuxt",
     "@nuxtjs/supabase",
+    "@vite-pwa/nuxt",
   ],
   css: [
     "@fortawesome/fontawesome-svg-core/styles.css",
@@ -55,6 +56,40 @@ export default defineNuxtConfig({
           rel: "icon",
           type: "image/png",
           href: "/favicon.png",
+        },
+      ],
+    },
+  },
+  pwa: {
+    mode: "development",
+    base: "/",
+    srcDir: "src",
+    filename: "sw.ts",
+    includeAssets: ["/favicon.png"],
+    strategies: "injectManifest",
+    manifest: {
+      name: "Bodega Project",
+      short_name: "Bodega",
+      theme_color: "#ffffff",
+      start_url: "/",
+      display: "standalone",
+      background_color: "#ffffff",
+      icons: [
+        {
+          src: "icon-192.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          src: "/icon-512.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
+        {
+          src: "icon-512.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "any maskable",
         },
       ],
     },

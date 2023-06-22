@@ -65,16 +65,12 @@ const handleLogin = async () => {
 };
 
 onMounted(() => {
-  console.log("LoginMounted");
-  console.log(userStore.loggedIn, userStore.data, user.value);
   if (user.value || (userStore.loggedIn && userStore.data)) {
     navigateTo("/");
   }
 });
 
 watch(user, () => {
-  console.log("LoginWatch");
-  console.log(userStore.loggedIn, userStore.data, user.value);
   if (user.value || (userStore.loggedIn && userStore.data)) {
     navigateTo("/");
   }
