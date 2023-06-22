@@ -67,8 +67,9 @@ export default defineNuxtConfig({
     includeAssets: ["/favicon.png"],
     strategies: "injectManifest",
     manifest: {
-      name: "Bodega Project",
+      name: "Bodega",
       short_name: "Bodega",
+      description: "Your digital wine cellar",
       theme_color: "#ffffff",
       start_url: "/",
       display: "standalone",
@@ -83,12 +84,6 @@ export default defineNuxtConfig({
           src: "/icon-512.png",
           sizes: "512x512",
           type: "image/png",
-        },
-        {
-          src: "icon-512.png",
-          sizes: "512x512",
-          type: "image/png",
-          purpose: "any maskable",
         },
       ],
     },
