@@ -92,7 +92,7 @@
             <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
                 class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
-                to="/bottles"
+                to="/activity"
                 @click.prevent="checkToggleSidebar()"
                 ><div class="flex items-center text-gray-100">
                   <svg
@@ -107,7 +107,7 @@
                     ></path></svg
                   ><span
                     class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
-                    >History</span
+                    >Activity</span
                   >
                 </div></NuxtLink
               >
