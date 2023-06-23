@@ -61,12 +61,10 @@ export default defineNuxtConfig({
     },
   },
   pwa: {
-    registerType: "autoUpdate",
     mode: "development",
-    srcDir: "/public",
+    srcDir: "/",
     filename: "sw.ts",
     includeAssets: ["/favicon.png"],
-    strategies: "injectManifest",
     manifest: {
       name: "Bodega",
       short_name: "Bodega",
