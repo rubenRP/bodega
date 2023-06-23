@@ -61,8 +61,9 @@ export default defineNuxtConfig({
     },
   },
   pwa: {
+    registerType: "autoUpdate",
     mode: "development",
-    base: "/",
+    srcDir: "/public",
     filename: "sw.ts",
     includeAssets: ["/favicon.png"],
     strategies: "injectManifest",
@@ -84,6 +85,12 @@ export default defineNuxtConfig({
           src: "/icon-512.png",
           sizes: "512x512",
           type: "image/png",
+        },
+        {
+          src: "/icon-512.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "any maskable",
         },
       ],
     },
