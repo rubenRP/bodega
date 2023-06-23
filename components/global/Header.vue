@@ -40,4 +40,3 @@ import { useGeneralStore } from "~~/stores/general";
 const store = useGeneralStore();
 const toggleSidebar = () => store.toggleSidebar();
 </script>
-P
