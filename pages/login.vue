@@ -64,13 +64,15 @@ const handleLogin = async () => {
   }
 };
 
-onMounted(() => {
+onMounted(async () => {
+  await new Promise((res) => setTimeout(res, 200));
   if (user.value || (userStore.loggedIn && userStore.data)) {
     navigateTo("/");
   }
 });
 
-watch(user, () => {
+watch(user, async () => {
+  await new Promise((res) => setTimeout(res, 200));
   if (user.value || (userStore.loggedIn && userStore.data)) {
     navigateTo("/");
   }
