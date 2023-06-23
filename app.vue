@@ -13,7 +13,6 @@ import { useGeneralStore } from "./stores/general";
 const generalStore = useGeneralStore();
 const userStore = useUserStore();
 // const reviewsStore = useReviewsStore();
-const user = useSupabaseUser();
 const client = useSupabaseClient();
 
 //bottlesStore.fetchStoreData();

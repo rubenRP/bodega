@@ -66,6 +66,7 @@ export default defineNuxtConfig({
     filename: "sw.ts",
     includeAssets: ["/favicon.png"],
     manifest: {
+      publicPath: "/",
       name: "Bodega",
       short_name: "Bodega",
       description: "Your digital wine cellar",
