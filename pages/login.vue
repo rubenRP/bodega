@@ -46,7 +46,6 @@ definePageMeta({
 });
 
 const authClient = useSupabaseAuthClient();
-const client = useSupabaseClient();
 const user = useSupabaseUser();
 const userStore = useUserStore();
 
@@ -74,8 +73,8 @@ onMounted(async () => {
   }
 });
 
-watch(user, async () => {
-  if ((await user.value) || (userStore.loggedIn && userStore.data)) {
+watch(user, () => {
+  if (user.value) {
     navigateTo("/");
   }
 });

@@ -2,15 +2,17 @@ import { useUserStore } from "~/stores/user";
 
 export default defineNuxtRouteMiddleware(async (to, _from) => {
   const store = useUserStore();
-  // const user = useSupabaseUser();
+  const user = useSupabaseUser();
   const client = useSupabaseClient();
-  const user = await client.auth.getSession();
+  // const user = client.auth.getSession()
 
-  if (!store.loggedIn && !store.data && !user) {
+  await new Promise((res) => setTimeout(res, 200));
+
+  if (!store.loggedIn && !store.data && !user.value) {
     console.log("No user");
     return navigateTo("/login");
   }
-  /*  if (!store.loggedIn && !store.data && user) {
-    store.fetchUser(user);
-  } */
+  if (!store.loggedIn && !store.data && user.value) {
+    store.fetchUser(user.value);
+  }
 });
