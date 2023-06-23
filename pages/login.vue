@@ -45,7 +45,8 @@ definePageMeta({
   layout: "auth",
 });
 
-const client = useSupabaseAuthClient();
+const authClient = useSupabaseAuthClient();
+const client = useSupabaseClient();
 const user = useSupabaseUser();
 const userStore = useUserStore();
 
@@ -55,7 +56,10 @@ let message = ref("");
 const handleLogin = async () => {
   try {
     loading.value = true;
-    const { error } = await client.auth.signInWithOAuth({ provider: "google" });
+    const { error } = await authClient.auth.signInWithOAuth({
+      provider: "google",
+    });
+    // client.auth.setSession(auth.session)
     if (error) throw error;
   } catch (error: any) {
     message.value = error.error_description || error.message;
@@ -65,15 +69,13 @@ const handleLogin = async () => {
 };
 
 onMounted(async () => {
-  await new Promise((res) => setTimeout(res, 200));
-  if (user.value || (userStore.loggedIn && userStore.data)) {
+  if ((await user.value) || (userStore.loggedIn && userStore.data)) {
     navigateTo("/");
   }
 });
 
 watch(user, async () => {
-  await new Promise((res) => setTimeout(res, 200));
-  if (user.value || (userStore.loggedIn && userStore.data)) {
+  if ((await user.value) || (userStore.loggedIn && userStore.data)) {
     navigateTo("/");
   }
 });
