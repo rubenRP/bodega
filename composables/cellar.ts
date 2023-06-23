@@ -1,5 +1,5 @@
 export const useCellar = () => {
-  const client = useSupabaseClient();
+  const client = useSupabase();
 
   const allCellarBottles = async () => {
     const { data } = await client

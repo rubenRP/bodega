@@ -3,7 +3,7 @@
 import { Bottle } from "~/types/bottle";
 
 export const useBottles = () => {
-  const client = useSupabaseClient();
+  const client = useSupabase();
 
   const allBottles = async () => {
     const { data } = await client

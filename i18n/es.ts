@@ -98,6 +98,9 @@ const messages = {
     forms: {
       required: "Campo obligatorio",
     },
+    activity: {
+      activity: "Actividad",
+    },
   },
   en: {
     general: {

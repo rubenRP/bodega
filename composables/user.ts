@@ -1,5 +1,5 @@
 export const useUser = () => {
-  const client = useSupabaseClient();
+  const client = useSupabase();
 
   const getProfile = async (id: any) => {
     const { data } = await client

@@ -73,8 +73,9 @@
 </template>
 
 <script setup lang="ts">
+import { useSupabase } from "~/composables/useSupabase";
 import { useUserStore } from "~~/stores/user";
-const client = useSupabaseAuthClient();
+const client = useSupabase();
 
 const userStore = useUserStore();
 

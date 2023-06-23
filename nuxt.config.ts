@@ -3,7 +3,6 @@ export default defineNuxtConfig({
     "nuxt-vitest",
     "@nuxtjs/i18n-edge",
     "@pinia/nuxt",
-    "@nuxtjs/supabase",
     "@vite-pwa/nuxt",
   ],
   css: [
@@ -21,6 +20,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      SUPABASE_URL: process.env.SUPABASE_URL,
+      SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
       supabase: {
         url: process.env.SUPABASE_URL,
         key: process.env.SUPABASE_KEY,

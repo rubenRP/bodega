@@ -38,16 +38,14 @@
 
 <script setup lang="ts">
 import Logo from "@/components/global/Logo.vue";
-import { useUserStore } from "@/stores/user";
 import { ref } from "vue";
+import { useSupabase } from "~/composables/useSupabase";
 
 definePageMeta({
   layout: "auth",
 });
 
-const authClient = useSupabaseAuthClient();
-const user = useSupabaseUser();
-const userStore = useUserStore();
+const supabase = useSupabase();
 
 const loading = ref(false);
 let message = ref("");
@@ -55,10 +53,10 @@ let message = ref("");
 const handleLogin = async () => {
   try {
     loading.value = true;
-    const { error } = await authClient.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
-    // client.auth.setSession(auth.session)
+    navigateTo("/");
     if (error) throw error;
   } catch (error: any) {
     message.value = error.error_description || error.message;
@@ -66,16 +64,4 @@ const handleLogin = async () => {
     loading.value = false;
   }
 };
-
-onMounted(async () => {
-  if ((await user.value) || (userStore.loggedIn && userStore.data)) {
-    navigateTo("/");
-  }
-});
-
-watch(user, () => {
-  if (user.value) {
-    navigateTo("/");
-  }
-});
 </script>

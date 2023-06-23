@@ -1,18 +1,10 @@
-import { useUserStore } from "~/stores/user";
+import { useSupabase } from "~/composables/useSupabase";
 
-export default defineNuxtRouteMiddleware(async (to, _from) => {
-  const store = useUserStore();
-  const user = useSupabaseUser();
-  const client = useSupabaseClient();
-  // const user = client.auth.getSession()
+export default defineNuxtRouteMiddleware(async (to, from) => {
+  const client = useSupabase();
+  const { data } = await client.auth.getUser();
 
-  await new Promise((res) => setTimeout(res, 200));
-
-  if (!store.loggedIn && !store.data && !user.value) {
-    console.log("No user");
-    return navigateTo("/login");
-  }
-  if (!store.loggedIn && !store.data && user.value) {
-    store.fetchUser(user.value);
+  if (!data.user) {
+    navigateTo("/login");
   }
 });

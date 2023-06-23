@@ -27,11 +27,12 @@ import BottleForm from "~/components/global/BottleForm.vue";
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { useBottlesStore } from "~/stores/bottles";
 import { useUserStore } from "~/stores/user";
+import { useSupabase } from "~/composables/useSupabase";
 
 const store = useGeneralStore();
 const bottlesStore = useBottlesStore();
 
-const client = useSupabaseClient();
+const client = useSupabase();
 
 const bodyClasses = "font-inter antialiased bg-slate-100 text-slate-600";
 
