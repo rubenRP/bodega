@@ -53,7 +53,6 @@
           <li>
             <a
               class="font-medium text-sm flex items-center py-1 px-3 text-pink-900 hover:text-pink-800"
-              href="#"
             >
               <span>{{ $t("user.settings") }}</span>
             </a>

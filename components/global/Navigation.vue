@@ -140,7 +140,7 @@
             <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
                 class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
-                href="/reviews"
+                to="/reviews"
                 @click.prevent="checkToggleSidebar()"
                 ><div class="flex items-center text-gray-100">
                   <svg
@@ -163,7 +163,7 @@
             <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
                 class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
-                href="/reviews"
+                to="/reviews"
                 @click.prevent="checkToggleSidebar()"
                 ><div class="flex items-center text-gray-100">
                   <svg
@@ -186,7 +186,7 @@
             <li class="rounded-sm mb-0.5 last:mb-0 false">
               <NuxtLink
                 class="block text-slate-200 truncate transition duration-150 hover:text-white px-3 py-2 nav-link"
-                href="/reviews"
+                to="/reviews"
                 @click.prevent="checkToggleSidebar()"
                 ><div class="flex items-center text-gray-100">
                   <svg
