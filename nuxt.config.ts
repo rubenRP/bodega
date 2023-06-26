@@ -51,9 +51,10 @@ export default defineNuxtConfig({
   },
   pwa: {
     mode: "development",
-    srcDir: "/",
+    srcDir: "public",
     filename: "sw.ts",
     includeAssets: ["/favicon.png"],
+    strategies: "injectManifest",
     manifest: {
       publicPath: "/",
       name: "Bodega",
